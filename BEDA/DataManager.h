@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataManager : NSObject
+@interface DataManager : NSObject {
+    QTMovie* movie;
+}
+
+@property (retain) QTMovie* movie;
 
 @end

@@ -10,4 +10,6 @@
 
 @implementation DataManager
 
+@synthesize movie;
+
 @end
