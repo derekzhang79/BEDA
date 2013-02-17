@@ -13,6 +13,8 @@
 		036723D116D181D9004F14D6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 036723CF16D181D9004F14D6 /* Credits.rtf */; };
 		036723D416D181D9004F14D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723D316D181D9004F14D6 /* AppDelegate.m */; };
 		036723D716D181DA004F14D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036723D516D181DA004F14D6 /* MainMenu.xib */; };
+		036723DF16D18265004F14D6 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723DE16D18265004F14D6 /* DataManager.m */; };
+		036723E116D18445004F14D6 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723E016D18445004F14D6 /* QTKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,9 @@
 		036723D216D181D9004F14D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		036723D316D181D9004F14D6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		036723D616D181DA004F14D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		036723DD16D18265004F14D6 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		036723DE16D18265004F14D6 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		036723E016D18445004F14D6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				036723E116D18445004F14D6 /* QTKit.framework in Frameworks */,
 				036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +52,7 @@
 		036723B416D181D8004F14D6 = {
 			isa = PBXGroup;
 			children = (
+				036723E016D18445004F14D6 /* QTKit.framework */,
 				036723C616D181D9004F14D6 /* BEDA */,
 				036723BF16D181D9004F14D6 /* Frameworks */,
 				036723BE16D181D9004F14D6 /* Products */,
@@ -85,6 +92,8 @@
 				036723D216D181D9004F14D6 /* AppDelegate.h */,
 				036723D316D181D9004F14D6 /* AppDelegate.m */,
 				036723D516D181DA004F14D6 /* MainMenu.xib */,
+				036723DD16D18265004F14D6 /* DataManager.h */,
+				036723DE16D18265004F14D6 /* DataManager.m */,
 				036723C716D181D9004F14D6 /* Supporting Files */,
 			);
 			path = BEDA;
@@ -168,6 +177,7 @@
 			files = (
 				036723CD16D181D9004F14D6 /* main.m in Sources */,
 				036723D416D181D9004F14D6 /* AppDelegate.m in Sources */,
+				036723DF16D18265004F14D6 /* DataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
