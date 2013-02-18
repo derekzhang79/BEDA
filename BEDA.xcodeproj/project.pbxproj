@@ -16,6 +16,7 @@
 		036723DF16D18265004F14D6 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723DE16D18265004F14D6 /* DataManager.m */; };
 		036723E116D18445004F14D6 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723E016D18445004F14D6 /* QTKit.framework */; };
 		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
+		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		036723E016D18445004F14D6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		B25CBBE716D1DDE100626FA9 /* DataAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAddController.h; sourceTree = "<group>"; };
 		B25CBBE816D1DDE100626FA9 /* DataAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAddController.m; sourceTree = "<group>"; };
+		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 			files = (
 				036723E116D18445004F14D6 /* QTKit.framework in Frameworks */,
 				036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */,
+				B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +75,7 @@
 		036723BF16D181D9004F14D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B28D32D616D206E000D58ADA /* CorePlot.framework */,
 				036723C016D181D9004F14D6 /* Cocoa.framework */,
 				036723E016D18445004F14D6 /* QTKit.framework */,
 				036723C216D181D9004F14D6 /* Other Frameworks */,
@@ -296,6 +300,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BEDA/BEDA-Prefix.pch";
 				INFOPLIST_FILE = "BEDA/BEDA-Info.plist";
@@ -308,6 +316,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BEDA/BEDA-Prefix.pch";
 				INFOPLIST_FILE = "BEDA/BEDA-Info.plist";
