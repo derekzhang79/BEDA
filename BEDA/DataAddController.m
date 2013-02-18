@@ -89,9 +89,12 @@
     NSLog(@"File read OK. contents length = %lu" ,(unsigned long)[fileContents length]);
     
     NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\r\n"]];
-    const int MAX_LOG_LINE = 20;
+    const int MAX_LOG_LINE = 60;
     
     // For each line
+    NSDate* basedate = Nil;
+    float basems = 0;
+
     for (int i = 0; i < [lines count]; i++) {
         NSString* line = [lines objectAtIndex:i];
         if (line.length == 0) {
@@ -109,13 +112,43 @@
         NSString *time = nil;
         
         // If we can parse the sensor data
-        while ([scanner scanFloat:&zAxis] && [scanner scanFloat:&yAxis] && [scanner scanFloat:&xAxis] && [scanner scanFloat:&battery] && [scanner scanFloat:&Celsius] && [scanner scanFloat:&EDA] &&[scanner scanUpToString:@"" intoString:&time]) {
+        
+        if ([scanner scanFloat:&zAxis] && [scanner scanFloat:&yAxis] && [scanner scanFloat:&xAxis] && [scanner scanFloat:&battery] && [scanner scanFloat:&Celsius] && [scanner scanFloat:&EDA] &&[scanner scanUpToString:@"" intoString:&time]) {
             // Process the values as needed.
-            if (i < MAX_LOG_LINE) {
-                NSLog(@"zAxis:%f, 1:%f, 2:%f, 3:%f:, 4:%f, time: {%@}", zAxis, yAxis, xAxis, battery, Celsius, time);
+            NSArray* tokens = [time componentsSeparatedByString:@"."];
+            NSDate* date = [NSDate dateWithNaturalLanguageString:[tokens objectAtIndex:0]];
+            float ms = [[tokens objectAtIndex:1] floatValue];
+            if (basedate == Nil) {
+                basedate = [date dateByAddingTimeInterval:0];
+                basems = ms;
             }
-        }
-    }
+            
+            // x = (date + ms / 1000) - (basedate + basems / 1000);
+
+            float secSinceBase = [date timeIntervalSinceDate:basedate] + (ms - basems) / 1000.0f;
+            
+            [[dm getSensor1] addObject:
+              [NSDictionary dictionaryWithObjectsAndKeys:
+               [NSDecimalNumber numberWithFloat:secSinceBase],
+               [NSNumber numberWithInt:CPTScatterPlotFieldX],
+               [NSDecimalNumber numberWithFloat:EDA],
+               [NSNumber numberWithInt:CPTScatterPlotFieldY],
+               nil
+               ]
+             ];
+//            NSLog(@"dataManager.sensor1.count = %ld", (unsigned long)[[dm getSensor1] count]);
+
+            
+            if (i < MAX_LOG_LINE) {
+//                NSLog(@"zAxis:%f, 1:%f, 2:%f, 3:%f:, 4:%f, time:{%@}, date: {%@}, ms:%f, sec = %f", zAxis, yAxis, xAxis, battery, Celsius, time, date, ms, secSinceBase);
+                NSLog(@"x:%f, y:%f", secSinceBase, EDA);
+
+            }
+        } // end of if
+    } // end of for
+    
+    [viewer reload];
+    NSLog(@"dataManager.sensor1.count = %ld", (unsigned long)[[dm getSensor1] count]);
     
 }
 

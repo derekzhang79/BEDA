@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKit.h>
+#import <CorePlot/CorePlot.h>
 
 #import "DataManager.h"
+#import "GraphViewController.h"
 
 @interface DataAddController : NSObject {
     IBOutlet DataManager* dm;
+    IBOutlet GraphViewController* viewer;
 }
 
 - (IBAction)openFile:(id)sender;

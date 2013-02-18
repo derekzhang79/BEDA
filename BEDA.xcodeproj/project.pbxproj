@@ -17,6 +17,7 @@
 		036723E116D18445004F14D6 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723E016D18445004F14D6 /* QTKit.framework */; };
 		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
 		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; };
+		B28D32DB16D20DB500D58ADA /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* GraphViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		B25CBBE716D1DDE100626FA9 /* DataAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAddController.h; sourceTree = "<group>"; };
 		B25CBBE816D1DDE100626FA9 /* DataAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAddController.m; sourceTree = "<group>"; };
 		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
+		B28D32D916D20DB500D58ADA /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		B28D32DA16D20DB500D58ADA /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,7 @@
 		036723C616D181D9004F14D6 /* BEDA */ = {
 			isa = PBXGroup;
 			children = (
+				B28D32DC16D20DBB00D58ADA /* GraphView */,
 				B25CBBE616D1DDBD00626FA9 /* Controller */,
 				B25CBBE516D1DDB300626FA9 /* Data */,
 				036723D216D181D9004F14D6 /* AppDelegate.h */,
@@ -134,6 +138,15 @@
 				B25CBBE816D1DDE100626FA9 /* DataAddController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		B28D32DC16D20DBB00D58ADA /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				B28D32D916D20DB500D58ADA /* GraphViewController.h */,
+				B28D32DA16D20DB500D58ADA /* GraphViewController.m */,
+			);
+			name = GraphView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +217,7 @@
 				036723D416D181D9004F14D6 /* AppDelegate.m in Sources */,
 				036723DF16D18265004F14D6 /* DataManager.m in Sources */,
 				B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */,
+				B28D32DB16D20DB500D58ADA /* GraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +313,7 @@
 		036723DB16D181DA004F14D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -315,6 +330,7 @@
 		036723DC16D181DA004F14D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
