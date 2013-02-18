@@ -10,6 +10,15 @@
 
 @implementation DataManager
 
-@synthesize movie;
+@synthesize movie1;
+@synthesize movie2;
+
+- (void) awakeFromNib {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self setMovie1:Nil];
+    [self setMovie2:Nil];
+
+}
 
 @end

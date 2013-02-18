@@ -15,6 +15,7 @@
 		036723D716D181DA004F14D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036723D516D181DA004F14D6 /* MainMenu.xib */; };
 		036723DF16D18265004F14D6 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723DE16D18265004F14D6 /* DataManager.m */; };
 		036723E116D18445004F14D6 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723E016D18445004F14D6 /* QTKit.framework */; };
+		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		036723DD16D18265004F14D6 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		036723DE16D18265004F14D6 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		036723E016D18445004F14D6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		B25CBBE716D1DDE100626FA9 /* DataAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAddController.h; sourceTree = "<group>"; };
+		B25CBBE816D1DDE100626FA9 /* DataAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAddController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +55,6 @@
 		036723B416D181D8004F14D6 = {
 			isa = PBXGroup;
 			children = (
-				036723E016D18445004F14D6 /* QTKit.framework */,
 				036723C616D181D9004F14D6 /* BEDA */,
 				036723BF16D181D9004F14D6 /* Frameworks */,
 				036723BE16D181D9004F14D6 /* Products */,
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				036723C016D181D9004F14D6 /* Cocoa.framework */,
+				036723E016D18445004F14D6 /* QTKit.framework */,
 				036723C216D181D9004F14D6 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -89,11 +92,11 @@
 		036723C616D181D9004F14D6 /* BEDA */ = {
 			isa = PBXGroup;
 			children = (
+				B25CBBE616D1DDBD00626FA9 /* Controller */,
+				B25CBBE516D1DDB300626FA9 /* Data */,
 				036723D216D181D9004F14D6 /* AppDelegate.h */,
 				036723D316D181D9004F14D6 /* AppDelegate.m */,
 				036723D516D181DA004F14D6 /* MainMenu.xib */,
-				036723DD16D18265004F14D6 /* DataManager.h */,
-				036723DE16D18265004F14D6 /* DataManager.m */,
 				036723C716D181D9004F14D6 /* Supporting Files */,
 			);
 			path = BEDA;
@@ -109,6 +112,24 @@
 				036723CF16D181D9004F14D6 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B25CBBE516D1DDB300626FA9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				036723DD16D18265004F14D6 /* DataManager.h */,
+				036723DE16D18265004F14D6 /* DataManager.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		B25CBBE616D1DDBD00626FA9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B25CBBE716D1DDE100626FA9 /* DataAddController.h */,
+				B25CBBE816D1DDE100626FA9 /* DataAddController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +199,7 @@
 				036723CD16D181D9004F14D6 /* main.m in Sources */,
 				036723D416D181D9004F14D6 /* AppDelegate.m in Sources */,
 				036723DF16D18265004F14D6 /* DataManager.m in Sources */,
+				B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +335,7 @@
 				036723DC16D181DA004F14D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <QTKit/QTKit.h>
 
 @interface DataManager : NSObject {
-    QTMovie* movie;
+    QTMovie* movie1;
+    QTMovie* movie2;
 }
 
-@property (retain) QTMovie* movie;
+@property (retain) QTMovie* movie1;
+@property (retain) QTMovie* movie2;
 
 @end
