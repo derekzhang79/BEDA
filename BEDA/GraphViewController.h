@@ -17,9 +17,8 @@
 
 
     CPTXYGraph *graph;
-    NSArray *plotData;
 }
-
 - (void) reload;
+- (void) onSensorDataLoaded:(NSNotification*) noti;
 
 @end

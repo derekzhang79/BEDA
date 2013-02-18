@@ -12,7 +12,6 @@
 
 -(void)dealloc
 {
-    [plotData release];
     [graph release];
     [super dealloc];
 }
@@ -98,29 +97,23 @@
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
     
-    // Add some data
-    NSMutableArray *newData = [NSMutableArray array];
-    NSUInteger i;
-    for ( i = 0; i < 30; i++ ) {
-        NSTimeInterval x = oneSec * i;
-        id y             = [NSDecimalNumber numberWithFloat:1.2 * rand() / (float)RAND_MAX + 1.2];
-        [newData addObject:
-         [NSDictionary dictionaryWithObjectsAndKeys:
-          [NSDecimalNumber numberWithFloat:x], [NSNumber numberWithInt:CPTScatterPlotFieldX],
-          y, [NSNumber numberWithInt:CPTScatterPlotFieldY],
-          nil]];
-    }
-    plotData = newData;
-    
+
+    // Adjust the panel size
     [view setFrameSize:NSSizeFromString(@"{900,225}")];
+    
+    // Register self as notification observer
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSensorDataLoaded:)
+                                                 name:@"sensorDataLoaded" object:Nil];
 }
 
 - (void) reload {
-    NSLog(@"Reload");
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     [graph reloadData];
-//    [view setFrameSize:NSSizeFromString(@"{1000,225}")];
+}
 
-    NSLog(@"Reload OK");
+- (void) onSensorDataLoaded:(NSNotification*) noti {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self reload];
 }
 
 #pragma mark -
@@ -128,15 +121,12 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    NSLog(@"number?");
-//    return 0;
-    return [[dm getSensor1] count];
+    return [[dm sensor1] count];
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
-    NSDecimalNumber *num = [[[dm getSensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:fieldEnum]];
-    
+    NSDecimalNumber *num = [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:(int)fieldEnum]];
     return num;
 }
 

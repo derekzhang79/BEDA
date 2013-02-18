@@ -124,10 +124,9 @@
             }
             
             // x = (date + ms / 1000) - (basedate + basems / 1000);
-
             float secSinceBase = [date timeIntervalSinceDate:basedate] + (ms - basems) / 1000.0f;
             
-            [[dm getSensor1] addObject:
+            [[dm sensor1] addObject:
               [NSDictionary dictionaryWithObjectsAndKeys:
                [NSDecimalNumber numberWithFloat:secSinceBase],
                [NSNumber numberWithInt:CPTScatterPlotFieldX],
@@ -136,9 +135,7 @@
                nil
                ]
              ];
-//            NSLog(@"dataManager.sensor1.count = %ld", (unsigned long)[[dm getSensor1] count]);
-
-            
+                      
             if (i < MAX_LOG_LINE) {
 //                NSLog(@"zAxis:%f, 1:%f, 2:%f, 3:%f:, 4:%f, time:{%@}, date: {%@}, ms:%f, sec = %f", zAxis, yAxis, xAxis, battery, Celsius, time, date, ms, secSinceBase);
                 NSLog(@"x:%f, y:%f", secSinceBase, EDA);
@@ -147,8 +144,9 @@
         } // end of if
     } // end of for
     
-    [viewer reload];
-    NSLog(@"dataManager.sensor1.count = %ld", (unsigned long)[[dm getSensor1] count]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sensorDataLoaded" object:nil];
+     
+    NSLog(@"dataManager.sensor1.count = %ld", (unsigned long)[[dm sensor1] count]);
     
 }
 
