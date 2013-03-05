@@ -7,6 +7,7 @@
 //
 
 #import "DataManager.h"
+#import <CorePlot/CorePlot.h>
 
 @implementation DataManager
 
@@ -21,6 +22,12 @@
     [self setMovie1:Nil];
     [self setMovie2:Nil];
     _sensor1 = [[NSMutableArray alloc] init];
+}
+
+-(double) getMaximumTime {
+    NSUInteger n = [[self sensor1] count];
+    NSDecimalNumber *num = [[[self sensor1] objectAtIndex:n-1] objectForKey:[NSNumber numberWithInt:(int)CPTScatterPlotFieldX]];
+    return [num doubleValue];
 }
 
 @end

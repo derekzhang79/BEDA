@@ -37,7 +37,7 @@
     // Add some padding to the graph, with more at the bottom for axis labels.
     graph.plotAreaFrame.paddingTop = 10.0f;
     graph.plotAreaFrame.paddingRight = 10.0f;
-    graph.plotAreaFrame.paddingBottom = 25.0f;
+    graph.plotAreaFrame.paddingBottom = 20.0f;
     graph.plotAreaFrame.paddingLeft = 10.0f;
     
     hostView.hostedGraph = graph;
@@ -60,11 +60,13 @@
     // Axes
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
-    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec);
+    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 10);
     x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
     x.minorTicksPerInterval       = 1;
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    dateFormatter.timeStyle = kCFDateFormatterLongStyle;
+    //dateFormatter.timeStyle = kCFDateFormatterLongStyle;
+    dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
+
     CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
     timeFormatter.referenceDate = refDate;
     x.labelFormatter            = timeFormatter;
@@ -99,7 +101,7 @@
     
 
     // Adjust the panel size
-    [view setFrameSize:NSSizeFromString(@"{900,225}")];
+    [view setFrameSize:NSSizeFromString(@"{1800,225}")];
     
     // Register self as notification observer
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSensorDataLoaded:)
@@ -108,7 +110,23 @@
 
 - (void) reload {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+ 
+    NSTimeInterval oneSec = 1.0;
+    double maxTime = [dm getMaximumTime];
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(oneSec * maxTime)];
+    
+    int newSize = 25 * maxTime;
+    if (newSize > 3000) {
+        newSize = 3000;
+    }
+    NSString* szString = [NSString stringWithFormat:@"{%d,225}", newSize];
+    NSLog(@"new szString = %@", szString);
+    [view setFrameSize:NSSizeFromString(szString)];
+
+    
     [graph reloadData];
+    
 }
 
 - (void) onSensorDataLoaded:(NSNotification*) noti {
