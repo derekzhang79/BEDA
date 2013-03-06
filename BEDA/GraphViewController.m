@@ -17,7 +17,6 @@
 }
 
 
-
 -(void)awakeFromNib
 {
     [super awakeFromNib];
@@ -38,7 +37,7 @@
     graph.plotAreaFrame.paddingTop = 10.0f;
     graph.plotAreaFrame.paddingRight = 10.0f;
     graph.plotAreaFrame.paddingBottom = 20.0f;
-    graph.plotAreaFrame.paddingLeft = 10.0f;
+    graph.plotAreaFrame.paddingLeft = 20.0f;
     
     hostView.hostedGraph = graph;
     graph.plotAreaFrame.borderLineStyle = nil;    // don't draw a border
@@ -64,7 +63,6 @@
     x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
     x.minorTicksPerInterval       = 1;
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    //dateFormatter.timeStyle = kCFDateFormatterLongStyle;
     dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
 
     CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
@@ -73,9 +71,10 @@
     x.labelTextStyle = axisTextStyle;
     
     CPTXYAxis *y = axisSet.yAxis;
+    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
     y.majorIntervalLength         = CPTDecimalFromString(@"0.5");
-    y.minorTicksPerInterval       = 0.1;
-    y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(1.0);
+    y.minorTicksPerInterval       = 0.5;
+    y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
     y.labelTextStyle = axisTextStyle;
     
     // Create a plot that uses the data source method
