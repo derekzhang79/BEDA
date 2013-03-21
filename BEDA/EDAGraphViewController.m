@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
-#import "GraphViewController.h"
+#import "EDAGraphViewController.h"
 
-@implementation GraphViewController
+@implementation EDAGraphViewController
 
 -(void)dealloc
 {
@@ -143,16 +143,19 @@
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
+    NSString* key = nil;
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
-            return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:0]];
+            key = @"t";
+            break;
         case CPTScatterPlotFieldY:
-            return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:1]];
+            key = @"EDA";
+            break;
         default:
-            return nil;
+            break;
     }
-//    NSDecimalNumber *num = [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:(int)fieldEnum]];
-//    return num;
+    NSDecimalNumber *num = [[[dm sensor1] objectAtIndex:index] objectForKey:key];
+    return num;
 }
 
 @end

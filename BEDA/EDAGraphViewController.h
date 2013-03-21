@@ -1,5 +1,5 @@
 //
-//  GraphViewController.h
+//  EDAGraphViewController.h
 //  BEDA
 //
 //  Created by Jennifer Kim on 2/18/13.
@@ -10,7 +10,7 @@
 #import <CorePlot/CorePlot.h>
 #import "DataManager.h"
 
-@interface GraphViewController : NSObject<CPTPlotDataSource> {
+@interface EDAGraphViewController : NSObject<CPTPlotDataSource> {
     IBOutlet CPTGraphHostingView *hostView;
     IBOutlet NSView *view;
     IBOutlet DataManager* dm;

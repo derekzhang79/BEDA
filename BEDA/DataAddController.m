@@ -129,9 +129,11 @@
             [[dm sensor1] addObject:
               [NSDictionary dictionaryWithObjectsAndKeys:
                [NSDecimalNumber numberWithFloat:secSinceBase],
-               [NSNumber numberWithInt:CPTScatterPlotFieldX],
+               // @"t",
+               [NSNumber numberWithInt:0],
                [NSDecimalNumber numberWithFloat:EDA],
-               [NSNumber numberWithInt:CPTScatterPlotFieldY],
+               [NSNumber numberWithInt:1],
+               //[NSNumber numberWithInt:CPTScatterPlotFieldY],
                nil
                ]
              ];
