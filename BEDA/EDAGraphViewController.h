@@ -1,5 +1,5 @@
 //
-//  EDAGraphViewController.h
+//  GraphViewController.h
 //  BEDA
 //
 //  Created by Jennifer Kim on 2/18/13.

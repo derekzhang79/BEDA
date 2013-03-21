@@ -143,19 +143,16 @@
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
-    NSString* key = nil;
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
-            key = @"t";
-            break;
+            return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:0]];
         case CPTScatterPlotFieldY:
-            key = @"EDA";
-            break;
+            return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:1]];
         default:
-            break;
+            return nil;
     }
-    NSDecimalNumber *num = [[[dm sensor1] objectAtIndex:index] objectForKey:key];
-    return num;
+//    NSDecimalNumber *num = [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:(int)fieldEnum]];
+//    return num;
 }
 
 @end

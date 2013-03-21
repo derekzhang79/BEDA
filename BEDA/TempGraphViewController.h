@@ -10,7 +10,7 @@
 #import <CorePlot/CorePlot.h>
 #import "DataManager.h"
 
-@interface EDAGraphViewController : NSObject<CPTPlotDataSource> {
+@interface TempGraphViewController : NSObject<CPTPlotDataSource> {
     IBOutlet CPTGraphHostingView *hostView;
     IBOutlet NSView *view;
     IBOutlet DataManager* dm;

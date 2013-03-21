@@ -48,7 +48,13 @@
 				<string key="NSClassName">DataAddController</string>
 			</object>
 			<object class="NSCustomObject" id="950403813">
-				<string key="NSClassName">GraphViewController</string>
+				<string key="NSClassName">EDAGraphViewController</string>
+			</object>
+			<object class="NSCustomObject" id="673683931">
+				<string key="NSClassName">TempGraphViewController</string>
+			</object>
+			<object class="NSCustomObject" id="1063951948">
+				<string key="NSClassName">AccelGraphViewController</string>
 			</object>
 			<object class="NSMenu" id="649796088">
 				<string key="NSTitle">AMainMenu</string>
@@ -1346,7 +1352,7 @@
 														<object class="NSCustomView" id="891849769">
 															<reference key="NSNextResponder" ref="433075258"/>
 															<int key="NSvFlags">256</int>
-															<string key="NSFrameSize">{445, 105}</string>
+															<string key="NSFrameSize">{445, 69}</string>
 															<reference key="NSSuperview" ref="433075258"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="447393523"/>
@@ -1356,11 +1362,21 @@
 														<object class="NSCustomView" id="447393523">
 															<reference key="NSNextResponder" ref="433075258"/>
 															<int key="NSvFlags">256</int>
-															<string key="NSFrame">{{0, 115}, {445, 110}}</string>
+															<string key="NSFrame">{{0, 79}, {445, 73}}</string>
+															<reference key="NSSuperview" ref="433075258"/>
+															<reference key="NSWindow"/>
+															<reference key="NSNextKeyView" ref="1062961309"/>
+															<string key="NSReuseIdentifierKey">_NS:13</string>
+															<string key="NSClassName">CPTGraphHostingView</string>
+														</object>
+														<object class="NSCustomView" id="1062961309">
+															<reference key="NSNextResponder" ref="433075258"/>
+															<int key="NSvFlags">268</int>
+															<string key="NSFrame">{{0, 162}, {445, 63}}</string>
 															<reference key="NSSuperview" ref="433075258"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="1053461685"/>
-															<string key="NSReuseIdentifierKey">_NS:13</string>
+															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<string key="NSClassName">CPTGraphHostingView</string>
 														</object>
 													</array>
@@ -1402,7 +1418,6 @@
 									<string key="NSFrame">{{430, 1}, {16, 225}}</string>
 									<reference key="NSSuperview" ref="733598421"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:15</string>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<reference key="NSTarget" ref="733598421"/>
@@ -2293,6 +2308,54 @@
 						<reference key="destination" ref="1008185271"/>
 					</object>
 					<int key="connectionID">602</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">dm</string>
+						<reference key="source" ref="673683931"/>
+						<reference key="destination" ref="1008185271"/>
+					</object>
+					<int key="connectionID">662</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">hostView</string>
+						<reference key="source" ref="673683931"/>
+						<reference key="destination" ref="447393523"/>
+					</object>
+					<int key="connectionID">663</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">view</string>
+						<reference key="source" ref="673683931"/>
+						<reference key="destination" ref="690033449"/>
+					</object>
+					<int key="connectionID">664</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">dm</string>
+						<reference key="source" ref="1063951948"/>
+						<reference key="destination" ref="1008185271"/>
+					</object>
+					<int key="connectionID">666</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">hostView</string>
+						<reference key="source" ref="1063951948"/>
+						<reference key="destination" ref="1062961309"/>
+					</object>
+					<int key="connectionID">667</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">view</string>
+						<reference key="source" ref="1063951948"/>
+						<reference key="destination" ref="690033449"/>
+					</object>
+					<int key="connectionID">668</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3540,16 +3603,12 @@
 						<reference key="parent" ref="733598421"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">561</int>
-						<reference key="object" ref="83786783"/>
-						<reference key="parent" ref="439893737"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">580</int>
 						<reference key="object" ref="433075258"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="891849769"/>
 							<reference ref="447393523"/>
+							<reference ref="1062961309"/>
 						</array>
 						<reference key="parent" ref="690033449"/>
 					</object>
@@ -3582,11 +3641,6 @@
 						<int key="objectID">588</int>
 						<reference key="object" ref="973021773"/>
 						<reference key="parent" ref="690033449"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">591</int>
-						<reference key="object" ref="273234309"/>
-						<reference key="parent" ref="439893737"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">592</int>
@@ -3925,8 +3979,33 @@
 						<reference key="parent" ref="439893737"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">660</int>
+						<reference key="object" ref="1062961309"/>
+						<reference key="parent" ref="433075258"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">661</int>
+						<reference key="object" ref="673683931"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">665</int>
+						<reference key="object" ref="1063951948"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">591</int>
+						<reference key="object" ref="273234309"/>
+						<reference key="parent" ref="439893737"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">659</int>
 						<reference key="object" ref="900977607"/>
+						<reference key="parent" ref="439893737"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">561</int>
+						<reference key="object" ref="83786783"/>
 						<reference key="parent" ref="439893737"/>
 					</object>
 				</array>
@@ -4158,6 +4237,9 @@
 				<string key="654.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="658.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="659.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="660.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="661.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="665.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4174,10 +4256,37 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">659</int>
+			<int key="maxID">679</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AccelGraphViewController</string>
+					<string key="superclassName">NSObject</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="dm">DataManager</string>
+						<string key="hostView">CPTGraphHostingView</string>
+						<string key="view">NSView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="dm">
+							<string key="name">dm</string>
+							<string key="candidateClassName">DataManager</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="hostView">
+							<string key="name">hostView</string>
+							<string key="candidateClassName">CPTGraphHostingView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="view">
+							<string key="name">view</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AccelGraphViewController.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">AppDelegate</string>
 					<string key="superclassName">NSObject</string>
@@ -4247,7 +4356,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">GraphViewController</string>
+					<string key="className">EDAGraphViewController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="dm">DataManager</string>
@@ -4270,7 +4379,7 @@
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/GraphViewController.h</string>
+						<string key="minorKey">./Classes/EDAGraphViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -4279,6 +4388,33 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TempGraphViewController</string>
+					<string key="superclassName">NSObject</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="dm">DataManager</string>
+						<string key="hostView">CPTGraphHostingView</string>
+						<string key="view">NSView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="dm">
+							<string key="name">dm</string>
+							<string key="candidateClassName">DataManager</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="hostView">
+							<string key="name">hostView</string>
+							<string key="candidateClassName">CPTGraphHostingView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="view">
+							<string key="name">view</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/TempGraphViewController.h</string>
 					</object>
 				</object>
 			</array>

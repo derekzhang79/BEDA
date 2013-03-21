@@ -125,6 +125,7 @@
             
             // x = (date + ms / 1000) - (basedate + basems / 1000);
             float secSinceBase = [date timeIntervalSinceDate:basedate] + (ms - basems) / 1000.0f;
+            float Accel = sqrt(xAxis * xAxis + yAxis * yAxis + zAxis * zAxis);
             
             [[dm sensor1] addObject:
               [NSDictionary dictionaryWithObjectsAndKeys:
@@ -133,6 +134,10 @@
                [NSNumber numberWithInt:0],
                [NSDecimalNumber numberWithFloat:EDA],
                [NSNumber numberWithInt:1],
+               [NSDecimalNumber numberWithFloat:Celsius],
+               [NSNumber numberWithInt:2],
+               [NSDecimalNumber numberWithFloat:Accel],
+               [NSNumber numberWithInt:3],
                //[NSNumber numberWithInt:CPTScatterPlotFieldY],
                nil
                ]

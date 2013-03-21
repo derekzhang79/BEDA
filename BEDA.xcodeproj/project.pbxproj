@@ -15,9 +15,11 @@
 		036723D716D181DA004F14D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036723D516D181DA004F14D6 /* MainMenu.xib */; };
 		036723DF16D18265004F14D6 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723DE16D18265004F14D6 /* DataManager.m */; };
 		036723E116D18445004F14D6 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723E016D18445004F14D6 /* QTKit.framework */; };
+		B225C4E816FBC2BA00D3C036 /* TempGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */; };
+		B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */; };
 		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
 		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; };
-		B28D32DB16D20DB500D58ADA /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* GraphViewController.m */; };
+		B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,11 +39,15 @@
 		036723DD16D18265004F14D6 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		036723DE16D18265004F14D6 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		036723E016D18445004F14D6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		B225C4E616FBC2BA00D3C036 /* TempGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempGraphViewController.h; sourceTree = "<group>"; };
+		B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempGraphViewController.m; sourceTree = "<group>"; };
+		B225C4E916FBC4E400D3C036 /* AccelGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelGraphViewController.h; sourceTree = "<group>"; };
+		B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccelGraphViewController.m; sourceTree = "<group>"; };
 		B25CBBE716D1DDE100626FA9 /* DataAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAddController.h; sourceTree = "<group>"; };
 		B25CBBE816D1DDE100626FA9 /* DataAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAddController.m; sourceTree = "<group>"; };
 		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
-		B28D32D916D20DB500D58ADA /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
-		B28D32DA16D20DB500D58ADA /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
+		B28D32D916D20DB500D58ADA /* EDAGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAGraphViewController.h; sourceTree = "<group>"; };
+		B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAGraphViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +149,12 @@
 		B28D32DC16D20DBB00D58ADA /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
-				B28D32D916D20DB500D58ADA /* GraphViewController.h */,
-				B28D32DA16D20DB500D58ADA /* GraphViewController.m */,
+				B225C4E916FBC4E400D3C036 /* AccelGraphViewController.h */,
+				B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */,
+				B225C4E616FBC2BA00D3C036 /* TempGraphViewController.h */,
+				B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */,
+				B28D32D916D20DB500D58ADA /* EDAGraphViewController.h */,
+				B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */,
 			);
 			name = GraphView;
 			sourceTree = "<group>";
@@ -217,7 +227,9 @@
 				036723D416D181D9004F14D6 /* AppDelegate.m in Sources */,
 				036723DF16D18265004F14D6 /* DataManager.m in Sources */,
 				B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */,
-				B28D32DB16D20DB500D58ADA /* GraphViewController.m in Sources */,
+				B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */,
+				B225C4E816FBC2BA00D3C036 /* TempGraphViewController.m in Sources */,
+				B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

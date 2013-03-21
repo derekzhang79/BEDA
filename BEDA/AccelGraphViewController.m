@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
-#import "GraphViewController.h"
+#import "AccelGraphViewController.h"
 
-@implementation GraphViewController
+@implementation AccelGraphViewController
 
 -(void)dealloc
 {
@@ -46,11 +46,11 @@
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     NSTimeInterval xLow       = 0.0f;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 50.0f)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(3.0)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
     
     plotSpace.allowsUserInteraction = YES;
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 5000.0f)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(3.0)];
+    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
     
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 9.0;
@@ -64,7 +64,7 @@
     x.minorTicksPerInterval       = 1;
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
-
+    
     CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
     timeFormatter.referenceDate = refDate;
     x.labelFormatter            = timeFormatter;
@@ -82,7 +82,7 @@
     dataSourceLinePlot.identifier = @"Date Plot";
     
     // Do a blue gradient
-    CPTColor *areaColor1       = [CPTColor colorWithComponentRed:0 green:1.0 blue:0 alpha:0.8];
+    CPTColor *areaColor1       = [CPTColor colorWithComponentRed:1.0 green:0.0 blue:0.0 alpha:0.8];
     CPTGradient *areaGradient1 = [CPTGradient gradientWithBeginningColor:areaColor1 endingColor:[CPTColor clearColor]];
     areaGradient1.angle = -90.0f;
     CPTFill *areaGradientFill = [CPTFill fillWithGradient:areaGradient1];
@@ -98,7 +98,7 @@
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
     
-
+    
     // Adjust the panel size
     [view setFrameSize:NSSizeFromString(@"{1800,225}")];
     
@@ -109,7 +109,7 @@
 
 - (void) reload {
     NSLog(@"%s", __PRETTY_FUNCTION__);
- 
+    
     NSTimeInterval oneSec = 1.0;
     double maxTime = [dm getMaximumTime];
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
@@ -122,7 +122,7 @@
     NSString* szString = [NSString stringWithFormat:@"{%d,225}", newSize];
     NSLog(@"new szString = %@", szString);
     [view setFrameSize:NSSizeFromString(szString)];
-
+    
     
     [graph reloadData];
     
@@ -147,12 +147,12 @@
         case CPTScatterPlotFieldX:
             return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:0]];
         case CPTScatterPlotFieldY:
-            return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:1]];
+            return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:3]];
         default:
             return nil;
     }
-//    NSDecimalNumber *num = [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:(int)fieldEnum]];
-//    return num;
+    //    NSDecimalNumber *num = [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:(int)fieldEnum]];
+    //    return num;
 }
 
 @end
