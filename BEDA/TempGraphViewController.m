@@ -92,7 +92,7 @@
     
     CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
     lineStyle.lineWidth              = 1.f;
-    lineStyle.lineColor              = [CPTColor greenColor];
+    lineStyle.lineColor              = [CPTColor blueColor];
     dataSourceLinePlot.dataLineStyle = lineStyle;
     
     dataSourceLinePlot.dataSource = self;
@@ -100,7 +100,7 @@
     
     
     // Adjust the panel size
-    [view setFrameSize:NSSizeFromString(@"{1800,225}")];
+    //[view setFrameSize:NSSizeFromString(@"{1800,225}")];
     
     // Register self as notification observer
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSensorDataLoaded:)
@@ -119,10 +119,11 @@
     if (newSize > 3000) {
         newSize = 3000;
     }
-    NSString* szString = [NSString stringWithFormat:@"{%d,225}", newSize];
+    int HEIGHT = view.frame.size.height;
+    NSString* szString = [NSString stringWithFormat:@"{%d,%d}", newSize, HEIGHT];
     NSLog(@"new szString = %@", szString);
     [view setFrameSize:NSSizeFromString(szString)];
-    
+
     
     [graph reloadData];
     
