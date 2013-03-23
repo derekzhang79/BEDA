@@ -34,10 +34,15 @@
     [graph applyTheme:theme];
     
     // Add some padding to the graph, with more at the bottom for axis labels.
-    graph.plotAreaFrame.paddingTop = 10.0f;
-    graph.plotAreaFrame.paddingRight = 10.0f;
-    graph.plotAreaFrame.paddingBottom = 20.0f;
-    graph.plotAreaFrame.paddingLeft = 20.0f;
+    graph.plotAreaFrame.paddingTop = 6.0f;
+    graph.plotAreaFrame.paddingRight = 0.0f;
+    graph.plotAreaFrame.paddingBottom = 5.0f;
+    graph.plotAreaFrame.paddingLeft = 30.0f;
+    
+    graph.paddingRight = 0.0f;
+    graph.paddingLeft = 0.0f;
+    graph.paddingTop = 0.0f;
+    graph.paddingBottom = 0.0f;
     
     hostView.hostedGraph = graph;
     graph.plotAreaFrame.borderLineStyle = nil;    // don't draw a border
@@ -45,7 +50,7 @@
     // Setup scatter plot space
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     NSTimeInterval xLow       = 0.0f;
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 50.0f)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 60.0f)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(3.0)];
     
     plotSpace.allowsUserInteraction = YES;
@@ -53,12 +58,29 @@
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(3.0)];
     
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
-    axisTextStyle.fontSize = 9.0;
+    axisTextStyle.fontSize = 10.0;
     
+    // Grid line styles
+    CPTMutableLineStyle *majorGridLineStyle = [CPTMutableLineStyle lineStyle];
+    majorGridLineStyle.lineWidth = 0.75;
+    majorGridLineStyle.lineColor = [[CPTColor colorWithGenericGray:0.2] colorWithAlphaComponent:0.75];
+    
+    CPTMutableLineStyle *minorGridLineStyle = [CPTMutableLineStyle lineStyle];
+    minorGridLineStyle.lineWidth = 0.25;
+    minorGridLineStyle.lineColor = [[CPTColor whiteColor] colorWithAlphaComponent:0.1];
+    
+    NSNumberFormatter *labelFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+    labelFormatter.maximumFractionDigits = 0;
     
     // Axes
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
+    
+    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
+    x.majorGridLineStyle = majorGridLineStyle;
+    x.minorGridLineStyle = minorGridLineStyle;
+    x.labelFormatter     = labelFormatter;
+
     x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 10);
     x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
     x.minorTicksPerInterval       = 1;
@@ -110,19 +132,19 @@
 - (void) reload {
     NSLog(@"%s", __PRETTY_FUNCTION__);
  
-    NSTimeInterval oneSec = 1.0;
-    double maxTime = [dm getMaximumTime];
-    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(oneSec * maxTime)];
-    
-    int newSize = 25 * maxTime;
-    if (newSize > 3000) {
-        newSize = 3000;
-    }
-    int HEIGHT = view.frame.size.height;
-    NSString* szString = [NSString stringWithFormat:@"{%d,%d}", newSize, HEIGHT];
-    NSLog(@"new szString = %@", szString);
-    [view setFrameSize:NSSizeFromString(szString)];
+//    NSTimeInterval oneSec = 1.0;
+//    double maxTime = [dm getMaximumTime];
+//    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
+//    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(oneSec * maxTime)];
+//    
+//    int newSize = 25 * maxTime;
+//    if (newSize > 3000) {
+//        newSize = 3000;
+//    }
+//    int HEIGHT = view.frame.size.height;
+//    NSString* szString = [NSString stringWithFormat:@"{%d,%d}", newSize, HEIGHT];
+//    NSLog(@"new szString = %@", szString);
+//    [view setFrameSize:NSSizeFromString(szString)];
 
     
     [graph reloadData];
