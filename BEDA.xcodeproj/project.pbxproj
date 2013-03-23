@@ -17,6 +17,9 @@
 		036723E116D18445004F14D6 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723E016D18445004F14D6 /* QTKit.framework */; };
 		038A62D416FD4CCB00E91A65 /* annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D216FD4CCB00E91A65 /* annotation.png */; };
 		038A62D516FD4CCB00E91A65 /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D316FD4CCB00E91A65 /* sync.png */; };
+		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
+		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
+		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
 		B225C4E816FBC2BA00D3C036 /* TempGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */; };
 		B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */; };
 		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
@@ -43,6 +46,9 @@
 		036723E016D18445004F14D6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		038A62D216FD4CCB00E91A65 /* annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotation.png; sourceTree = "<group>"; };
 		038A62D316FD4CCB00E91A65 /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
+		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
+		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
+		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		B225C4E616FBC2BA00D3C036 /* TempGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempGraphViewController.h; sourceTree = "<group>"; };
 		B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempGraphViewController.m; sourceTree = "<group>"; };
 		B225C4E916FBC4E400D3C036 /* AccelGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelGraphViewController.h; sourceTree = "<group>"; };
@@ -109,6 +115,9 @@
 		036723C616D181D9004F14D6 /* BEDA */ = {
 			isa = PBXGroup;
 			children = (
+				03B663EF16FD84C600781105 /* backward.png */,
+				03B663F016FD84C600781105 /* ff.png */,
+				03B663F116FD84C600781105 /* play.png */,
 				038A62D216FD4CCB00E91A65 /* annotation.png */,
 				038A62D316FD4CCB00E91A65 /* sync.png */,
 				B28D32DC16D20DBB00D58ADA /* GraphView */,
@@ -221,6 +230,9 @@
 				036723D716D181DA004F14D6 /* MainMenu.xib in Resources */,
 				038A62D416FD4CCB00E91A65 /* annotation.png in Resources */,
 				038A62D516FD4CCB00E91A65 /* sync.png in Resources */,
+				03B663F216FD84C600781105 /* backward.png in Resources */,
+				03B663F316FD84C600781105 /* ff.png in Resources */,
+				03B663F416FD84C600781105 /* play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

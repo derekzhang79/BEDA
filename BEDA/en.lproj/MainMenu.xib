@@ -1366,6 +1366,25 @@
 							<bool key="NSToolbarIsUserRemovable">YES</bool>
 							<int key="NSToolbarItemVisibilityPriority">0</int>
 						</object>
+						<object class="NSToolbarItem" key="C994694C-5FC5-4914-8BCE-15110962ABB0" id="514869657">
+							<object class="NSMutableString" key="NSToolbarItemIdentifier">
+								<characters key="NS.bytes">C994694C-5FC5-4914-8BCE-15110962ABB0</characters>
+							</object>
+							<string key="NSToolbarItemLabel">Toolbar Item</string>
+							<string key="NSToolbarItemPaletteLabel">Toolbar Item</string>
+							<string key="NSToolbarItemToolTip"/>
+							<nil key="NSToolbarItemView"/>
+							<nil key="NSToolbarItemImage"/>
+							<nil key="NSToolbarItemTarget"/>
+							<nil key="NSToolbarItemAction"/>
+							<string key="NSToolbarItemMinSize">{0, 0}</string>
+							<string key="NSToolbarItemMaxSize">{0, 0}</string>
+							<bool key="NSToolbarItemEnabled">YES</bool>
+							<bool key="NSToolbarItemAutovalidates">YES</bool>
+							<int key="NSToolbarItemTag">-1</int>
+							<bool key="NSToolbarIsUserRemovable">YES</bool>
+							<int key="NSToolbarItemVisibilityPriority">0</int>
+						</object>
 						<object class="NSToolbarItem" key="DD642B69-F436-424A-AE43-B747270B8D05" id="87662875">
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">DD642B69-F436-424A-AE43-B747270B8D05</characters>
@@ -1539,8 +1558,9 @@
 						<reference ref="87662875"/>
 						<reference ref="223469117"/>
 						<reference ref="336170468"/>
+						<reference ref="514869657"/>
 					</array>
-					<array key="NSToolbarIBDefaultItems">
+					<array class="NSMutableArray" key="NSToolbarIBDefaultItems">
 						<reference ref="101738483"/>
 						<reference ref="336170468"/>
 						<reference ref="87662875"/>
@@ -1574,7 +1594,6 @@
 															<int key="NSvFlags">256</int>
 															<string key="NSFrameSize">{854, 203}</string>
 															<reference key="NSSuperview" ref="433075258"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="447393523"/>
 															<string key="NSReuseIdentifierKey">_NS:11</string>
 															<string key="NSClassName">CPTGraphHostingView</string>
@@ -1584,7 +1603,6 @@
 															<int key="NSvFlags">256</int>
 															<string key="NSFrame">{{0, 213}, {854, 139}}</string>
 															<reference key="NSSuperview" ref="433075258"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="1062961309"/>
 															<string key="NSReuseIdentifierKey">_NS:13</string>
 															<string key="NSClassName">CPTGraphHostingView</string>
@@ -1594,7 +1612,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{0, 362}, {854, 126}}</string>
 															<reference key="NSSuperview" ref="433075258"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="1053461685"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<string key="NSClassName">CPTGraphHostingView</string>
@@ -1602,7 +1619,6 @@
 													</array>
 													<string key="NSFrameSize">{854, 488}</string>
 													<reference key="NSSuperview" ref="690033449"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="891849769"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<int key="NSDividerStyle">3</int>
@@ -1610,14 +1626,12 @@
 											</array>
 											<string key="NSFrameSize">{854, 488}</string>
 											<reference key="NSSuperview" ref="549447035"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="433075258"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 										</object>
 									</array>
 									<string key="NSFrame">{{1, 1}, {854, 488}}</string>
 									<reference key="NSSuperview" ref="733598421"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="690033449"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 									<reference key="NSDocView" ref="690033449"/>
@@ -1637,7 +1651,6 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{839, 1}, {16, 488}}</string>
 									<reference key="NSSuperview" ref="733598421"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:15</string>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -1651,7 +1664,6 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{1, 473}, {854, 16}}</string>
 									<reference key="NSSuperview" ref="733598421"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="65859092"/>
 									<string key="NSReuseIdentifierKey">_NS:26</string>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -1663,7 +1675,6 @@
 							</array>
 							<string key="NSFrame">{{20, 20}, {856, 490}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="549447035"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSHuggingPriority">{250, 250}</string>
@@ -1694,7 +1705,6 @@
 											</set>
 											<string key="NSFrameSize">{427, 247}</string>
 											<reference key="NSSuperview" ref="105528866"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="210785796"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<string key="NSHuggingPriority">{550, 250}</string>
@@ -1710,7 +1720,6 @@
 									</array>
 									<string key="NSFrameSize">{427, 247}</string>
 									<reference key="NSSuperview" ref="719176006"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="487276744"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 									<string key="NSClassName">NSView</string>
@@ -1730,7 +1739,6 @@
 											</set>
 											<string key="NSFrameSize">{419, 247}</string>
 											<reference key="NSSuperview" ref="210785796"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="733598421"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<string key="NSHuggingPriority">{550, 250}</string>
@@ -1743,7 +1751,6 @@
 									</array>
 									<string key="NSFrame">{{437, 0}, {419, 247}}</string>
 									<reference key="NSSuperview" ref="719176006"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="259676792"/>
 									<string key="NSReuseIdentifierKey">_NS:13</string>
 									<string key="NSClassName">NSView</string>
@@ -1751,7 +1758,6 @@
 							</array>
 							<string key="NSFrame">{{20, 523}, {856, 247}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="105528866"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSHuggingPriority">{250, 250}</string>
@@ -1762,7 +1768,6 @@
 					</array>
 					<string key="NSFrameSize">{889, 790}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="719176006"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
@@ -4212,6 +4217,7 @@
 							<reference ref="87662875"/>
 							<reference ref="223469117"/>
 							<reference ref="336170468"/>
+							<reference ref="514869657"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -4284,6 +4290,11 @@
 						<int key="objectID">698</int>
 						<reference key="object" ref="573709101"/>
 						<reference key="parent" ref="439893737"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">699</int>
+						<reference key="object" ref="514869657"/>
+						<reference key="parent" ref="639823608"/>
 					</object>
 				</array>
 			</object>
@@ -4526,6 +4537,7 @@
 				<string key="692.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="693.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="698.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="699.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4542,169 +4554,9 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">698</int>
+			<int key="maxID">699</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">AccelGraphViewController</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="dm">DataManager</string>
-						<string key="hostView">CPTGraphHostingView</string>
-						<string key="view">NSView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="dm">
-							<string key="name">dm</string>
-							<string key="candidateClassName">DataManager</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="hostView">
-							<string key="name">hostView</string>
-							<string key="candidateClassName">CPTGraphHostingView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="view">
-							<string key="name">view</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/AccelGraphViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">AppDelegate</string>
-					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">window</string>
-						<string key="NS.object.0">NSWindow</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">window</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">window</string>
-							<string key="candidateClassName">NSWindow</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/AppDelegate.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CPTGraphHostingView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CPTGraphHostingView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">DataAddController</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="openFile:">id</string>
-						<string key="openProject:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="openFile:">
-							<string key="name">openFile:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="openProject:">
-							<string key="name">openProject:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">dm</string>
-						<string key="NS.object.0">DataManager</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">dm</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">dm</string>
-							<string key="candidateClassName">DataManager</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/DataAddController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">DataManager</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/DataManager.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">EDAGraphViewController</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="dm">DataManager</string>
-						<string key="hostView">CPTGraphHostingView</string>
-						<string key="view">NSView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="dm">
-							<string key="name">dm</string>
-							<string key="candidateClassName">DataManager</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="hostView">
-							<string key="name">hostView</string>
-							<string key="candidateClassName">CPTGraphHostingView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="view">
-							<string key="name">view</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/EDAGraphViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSLayoutConstraint</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TempGraphViewController</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="dm">DataManager</string>
-						<string key="hostView">CPTGraphHostingView</string>
-						<string key="view">NSView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="dm">
-							<string key="name">dm</string>
-							<string key="candidateClassName">DataManager</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="hostView">
-							<string key="name">hostView</string>
-							<string key="candidateClassName">CPTGraphHostingView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="view">
-							<string key="name">view</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TempGraphViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

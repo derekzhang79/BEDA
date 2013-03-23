@@ -100,6 +100,28 @@
     y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
     y.labelTextStyle = axisTextStyle;
     
+    // Add an extra y axis (red)
+    // We add constraints to this axis below
+    CPTXYAxis *y2 = [[(CPTXYAxis *)[CPTXYAxis alloc] initWithFrame:CGRectZero] autorelease];
+    y2.axisConstraints = [CPTConstraints constraintWithLowerOffset:410];
+
+    y2.labelingPolicy              = CPTAxisLabelingPolicyAutomatic;
+    y2.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
+    y2.labelOffset                 = 10.0;
+    y2.coordinate                  = CPTCoordinateY;
+    y2.plotSpace                   = graph.defaultPlotSpace;
+    
+    CPTMutableLineStyle* y2Style = [CPTMutableLineStyle lineStyle];
+    y2Style.lineWidth = 2.0;
+    y2Style.lineColor = [CPTColor redColor];
+    
+    y2.axisLineStyle = y2Style;
+    y2.majorTickLineStyle          = nil;
+    y2.minorTickLineStyle          = nil;
+    y2.labelTextStyle              = nil;
+    // Set axes
+    graph.axisSet.axes = [NSArray arrayWithObjects:x, y, y2, nil];
+    
     // Create a plot that uses the data source method
     CPTScatterPlot *dataSourceLinePlot = [[[CPTScatterPlot alloc] init] autorelease];
     dataSourceLinePlot.identifier = @"Date Plot";
