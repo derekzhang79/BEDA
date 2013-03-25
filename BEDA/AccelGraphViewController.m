@@ -159,6 +159,18 @@
 - (void) reload {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    NSDate* basedate = [dm basedate];
+    NSLog(@"basedate = %@", basedate);
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+    CPTXYAxis *x          = axisSet.xAxis;
+    
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
+    CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
+    timeFormatter.referenceDate = basedate;
+    x.labelFormatter = timeFormatter;
+    
+    
 //    NSTimeInterval oneSec = 1.0;
 //    double maxTime = [dm getMaximumTime];
 //    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
@@ -203,5 +215,7 @@
             return nil;
     }
 }
+
+
 
 @end

@@ -11,14 +11,18 @@
 #import <CorePlot/CorePlot.h>
 
 #import "DataManager.h"
+#import "GraphViewController.h"
 
 @interface DataAddController : NSObject {
     IBOutlet DataManager* dm;
     IBOutlet NSSplitView* splitview;
+    GraphViewController* controller;
 }
 
 - (IBAction)openFile:(id)sender;
 - (IBAction)openProject:(id)sender;
+- (IBAction)addAdditionalData:(id)sender;
+
 
 - (void)openMovieFile:(NSURL*)url;
 - (void)openSensorFile:(NSURL*)url;

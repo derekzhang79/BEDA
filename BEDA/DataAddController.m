@@ -7,6 +7,11 @@
 //
 
 #import "DataAddController.h"
+#import "GraphViewController.h"
+#import "EDAGraphViewController.h"
+#import "TempGraphViewController.h"
+#import "AccelGraphViewController.h"
+
 
 @implementation DataAddController
 
@@ -123,6 +128,7 @@
             float ms = [[tokens objectAtIndex:1] floatValue];
             if (basedate == Nil) {
                 basedate = [date dateByAddingTimeInterval:0];
+                [dm setBasedate:basedate];
                 basems = ms;
             }
             
@@ -141,6 +147,9 @@
                [NSNumber numberWithInt:2],
                [NSDecimalNumber numberWithFloat:Accel],
                [NSNumber numberWithInt:3],
+               [NSDecimalNumber numberWithFloat:xAxis],
+               [NSNumber numberWithInt:4],
+
                //[NSNumber numberWithInt:CPTScatterPlotFieldY],
                nil
                ]
@@ -158,6 +167,23 @@
      
     NSLog(@"dataManager.sensor1.count = %ld", (unsigned long)[[dm sensor1] count]);
     
+}
+
+- (IBAction)addAdditionalData:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
+    NSArray* v = [splitview subviews];
+    //CPTGraphHostingView* lastView = [v objectAtIndex:1];
+    CPTGraphHostingView* lastView = [v lastObject];
+
+    [splitview addSubview:view positioned:NSWindowBelow relativeTo:lastView];
+    
+    controller = [[GraphViewController alloc] init];
+    [controller setCPTHostView:view];
+    [controller setDM:dm];
+    [controller awakeFromNib];
+    [splitview adjustSubviews];
+
 }
 
 @end

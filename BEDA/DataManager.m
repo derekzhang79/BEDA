@@ -14,6 +14,7 @@
 @synthesize movie1;
 @synthesize movie2;
 @synthesize sensor1 = _sensor1;
+@synthesize basedate;
 
 
 - (void) awakeFromNib {

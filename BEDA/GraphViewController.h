@@ -19,5 +19,7 @@
 }
 - (void) reload;
 - (void) onSensorDataLoaded:(NSNotification*) noti;
+- (void) setCPTHostView:(CPTGraphHostingView *)_view;
+- (void) setDM:(DataManager*)_dm;
 
 @end

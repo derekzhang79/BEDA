@@ -20,5 +20,4 @@
 }
 - (void) reload;
 - (void) onSensorDataLoaded:(NSNotification*) noti;
-
 @end

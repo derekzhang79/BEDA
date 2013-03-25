@@ -17,6 +17,7 @@
 @property (retain) QTMovie* movie1;
 @property (retain) QTMovie* movie2;
 @property (retain) NSMutableArray* sensor1;
+@property (retain) NSDate* basedate;
 
 -(double) getMaximumTime;
 

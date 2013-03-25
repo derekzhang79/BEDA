@@ -183,6 +183,15 @@
     [self reload];
 }
 
+- (void) setCPTHostView:(CPTGraphHostingView *)_view {
+    hostView = _view;
+}
+
+- (void) setDM:(DataManager*)_dm {
+    dm = _dm;
+}
+
+
 #pragma mark -
 #pragma mark Plot Data Source Methods
 
@@ -198,7 +207,7 @@
         case CPTScatterPlotFieldX:
             return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:0]];
         case CPTScatterPlotFieldY:
-            return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:3]];
+            return [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:4]];
         default:
             return nil;
     }
