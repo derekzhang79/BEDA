@@ -16,6 +16,9 @@
 
 - (IBAction)openFile:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSTextView *textView = [NSTextView new];
+//    [splitview addSubview:textView];
+//    return;
     
     // Show the OpenPanel
     NSOpenPanel *panel = [NSOpenPanel openPanel];

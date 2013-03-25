@@ -14,6 +14,7 @@
 
 @interface DataAddController : NSObject {
     IBOutlet DataManager* dm;
+    IBOutlet NSSplitView* splitview;
 }
 
 - (IBAction)openFile:(id)sender;

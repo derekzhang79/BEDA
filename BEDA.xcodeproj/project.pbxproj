@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032CEB3716FFCFE200F3DFE2 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */; };
 		036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723C016D181D9004F14D6 /* Cocoa.framework */; };
 		036723CB16D181D9004F14D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036723C916D181D9004F14D6 /* InfoPlist.strings */; };
 		036723CD16D181D9004F14D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723CC16D181D9004F14D6 /* main.m */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		032CEB3516FFCFE200F3DFE2 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		036723BD16D181D9004F14D6 /* BEDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BEDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036723C016D181D9004F14D6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		036723C316D181D9004F14D6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -170,6 +173,8 @@
 				B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */,
 				B28D32D916D20DB500D58ADA /* EDAGraphViewController.h */,
 				B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */,
+				032CEB3516FFCFE200F3DFE2 /* GraphViewController.h */,
+				032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */,
 			);
 			name = GraphView;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */,
 				B225C4E816FBC2BA00D3C036 /* TempGraphViewController.m in Sources */,
 				B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */,
+				032CEB3716FFCFE200F3DFE2 /* GraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

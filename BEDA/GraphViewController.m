@@ -2,13 +2,13 @@
 //  GraphViewController.m
 //  BEDA
 //
-//  Created by Jennifer Kim on 2/18/13.
+//  Created by Jennifer Kim on 3/24/13.
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
-#import "AccelGraphViewController.h"
+#import "GraphViewController.h"
 
-@implementation AccelGraphViewController
+@implementation GraphViewController
 
 -(void)dealloc
 {
@@ -34,11 +34,11 @@
     [graph applyTheme:theme];
     
     // Add some padding to the graph, with more at the bottom for axis labels.
-    graph.plotAreaFrame.paddingTop = 5.0f;
+    graph.plotAreaFrame.paddingTop = 6.0f;
     graph.plotAreaFrame.paddingRight = 0.0f;
-    graph.plotAreaFrame.paddingBottom = 20.0f;
+    graph.plotAreaFrame.paddingBottom = 5.0f;
     graph.plotAreaFrame.paddingLeft = 30.0f;
-    
+    NSLog(@"[parent]graph.plotAreaFrame.paddingBottom = %f",  graph.plotAreaFrame.paddingBottom);
     graph.paddingRight = 0.0f;
     graph.paddingLeft = 0.0f;
     graph.paddingTop = 0.0f;
@@ -51,12 +51,12 @@
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     NSTimeInterval xLow       = 0.0f;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 60.0f)];
-    //////////////////////////////////////////////////////////////////////yRange should be dfferent 
+    //////////////////////////////////////////////////////////////////////yRange should be dfferent
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
     
     plotSpace.allowsUserInteraction = YES;
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 5000.0f)];
-    //////////////////////////////////////////////////////////////////////yRange should be dfferent 
+    //////////////////////////////////////////////////////////////////////yRange should be dfferent
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
     
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
@@ -82,12 +82,12 @@
     x.majorGridLineStyle = majorGridLineStyle;
     x.minorGridLineStyle = minorGridLineStyle;
     x.labelFormatter     = labelFormatter;
-
+    
     x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 10);
-    //////////////////////////////////////////////////////////////////////xOrthogonal coordinate decimal should be set to starting y range 
+    //////////////////////////////////////////////////////////////////////xOrthogonal coordinate decimal should be set to starting y range
     x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
     x.minorTicksPerInterval       = 1;
-   
+    
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
     
@@ -98,7 +98,7 @@
     
     CPTXYAxis *y = axisSet.yAxis;
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
-    //////////////////////////////////////////////////////////////////////yRange should be dfferent 
+    //////////////////////////////////////////////////////////////////////yRange should be dfferent
     y.majorIntervalLength         = CPTDecimalFromString(@"1.0");
     y.minorTicksPerInterval       = 0.5;
     y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
@@ -108,7 +108,7 @@
     // We add constraints to this axis below
     CPTXYAxis *y2 = [[(CPTXYAxis *)[CPTXYAxis alloc] initWithFrame:CGRectZero] autorelease];
     y2.axisConstraints = [CPTConstraints constraintWithLowerOffset:410];
-
+    
     y2.labelingPolicy              = CPTAxisLabelingPolicyAutomatic;
     y2.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
     y2.labelOffset                 = 10.0;
@@ -159,20 +159,20 @@
 - (void) reload {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-//    NSTimeInterval oneSec = 1.0;
-//    double maxTime = [dm getMaximumTime];
-//    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
-//    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(oneSec * maxTime)];
+    //    NSTimeInterval oneSec = 1.0;
+    //    double maxTime = [dm getMaximumTime];
+    //    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
+    //    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(oneSec * maxTime)];
     
-//    int newSize = 25 * maxTime;
-//    if (newSize > 3000) {
-//        newSize = 3000;
-//    }
-//    int HEIGHT = view.frame.size.height;
-//    NSString* szString = [NSString stringWithFormat:@"{%d,%d}", newSize, HEIGHT];
-//    NSLog(@"new szString = %@", szString);
-//    [view setFrameSize:NSSizeFromString(szString)];
-//    
+    //    int newSize = 25 * maxTime;
+    //    if (newSize > 3000) {
+    //        newSize = 3000;
+    //    }
+    //    int HEIGHT = view.frame.size.height;
+    //    NSString* szString = [NSString stringWithFormat:@"{%d,%d}", newSize, HEIGHT];
+    //    NSLog(@"new szString = %@", szString);
+    //    [view setFrameSize:NSSizeFromString(szString)];
+    //
     
     [graph reloadData];
     
@@ -191,7 +191,7 @@
     return [[dm sensor1] count];
 }
 
-//////////////////////////////////////////////////////////////////////number for plot should be dfferent 
+//////////////////////////////////////////////////////////////////////number for plot should be dfferent
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
     switch (fieldEnum) {
@@ -203,5 +203,4 @@
             return nil;
     }
 }
-
 @end

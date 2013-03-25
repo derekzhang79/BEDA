@@ -10,13 +10,6 @@
 
 @implementation EDAGraphViewController
 
--(void)dealloc
-{
-    [graph release];
-    [super dealloc];
-}
-
-
 -(void)awakeFromNib
 {
     [super awakeFromNib];
@@ -27,26 +20,7 @@
     NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"12:00:00"];
     //    NSTimeInterval oneDay = 24 * 60 * 60;
     NSTimeInterval oneSec = 1.0;
-    
-    // Create graph from theme
-    graph = [(CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:CGRectZero];
-    CPTTheme *theme = [CPTTheme themeNamed:kCPTPlainWhiteTheme];
-    [graph applyTheme:theme];
-    
-    // Add some padding to the graph, with more at the bottom for axis labels.
-    graph.plotAreaFrame.paddingTop = 6.0f;
-    graph.plotAreaFrame.paddingRight = 0.0f;
-    graph.plotAreaFrame.paddingBottom = 5.0f;
-    graph.plotAreaFrame.paddingLeft = 30.0f;
-    
-    graph.paddingRight = 0.0f;
-    graph.paddingLeft = 0.0f;
-    graph.paddingTop = 0.0f;
-    graph.paddingBottom = 0.0f;
-    
-    hostView.hostedGraph = graph;
-    graph.plotAreaFrame.borderLineStyle = nil;    // don't draw a border
-    
+  
     // Setup scatter plot space
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     NSTimeInterval xLow       = 0.0f;
@@ -60,73 +34,73 @@
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 10.0;
     
-    // Grid line styles
-    CPTMutableLineStyle *majorGridLineStyle = [CPTMutableLineStyle lineStyle];
-    majorGridLineStyle.lineWidth = 0.75;
-    majorGridLineStyle.lineColor = [[CPTColor colorWithGenericGray:0.2] colorWithAlphaComponent:0.75];
-    
-    CPTMutableLineStyle *minorGridLineStyle = [CPTMutableLineStyle lineStyle];
-    minorGridLineStyle.lineWidth = 0.25;
-    minorGridLineStyle.lineColor = [[CPTColor whiteColor] colorWithAlphaComponent:0.1];
-    
-    NSNumberFormatter *labelFormatter = [[[NSNumberFormatter alloc] init] autorelease];
-    labelFormatter.maximumFractionDigits = 0;
-    
-    // Axes
-    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
-    CPTXYAxis *x          = axisSet.xAxis;
-    
-    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
-    x.majorGridLineStyle = majorGridLineStyle;
-    x.minorGridLineStyle = minorGridLineStyle;
-    x.labelFormatter     = labelFormatter;
-
-    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 10);
-    x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
-    x.minorTicksPerInterval       = 1;
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
-
-    CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
-    timeFormatter.referenceDate = refDate;
-    x.labelFormatter            = timeFormatter;
-    x.labelTextStyle = axisTextStyle;
-    
-    CPTXYAxis *y = axisSet.yAxis;
-    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
-    y.majorIntervalLength         = CPTDecimalFromString(@"0.5");
-    y.minorTicksPerInterval       = 0.5;
-    y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
-//    y.title = @"EDA";
-//    y.titleLocation =  CPTDecimalFromInteger(0);
-    y.labelTextStyle = axisTextStyle;
-    
-    // Add an extra y axis (red)
-    // We add constraints to this axis below
-    CPTXYAxis *y2 = [[(CPTXYAxis *)[CPTXYAxis alloc] initWithFrame:CGRectZero] autorelease];
-    y2.axisConstraints = [CPTConstraints constraintWithLowerOffset:410];
-    
-    y2.labelingPolicy              = CPTAxisLabelingPolicyAutomatic;
-    y2.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
-    y2.labelOffset                 = 10.0;
-    y2.coordinate                  = CPTCoordinateY;
-    y2.plotSpace                   = graph.defaultPlotSpace;
-    
-    CPTMutableLineStyle* y2Style = [CPTMutableLineStyle lineStyle];
-    y2Style.lineWidth = 2.0;
-    y2Style.lineColor = [CPTColor redColor];
-    
-    y2.axisLineStyle = y2Style;
-    y2.majorTickLineStyle          = nil;
-    y2.minorTickLineStyle          = nil;
-    y2.labelTextStyle              = nil;
-    //y2.title = @"EDA";
-    //y2.titleLocation =  CPTDecimalFromInteger(0);
-    // Set axes
-    graph.axisSet.axes = [NSArray arrayWithObjects:x, y, y2, nil];
-    
-    
-    // Create a plot that uses the data source method
+//    // Grid line styles
+//    CPTMutableLineStyle *majorGridLineStyle = [CPTMutableLineStyle lineStyle];
+//    majorGridLineStyle.lineWidth = 0.75;
+//    majorGridLineStyle.lineColor = [[CPTColor colorWithGenericGray:0.2] colorWithAlphaComponent:0.75];
+//    
+//    CPTMutableLineStyle *minorGridLineStyle = [CPTMutableLineStyle lineStyle];
+//    minorGridLineStyle.lineWidth = 0.25;
+//    minorGridLineStyle.lineColor = [[CPTColor whiteColor] colorWithAlphaComponent:0.1];
+//    
+//    NSNumberFormatter *labelFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+//    labelFormatter.maximumFractionDigits = 0;
+//    
+//    // Axes
+//    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+//    CPTXYAxis *x          = axisSet.xAxis;
+//    
+//    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
+//    x.majorGridLineStyle = majorGridLineStyle;
+//    x.minorGridLineStyle = minorGridLineStyle;
+//    x.labelFormatter     = labelFormatter;
+//
+//    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 10);
+//    x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
+//    x.minorTicksPerInterval       = 1;
+//    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+//    dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
+//
+//    CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
+//    timeFormatter.referenceDate = refDate;
+//    x.labelFormatter            = timeFormatter;
+//    x.labelTextStyle = axisTextStyle;
+//    
+//    CPTXYAxis *y = axisSet.yAxis;
+//    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
+//    y.majorIntervalLength         = CPTDecimalFromString(@"0.5");
+//    y.minorTicksPerInterval       = 0.5;
+//    y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
+////    y.title = @"EDA";
+////    y.titleLocation =  CPTDecimalFromInteger(0);
+//    y.labelTextStyle = axisTextStyle;
+//    
+//    // Add an extra y axis (red)
+//    // We add constraints to this axis below
+//    CPTXYAxis *y2 = [[(CPTXYAxis *)[CPTXYAxis alloc] initWithFrame:CGRectZero] autorelease];
+//    y2.axisConstraints = [CPTConstraints constraintWithLowerOffset:410];
+//    
+//    y2.labelingPolicy              = CPTAxisLabelingPolicyAutomatic;
+//    y2.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
+//    y2.labelOffset                 = 10.0;
+//    y2.coordinate                  = CPTCoordinateY;
+//    y2.plotSpace                   = graph.defaultPlotSpace;
+//    
+//    CPTMutableLineStyle* y2Style = [CPTMutableLineStyle lineStyle];
+//    y2Style.lineWidth = 2.0;
+//    y2Style.lineColor = [CPTColor redColor];
+//    
+//    y2.axisLineStyle = y2Style;
+//    y2.majorTickLineStyle          = nil;
+//    y2.minorTickLineStyle          = nil;
+//    y2.labelTextStyle              = nil;
+//    //y2.title = @"EDA";
+//    //y2.titleLocation =  CPTDecimalFromInteger(0);
+//    // Set axes
+//    graph.axisSet.axes = [NSArray arrayWithObjects:x, y, y2, nil];
+//    
+//    
+//    // Create a plot that uses the data source method
     CPTScatterPlot *dataSourceLinePlot = [[[CPTScatterPlot alloc] init] autorelease];
     dataSourceLinePlot.identifier = @"Date Plot";
     
@@ -156,40 +130,6 @@
                                                  name:@"sensorDataLoaded" object:Nil];
 }
 
-- (void) reload {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
- 
-//    NSTimeInterval oneSec = 1.0;
-//    double maxTime = [dm getMaximumTime];
-//    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
-//    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(oneSec * maxTime)];
-//    
-//    int newSize = 25 * maxTime;
-//    if (newSize > 3000) {
-//        newSize = 3000;
-//    }
-//    int HEIGHT = view.frame.size.height;
-//    NSString* szString = [NSString stringWithFormat:@"{%d,%d}", newSize, HEIGHT];
-//    NSLog(@"new szString = %@", szString);
-//    [view setFrameSize:NSSizeFromString(szString)];
-
-    
-    [graph reloadData];
-    
-}
-
-- (void) onSensorDataLoaded:(NSNotification*) noti {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self reload];
-}
-
-#pragma mark -
-#pragma mark Plot Data Source Methods
-
--(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
-{
-    return [[dm sensor1] count];
-}
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
@@ -201,8 +141,6 @@
         default:
             return nil;
     }
-//    NSDecimalNumber *num = [[[dm sensor1] objectAtIndex:index] objectForKey:[NSNumber numberWithInt:(int)fieldEnum]];
-//    return num;
 }
 
 @end
