@@ -21,6 +21,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property BOOL isNavMode;
 @property double gtAppTime;
 
+- (NSSplitView*) getSplitView;
 
 // Responde to menu
 - (IBAction)openFile:(id)sender;
@@ -45,6 +46,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (void)spaceEvenly:(NSSplitView *)splitView;
 - (void)spaceEvenly:(NSSplitView *)splitView withFirstSize:(float)szFirst;
 
+- (void)addSourceTimeData:(NSURL*)url;
 
 
 @end

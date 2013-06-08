@@ -11,6 +11,8 @@
 
 #import "SourceMovie.h"
 #import "ChannelMovie.h"
+#import "SourceTimeData.h"
+#import "ChannelTimeData.h"
 
 
 float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
@@ -49,6 +51,10 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     
 }
 
+- (NSSplitView*) getSplitView {
+    return splitview;
+}
+
 
 - (IBAction)openFile:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -70,7 +76,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     NSLog(@"url = %@ [ext = %@]", url, ext);
     
     if ([ext isEqualToString:@"csv"]) {
-        // [self openSensorFile:url];
+        [self addSourceTimeData:url];
     } else {
         [self addSourceMov:url];
     }
@@ -338,5 +344,21 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     [splitView adjustSubviews];
 }
 
+- (void)addSourceTimeData:(NSURL*)url {
+    // Create a source
+    SourceTimeData* s = [[SourceTimeData alloc] init];
+    [s setBeda:self];
+    [s loadFile:url];
+    [[self sources] addObject:s];
+    NSLog(@"%s: sources.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self sources] count]);
+    
+    // Create a movie view for
+    ChannelTimeData* ch = [[s channels] objectAtIndex:0];
+    if (ch) {
+        [ch createEDAViewFor:self];
+    }
+    
+    [self spaceEvenly:splitview];
+}
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0314637B1762F675007B075B /* ChannelTimeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314637A1762F675007B075B /* ChannelTimeData.m */; };
+		0314637E1762F685007B075B /* SourceTimeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314637D1762F685007B075B /* SourceTimeData.m */; };
 		032CEB3716FFCFE200F3DFE2 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */; };
 		036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723C016D181D9004F14D6 /* Cocoa.framework */; };
 		036723CB16D181D9004F14D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036723C916D181D9004F14D6 /* InfoPlist.strings */; };
@@ -35,6 +37,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		031463791762F675007B075B /* ChannelTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTimeData.h; sourceTree = "<group>"; };
+		0314637A1762F675007B075B /* ChannelTimeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTimeData.m; sourceTree = "<group>"; };
+		0314637C1762F685007B075B /* SourceTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceTimeData.h; sourceTree = "<group>"; };
+		0314637D1762F685007B075B /* SourceTimeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceTimeData.m; sourceTree = "<group>"; };
 		032CEB3516FFCFE200F3DFE2 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		036723BD16D181D9004F14D6 /* BEDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BEDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +101,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031463781762F62F007B075B /* TimeData */ = {
+			isa = PBXGroup;
+			children = (
+				031463791762F675007B075B /* ChannelTimeData.h */,
+				0314637A1762F675007B075B /* ChannelTimeData.m */,
+				0314637C1762F685007B075B /* SourceTimeData.h */,
+				0314637D1762F685007B075B /* SourceTimeData.m */,
+			);
+			name = TimeData;
+			sourceTree = "<group>";
+		};
 		036723B416D181D8004F14D6 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +155,7 @@
 			children = (
 				B26BF27D176182B6009BCC7D /* AppController */,
 				B26BF28A176183C1009BCC7D /* Movie */,
+				031463781762F62F007B075B /* TimeData */,
 				B26BF28B176183D5009BCC7D /* Resources */,
 				B28D32DC16D20DBB00D58ADA /* GraphView */,
 				B25CBBE616D1DDBD00626FA9 /* Controller */,
@@ -316,6 +334,8 @@
 				B26BF2891761835F009BCC7D /* Viewer.m in Sources */,
 				B26BF28E176196BD009BCC7D /* SourceMovie.m in Sources */,
 				B26BF291176196CC009BCC7D /* ChannelMovie.m in Sources */,
+				0314637B1762F675007B075B /* ChannelTimeData.m in Sources */,
+				0314637E1762F685007B075B /* SourceTimeData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
