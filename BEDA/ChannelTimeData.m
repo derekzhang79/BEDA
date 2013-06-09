@@ -138,6 +138,9 @@
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
     
+    // Create a header plot
+    [self createHeaderPlot];
+    
 //    // Register self as notification observer
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSensorDataLoaded:)
 //                                                 name:@"sensorDataLoaded" object:Nil];
@@ -188,14 +191,92 @@
     
 
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// HeaderPlot functions
+- (void)createHeaderPlot {
+    // Create header plot
+    plotHeader = [[[CPTScatterPlot alloc] initWithFrame:CGRectNull] autorelease];
+    plotHeader.identifier = BEDA_INDENTIFIER_HEADER_PLOT;
+    plotHeader.dataSource = self;
+    plotHeader.delegate = self;
+    
+    // Set the style
+    // 1. SavingPlotLine style
+    CPTColor *headerPlotColor = [CPTColor orangeColor];
+    CPTMutableLineStyle *savingsPlotLineStyle = [CPTMutableLineStyle lineStyle];
+    savingsPlotLineStyle.lineColor = headerPlotColor;
+    
+    // 2. Symbol style
+    CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
+    headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
+    headerPlotSymbol.lineStyle = savingsPlotLineStyle;
+    headerPlotSymbol.size = CGSizeMake(5.0f, 5.0f);
+    plotHeader.plotSymbol = headerPlotSymbol;
 
+    // 3. DataLineStyle
+    CPTMutableLineStyle *headerLineStyle = [CPTMutableLineStyle lineStyle];
+    headerLineStyle.lineColor = [CPTColor orangeColor];
+    headerLineStyle.lineWidth = 2.0f;
+    plotHeader.dataLineStyle = headerLineStyle;
+
+    // Add the plot to the graph
+    [graph addPlot:plotHeader];
+}
+
+-(NSUInteger)numberOfRecordsForHeaderPlot {
+    return 5;
+}
+
+-(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
+    double px[6] = {0.0, -0.5, 0.5, 0.0, 0.0, 0.0};
+    double py[6] = {4.0, 4.8, 4.8, 4.0, 0.2, 0.0};
+    double t = 20.0;
+    
+    if (fieldEnum == CPTScatterPlotFieldX) {
+        // Returns X values
+//        return [NSNumber numberWithDouble:20];
+        return [NSNumber numberWithDouble: (px[index] + t) ];
+    } else if (fieldEnum == CPTScatterPlotFieldY) {
+        // Returns Y values
+        return [NSNumber numberWithDouble: (py[index]) ];
+        //        switch(index) {
+//            case 0:
+//                return [NSNumber numberWithDouble:0.5];
+//            case 1:
+//                return [NSNumber numberWithDouble:4.5];
+//            default:
+//                return nil;
+//        }
+    } else {
+        // Invalid fieldEnum: Should not be reached, probably
+        return nil;
+    }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CPTPlotDataSource functions
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
+    // If plot is header plot
+    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
+    {
+        return [self numberOfRecordsForHeaderPlot];
+    }
+    // Otherwise, plot it data plot
+    
     return [[[self sourceTimeData] timedata] count];
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
+    // If plot is header plot
+    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
+    {
+        return [self numberForHeaderPlotField:fieldEnum recordIndex:index];
+    }
+    
+    // Otherwise, plot it data plot
     NSMutableArray* data = [[self sourceTimeData] timedata];
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
