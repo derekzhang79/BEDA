@@ -13,19 +13,35 @@
 
 #define BEDA_INDENTIFIER_HEADER_PLOT @"BedaHeaderPlot"
 
-@interface ChannelTimeData : Channel<CPTPlotDataSource>  {
+@interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
     CPTScatterPlot *plotHeader;
 
 }
 
+@property (assign) BOOL isHeaderSelected;
+@property (assign) double headerTime;
+
+@property (retain) NSTimer* playTimer;
+@property (retain) NSDate* playBase;
 
 - (SourceTimeData*) sourceTimeData;
 - (void)initGraph;
 - (void)createEDAViewFor:(BedaController*)beda;
 
+// Play/stop
+- (void)play;
+- (void)stop;
+- (void)onPlayTimer : (id)sender ;
+
+- (double) getMyTimeInGlobal;
+- (void) setMyTimeInGlobal:(double)gt;
+
+
 // Header related functions
 - (void)createHeaderPlot;
+- (void)selectHeaderPlot;
+- (void)deselectHeaderPlot;
 -(NSUInteger)numberOfRecordsForHeaderPlot;
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index;
 

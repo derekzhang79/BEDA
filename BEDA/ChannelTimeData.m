@@ -10,12 +10,20 @@
 
 @implementation ChannelTimeData
 
+@synthesize isHeaderSelected;
+@synthesize headerTime;
+@synthesize playTimer = _playTimer;
+@synthesize playBase = _playBase;
+
 - (SourceTimeData*) sourceTimeData {
     return (SourceTimeData*)[self source];
 }
 
 
 - (void)initGraph {
+    [self setPlayTimer:Nil];
+    [self setPlayBase:Nil];
+    
     [super awakeFromNib];
     
     // If you make sure your dates are calculated at noon, you shouldn't have to
@@ -48,6 +56,10 @@
     
     // Setup scatter plot space
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
+    
+    plotSpace.allowsUserInteraction = YES;
+    plotSpace.delegate = self;
+    
     NSTimeInterval xLow       = 0.0f;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 60.0f)];
     //////////////////////////////////////////////////////////////////////yRange should be dfferent
@@ -191,6 +203,67 @@
     
 
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Play/stop
+- (void)play {
+    if ([self isNavMode] == NO) {
+        NSLog(@"%s : graph only plays in Navigation Mode", __PRETTY_FUNCTION__);
+        return;
+    }
+    NSTimer* _timer = [self playTimer];
+    if (_timer == nil)
+    {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                                  target:self
+                                                selector:@selector(onPlayTimer:)
+                                                userInfo:nil
+                                                 repeats:YES];
+        [self setPlayTimer:_timer];
+        NSDate* clickedTime = [NSDate date];
+        NSDate* adjustedTime = [clickedTime dateByAddingTimeInterval:-[self headerTime]];
+        [self setPlayBase:adjustedTime];
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+    }
+}
+
+- (void)stop {
+    NSTimer* _timer = [self playTimer];
+    if (_timer != nil)
+    {
+        [_timer invalidate];
+        [self setPlayTimer:Nil];
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    }
+    
+}
+- (void)onPlayTimer : (id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    double t = [self headerTime];
+//    [self setHeaderTime:t + 0.05];
+
+    double t = -[[self playBase] timeIntervalSinceNow];
+    [self setHeaderTime:t];
+    
+    [graph reloadData];
+
+}
+
+- (double) getMyTimeInGlobal {
+    double ltSeconds = [self headerTime];
+    double gtSeconds = [self localToGlobalTime:ltSeconds];
+    return gtSeconds;
+}
+
+- (void) setMyTimeInGlobal:(double)gt {
+    double lt = [self globalToLocalTime:gt];
+    [self setHeaderTime:lt];
+    [graph reloadData];
+
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // HeaderPlot functions
 - (void)createHeaderPlot {
@@ -199,6 +272,41 @@
     plotHeader.identifier = BEDA_INDENTIFIER_HEADER_PLOT;
     plotHeader.dataSource = self;
     plotHeader.delegate = self;
+    
+    [self deselectHeaderPlot];
+    [self setHeaderTime:0.0];
+
+    // Add the plot to the graph
+    [graph addPlot:plotHeader];
+}
+
+- (void)selectHeaderPlot {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    CPTColor *selectedPlotColor = [CPTColor redColor];
+    
+    CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
+    symbolLineStyle.lineColor = selectedPlotColor;
+    
+    CPTPlotSymbol *plotSymbol = nil;
+    plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
+    plotSymbol.fill = [CPTFill fillWithColor:selectedPlotColor];
+    plotSymbol.lineStyle = symbolLineStyle;
+    plotSymbol.size = CGSizeMake(15.0f, 15.0f);
+    
+    plotHeader.plotSymbol = plotSymbol;
+    
+    CPTMutableLineStyle *selectedLineStyle = [CPTMutableLineStyle lineStyle];
+    selectedLineStyle.lineColor = [CPTColor yellowColor];
+    selectedLineStyle.lineWidth = 5.0f;
+    
+    plotHeader.dataLineStyle = selectedLineStyle;
+    [self setIsHeaderSelected:YES];
+    
+}
+
+- (void)deselectHeaderPlot {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
     
     // Set the style
     // 1. SavingPlotLine style
@@ -210,17 +318,15 @@
     CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
     headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
     headerPlotSymbol.lineStyle = savingsPlotLineStyle;
-    headerPlotSymbol.size = CGSizeMake(5.0f, 5.0f);
+    headerPlotSymbol.size = CGSizeMake(15.0f, 15.0f);
     plotHeader.plotSymbol = headerPlotSymbol;
-
+    
     // 3. DataLineStyle
     CPTMutableLineStyle *headerLineStyle = [CPTMutableLineStyle lineStyle];
     headerLineStyle.lineColor = [CPTColor orangeColor];
     headerLineStyle.lineWidth = 2.0f;
     plotHeader.dataLineStyle = headerLineStyle;
-
-    // Add the plot to the graph
-    [graph addPlot:plotHeader];
+    [self setIsHeaderSelected:NO];
 }
 
 -(NSUInteger)numberOfRecordsForHeaderPlot {
@@ -230,7 +336,7 @@
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
     double px[6] = {0.0, -0.5, 0.5, 0.0, 0.0, 0.0};
     double py[6] = {4.0, 4.8, 4.8, 4.0, 0.2, 0.0};
-    double t = 20.0;
+    double t = [self headerTime];
     
     if (fieldEnum == CPTScatterPlotFieldX) {
         // Returns X values
@@ -253,6 +359,71 @@
     }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Delegation functions
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(id)event
+          atPoint:(CGPoint)point
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return YES;
+}
+
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceUpEvent:(id)event atPoint:(CGPoint)point
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    // Restore the vertical line plot to its initial color.
+//    [self applyTouchPlotColor];
+    [self deselectHeaderPlot];
+    return YES;
+}
+
+- (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index
+{
+    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
+    {
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+        [self selectHeaderPlot];
+
+//        touchPlotSelected = YES;
+//        [self applyHighLightPlotColor:plot];
+//        if ([delegate respondsToSelector:@selector(linePlot:indexLocation:)])
+//            [delegate linePlot:self indexLocation:index];
+    }
+}
+
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(id)event atPoint:(CGPoint)point
+{
+    // Convert the touch point to plot area frame location
+    CGPoint pointInPlotArea = [graph convertPoint:point toLayer:graph.plotAreaFrame];
+
+    NSDecimal pt[2];
+    [graph.defaultPlotSpace plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
+//    NSDecimalRound(&pt[0], &pt[0], 0, NSRoundPlain);
+    
+
+    double x = [[NSDecimalNumber decimalNumberWithDecimal:pt[0]] doubleValue];
+    double y = [[NSDecimalNumber decimalNumberWithDecimal:pt[1]] doubleValue];
+//    NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
+    if ([self isHeaderSelected]) {
+        [self setHeaderTime:x];
+        [graph reloadData];
+    }
+    
+    if ([self isNavMode] == NO) {
+        double gt = [self getGlobalTime];
+        double lt = [self headerTime];
+        // gt + offset = lt
+        double offset = lt - gt;
+        [[self source] setOffset:offset];
+        NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
+    } else {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"channelCurrentTimeUpdate"
+         object:self];
+    }
+    
+    return YES;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CPTPlotDataSource functions
