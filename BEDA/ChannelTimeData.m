@@ -124,7 +124,7 @@
     y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
     y.labelTextStyle = titleText;
     y.titleTextStyle = titleText;
-    y.title = @"Accel";
+    y.title = @"EDA";
     y.titleOffset = 35;
     
     // Add an extra y axis (red)
@@ -137,25 +137,24 @@
     CPTScatterPlot *dataSourceLinePlot = [[[CPTScatterPlot alloc] init] autorelease];
     dataSourceLinePlot.identifier = @"Date Plot";
     
-    //////////////////////////////////////////////////////////////////////color should be different
-    //CPTFill *areaFill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:1.0f green:0.0f blue:0.0f alpha:0.2f]];
-    //dataSourceLinePlot.areaFill      = areaFill;
-    dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
-    
+    // Actual graph line & fill
     CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
     lineStyle.lineWidth              = 1.f;
-    lineStyle.lineColor              = [CPTColor redColor];
+    lineStyle.lineColor              = [CPTColor colorWithComponentRed:0.50f green:0.67f blue:0.65f alpha:1.0f];
     dataSourceLinePlot.dataLineStyle = lineStyle;
     
+    CPTFill *areaFill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0.50f green:0.67f blue:0.65f alpha:0.4f]];
+    dataSourceLinePlot.areaFill      = areaFill;
+    dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
+        
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
     
+    //    // Register self as notification observer
+    [self reload];
     // Create a header plot
     [self createHeaderPlot];
     
-//    // Register self as notification observer
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSensorDataLoaded:)
-//                                                 name:@"sensorDataLoaded" object:Nil];
 }
 
 - (void) reload {
@@ -330,12 +329,12 @@
 }
 
 -(NSUInteger)numberOfRecordsForHeaderPlot {
-    return 5;
+    return 2;
 }
 
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
-    double px[6] = {0.0, -0.5, 0.5, 0.0, 0.0, 0.0};
-    double py[6] = {4.0, 4.8, 4.8, 4.0, 0.2, 0.0};
+    double px[6] = {0.0, 0.0, 0.5, 0.0, 0.0, 0.0};
+    double py[6] = {4.92, 0.11, 4.8, 4.0, 0.2, 0.0};
     double t = [self headerTime];
     
     if (fieldEnum == CPTScatterPlotFieldX) {
@@ -453,7 +452,7 @@
         case CPTScatterPlotFieldX:
             return [[data objectAtIndex:index] objectForKey:[NSNumber numberWithInt:0]];
         case CPTScatterPlotFieldY:
-            return [[data objectAtIndex:index] objectForKey:[NSNumber numberWithInt:3]];
+            return [[data objectAtIndex:index] objectForKey:[NSNumber numberWithInt:1]];
         default:
             return nil;
     }
