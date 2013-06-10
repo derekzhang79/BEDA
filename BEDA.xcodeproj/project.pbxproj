@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		0314637B1762F675007B075B /* ChannelTimeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314637A1762F675007B075B /* ChannelTimeData.m */; };
 		0314637E1762F685007B075B /* SourceTimeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314637D1762F685007B075B /* SourceTimeData.m */; };
+		031463801765ADDD007B075B /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0314637F1765ADDD007B075B /* stop.png */; };
+		031463821765AF7E007B075B /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 031463811765AF7E007B075B /* plus.png */; };
+		031463861765B1D5007B075B /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 031463851765B1D4007B075B /* minus.png */; };
+		031463891765B277007B075B /* Data-Zoom-in-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 031463871765B277007B075B /* Data-Zoom-in-icon.png */; };
+		0314638A1765B277007B075B /* Data-Zoom-out-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 031463881765B277007B075B /* Data-Zoom-out-icon.png */; };
 		032CEB3716FFCFE200F3DFE2 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */; };
 		036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723C016D181D9004F14D6 /* Cocoa.framework */; };
 		036723CB16D181D9004F14D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036723C916D181D9004F14D6 /* InfoPlist.strings */; };
@@ -41,6 +46,11 @@
 		0314637A1762F675007B075B /* ChannelTimeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTimeData.m; sourceTree = "<group>"; };
 		0314637C1762F685007B075B /* SourceTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceTimeData.h; sourceTree = "<group>"; };
 		0314637D1762F685007B075B /* SourceTimeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceTimeData.m; sourceTree = "<group>"; };
+		0314637F1765ADDD007B075B /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		031463811765AF7E007B075B /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		031463851765B1D4007B075B /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
+		031463871765B277007B075B /* Data-Zoom-in-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data-Zoom-in-icon.png"; sourceTree = "<group>"; };
+		031463881765B277007B075B /* Data-Zoom-out-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data-Zoom-out-icon.png"; sourceTree = "<group>"; };
 		032CEB3516FFCFE200F3DFE2 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		036723BD16D181D9004F14D6 /* BEDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BEDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +237,11 @@
 		B26BF28B176183D5009BCC7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				031463871765B277007B075B /* Data-Zoom-in-icon.png */,
+				031463881765B277007B075B /* Data-Zoom-out-icon.png */,
+				031463851765B1D4007B075B /* minus.png */,
+				031463811765AF7E007B075B /* plus.png */,
+				0314637F1765ADDD007B075B /* stop.png */,
 				03B663EF16FD84C600781105 /* backward.png */,
 				03B663F016FD84C600781105 /* ff.png */,
 				03B663F116FD84C600781105 /* play.png */,
@@ -310,6 +325,11 @@
 				03B663F216FD84C600781105 /* backward.png in Resources */,
 				03B663F316FD84C600781105 /* ff.png in Resources */,
 				03B663F416FD84C600781105 /* play.png in Resources */,
+				031463801765ADDD007B075B /* stop.png in Resources */,
+				031463821765AF7E007B075B /* plus.png in Resources */,
+				031463861765B1D5007B075B /* minus.png in Resources */,
+				031463891765B277007B075B /* Data-Zoom-in-icon.png in Resources */,
+				0314638A1765B277007B075B /* Data-Zoom-out-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

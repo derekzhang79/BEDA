@@ -31,6 +31,8 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (IBAction)changeModeFromSegmentedControl:(id)sender;
 - (IBAction)navigate:(id)sender;
 - (IBAction)synchronize:(id)sender;
+- (IBAction)zoomIn:(id)sender;
+- (IBAction)zoomOut:(id)sender;
 
 // Time related functions
 - (double) getGlobalTime;

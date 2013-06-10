@@ -15,7 +15,11 @@
 
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
+    CPTXYPlotSpace *plotSpace;
     CPTScatterPlot *plotHeader;
+    
+    int graphScaleX;
+    int graphScaleY;
 
 }
 
@@ -33,6 +37,9 @@
 - (void)play;
 - (void)stop;
 - (void)onPlayTimer : (id)sender ;
+
+- (void)zoomIn;
+- (void)zoomOut;
 
 - (double) getMyTimeInGlobal;
 - (void) setMyTimeInGlobal:(double)gt;

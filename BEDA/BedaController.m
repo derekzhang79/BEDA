@@ -106,6 +106,29 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     }
 }
 
+
+-(IBAction)zoomIn:(id)sender
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            [ch zoomIn];
+        }
+    }
+
+}
+
+
+-(IBAction)zoomOut:(id)sender
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            [ch zoomOut];
+        }
+    }
+}
+
 - (IBAction)navigate:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [self setIsNavMode:YES];

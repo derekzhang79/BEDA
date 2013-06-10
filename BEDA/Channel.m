@@ -33,6 +33,15 @@
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
 }
 
+- (void)zoomIn {
+    NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
+    
+}
+
+- (void)zoomOut {
+    NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
+}
+
 - (double) getMyTimeInGlobal {
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
     return 0;

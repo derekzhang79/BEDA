@@ -18,6 +18,9 @@
 - (void)play;
 - (void)stop;
 
+- (void)zoomIn;
+- (void)zoomOut;
+
 - (double) getMyTimeInGlobal;
 - (void) setMyTimeInGlobal:(double)gt;
 

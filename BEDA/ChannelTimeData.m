@@ -55,12 +55,13 @@
     graph.plotAreaFrame.borderLineStyle = nil;    // don't draw a border
     
     // Setup scatter plot space
-    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
+    plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate = self;
     
     NSTimeInterval xLow       = 0.0f;
+    graphScaleX = 60;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 60.0f)];
     //////////////////////////////////////////////////////////////////////yRange should be dfferent
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
@@ -249,6 +250,18 @@
 
 }
 
+-(void)zoomIn{
+    graphScaleX += 15;
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
+
+}
+
+-(void)zoomOut{
+    graphScaleX -= 15;
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
+
+}
+
 - (double) getMyTimeInGlobal {
     double ltSeconds = [self headerTime];
     double gtSeconds = [self localToGlobalTime:ltSeconds];
@@ -334,7 +347,7 @@
 
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
     double px[6] = {0.0, 0.0, 0.5, 0.0, 0.0, 0.0};
-    double py[6] = {4.92, 0.11, 4.8, 4.0, 0.2, 0.0};
+    double py[6] = {4.92, 0.1, 4.8, 4.0, 0.2, 0.0};
     double t = [self headerTime];
     
     if (fieldEnum == CPTScatterPlotFieldX) {
