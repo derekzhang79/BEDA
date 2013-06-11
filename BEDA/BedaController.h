@@ -47,6 +47,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (void)createMovSplitViewIfNotExist;
 - (void)spaceEvenly:(NSSplitView *)splitView;
 - (void)spaceEvenly:(NSSplitView *)splitView withFirstSize:(float)szFirst;
+- (void)spaceProportionaly:(NSSplitView *)splitView;
 
 - (void)addSourceTimeData:(NSURL*)url;
 

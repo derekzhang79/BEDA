@@ -27,10 +27,12 @@
 - (double) getMyTimeInLocal;
 - (double) getMyTimeInGlobal;
 - (void) setMyTimeInGlobal:(double)gt;
+- (double) windowHeightFactor;
 
 // Local functions
 - (void) rateDidChanged: (NSNotification *)notification;
 - (void) timeDidChanged: (NSNotification *)notification;
 - (NSString*) SMPTEStringFromTime:(QTTime)time;
+
 
 @end

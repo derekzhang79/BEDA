@@ -206,6 +206,10 @@
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDataChanged:)
+                                                 name:@"dataChanged" object:Nil];
+
+    
     //    // Register self as notification observer
     [self reload];
     // Create a header plot
@@ -228,6 +232,14 @@
     x.labelFormatter = timeFormatter;
     
     [graph reloadData];
+}
+
+- (void) onDataChanged:(NSNotification*) noti {
+    NSLog(@"%s: %d", __PRETTY_FUNCTION__, [self channelIndex]);
+    double gt = [self getGlobalTime];
+    double lt = gt + [self globalToLocalTime:gt];
+    [self setHeaderTime:lt];
+    [self reload];
 }
 
 - (void)createMovieViewFor:(BedaController*)beda {
@@ -352,6 +364,17 @@
 
 }
 
+- (double) windowHeightFactor {
+    switch ([self channelIndex]) {
+        case 1:
+            return 2.0;
+        case 2:
+            return 1.0;
+        case 3:
+            return 1.0;
+    }
+    return 1.0;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // HeaderPlot functions
@@ -423,8 +446,15 @@
 }
 
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
+    double minY = 0.1;
+    double maxY = 4.9;
+    if ([self channelIndex] == 2) {
+        minY = 30.1;
+        maxY = 34.9;
+    }
+    
     double px[6] = {0.0, 0.0, 0.5, 0.0, 0.0, 0.0};
-    double py[6] = {4.92, 0.1, 4.8, 4.0, 0.2, 0.0};
+    double py[6] = {maxY, minY, 4.8, 4.0, 0.2, 0.0};
     double t = [self headerTime];
     
     if (fieldEnum == CPTScatterPlotFieldX) {
@@ -462,7 +492,12 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     // Restore the vertical line plot to its initial color.
 //    [self applyTouchPlotColor];
-    [self deselectHeaderPlot];
+    
+    for (ChannelTimeData* ch in [[self source] channels]) {
+        [ch deselectHeaderPlot];
+    }
+
+    // [self deselectHeaderPlot];
     return YES;
 }
 
@@ -471,7 +506,10 @@
     if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
     {
         NSLog(@"%s", __PRETTY_FUNCTION__);
-        [self selectHeaderPlot];
+        //[self selectHeaderPlot];
+        for (ChannelTimeData* ch in [[self source] channels]) {
+            [ch selectHeaderPlot];
+        }
 
 //        touchPlotSelected = YES;
 //        [self applyHighLightPlotColor:plot];
@@ -505,6 +543,9 @@
         double offset = lt - gt;
         [[self source] setOffset:offset];
         NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"dataChanged"
+         object:nil];
     } else {
         [[NSNotificationCenter defaultCenter]
          postNotificationName:@"channelCurrentTimeUpdate"

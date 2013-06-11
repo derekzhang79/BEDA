@@ -30,4 +30,6 @@
 - (double) localToGlobalTime:(double)lt;
 - (double) globalToLocalTime:(double)gt;
 
+- (double) windowHeightFactor;
+
 @end

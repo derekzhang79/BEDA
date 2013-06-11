@@ -48,7 +48,9 @@
 
 - (double) getMyTimeInGlobal;
 - (void) setMyTimeInGlobal:(double)gt;
+- (double) windowHeightFactor;
 
+- (void) onDataChanged:(NSNotification*) noti;
 
 // Header related functions
 - (void)createHeaderPlot;

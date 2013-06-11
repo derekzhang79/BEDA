@@ -105,6 +105,9 @@
     [[self movie] setCurrentTime:qt];
 }
 
+- (double) windowHeightFactor {
+    return 3.0;
+}
 
 - (void) rateDidChanged: (NSNotification *)notification {
     if ([self isNavMode] == NO) {

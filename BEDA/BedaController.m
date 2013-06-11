@@ -253,13 +253,18 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     [sv setVertical:YES];
     
     NSArray* v = [splitview subviews];
-    NSView* firstView = [v objectAtIndex:0];
+    NSView* firstView = Nil;
+    if ([[splitview subviews] count] > 0) {
+        firstView = [v objectAtIndex:0];
+    }
     
     [splitview addSubview:sv positioned:NSWindowBelow relativeTo:firstView];
     
     [self setMovSplitView:sv];
     
-    [self spaceEvenly:splitview withFirstSize:BEDA_WINDOW_INITIAL_MOVIE_HEIGHT];
+//    [self spaceEvenly:splitview withFirstSize:BEDA_WINDOW_INITIAL_MOVIE_HEIGHT];
+    [self spaceProportionaly:splitview];
+
 }
 
 - (void)spaceEvenly:(NSSplitView *)splitView
@@ -367,6 +372,61 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     [splitView adjustSubviews];
 }
 
+- (void)spaceProportionaly:(NSSplitView *)splitView {
+    int cnt = 0;
+    float factor[20];
+    float sumFactor = 0.0;
+
+    if ([self movSplitView] != Nil) {
+        for (Source* s in [self sources]) {
+            for (Channel* ch in [s channels]) {
+                if ([ch isKindOfClass:[ChannelMovie class]] && cnt == 0) {
+                    factor[cnt] = [ch windowHeightFactor];
+                    sumFactor += factor[cnt];
+                    cnt++;
+                }
+            }
+        }
+    }
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            if ([ch isKindOfClass:[ChannelMovie class]]) {
+                continue;
+            }
+            factor[cnt] = [ch windowHeightFactor];
+            sumFactor += factor[cnt];
+            cnt++;
+        }
+    }
+    for (int i = 0; i < cnt; i++) NSLog(@"factor %d: %f", i, factor[i]);
+    NSLog(@"sum factor = %f", sumFactor);
+    
+    NSArray *subviews = [splitView subviews];
+    unsigned int n = [subviews count];
+    float divider = [splitView dividerThickness];
+
+    float availableHeights = [splitView bounds].size.height - (n - 1) * divider;
+    
+    
+    // adjust the frames of all subviews
+    float y = 0;
+    NSView *subview;
+    NSEnumerator *e = [subviews objectEnumerator];
+    int index = 0;
+    while ((subview = [e nextObject]) != nil)
+    {
+        NSRect frame = [subview frame];
+        frame.origin.y = rintf(y);
+        float height = availableHeights / sumFactor * factor[index];
+        frame.size.height = rintf(y + height) - frame.origin.y;
+        [subview setFrame:frame];
+        y += height + divider;
+        index++;
+    }
+    [splitView adjustSubviews];
+
+}
+
 - (void)addSourceTimeData:(NSURL*)url {
     // Create a source
     SourceTimeData* s = [[SourceTimeData alloc] init];
@@ -385,7 +445,9 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
         [chAccel createAccelViewFor:self];
     }
     
-    [self spaceEvenly:splitview];
+//    [self spaceEvenly:splitview];
+    [self spaceProportionaly:splitview];
+
 }
 
 @end

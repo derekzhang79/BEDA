@@ -76,4 +76,9 @@
     return gt + [self offset];
 }
 
+- (double) windowHeightFactor {
+    return 1.0;
+}
+
+
 @end
