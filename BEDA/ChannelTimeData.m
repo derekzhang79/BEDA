@@ -93,8 +93,8 @@
             break;
         }
         case 2:{
-            plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(30.0) length:CPTDecimalFromFloat(5.0)];
-            plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(30.0) length:CPTDecimalFromFloat(5.0)];
+            plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(31.0) length:CPTDecimalFromFloat(6.0)];
+            plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(31.0) length:CPTDecimalFromFloat(6.0)];
             break;
             
         }
@@ -189,8 +189,11 @@
         }
         case 2:{
             y.title = @"Temperature";
-            lineStyle.lineColor              = [CPTColor colorWithComponentRed:1.0f green:0.0f blue:0.0f alpha:1.0f];
+            lineStyle.lineColor              = [CPTColor colorWithComponentRed:0.8f green:0.0f blue:0.0f alpha:0.6f];
+            CPTFill *areaFill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0.8f green:0.0f blue:0.0f alpha:0.2f]];
+            dataSourceLinePlot.areaFill      = areaFill;
             dataSourceLinePlot.dataLineStyle = lineStyle;
+            dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
             break;
             
         }
@@ -449,8 +452,8 @@
     double minY = 0.1;
     double maxY = 4.9;
     if ([self channelIndex] == 2) {
-        minY = 30.1;
-        maxY = 34.9;
+        minY = 31.1;
+        maxY = 36.9;
     }
     
     double px[6] = {0.0, 0.0, 0.5, 0.0, 0.0, 0.0};

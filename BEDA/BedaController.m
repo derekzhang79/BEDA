@@ -239,7 +239,8 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
         [ch createMovieViewFor:self];
     }
     
-
+    [self spaceProportionaly:splitview];
+    
 }
 
 - (void)createMovSplitViewIfNotExist {
@@ -263,8 +264,6 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     [self setMovSplitView:sv];
     
 //    [self spaceEvenly:splitview withFirstSize:BEDA_WINDOW_INITIAL_MOVIE_HEIGHT];
-    [self spaceProportionaly:splitview];
-
 }
 
 - (void)spaceEvenly:(NSSplitView *)splitView
