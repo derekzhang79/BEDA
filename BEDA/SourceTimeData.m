@@ -108,11 +108,21 @@
     NSLog(@"basedate = %@", [self basedate]);
     NSLog(@"data.count = %ld", (unsigned long)[[self timedata] count]);
     
-    ChannelTimeData* ch = [[ChannelTimeData alloc] init];
-    [ch setSource:self];
-    [ch initGraph];
+    ChannelTimeData* chEda = [[ChannelTimeData alloc] init];
+    [chEda setSource:self];
+    [chEda initGraph:1];
+    [[self channels] addObject:chEda];
+    
+    ChannelTimeData* chTemp = [[ChannelTimeData alloc] init];
+    [chTemp setSource:self];
+    [chTemp initGraph:2];
+    [[self channels] addObject:chTemp];
+    
+    ChannelTimeData* chAccel = [[ChannelTimeData alloc] init];
+    [chAccel setSource:self];
+    [chAccel initGraph:3];
+    [[self channels] addObject:chAccel];
         
-    [[self channels] addObject:ch];
     NSLog(@"%s: channels.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self channels] count]);
 
 }

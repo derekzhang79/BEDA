@@ -30,8 +30,11 @@
 @property (retain) NSDate* playBase;
 
 - (SourceTimeData*) sourceTimeData;
-- (void)initGraph;
+- (void)initGraph:(int)data;
 - (void)createEDAViewFor:(BedaController*)beda;
+- (void)createTempViewFor:(BedaController*)beda;
+- (void)createAccelViewFor:(BedaController*)beda;
+
 
 // Play/stop
 - (void)play;

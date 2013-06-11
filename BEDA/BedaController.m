@@ -376,9 +376,13 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     NSLog(@"%s: sources.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self sources] count]);
     
     // Create a movie view for
-    ChannelTimeData* ch = [[s channels] objectAtIndex:0];
-    if (ch) {
-        [ch createEDAViewFor:self];
+    ChannelTimeData* chEda = [[s channels] objectAtIndex:0];
+    ChannelTimeData* chTemp = [[s channels] objectAtIndex:1];
+    ChannelTimeData* chAccel = [[s channels] objectAtIndex:2];
+    if (chEda) {
+        [chEda createEDAViewFor:self];
+        [chTemp createTempViewFor:self];
+        [chAccel createAccelViewFor:self];
     }
     
     [self spaceEvenly:splitview];

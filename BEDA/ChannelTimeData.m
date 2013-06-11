@@ -20,7 +20,9 @@
 }
 
 
-- (void)initGraph {
+- (void)initGraph :(int)data {
+    
+    NSLog(@"%s: init data = %d ", __PRETTY_FUNCTION__, data);
     [self setPlayTimer:Nil];
     [self setPlayBase:Nil];
     
@@ -200,8 +202,30 @@
     CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
     
     [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
-    
+}
 
+
+- (void)createTempViewFor:(BedaController*)beda {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
+    view.hostedGraph = graph;
+    
+    NSSplitView* splitview = [beda getSplitView];
+    CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
+    
+    [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
+}
+
+
+- (void)createAccelViewFor:(BedaController*)beda {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
+    view.hostedGraph = graph;
+    
+    NSSplitView* splitview = [beda getSplitView];
+    CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
+    
+    [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -251,13 +275,13 @@
 }
 
 -(void)zoomIn{
-    graphScaleX += 15;
+    graphScaleX -= 15;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
 
 }
 
 -(void)zoomOut{
-    graphScaleX -= 15;
+    graphScaleX += 15;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
 
 }
