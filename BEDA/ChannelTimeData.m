@@ -240,7 +240,7 @@
 - (void) onDataChanged:(NSNotification*) noti {
     NSLog(@"%s: %d", __PRETTY_FUNCTION__, [self channelIndex]);
     double gt = [self getGlobalTime];
-    double lt = gt + [self globalToLocalTime:gt];
+    double lt = [self offset] + [self globalToLocalTime:gt];
     [self setHeaderTime:lt];
     [self reload];
 }
