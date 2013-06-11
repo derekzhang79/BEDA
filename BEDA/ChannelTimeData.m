@@ -10,6 +10,7 @@
 
 @implementation ChannelTimeData
 
+@synthesize channelIndex;
 @synthesize isHeaderSelected;
 @synthesize headerTime;
 @synthesize playTimer = _playTimer;
@@ -23,6 +24,7 @@
 - (void)initGraph :(int)data {
     
     NSLog(@"%s: init data = %d ", __PRETTY_FUNCTION__, data);
+    [self setChannelIndex:data];
     [self setPlayTimer:Nil];
     [self setPlayBase:Nil];
     
@@ -127,7 +129,14 @@
     y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
     y.labelTextStyle = titleText;
     y.titleTextStyle = titleText;
-    y.title = @"EDA";
+    
+    switch ([self channelIndex]) {
+        case 1: y.title = @"EDA"; break;
+        case 2: y.title = @"TEMP"; break;
+        case 3: y.title = @"Accel"; break;
+        default:
+            y.title = @"Unknown";
+    }     
     y.titleOffset = 35;
     
     // Add an extra y axis (red)
@@ -483,13 +492,14 @@
         return [self numberForHeaderPlotField:fieldEnum recordIndex:index];
     }
     
+    int key = [self channelIndex];
     // Otherwise, plot it data plot
     NSMutableArray* data = [[self sourceTimeData] timedata];
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
             return [[data objectAtIndex:index] objectForKey:[NSNumber numberWithInt:0]];
         case CPTScatterPlotFieldY:
-            return [[data objectAtIndex:index] objectForKey:[NSNumber numberWithInt:1]];
+            return [[data objectAtIndex:index] objectForKey:[NSNumber numberWithInt:key]];
         default:
             return nil;
     }

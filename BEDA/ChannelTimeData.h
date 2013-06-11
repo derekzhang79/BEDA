@@ -23,11 +23,13 @@
 
 }
 
+@property (assign) int channelIndex;
 @property (assign) BOOL isHeaderSelected;
 @property (assign) double headerTime;
 
 @property (retain) NSTimer* playTimer;
 @property (retain) NSDate* playBase;
+
 
 - (SourceTimeData*) sourceTimeData;
 - (void)initGraph:(int)data;
