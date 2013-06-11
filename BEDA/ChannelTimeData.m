@@ -44,18 +44,34 @@
     graph.fill = [CPTFill fillWithColor:[CPTColor clearColor]];
     graph.plotAreaFrame.fill = [CPTFill fillWithColor:[CPTColor clearColor]];
     
-    // Add some padding to the graph, with more at the bottom for axis labels.
     graph.plotAreaFrame.paddingTop = 5.0f;
     graph.plotAreaFrame.paddingRight = 0.0f;
-    graph.plotAreaFrame.paddingBottom = 20.0f;
     graph.plotAreaFrame.paddingLeft = 57.0f;
+    
+    switch ([self channelIndex]) {
+        case 1:
+        {
+            graph.plotAreaFrame.paddingBottom = 5.0f;
+            break;
+        }
+        case 2:{
+            graph.plotAreaFrame.paddingBottom = 5.0f;
+            break;
+            
+        }
+        case 3:{
+            graph.plotAreaFrame.paddingBottom = 20.0f;
+            break;
+        }
+    }
+   
+    // Add some padding to the graph, with more at the bottom for axis labels.
     
     graph.paddingRight = 0.0f;
     graph.paddingLeft = 0.0f;
     graph.paddingTop = 0.0f;
     graph.paddingBottom = 0.0f;
     
-////    hostView.hostedGraph = graph;
     graph.plotAreaFrame.borderLineStyle = nil;    // don't draw a border
     
     // Setup scatter plot space
@@ -67,14 +83,28 @@
     NSTimeInterval xLow       = 0.0f;
     graphScaleX = 60;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 60.0f)];
-    //////////////////////////////////////////////////////////////////////yRange should be dfferent
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
-    
-    plotSpace.allowsUserInteraction = YES;
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 5000.0f)];
     //////////////////////////////////////////////////////////////////////yRange should be dfferent
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
-    
+    switch ([self channelIndex]) {
+        case 1:
+        {
+            plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
+            plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
+            break;
+        }
+        case 2:{
+            plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(30.0) length:CPTDecimalFromFloat(5.0)];
+            plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(30.0) length:CPTDecimalFromFloat(5.0)];
+            break;
+            
+        }
+        case 3:{
+            plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
+            plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
+            break;
+            
+        }
+    }
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 10.0;
     
@@ -129,14 +159,6 @@
     y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
     y.labelTextStyle = titleText;
     y.titleTextStyle = titleText;
-    
-    switch ([self channelIndex]) {
-        case 1: y.title = @"EDA"; break;
-        case 2: y.title = @"TEMP"; break;
-        case 3: y.title = @"Accel"; break;
-        default:
-            y.title = @"Unknown";
-    }     
     y.titleOffset = 35;
     
     // Add an extra y axis (red)
@@ -152,13 +174,35 @@
     // Actual graph line & fill
     CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
     lineStyle.lineWidth              = 1.f;
-    lineStyle.lineColor              = [CPTColor colorWithComponentRed:0.50f green:0.67f blue:0.65f alpha:1.0f];
-    dataSourceLinePlot.dataLineStyle = lineStyle;
     
-    CPTFill *areaFill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0.50f green:0.67f blue:0.65f alpha:0.4f]];
-    dataSourceLinePlot.areaFill      = areaFill;
-    dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
-        
+
+    switch ([self channelIndex]) {
+        case 1:
+        {
+            y.title = @"EDA";
+            lineStyle.lineColor              = [CPTColor colorWithComponentRed:0.50f green:0.67f blue:0.65f alpha:1.0f];
+            CPTFill *areaFill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0.50f green:0.67f blue:0.65f alpha:0.4f]];
+            dataSourceLinePlot.areaFill      = areaFill;
+            dataSourceLinePlot.dataLineStyle = lineStyle;
+            dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
+            break;
+        }
+        case 2:{
+            y.title = @"Temperature";
+            lineStyle.lineColor              = [CPTColor colorWithComponentRed:1.0f green:0.0f blue:0.0f alpha:1.0f];
+            dataSourceLinePlot.dataLineStyle = lineStyle;
+            break;
+            
+        }
+        case 3:{
+            y.title = @"Accel";
+            lineStyle.lineColor              = [CPTColor colorWithComponentRed:0.0f green:0.0f blue:1.0f alpha:1.0f];
+            dataSourceLinePlot.dataLineStyle = lineStyle;
+            break;
+   
+        }   
+    }
+    
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
     
