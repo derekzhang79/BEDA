@@ -235,6 +235,7 @@
     x.labelFormatter = timeFormatter;
     
     [graph reloadData];
+    
 }
 
 - (void) onDataChanged:(NSNotification*) noti {
@@ -242,7 +243,8 @@
     double gt = [self getGlobalTime];
     double lt = [self offset] + [self globalToLocalTime:gt];
     [self setHeaderTime:lt];
-    [self reload];
+    [plotHeader reloadData];
+//    [self reload];
 }
 
 - (void)createMovieViewFor:(BedaController*)beda {
@@ -338,7 +340,8 @@
     double t = -[[self playBase] timeIntervalSinceNow];
     [self setHeaderTime:t];
     
-    [graph reloadData];
+//    [graph reloadData];
+    [plotHeader reloadData];
 
 }
 
@@ -363,7 +366,8 @@
 - (void) setMyTimeInGlobal:(double)gt {
     double lt = [self globalToLocalTime:gt];
     [self setHeaderTime:lt];
-    [graph reloadData];
+    [plotHeader reloadData];
+//    [graph reloadData];
 
 }
 
@@ -487,6 +491,7 @@
           atPoint:(CGPoint)point
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+
     return YES;
 }
 
@@ -513,27 +518,24 @@
         for (ChannelTimeData* ch in [[self source] channels]) {
             [ch selectHeaderPlot];
         }
-
-//        touchPlotSelected = YES;
-//        [self applyHighLightPlotColor:plot];
-//        if ([delegate respondsToSelector:@selector(linePlot:indexLocation:)])
-//            [delegate linePlot:self indexLocation:index];
     }
 }
 
 - (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(id)event atPoint:(CGPoint)point
 {
+    point.x -= graph.plotAreaFrame.paddingLeft;
+
     // Convert the touch point to plot area frame location
     CGPoint pointInPlotArea = [graph convertPoint:point toLayer:graph.plotAreaFrame];
 
     NSDecimal pt[2];
-    [graph.defaultPlotSpace plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
-//    NSDecimalRound(&pt[0], &pt[0], 0, NSRoundPlain);
-    
+ //   [graph.defaultPlotSpace plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
+    [space plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
+
 
     double x = [[NSDecimalNumber decimalNumberWithDecimal:pt[0]] doubleValue];
     double y = [[NSDecimalNumber decimalNumberWithDecimal:pt[1]] doubleValue];
-//    NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
+    NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
     if ([self isHeaderSelected]) {
         [self setHeaderTime:x];
         [graph reloadData];
