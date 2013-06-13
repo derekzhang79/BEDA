@@ -448,6 +448,20 @@
     [self setIsHeaderSelected:NO];
 }
 
+
+-(void) addAnnotation{
+    annoationMark = [[[CPTScatterPlot alloc] initWithFrame:CGRectNull] autorelease];
+    //    annoationMark.identifier = BEDA_INDENTIFIER_ANNOTATION_PLOT;
+    annoationMark.dataSource = self;
+    annoationMark.delegate = self;
+    
+    [self setHeaderTime:0.0];
+    
+    // Add the plot to the graph
+    [graph addPlot:annoationMark];
+    
+}
+
 -(NSUInteger)numberOfRecordsForHeaderPlot {
     return 2;
 }
@@ -466,19 +480,10 @@
     
     if (fieldEnum == CPTScatterPlotFieldX) {
         // Returns X values
-//        return [NSNumber numberWithDouble:20];
         return [NSNumber numberWithDouble: (px[index] + t) ];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
         // Returns Y values
         return [NSNumber numberWithDouble: (py[index]) ];
-        //        switch(index) {
-//            case 0:
-//                return [NSNumber numberWithDouble:0.5];
-//            case 1:
-//                return [NSNumber numberWithDouble:4.5];
-//            default:
-//                return nil;
-//        }
     } else {
         // Invalid fieldEnum: Should not be reached, probably
         return nil;
@@ -504,8 +509,6 @@
     for (ChannelTimeData* ch in [[self source] channels]) {
         [ch deselectHeaderPlot];
     }
-
-    // [self deselectHeaderPlot];
     return YES;
 }
 

@@ -17,6 +17,7 @@
     CPTXYGraph *graph;
     CPTXYPlotSpace *plotSpace;
     CPTScatterPlot *plotHeader;
+    CPTScatterPlot *annoationMark;
     
     int graphScaleX;
     int graphScaleY;
@@ -45,6 +46,8 @@
 
 - (void)zoomIn;
 - (void)zoomOut;
+
+- (void)addAnnotation;
 
 - (double) getMyTimeInGlobal;
 - (void) setMyTimeInGlobal:(double)gt;
