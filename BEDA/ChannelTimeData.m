@@ -217,6 +217,7 @@
     [self reload];
     // Create a header plot
     [self createHeaderPlot];
+    [self createAnnotationPlot];
     
     
     // Example usage of annotations
@@ -253,21 +254,6 @@
 //    [self reload];
 }
 
-- (void)createMovieViewFor:(BedaController*)beda {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    // Create a movie view
-    QTMovieView* view = [[QTMovieView alloc] init];
-    NSArray* v = [[beda movSplitView] subviews];
-    NSView* lastView = [v lastObject];
-    NSSplitView* movSplitView = [beda movSplitView];
-    
-    [movSplitView addSubview:view positioned:NSWindowAbove relativeTo:lastView];
-    [beda spaceEvenly:movSplitView];
-    
-    [view setPreservesAspectRatio:YES];
-    [view setMovie:[self movie]];
-}
 
 - (void)createEDAViewFor:(BedaController*)beda {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -373,8 +359,6 @@
     double lt = [self globalToLocalTime:gt];
     [self setHeaderTime:lt];
     [plotHeader reloadData];
-//    [graph reloadData];
-
 }
 
 - (double) windowHeightFactor {
@@ -431,7 +415,6 @@
 
 - (void)deselectHeaderPlot {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-
     
     // Set the style
     // 1. SavingPlotLine style
@@ -454,19 +437,6 @@
     [self setIsHeaderSelected:NO];
 }
 
-
-//-(void) addAnnotation{
-//    annoationMark = [[[CPTScatterPlot alloc] initWithFrame:CGRectNull] autorelease];
-//    //    annoationMark.identifier = BEDA_INDENTIFIER_ANNOTATION_PLOT;
-//    annoationMark.dataSource = self;
-//    annoationMark.delegate = self;
-//    
-//    [self setHeaderTime:0.0];
-//    
-//    // Add the plot to the graph
-//    [graph addPlot:annoationMark];
-//    
-//}
 
 -(NSUInteger)numberOfRecordsForHeaderPlot {
     return 2;
@@ -495,6 +465,75 @@
         return nil;
     }
 }
+
+-(void) createAnnotationPlot{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    // Create header plot
+    plotAnnotation = [[[CPTScatterPlot alloc] initWithFrame:CGRectNull] autorelease];
+    plotAnnotation.identifier = BEDA_INDENTIFIER_ANNOTATION_PLOT;
+    plotAnnotation.dataSource = self;
+    plotAnnotation.delegate = self;
+    
+    // Add the plot to the graph
+    [graph addPlot:plotAnnotation];
+    
+}
+
+-(void) addAnnotation{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    // Set the style
+    // 1. SavingPlotLine style
+    CPTColor *headerPlotColor = [CPTColor greenColor];
+    CPTMutableLineStyle *savingsPlotLineStyle = [CPTMutableLineStyle lineStyle];
+    savingsPlotLineStyle.lineColor = headerPlotColor;
+    
+    // 2. Symbol style
+    CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol diamondPlotSymbol];
+    headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
+    headerPlotSymbol.lineStyle = savingsPlotLineStyle;
+    headerPlotSymbol.size = CGSizeMake(15.0f, 15.0f);
+    plotAnnotation.plotSymbol = headerPlotSymbol;
+    
+    // 3. DataLineStyle
+    CPTMutableLineStyle *headerLineStyle = [CPTMutableLineStyle lineStyle];
+    headerLineStyle.lineColor = [CPTColor orangeColor];
+    headerLineStyle.lineWidth = 2.0f;
+    plotAnnotation.dataLineStyle = headerLineStyle;
+
+    
+}
+
+-(NSUInteger)numberOfRecordsForAnnotationPlot {
+    return 1;
+}
+
+-(NSNumber *)numberForAnnotationPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
+    double minY = 0.1;
+    double maxY = 4.9;
+    if ([self channelIndex] == 2) {
+        minY = 31.1;
+        maxY = 36.9;
+    }
+    
+    double middle = (minY+maxY)/2;
+    double px[6] = {0.0, 0.0, 0.5, 0.0, 0.0, 0.0};
+    double py[6] = {middle, 0.0 , 4.8, 4.0, 0.2, 0.0};
+    double t = [self headerTime];
+    
+    if (fieldEnum == CPTScatterPlotFieldX) {
+        // Returns X values
+        return [NSNumber numberWithDouble: (px[index] + t) ];
+    } else if (fieldEnum == CPTScatterPlotFieldY) {
+        // Returns Y values
+        return [NSNumber numberWithDouble: (py[index]) ];
+    } else {
+        // Invalid fieldEnum: Should not be reached, probably
+        return nil;
+    }
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Delegation functions
@@ -578,6 +617,11 @@
     {
         return [self numberOfRecordsForHeaderPlot];
     }
+    
+    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_ANNOTATION_PLOT])
+    {
+        return [self numberOfRecordsForAnnotationPlot];
+    }
     // Otherwise, plot it data plot
     
     return [[[self sourceTimeData] timedata] count];
@@ -589,6 +633,11 @@
     if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
     {
         return [self numberForHeaderPlotField:fieldEnum recordIndex:index];
+    }
+    
+    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_ANNOTATION_PLOT])
+    {
+        return [self numberForAnnotationPlotField:fieldEnum recordIndex:index];
     }
     
     int key = [self channelIndex];

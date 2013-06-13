@@ -12,12 +12,13 @@
 #import <CorePlot/CorePlot.h>
 
 #define BEDA_INDENTIFIER_HEADER_PLOT @"BedaHeaderPlot"
+#define BEDA_INDENTIFIER_ANNOTATION_PLOT @"BedaAnnotationPlot"
 
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
     CPTXYPlotSpace *plotSpace;
     CPTScatterPlot *plotHeader;
-    CPTScatterPlot *annoationMark;
+    CPTScatterPlot *plotAnnotation;
     
     int graphScaleX;
     int graphScaleY;
@@ -37,6 +38,8 @@
 - (void)createEDAViewFor:(BedaController*)beda;
 - (void)createTempViewFor:(BedaController*)beda;
 - (void)createAccelViewFor:(BedaController*)beda;
+
+- (void)addAnnotation;
 
 
 // Play/stop
