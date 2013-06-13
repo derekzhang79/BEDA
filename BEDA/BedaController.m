@@ -109,10 +109,10 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 - (IBAction)addAnnotation:(id)sender{
     NSLog(@"%s", __PRETTY_FUNCTION__);
     for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            [ch addAnnotation];
-        }
+        [s addAnnotation];
+        [s logAnnotations];
     }
+    
 }
 
 -(IBAction)zoomIn:(id)sender

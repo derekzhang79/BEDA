@@ -47,7 +47,7 @@
 - (void)zoomIn;
 - (void)zoomOut;
 
-- (void)addAnnotation;
+//- (void)addAnnotation;
 
 - (double) getMyTimeInGlobal;
 - (void) setMyTimeInGlobal:(double)gt;

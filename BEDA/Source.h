@@ -15,8 +15,20 @@
 
 @property (assign) BedaController* beda;
 @property (retain) NSMutableArray* channels;
+
 @property double offset;
 - (void)loadFile:(NSURL*)url;
 
+// Annotations
+@property (retain) NSMutableArray* annots;
 
+- (void)addAnnotation;
+- (void)addAnnotation:(NSString*)text;
+- (void)addAnnotation:(NSString*)text at:(double)time;
+
+- (int) numAnnotations;
+- (double) annotationTime : (int)index;
+- (NSString*) annotationText : (int)index;
+
+- (void)logAnnotations;
 @end

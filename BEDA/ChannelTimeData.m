@@ -218,6 +218,12 @@
     // Create a header plot
     [self createHeaderPlot];
     
+    
+    // Example usage of annotations
+    NSLog(@"# annotations = %d", [[self source] numAnnotations]);
+    for (int i = 0; i < [ [self source] numAnnotations]; i++) {
+        NSLog(@"Annot %d at %lf : text = %@", i, [[self source] annotationTime:i], [[self source] annotationText:i]);
+    }
 }
 
 - (void) reload {
@@ -449,18 +455,18 @@
 }
 
 
--(void) addAnnotation{
-    annoationMark = [[[CPTScatterPlot alloc] initWithFrame:CGRectNull] autorelease];
-    //    annoationMark.identifier = BEDA_INDENTIFIER_ANNOTATION_PLOT;
-    annoationMark.dataSource = self;
-    annoationMark.delegate = self;
-    
-    [self setHeaderTime:0.0];
-    
-    // Add the plot to the graph
-    [graph addPlot:annoationMark];
-    
-}
+//-(void) addAnnotation{
+//    annoationMark = [[[CPTScatterPlot alloc] initWithFrame:CGRectNull] autorelease];
+//    //    annoationMark.identifier = BEDA_INDENTIFIER_ANNOTATION_PLOT;
+//    annoationMark.dataSource = self;
+//    annoationMark.delegate = self;
+//    
+//    [self setHeaderTime:0.0];
+//    
+//    // Add the plot to the graph
+//    [graph addPlot:annoationMark];
+//    
+//}
 
 -(NSUInteger)numberOfRecordsForHeaderPlot {
     return 2;
