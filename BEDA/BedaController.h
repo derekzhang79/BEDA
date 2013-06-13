@@ -25,6 +25,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 // Responde to menu
 - (IBAction)openFile:(id)sender;
+- (IBAction)openGraphController:(id)sender;
 - (IBAction)play:(id)sender;
 - (IBAction)stop:(id)sender;
 

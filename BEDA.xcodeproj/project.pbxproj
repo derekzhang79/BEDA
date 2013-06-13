@@ -23,6 +23,7 @@
 		036723D716D181DA004F14D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036723D516D181DA004F14D6 /* MainMenu.xib */; };
 		036723DF16D18265004F14D6 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723DE16D18265004F14D6 /* DataManager.m */; };
 		036723E116D18445004F14D6 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723E016D18445004F14D6 /* QTKit.framework */; };
+		0379841A176A8994000CFBEE /* GraphController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03798419176A8994000CFBEE /* GraphController.xib */; };
 		038A62D416FD4CCB00E91A65 /* annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D216FD4CCB00E91A65 /* annotation.png */; };
 		038A62D516FD4CCB00E91A65 /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D316FD4CCB00E91A65 /* sync.png */; };
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
@@ -69,6 +70,7 @@
 		036723DD16D18265004F14D6 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		036723DE16D18265004F14D6 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		036723E016D18445004F14D6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		03798419176A8994000CFBEE /* GraphController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphController.xib; sourceTree = "<group>"; };
 		038A62D216FD4CCB00E91A65 /* annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotation.png; sourceTree = "<group>"; };
 		038A62D316FD4CCB00E91A65 /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				036723D216D181D9004F14D6 /* AppDelegate.h */,
 				036723D316D181D9004F14D6 /* AppDelegate.m */,
 				036723D516D181DA004F14D6 /* MainMenu.xib */,
+				03798419176A8994000CFBEE /* GraphController.xib */,
 				036723C716D181D9004F14D6 /* Supporting Files */,
 			);
 			path = BEDA;
@@ -330,6 +333,7 @@
 				031463861765B1D5007B075B /* minus.png in Resources */,
 				031463891765B277007B075B /* Data-Zoom-in-icon.png in Resources */,
 				0314638A1765B277007B075B /* Data-Zoom-out-icon.png in Resources */,
+				0379841A176A8994000CFBEE /* GraphController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

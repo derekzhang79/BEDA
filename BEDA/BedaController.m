@@ -82,6 +82,15 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     }
 }
 
+- (IBAction)openGraphController:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    NSWindowController *controllerWindow = [[NSWindowController alloc] initWithWindowNibName:@"graphController.xib"];
+    [controllerWindow showWindow:self];
+}
+
+
+
 - (IBAction)play:(id)sender {
     if ([self isNavMode] == NO) {
         return;

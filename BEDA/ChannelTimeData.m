@@ -487,6 +487,11 @@
     headerPlotSymbol.size = CGSizeMake(15.0f, 15.0f);
     plotAnnotation.plotSymbol = headerPlotSymbol;
     
+    CPTMutableLineStyle *annotationLineStyle = [CPTMutableLineStyle lineStyle];
+    annotationLineStyle.lineWidth = 0.0f;
+    
+    plotAnnotation.dataLineStyle = annotationLineStyle;
+    
     // Add the plot to the graph
     [graph addPlot:plotAnnotation];
 }
@@ -541,7 +546,6 @@
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     // Restore the vertical line plot to its initial color.
-//    [self applyTouchPlotColor];
     
     for (ChannelTimeData* ch in [[self source] channels]) {
         [ch deselectHeaderPlot];
@@ -578,8 +582,6 @@
     NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
     if ([self isHeaderSelected]) {
         [self setHeaderTime:x];
-//        [graph reloadData];
-//        [plotHeader reloadData];
     }
     
     if ([self isNavMode] == NO) {
