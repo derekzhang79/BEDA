@@ -251,7 +251,6 @@
     double lt = [self offset] + [self globalToLocalTime:gt];
     [self setHeaderTime:lt];
     [plotHeader reloadData];
-//    [self reload];
 }
 
 
@@ -326,13 +325,10 @@
 }
 - (void)onPlayTimer : (id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-//    double t = [self headerTime];
-//    [self setHeaderTime:t + 0.05];
-
+    
     double t = -[[self playBase] timeIntervalSinceNow];
     [self setHeaderTime:t];
     
-//    [graph reloadData];
     [plotHeader reloadData];
 
 }
@@ -477,7 +473,7 @@
     
     // Add the plot to the graph
     [graph addPlot:plotAnnotation];
-    
+    [self addAnnotation];
 }
 
 -(void) addAnnotation{
@@ -486,27 +482,16 @@
     // Set the style
     // 1. SavingPlotLine style
     CPTColor *headerPlotColor = [CPTColor greenColor];
-    CPTMutableLineStyle *savingsPlotLineStyle = [CPTMutableLineStyle lineStyle];
-    savingsPlotLineStyle.lineColor = headerPlotColor;
     
     // 2. Symbol style
     CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol diamondPlotSymbol];
     headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
-    headerPlotSymbol.lineStyle = savingsPlotLineStyle;
     headerPlotSymbol.size = CGSizeMake(15.0f, 15.0f);
     plotAnnotation.plotSymbol = headerPlotSymbol;
-    
-    // 3. DataLineStyle
-    CPTMutableLineStyle *headerLineStyle = [CPTMutableLineStyle lineStyle];
-    headerLineStyle.lineColor = [CPTColor orangeColor];
-    headerLineStyle.lineWidth = 2.0f;
-    plotAnnotation.dataLineStyle = headerLineStyle;
-
-    
 }
 
 -(NSUInteger)numberOfRecordsForAnnotationPlot {
-    return 1;
+    return [[self source] numAnnotations];
 }
 
 -(NSNumber *)numberForAnnotationPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
@@ -518,13 +503,18 @@
     }
     
     double middle = (minY+maxY)/2;
-    double px[6] = {0.0, 0.0, 0.5, 0.0, 0.0, 0.0};
-    double py[6] = {middle, 0.0 , 4.8, 4.0, 0.2, 0.0};
-    double t = [self headerTime];
+    double px[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    double py[6] = {middle, middle , middle, middle, middle, middle};
+    
+    for (int i = 0; i < [ [self source] numAnnotations]; i++) {
+        NSLog(@"Annot %d at %lf : text = %@", i, [[self source] annotationTime:i], [[self source] annotationText:i]);
+        px[i] = [[self source] annotationTime:i];
+    }
+    
     
     if (fieldEnum == CPTScatterPlotFieldX) {
         // Returns X values
-        return [NSNumber numberWithDouble: (px[index] + t) ];
+        return [NSNumber numberWithDouble: (px[index]) ];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
         // Returns Y values
         return [NSNumber numberWithDouble: (py[index]) ];
