@@ -14,6 +14,8 @@
 #define BEDA_INDENTIFIER_HEADER_PLOT @"BedaHeaderPlot"
 #define BEDA_INDENTIFIER_ANNOTATION_PLOT @"BedaAnnotationPlot"
 
+#define BEDA_NOTI_SOURCE_OFFSET_CHANGED @"BedaNotiSourceOffsetChanged"
+
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
     CPTXYPlotSpace *plotSpace;
@@ -39,7 +41,6 @@
 - (void)createTempViewFor:(BedaController*)beda;
 - (void)createAccelViewFor:(BedaController*)beda;
 
-- (void)addAnnotation;
 
 
 // Play/stop
@@ -56,7 +57,8 @@
 - (void) setMyTimeInGlobal:(double)gt;
 - (double) windowHeightFactor;
 
-- (void) onDataChanged:(NSNotification*) noti;
+- (void) onSourceOffsetUpdated:(NSNotification*) noti;
+- (void)updateAnnotation;
 
 // Header related functions
 - (void)createHeaderPlot;

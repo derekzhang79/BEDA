@@ -80,5 +80,9 @@
     return 1.0;
 }
 
+- (void) updateAnnotation {
+    NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
+}
+
 
 @end

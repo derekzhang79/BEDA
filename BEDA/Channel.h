@@ -31,5 +31,6 @@
 - (double) globalToLocalTime:(double)gt;
 
 - (double) windowHeightFactor;
+- (void) updateAnnotation;
 
 @end

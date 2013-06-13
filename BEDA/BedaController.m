@@ -111,7 +111,11 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     for (Source* s in [self sources]) {
         [s addAnnotation];
         [s logAnnotations];
+        for (Channel* ch in [s channels]) {
+            [ch updateAnnotation];
+        }
     }
+    
     
 }
 

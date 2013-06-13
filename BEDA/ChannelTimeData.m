@@ -209,8 +209,8 @@
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDataChanged:)
-                                                 name:@"dataChanged" object:Nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSourceOffsetUpdated:)
+                                                 name:BEDA_NOTI_SOURCE_OFFSET_CHANGED object:Nil];
 
     
     //    // Register self as notification observer
@@ -245,12 +245,17 @@
     
 }
 
-- (void) onDataChanged:(NSNotification*) noti {
+- (void) onSourceOffsetUpdated:(NSNotification*) noti {
     NSLog(@"%s: %d", __PRETTY_FUNCTION__, [self channelIndex]);
     double gt = [self getGlobalTime];
     double lt = [self offset] + [self globalToLocalTime:gt];
     [self setHeaderTime:lt];
     [plotHeader reloadData];
+}
+
+-(void) updateAnnotation {
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [plotAnnotation reloadData];
 }
 
 
@@ -471,14 +476,7 @@
     plotAnnotation.dataSource = self;
     plotAnnotation.delegate = self;
     
-    // Add the plot to the graph
-    [graph addPlot:plotAnnotation];
-    [self addAnnotation];
-}
 
--(void) addAnnotation{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
     // Set the style
     // 1. SavingPlotLine style
     CPTColor *headerPlotColor = [CPTColor greenColor];
@@ -488,7 +486,11 @@
     headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
     headerPlotSymbol.size = CGSizeMake(15.0f, 15.0f);
     plotAnnotation.plotSymbol = headerPlotSymbol;
+    
+    // Add the plot to the graph
+    [graph addPlot:plotAnnotation];
 }
+
 
 -(NSUInteger)numberOfRecordsForAnnotationPlot {
     return [[self source] numAnnotations];
@@ -507,7 +509,7 @@
     double py[6] = {middle, middle , middle, middle, middle, middle};
     
     for (int i = 0; i < [ [self source] numAnnotations]; i++) {
-        NSLog(@"Annot %d at %lf : text = %@", i, [[self source] annotationTime:i], [[self source] annotationText:i]);
+//        NSLog(@"Annot %d at %lf : text = %@", i, [[self source] annotationTime:i], [[self source] annotationText:i]);
         px[i] = [[self source] annotationTime:i];
     }
     
@@ -576,7 +578,8 @@
     NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
     if ([self isHeaderSelected]) {
         [self setHeaderTime:x];
-        [graph reloadData];
+//        [graph reloadData];
+//        [plotHeader reloadData];
     }
     
     if ([self isNavMode] == NO) {
@@ -587,9 +590,10 @@
         [[self source] setOffset:offset];
         NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
         [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"dataChanged"
+         postNotificationName:BEDA_NOTI_SOURCE_OFFSET_CHANGED
          object:nil];
     } else {
+        [plotHeader reloadData];
         [[NSNotificationCenter defaultCenter]
          postNotificationName:@"channelCurrentTimeUpdate"
          object:self];
