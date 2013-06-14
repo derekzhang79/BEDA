@@ -19,6 +19,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSourceAdded:)
                                                  name:BEDA_NOTI_SOURCE_ADDED object:Nil];
+   
 
 }
 
@@ -32,9 +33,8 @@
                                 initWithIdentifier:name] autorelease];
     [item setLabel:name];
     [tabview addTabViewItem:item];
-    
-    NSViewController *viewController = [[[NSViewController alloc]
-                                         initWithNibName:@"myView" bundle:nil] autorelease];
+    viewController = [[[NSViewController alloc]
+                                         initWithNibName:@"DataTableView" bundle:nil] autorelease];
     [item setView:[viewController view]];
     
 }

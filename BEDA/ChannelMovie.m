@@ -53,6 +53,7 @@
     [movSplitView addSubview:view positioned:NSWindowAbove relativeTo:lastView];
     [beda spaceEvenly:movSplitView];
     
+    [view setWantsLayer:YES];
     [view setPreservesAspectRatio:YES];
     [view setMovie:[self movie]];
     

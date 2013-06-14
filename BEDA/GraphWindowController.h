@@ -11,6 +11,7 @@
 
 @interface GraphWindowController : NSObject {
     IBOutlet NSTabView* tabview;
+    IBOutlet NSViewController *viewController;
 }
 
 - (IBAction)openFile:(id)sender;
