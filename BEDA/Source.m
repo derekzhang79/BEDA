@@ -15,6 +15,7 @@
 @synthesize offset;
 @synthesize annots = _annots;
 @synthesize name;
+@synthesize filename;
 
 -(id) init {
     self = [super init];
@@ -26,6 +27,7 @@
         _annots = [[NSMutableArray alloc] init];
         
         [self setName:@""];
+        [self setFilename:@""];
         
         [self setOffset:0.0];
     }

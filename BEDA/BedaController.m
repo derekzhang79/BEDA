@@ -32,6 +32,7 @@ static BedaController* g_instance = nil;
     
     _sources = [[NSMutableArray alloc] init];
     _movSplitView = Nil;
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveChannelPlayed:)
@@ -83,6 +84,12 @@ static BedaController* g_instance = nil;
     NSString *ext = [[url path] pathExtension];
     NSLog(@"url = %@ [ext = %@]", url, ext);
     
+    [self openFileAtURL:url];
+}
+
+- (void)openFileAtURL:(NSURL*)url {
+    NSString *ext = [[url path] pathExtension];
+    NSLog(@"url = %@ [ext = %@]", url, ext);
     if ([ext isEqualToString:@"csv"]) {
         [self addSourceTimeData:url];
     } else {
@@ -92,6 +99,8 @@ static BedaController* g_instance = nil;
     [[NSNotificationCenter defaultCenter]
      postNotificationName:BEDA_NOTI_SOURCE_ADDED
      object:nil];
+
+    
 }
 
 - (IBAction)openGraphController:(id)sender {

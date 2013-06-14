@@ -16,6 +16,7 @@
 - (void)loadFile:(NSURL*)url {
     NSLog(@"%s: Load URL %@ ", __PRETTY_FUNCTION__, url);
     
+    
     NSError* error = nil;
     QTMovie *newMovie = [QTMovie movieWithURL:url error:&error];
     // If there's an error, ..

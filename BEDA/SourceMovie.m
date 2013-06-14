@@ -14,6 +14,8 @@
 - (void)loadFile:(NSURL*)url {
     NSLog(@"%s: Load URL %@ ", __PRETTY_FUNCTION__, url);
     
+    [self setFilename:[url absoluteString]];
+    
     // Create only one channel for SourceMovie
     ChannelMovie* ch = [[ChannelMovie alloc] init];
     [ch setSource:self];

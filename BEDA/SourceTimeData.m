@@ -38,6 +38,8 @@
         return;
     }
     NSLog(@"File read OK. contents length = %lu" ,(unsigned long)[fileContents length]);
+    [self setFilename:[url absoluteString]];
+
    
     NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\r\n"]];
     const int MAX_LOG_LINE = 60;

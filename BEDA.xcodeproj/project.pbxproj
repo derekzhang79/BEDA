@@ -40,6 +40,7 @@
 		B26BF291176196CC009BCC7D /* ChannelMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF290176196CC009BCC7D /* ChannelMovie.m */; };
 		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; };
 		B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */; };
+		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
 		B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B7E9CB176AA4A900190941 /* GraphWindowController.m */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,8 @@
 		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
 		B28D32D916D20DB500D58ADA /* EDAGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAGraphViewController.h; sourceTree = "<group>"; };
 		B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAGraphViewController.m; sourceTree = "<group>"; };
+		B299F6BA176AE8E6004BCD35 /* ProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectManager.h; sourceTree = "<group>"; };
+		B299F6BB176AE8E6004BCD35 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 		B2B7E9CA176AA4A900190941 /* GraphWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphWindowController.h; sourceTree = "<group>"; };
 		B2B7E9CB176AA4A900190941 /* GraphWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,6 +229,8 @@
 				B26BF28217618336009BCC7D /* Source.m */,
 				B26BF2871761835F009BCC7D /* Viewer.h */,
 				B26BF2881761835F009BCC7D /* Viewer.m */,
+				B299F6BA176AE8E6004BCD35 /* ProjectManager.h */,
+				B299F6BB176AE8E6004BCD35 /* ProjectManager.m */,
 			);
 			name = AppController;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 				0314637B1762F675007B075B /* ChannelTimeData.m in Sources */,
 				0314637E1762F685007B075B /* SourceTimeData.m in Sources */,
 				B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */,
+				B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
