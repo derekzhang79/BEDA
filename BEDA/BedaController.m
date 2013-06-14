@@ -25,6 +25,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize isNavMode;
 @synthesize gtAppTime;
 
+static BedaController* g_instance = nil;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -49,7 +50,14 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
     
     [self navigate:nil];
     
+    g_instance = self;
+    
 }
+
++ (BedaController*) getInstance {
+    return g_instance;
+}
+
 
 - (NSSplitView*) getSplitView {
     return splitview;
@@ -85,7 +93,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 - (IBAction)openGraphController:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSWindowController *controllerWindow = [[NSWindowController alloc] initWithWindowNibName:@"graphController.xib"];
+    NSWindowController *controllerWindow = [[NSWindowController alloc] initWithWindowNibName:@"GraphController"];
     [controllerWindow showWindow:self];
 }
 

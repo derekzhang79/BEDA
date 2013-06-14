@@ -14,6 +14,7 @@
 @synthesize channels = _channels;
 @synthesize offset;
 @synthesize annots = _annots;
+@synthesize name;
 
 -(id) init {
     self = [super init];
@@ -23,6 +24,8 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _channels = [[NSMutableArray alloc] init];
         _annots = [[NSMutableArray alloc] init];
+        
+        [self setName:@""];
         
         [self setOffset:0.0];
     }

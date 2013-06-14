@@ -15,6 +15,7 @@
 
 @property (assign) BedaController* beda;
 @property (retain) NSMutableArray* channels;
+@property (copy) NSString* name;
 
 @property double offset;
 - (void)loadFile:(NSURL*)url;

@@ -21,6 +21,7 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _timedata = [[NSMutableArray alloc] init];
+        [self setName:@"SourceTimeData"];
     }
     
     return self;

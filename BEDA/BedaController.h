@@ -16,6 +16,9 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
     IBOutlet NSSplitView* splitview;
 }
 
+// Singleton
++ (BedaController*) getInstance;
+
 @property (retain) NSMutableArray* sources;
 @property (retain) NSSplitView* movSplitView;
 @property BOOL isNavMode;

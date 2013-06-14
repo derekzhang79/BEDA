@@ -23,6 +23,8 @@
     
     NSLog(@"%s: channels.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self channels] count]);
 
+    [self setName:@"SourceMovie"];
+
 }
 
 
