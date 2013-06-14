@@ -57,15 +57,10 @@
     [view setPreservesAspectRatio:YES];
     [view setMovie:[self movie]];
     
-//    // Overlay window
-//    NSTextField* overlay = [[NSTextField alloc] init];
-//    overlay.frame = CGRectMake(10, 10, 100, 30);
-//    overlay.backgroundColor = [NSColor yellowColor];
-//    overlay.alphaValue = 0.3f;
-//    [overlay setStringValue:@"HAHAHAHA"];
-//    [view addSubview:overlay positioned:NSWindowAbove relativeTo:nil];
-//    // [view addSubview:overlay];
-//    
+    
+    [self setView:view];
+     // [view addSubview:overlay];
+    
 }
 
 - (void)play {
@@ -127,13 +122,14 @@
         [[NSNotificationCenter defaultCenter]
          postNotificationName:@"channelPlay"
          object:self];
-        
-        
+        [self updateOffsetOverlay];
     } else {
         NSLog(@"%s : STOP", __PRETTY_FUNCTION__);
         [[NSNotificationCenter defaultCenter]
          postNotificationName:@"channelStop"
          object:self];
+        [self updateOffsetOverlay];
+
     }
     
 }
@@ -146,6 +142,7 @@
         double offset = lt - gt;
         [[self source] setOffset:offset];
         NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
+        [self updateOffsetOverlay];
         return;
     }
 

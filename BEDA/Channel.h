@@ -14,6 +14,8 @@
 }
 
 @property (assign) Source* source;
+@property (assign) NSView* view;
+@property (assign) NSTextField* offsetOverlay;
 
 - (void)play;
 - (void)stop;
@@ -32,5 +34,11 @@
 
 - (double) windowHeightFactor;
 - (void) updateAnnotation;
+
+- (void) createOffsetOverlay;
+- (void) showOffsetOverlay;
+- (void) hideOffsetOverlay;
+- (void) updateOffsetOverlay;
+
 
 @end

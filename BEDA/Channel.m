@@ -11,6 +11,8 @@
 @implementation Channel
 
 @synthesize source = _source;
+@synthesize view = _view;
+@synthesize offsetOverlay = _offsetOverlay;
 
 -(id) init {
     self = [super init];
@@ -82,6 +84,60 @@
 
 - (void) updateAnnotation {
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
+}
+
+- (void) createOffsetOverlay {
+    if ([self offsetOverlay] != Nil) {
+        return;
+    }
+    // Overlay window
+    NSTextField* overlay = [[NSTextField alloc] init];
+    overlay.frame = CGRectMake(10, 10, 100, 30);
+    
+    
+//    if (lastView) {
+//        NSLog(@"lastview.frame.size = %@", NSStringFromSize(lastView.frame.size) );
+//    }
+    //    NSLog(@"overlay.frame.origin = %f, %f", overlay.frame.origin.x, overlay.frame.origin.y);
+    
+    overlay.backgroundColor = [NSColor yellowColor];
+    overlay.alphaValue = 0.3f;
+    [overlay setStringValue:@"HAHAHAHA"];
+    [[self view] addSubview:overlay positioned:NSWindowAbove relativeTo:nil];
+    
+    [self setOffsetOverlay:overlay];
+    
+}
+
+- (void) showOffsetOverlay {
+    if ([self offsetOverlay] == Nil) {
+        [self createOffsetOverlay];
+    }
+    [self offsetOverlay].alphaValue = 1.0f;
+    [self updateOffsetOverlay];
+    
+}
+
+- (void) hideOffsetOverlay {
+    if ([self offsetOverlay] == Nil) {
+        [self createOffsetOverlay];
+    }
+    [self offsetOverlay].alphaValue = 0.0f;
+    [self updateOffsetOverlay];
+}
+
+- (void) updateOffsetOverlay {
+    if ([self offsetOverlay] == Nil) {
+        return;
+    }
+    NSTextField* overlay = [self offsetOverlay];
+    NSSize sz = [self view].frame.size;
+    NSSize my = overlay.frame.size;
+    overlay.frame = CGRectMake(sz.width - my.width - 20, sz.height - my.height - 20, my.width, my.height);
+
+    NSLog(@"overlay.frame.size = %@", NSStringFromSize(overlay.frame.size) );
+
+    [[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%lf", [self offset]]];
 }
 
 

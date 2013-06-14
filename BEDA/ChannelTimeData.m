@@ -251,6 +251,8 @@
     double lt = [self offset] + [self globalToLocalTime:gt];
     [self setHeaderTime:lt];
     [plotHeader reloadData];
+    [self updateOffsetOverlay];
+
 }
 
 -(void) updateAnnotation {
@@ -268,6 +270,9 @@
     CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
     
     [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
+    
+    [self setView:view];
+
 }
 
 
@@ -280,6 +285,9 @@
     CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
     
     [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
+    
+    [self setView:view];
+
 }
 
 
@@ -292,6 +300,9 @@
     CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
     
     [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
+    
+    [self setView:view];
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -335,6 +346,7 @@
     [self setHeaderTime:t];
     
     [plotHeader reloadData];
+    [self updateOffsetOverlay];
 
 }
 

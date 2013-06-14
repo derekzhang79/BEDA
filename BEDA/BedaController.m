@@ -189,8 +189,19 @@ static BedaController* g_instance = nil;
     NSLog(@"%s : %ld", __PRETTY_FUNCTION__, (long)mymode);
     if (mymode == 0) {
         [self setIsNavMode:YES];
+        for (Source* s in [self sources]) {
+            for (Channel* ch in [s channels]) {
+                [ch hideOffsetOverlay];
+            }
+        }
+        
     } else {
         [self setIsNavMode:NO];
+        for (Source* s in [self sources]) {
+            for (Channel* ch in [s channels]) {
+                [ch showOffsetOverlay];
+            }
+        }
     }
    
 }
