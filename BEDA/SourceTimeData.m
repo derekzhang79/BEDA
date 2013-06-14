@@ -21,7 +21,7 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _timedata = [[NSMutableArray alloc] init];
-        [self setName:@"SourceTimeData"];
+//        [self setName:@"SourceTimeData"];
     }
     
     return self;
@@ -38,7 +38,7 @@
         return;
     }
     NSLog(@"File read OK. contents length = %lu" ,(unsigned long)[fileContents length]);
-    
+   
     NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\r\n"]];
     const int MAX_LOG_LINE = 60;
     
@@ -73,7 +73,6 @@
                 basems = ms;
             }
             
-            // x = (date + ms / 1000) - (basedate + basems / 1000);
             float secSinceBase = [date timeIntervalSinceDate:[self basedate]] + (ms - basems) / 1000.0f;
             float Accel = sqrt(xAxis * xAxis + yAxis * yAxis + zAxis * zAxis);
             
@@ -104,8 +103,6 @@
         } // end of if
     } // end of for
     
-    // [[NSNotificationCenter defaultCenter] postNotificationName:@"sensorDataLoaded" object:nil];
-    
     NSLog(@"basedate = %@", [self basedate]);
     NSLog(@"data.count = %ld", (unsigned long)[[self timedata] count]);
     
@@ -123,7 +120,10 @@
     [chAccel setSource:self];
     [chAccel initGraph:3];
     [[self channels] addObject:chAccel];
-        
+    
+    NSString* fileName = [[url absoluteString] lastPathComponent];
+    [self setName:fileName];
+    
     NSLog(@"%s: channels.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self channels] count]);
 
 }

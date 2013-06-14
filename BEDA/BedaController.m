@@ -88,6 +88,10 @@ static BedaController* g_instance = nil;
     } else {
         [self addSourceMov:url];
     }
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_SOURCE_ADDED
+     object:nil];
 }
 
 - (IBAction)openGraphController:(id)sender {
@@ -292,7 +296,6 @@ static BedaController* g_instance = nil;
     
     [self setMovSplitView:sv];
     
-//    [self spaceEvenly:splitview withFirstSize:BEDA_WINDOW_INITIAL_MOVIE_HEIGHT];
 }
 
 - (void)spaceEvenly:(NSSplitView *)splitView

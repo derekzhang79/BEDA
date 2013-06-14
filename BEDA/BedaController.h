@@ -10,6 +10,7 @@
 #import <QTKit/QTKit.h>
 
 extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
+#define BEDA_NOTI_SOURCE_ADDED @"BedaNotiSourceAdded"
 
 @interface BedaController : NSObject {
     IBOutlet NSSegmentedControl* modeSelector;

@@ -13,6 +13,6 @@
     IBOutlet NSTabView* tabview;
 }
 
+- (IBAction)openFile:(id)sender;
 - (BedaController*) beda;
-
 @end
