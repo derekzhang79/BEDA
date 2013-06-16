@@ -13,6 +13,8 @@
 
 @implementation GraphWindowController
 
+@synthesize tvc = _tvc;
+
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -20,13 +22,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSourceAdded:)
                                                  name:BEDA_NOTI_SOURCE_ADDED object:Nil];
-   
-
+    
+    [self setTvc:Nil];
 }
 
 - (void) onSourceAdded:(NSNotification*) noti {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    
+
     Source* s = [[[self beda] sources] lastObject];
     if ([s isKindOfClass:[SourceTimeData class]]) {
         [self onSourceTimeDataAdded:noti];
@@ -37,23 +39,52 @@
 }
 
 - (void) onSourceTimeDataAdded:(NSNotification*) noti {
+    //////////////////// TESTING /////////////////////////
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    Source* s = [[[self beda] sources] lastObject];
+
+    SourceTimeData* s = [[[self beda] sources] lastObject];
     NSString* name = [s name];
     NSLog(@"creating a tab for source [%@]", name);
+    // Create a tab view item
     NSTabViewItem *item = [[[NSTabViewItem alloc]
                             initWithIdentifier:name] autorelease];
     [item setLabel:name];
-    [tabview addTabViewItem:item];
-    viewController = [[[NSViewController alloc]
-                       initWithNibName:@"DataTableView" bundle:nil] autorelease];
+
+    // Create a custum view and assign it to the tab view item
+    TableViewController* viewController = [[TableViewController alloc]
+                                            initWithNibName:@"TableView" bundle:nil];
+    [self setTvc:viewController];
+    [viewController setSource:s];
     [item setView:[viewController view]];
+
+    // Add a new tab to the tabview
+    [tabview addTabViewItem:item];
+    
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//
+//    Source* s = [[[self beda] sources] lastObject];
+//    NSString* name = [s name];
+//    NSLog(@"creating a tab for source [%@]", name);
+//    
+//    // Create a tab view item
+//    NSTabViewItem *item = [[[NSTabViewItem alloc]
+//                            initWithIdentifier:name] autorelease];
+//    [item setLabel:name];
+//    
+//    // Create a custum view and assign it to the tab view item
+//    TableViewController* viewController = [[[TableViewController alloc]
+//                       initWithNibName:@"TableView" bundle:nil] autorelease];
+//    [item setView:[viewController view]];
+//    
+//    // Add a new tab to the tabview
+//    [tabview addTabViewItem:item];
+
 }
 
 - (IBAction)openFile:(id)sender
 {
     [[self beda] openFile:nil];
+
 }
 
 

@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "BedaController.h"
+#import "TableViewController.h"
+
 
 @interface GraphWindowController : NSObject {
     IBOutlet NSTabView* tabview;
-    IBOutlet NSViewController *viewController;
 }
+
+@property (retain) TableViewController* tvc;
 
 - (IBAction)openFile:(id)sender;
 - (BedaController*) beda;

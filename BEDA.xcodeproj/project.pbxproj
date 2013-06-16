@@ -29,10 +29,10 @@
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
 		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
 		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
-		03CF8FB6176BB270004234B1 /* DataTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03CF8FB5176BB270004234B1 /* DataTableView.xib */; };
-		B214A158176D40870033173B /* DataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B214A157176D40870033173B /* DataTableViewController.m */; };
 		B225C4E816FBC2BA00D3C036 /* TempGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */; };
 		B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */; };
+		B22980B6176E6F6D004C2115 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22980B5176E6F6D004C2115 /* TableView.xib */; };
+		B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22980B8176E6F7B004C2115 /* TableViewController.m */; };
 		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
 		B26BF280176182EE009BCC7D /* BedaController.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF27F176182EE009BCC7D /* BedaController.m */; };
 		B26BF28317618336009BCC7D /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF28217618336009BCC7D /* Source.m */; };
@@ -80,13 +80,13 @@
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
-		03CF8FB5176BB270004234B1 /* DataTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableView.xib; sourceTree = "<group>"; };
-		B214A156176D40870033173B /* DataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTableViewController.h; sourceTree = "<group>"; };
-		B214A157176D40870033173B /* DataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTableViewController.m; sourceTree = "<group>"; };
 		B225C4E616FBC2BA00D3C036 /* TempGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempGraphViewController.h; sourceTree = "<group>"; };
 		B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempGraphViewController.m; sourceTree = "<group>"; };
 		B225C4E916FBC4E400D3C036 /* AccelGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelGraphViewController.h; sourceTree = "<group>"; };
 		B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccelGraphViewController.m; sourceTree = "<group>"; };
+		B22980B5176E6F6D004C2115 /* TableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
+		B22980B7176E6F7B004C2115 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		B22980B8176E6F7B004C2115 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		B25CBBE716D1DDE100626FA9 /* DataAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAddController.h; sourceTree = "<group>"; };
 		B25CBBE816D1DDE100626FA9 /* DataAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAddController.m; sourceTree = "<group>"; };
 		B26BF27E176182EE009BCC7D /* BedaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BedaController.h; sourceTree = "<group>"; };
@@ -187,7 +187,6 @@
 				036723D216D181D9004F14D6 /* AppDelegate.h */,
 				036723D316D181D9004F14D6 /* AppDelegate.m */,
 				036723D516D181DA004F14D6 /* MainMenu.xib */,
-				03798419176A8994000CFBEE /* GraphController.xib */,
 				036723C716D181D9004F14D6 /* Supporting Files */,
 			);
 			path = BEDA;
@@ -286,11 +285,12 @@
 		B2B7E9C9176AA45100190941 /* GraphWindow */ = {
 			isa = PBXGroup;
 			children = (
+				03798419176A8994000CFBEE /* GraphController.xib */,
 				B2B7E9CA176AA4A900190941 /* GraphWindowController.h */,
 				B2B7E9CB176AA4A900190941 /* GraphWindowController.m */,
-				03CF8FB5176BB270004234B1 /* DataTableView.xib */,
-				B214A156176D40870033173B /* DataTableViewController.h */,
-				B214A157176D40870033173B /* DataTableViewController.m */,
+				B22980B5176E6F6D004C2115 /* TableView.xib */,
+				B22980B7176E6F7B004C2115 /* TableViewController.h */,
+				B22980B8176E6F7B004C2115 /* TableViewController.m */,
 			);
 			name = GraphWindow;
 			sourceTree = "<group>";
@@ -360,7 +360,7 @@
 				031463891765B277007B075B /* Data-Zoom-in-icon.png in Resources */,
 				0314638A1765B277007B075B /* Data-Zoom-out-icon.png in Resources */,
 				0379841A176A8994000CFBEE /* GraphController.xib in Resources */,
-				03CF8FB6176BB270004234B1 /* DataTableView.xib in Resources */,
+				B22980B6176E6F6D004C2115 /* TableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +389,7 @@
 				0314637E1762F685007B075B /* SourceTimeData.m in Sources */,
 				B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */,
 				B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */,
-				B214A158176D40870033173B /* DataTableViewController.m in Sources */,
+				B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
