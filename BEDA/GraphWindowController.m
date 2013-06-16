@@ -9,6 +9,7 @@
 #import "GraphWindowController.h"
 #import "BedaController.h"
 #import "Source.h"
+#import "SourceTimeData.h"
 
 @implementation GraphWindowController
 
@@ -27,16 +28,27 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     Source* s = [[[self beda] sources] lastObject];
+    if ([s isKindOfClass:[SourceTimeData class]]) {
+        [self onSourceTimeDataAdded:noti];
+    } else {
+        NSLog(@"%s: No tab view for source [%@]", __PRETTY_FUNCTION__, [s name]);
+    }
+    
+}
+
+- (void) onSourceTimeDataAdded:(NSNotification*) noti {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    Source* s = [[[self beda] sources] lastObject];
     NSString* name = [s name];
     NSLog(@"creating a tab for source [%@]", name);
     NSTabViewItem *item = [[[NSTabViewItem alloc]
-                                initWithIdentifier:name] autorelease];
+                            initWithIdentifier:name] autorelease];
     [item setLabel:name];
     [tabview addTabViewItem:item];
     viewController = [[[NSViewController alloc]
-                                         initWithNibName:@"DataTableView" bundle:nil] autorelease];
+                       initWithNibName:@"DataTableView" bundle:nil] autorelease];
     [item setView:[viewController view]];
-    
 }
 
 - (IBAction)openFile:(id)sender
