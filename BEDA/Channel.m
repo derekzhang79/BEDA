@@ -92,17 +92,11 @@
     }
     // Overlay window
     NSTextField* overlay = [[NSTextField alloc] init];
-    overlay.frame = CGRectMake(10, 10, 100, 30);
-    
-    
-//    if (lastView) {
-//        NSLog(@"lastview.frame.size = %@", NSStringFromSize(lastView.frame.size) );
-//    }
-    //    NSLog(@"overlay.frame.origin = %f, %f", overlay.frame.origin.x, overlay.frame.origin.y);
+    overlay.frame = CGRectMake(10, 10, 80, 20);
     
     overlay.backgroundColor = [NSColor yellowColor];
-    overlay.alphaValue = 0.3f;
-    [overlay setStringValue:@"HAHAHAHA"];
+    overlay.alphaValue = 0.5f;
+    [overlay setStringValue:@"default"];
     [[self view] addSubview:overlay positioned:NSWindowAbove relativeTo:nil];
     
     [self setOffsetOverlay:overlay];
@@ -133,7 +127,7 @@
     NSTextField* overlay = [self offsetOverlay];
     NSSize sz = [self view].frame.size;
     NSSize my = overlay.frame.size;
-    overlay.frame = CGRectMake(sz.width - my.width - 20, sz.height - my.height - 20, my.width, my.height);
+    overlay.frame = CGRectMake(sz.width - my.width - 10, sz.height - my.height - 10, my.width, my.height);
 
     NSLog(@"overlay.frame.size = %@", NSStringFromSize(overlay.frame.size) );
 

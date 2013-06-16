@@ -305,6 +305,14 @@
 
 }
 
+- (void)keyDown:(NSEvent *)theEvent {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    if ([theEvent keyCode] == 49) { //Spacebar keyCode is 49
+        NSLog(@"Time is: %@", [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle]);
+    }
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Play/stop
 - (void)play {
