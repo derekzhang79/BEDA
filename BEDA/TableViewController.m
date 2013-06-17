@@ -45,7 +45,7 @@
 
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     NSTextField *result = [tableView makeViewWithIdentifier:@"MyView" owner:self];
     if (result == nil) {

@@ -112,9 +112,10 @@
     NSLog(@"basedate = %@", [self basedate]);
     NSLog(@"data.count = %ld", (unsigned long)[[self timedata] count]);
     
-    [self loadEDAGraph];
-    [self loadTempGraph];
-    [self loadAccelGraph];
+    
+//    [self loadEDAGraph];
+//    [self loadTempGraph];
+//    [self loadAccelGraph];
     
     NSString* fileName = [[url absoluteString] lastPathComponent];
     [self setName:fileName];
@@ -123,26 +124,26 @@
 
 }
 
--(void)loadEDAGraph {
-    ChannelTimeData *chEda = [[ChannelTimeData alloc] init];
-    [chEda setSource:self];
-    [chEda initGraph:1];
-    [[self channels] addObject:chEda];
-}
-
--(void)loadTempGraph {
-    ChannelTimeData *chTemp = [[ChannelTimeData alloc] init];
-    [chTemp setSource:self];
-    [chTemp initGraph:2];
-    [[self channels] addObject:chTemp];
-}
-
--(void)loadAccelGraph {
-    ChannelTimeData *chAccel = [[ChannelTimeData alloc] init];
-    [chAccel setSource:self];
-    [chAccel initGraph:3];
-    [[self channels] addObject:chAccel];
-}
+//-(void)loadEDAGraph {
+//    ChannelTimeData *chEda = [[ChannelTimeData alloc] init];
+//    [chEda setSource:self];
+//    [chEda initGraph:1];
+//    [[self channels] addObject:chEda];
+//}
+//
+//-(void)loadTempGraph {
+//    ChannelTimeData *chTemp = [[ChannelTimeData alloc] init];
+//    [chTemp setSource:self];
+//    [chTemp initGraph:2];
+//    [[self channels] addObject:chTemp];
+//}
+//
+//-(void)loadAccelGraph {
+//    ChannelTimeData *chAccel = [[ChannelTimeData alloc] init];
+//    [chAccel setSource:self];
+//    [chAccel initGraph:3];
+//    [[self channels] addObject:chAccel];
+//}
 
 
 @end

@@ -10,6 +10,7 @@
 #import "BedaController.h"
 #import "Source.h"
 #import "SourceTimeData.h"
+#import "ChannelTimeData.h"
 
 @implementation GraphWindowController
 
@@ -91,16 +92,36 @@
 
 - (IBAction)onAddGraph:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"Selected column = %d", [[self tvc] selectedTableColumn]);
-    NSLog(@"Selected column name = %@", [[self tvc] selectedTableColumnName]);
-    NSString *selectedColumn = [[self tvc] selectedTableColumnName];
-    if([selectedColumn isEqualToString:@"EDA"] ){
-        [s loadEDAGraph];
+    if ([[self tvc] selectedTableColumn] == -1) {
+        NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
     }
-    if([selectedColumn isEqualToString:@"Temp"] ){
-        [s loadEDAGraph];
-    }
+    
+    s = [[[self beda] sources] lastObject];
 
+    // Step 1. Create the proper channel
+    ChannelTimeData *ch = [[ChannelTimeData alloc] init];
+    [ch setSource:s];
+
+    // Step 2. initialize the graph
+    int index = [[self tvc] selectedTableColumn];
+    NSString* name = [[self tvc] selectedTableColumnName];
+    double min = 0.0;
+    double max = 10.0;
+    NSColor *lc  = [graphColor color];
+    NSColor *ac  = [areaColor color];
+    BOOL isBottom = YES;
+    BOOL hasArea = YES;
+    [ch initGraph:name atIndex:index range:min to:max withLineColor:lc areaColor:ac isBottom:isBottom hasArea:hasArea];
+
+    // Step 3. Add to the created channel to the source
+    [[s channels] addObject:ch];
+
+    // Step 4. Create a corresponding view
+    [ch createGraphViewFor:[self beda]];
+    [[self beda] spaceProportionalyMainSplit];
+    
+
+    
 }
 
 
