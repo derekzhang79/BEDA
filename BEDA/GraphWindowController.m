@@ -14,8 +14,6 @@
 @implementation GraphWindowController
 
 @synthesize tvc = _tvc;
-@synthesize graphName;
-@synthesize graphStyle;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -32,8 +30,6 @@
 
 - (IBAction)onApplySettings:(id)sender{
      NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"graphName: [%@]", [self graphName]);
-    NSLog(@"graphStyle: [%@]", [self graphStyle]);
 }
 
 - (void) onSourceAdded:(NSNotification*) noti {
@@ -61,27 +57,15 @@
     [item setLabel:name];
 
     // Create a custum view and assign it to the tab view item
-    TableViewController* viewController = [[TableViewController alloc]
+    TableViewController* tableViewController = [[TableViewController alloc]
                                             initWithNibName:@"TableView" bundle:nil];
-    [self setTvc:viewController];
-    [viewController setSource:s];
-    [item setView:[viewController view]];
+    [self setTvc:tableViewController];
+    [tableViewController setSource:s];
+    [item setView:[tableViewController view]];
 
     // Add a new tab to the tabview
     [tabview addTabViewItem:item];
 
-}
-
-- (IBAction)getGraphColor:(id)sender{
-    NSColor *color  = [graphColor color];
-    NSLog(@"%s, Graph color name %@", __PRETTY_FUNCTION__, color);
-    
-}
-
-- (IBAction)getAreaColor:(id)sender{
-    NSColor *color  = [areaColor color];
-    NSLog(@"%s, aREA color name %@", __PRETTY_FUNCTION__, color);
-    
 }
 
 - (IBAction)openFile:(id)sender {
@@ -94,13 +78,16 @@
     NSLog(@"Selected column = %d", [[self tvc] selectedTableColumn]);
     NSLog(@"Selected column name = %@", [[self tvc] selectedTableColumnName]);
     NSString *selectedColumn = [[self tvc] selectedTableColumnName];
-    if([selectedColumn isEqualToString:@"EDA"] ){
-        [s loadEDAGraph];
-    }
-    if([selectedColumn isEqualToString:@"Temp"] ){
-        [s loadEDAGraph];
-    }
-
+    
+    NSTabViewItem *item = [[[NSTabViewItem alloc]
+                            initWithIdentifier:selectedColumn] autorelease];
+    [item setLabel:selectedColumn];
+    NSViewController* viewController = [[NSViewController alloc]
+                                           initWithNibName:@"GraphSettingView" bundle:nil];
+    
+    [item setView:[viewController view]];
+    [graphControlTabview addTabViewItem:item];
+    
 }
 
 

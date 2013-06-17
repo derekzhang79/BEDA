@@ -14,6 +14,8 @@
 		031463861765B1D5007B075B /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 031463851765B1D4007B075B /* minus.png */; };
 		031463891765B277007B075B /* Data-Zoom-in-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 031463871765B277007B075B /* Data-Zoom-in-icon.png */; };
 		0314638A1765B277007B075B /* Data-Zoom-out-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 031463881765B277007B075B /* Data-Zoom-out-icon.png */; };
+		0320251A176FC3E600BC7020 /* GraphSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03202519176FC3E500BC7020 /* GraphSettingView.xib */; };
+		0320251D176FC44000BC7020 /* GraphSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0320251C176FC43F00BC7020 /* GraphSettingController.m */; };
 		032CEB3716FFCFE200F3DFE2 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */; };
 		036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723C016D181D9004F14D6 /* Cocoa.framework */; };
 		036723CB16D181D9004F14D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036723C916D181D9004F14D6 /* InfoPlist.strings */; };
@@ -56,6 +58,9 @@
 		031463851765B1D4007B075B /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		031463871765B277007B075B /* Data-Zoom-in-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data-Zoom-in-icon.png"; sourceTree = "<group>"; };
 		031463881765B277007B075B /* Data-Zoom-out-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data-Zoom-out-icon.png"; sourceTree = "<group>"; };
+		03202519176FC3E500BC7020 /* GraphSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphSettingView.xib; sourceTree = "<group>"; };
+		0320251B176FC43F00BC7020 /* GraphSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphSettingController.h; sourceTree = "<group>"; };
+		0320251C176FC43F00BC7020 /* GraphSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphSettingController.m; sourceTree = "<group>"; };
 		032CEB3516FFCFE200F3DFE2 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		036723BD16D181D9004F14D6 /* BEDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BEDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +296,9 @@
 				B22980B5176E6F6D004C2115 /* TableView.xib */,
 				B22980B7176E6F7B004C2115 /* TableViewController.h */,
 				B22980B8176E6F7B004C2115 /* TableViewController.m */,
+				03202519176FC3E500BC7020 /* GraphSettingView.xib */,
+				0320251B176FC43F00BC7020 /* GraphSettingController.h */,
+				0320251C176FC43F00BC7020 /* GraphSettingController.m */,
 			);
 			name = GraphWindow;
 			sourceTree = "<group>";
@@ -361,6 +369,7 @@
 				0314638A1765B277007B075B /* Data-Zoom-out-icon.png in Resources */,
 				0379841A176A8994000CFBEE /* GraphController.xib in Resources */,
 				B22980B6176E6F6D004C2115 /* TableView.xib in Resources */,
+				0320251A176FC3E600BC7020 /* GraphSettingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +399,7 @@
 				B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */,
 				B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */,
 				B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */,
+				0320251D176FC44000BC7020 /* GraphSettingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

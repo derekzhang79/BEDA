@@ -13,23 +13,16 @@
 
 @interface GraphWindowController : NSObject {
     IBOutlet NSTabView* tabview;
-    IBOutlet NSColorWell* graphColor;
-    IBOutlet NSColorWell* areaColor;
+    IBOutlet NSTabView* graphControlTabview;
     SourceTimeData* s;
-    NSString *graphName;
-    NSString *graphStyle;
     
 }
 
 @property (retain) TableViewController* tvc;
-@property (retain) NSString *graphName;
-@property (retain) NSString *graphStyle;
 
 - (IBAction)openFile:(id)sender;
 - (IBAction)onAddGraph:(id)sender;
 - (IBAction)onApplySettings:(id)sender;
-- (IBAction)getGraphColor:(id)sender;
-- (IBAction)getAreaColor:(id)sender;
 - (BedaController*) beda;
 
 @end
