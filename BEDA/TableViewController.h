@@ -16,4 +16,7 @@
 
 @property (retain) SourceTimeData* source;
 
+- (int) selectedTableColumn;
+- (NSString*) selectedTableColumnName;
+- (NSMutableArray*) columns; // Mutable array of NSString, with Column Names;
 @end

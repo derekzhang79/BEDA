@@ -13,6 +13,7 @@
 
 @synthesize timedata = _timedata;
 @synthesize basedate;
+@synthesize columns = _columns;
 
 -(id) init {
     self = [super init];
@@ -21,6 +22,8 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _timedata = [[NSMutableArray alloc] init];
+        _columns = [[NSMutableArray alloc] init];
+
     }
     
     return self;
@@ -100,6 +103,12 @@
             }
         } // end of if
     } // end of for
+    
+    [[self columns] removeAllObjects];
+    [self setColumns:[NSMutableArray arrayWithObjects: @"Time", @"EDA", @"Temp", @"Accel", nil]];
+//    [self setColumns:[NSMutableArray arrayWithObjects: @"Time", @"EDA", @"Temp", nil]];
+
+
     
     NSLog(@"basedate = %@", [self basedate]);
     NSLog(@"data.count = %ld", (unsigned long)[[self timedata] count]);

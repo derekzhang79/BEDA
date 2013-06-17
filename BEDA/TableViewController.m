@@ -16,37 +16,25 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     data = [[self source] timedata];
     
-    {
+    for (NSString* cname in [[self source] columns]) {
         // Add TableColumn for Time
-        NSTableColumn* column = [[NSTableColumn alloc] initWithIdentifier:@"Time"];
-        [[column headerCell] setStringValue:@"Time"];
+        NSTableColumn* column = [[NSTableColumn alloc] initWithIdentifier:cname];
+        [[column headerCell] setStringValue:cname];
         [column setWidth:100];
         [tableview addTableColumn:column];
     }
-    
-    {
-        // Add TableColumn for EDA
-        NSTableColumn* column = [[NSTableColumn alloc] initWithIdentifier:@"EDA"];
-        [[column headerCell] setStringValue:@"EDA"];
-        [column setWidth:100];
-        [tableview addTableColumn:column];
-    }
-    
-    {
-        // Add TableColumn for EDA
-        NSTableColumn* column = [[NSTableColumn alloc] initWithIdentifier:@"Temp"];
-        [[column headerCell] setStringValue:@"Temp"];
-        [column setWidth:100];
-        [tableview addTableColumn:column];
-    }
-    
-    {
-        // Add TableColumn for EDA
-        NSTableColumn* column = [[NSTableColumn alloc] initWithIdentifier:@"Accel"];
-        [[column headerCell] setStringValue:@"Accel"];
-        [column setWidth:100];
-        [tableview addTableColumn:column];
-    }
+}
+
+- (int) selectedTableColumn {
+    return (int)[tableview selectedColumn];
+}
+
+- (NSString*) selectedTableColumnName {
+    return [[self columns] objectAtIndex:[self selectedTableColumn]];
+}
+
+- (NSMutableArray*) columns {
+    return [[self source] columns];
 }
 
 
@@ -76,27 +64,35 @@
     }
     
     
-    if ([tableColumn.identifier isEqualToString:@"Time"]) {
-        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:0]];
-        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
-
+    for (int i = 0; i < [[[self source] columns] count]; i++) {
+        NSString* cname = [[[self source] columns] objectAtIndex:i];
+        if ([tableColumn.identifier isEqualToString:cname]) {
+            NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:i]];
+            result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
+            
+        }
     }
-    
-    if ([tableColumn.identifier isEqualToString:@"EDA"]) {
-        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:1]];
-        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
-    }
-    
-    if ([tableColumn.identifier isEqualToString:@"Temp"]) {
-        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:2]];
-        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
-    }
-    
-    if ([tableColumn.identifier isEqualToString:@"Accel"]) {
-        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:3]];
-        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
-    }
-    
+//    if ([tableColumn.identifier isEqualToString:@"Time"]) {
+//        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:0]];
+//        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
+//
+//    }
+//    
+//    if ([tableColumn.identifier isEqualToString:@"EDA"]) {
+//        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:1]];
+//        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
+//    }
+//    
+//    if ([tableColumn.identifier isEqualToString:@"Temp"]) {
+//        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:2]];
+//        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
+//    }
+//    
+//    if ([tableColumn.identifier isEqualToString:@"Accel"]) {
+//        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:3]];
+//        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
+//    }
+//    
     
     return result;
 }

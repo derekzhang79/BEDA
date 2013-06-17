@@ -15,6 +15,7 @@
 
 @property (retain) NSMutableArray* timedata;
 @property (retain) NSDate* basedate;
+@property (retain) NSMutableArray* columns;
 
 - (void)loadFile:(NSURL*)url;
 

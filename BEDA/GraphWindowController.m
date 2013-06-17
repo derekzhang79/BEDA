@@ -63,9 +63,15 @@
 
 }
 
-- (IBAction)openFile:(id)sender
-{
+- (IBAction)openFile:(id)sender {
     [[self beda] openFile:nil];
+
+}
+
+- (IBAction)onAddGraph:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"Selected column = %d", [[self tvc] selectedTableColumn]);
+    NSLog(@"Selected column name = %@", [[self tvc] selectedTableColumnName]);
 
 }
 

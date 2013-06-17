@@ -18,5 +18,7 @@
 @property (retain) TableViewController* tvc;
 
 - (IBAction)openFile:(id)sender;
+- (IBAction)onAddGraph:(id)sender;
 - (BedaController*) beda;
+
 @end
