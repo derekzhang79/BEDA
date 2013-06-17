@@ -21,7 +21,6 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _timedata = [[NSMutableArray alloc] init];
-//        [self setName:@"SourceTimeData"];
     }
     
     return self;
@@ -81,7 +80,6 @@
             [[self timedata] addObject:
              [NSDictionary dictionaryWithObjectsAndKeys:
               [NSDecimalNumber numberWithFloat:secSinceBase],
-              // @"t",
               [NSNumber numberWithInt:0],
               [NSDecimalNumber numberWithFloat:EDA],
               [NSNumber numberWithInt:1],
@@ -91,8 +89,6 @@
               [NSNumber numberWithInt:3],
               [NSDecimalNumber numberWithFloat:xAxis],
               [NSNumber numberWithInt:4],
-              
-              //[NSNumber numberWithInt:CPTScatterPlotFieldY],
               nil
               ]
              ];

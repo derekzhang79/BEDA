@@ -11,6 +11,7 @@
 
 @interface TableViewController : NSViewController<NSTableViewDelegate, NSTableViewDataSource> {
     IBOutlet NSTableView* tableview;
+    NSMutableArray* data;
 }
 
 @property (retain) SourceTimeData* source;
