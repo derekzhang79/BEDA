@@ -14,6 +14,8 @@
 @implementation GraphWindowController
 
 @synthesize tvc = _tvc;
+@synthesize graphName;
+@synthesize graphStyle;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -27,10 +29,17 @@
     
 }
 
+
+- (IBAction)onApplySettings:(id)sender{
+     NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"graphName: [%@]", [self graphName]);
+    NSLog(@"graphStyle: [%@]", [self graphStyle]);
+}
+
 - (void) onSourceAdded:(NSNotification*) noti {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    Source* s = [[[self beda] sources] lastObject];
+    s = [[[self beda] sources] lastObject];
     if ([s isKindOfClass:[SourceTimeData class]]) {
         [self onSourceTimeDataAdded:noti];
     } else {
@@ -43,7 +52,7 @@
     //////////////////// TESTING /////////////////////////
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    SourceTimeData* s = [[[self beda] sources] lastObject];
+    s = [[[self beda] sources] lastObject];
     NSString* name = [s name];
     NSLog(@"creating a tab for source [%@]", name);
     // Create a tab view item
@@ -63,6 +72,18 @@
 
 }
 
+- (IBAction)getGraphColor:(id)sender{
+    NSColor *color  = [graphColor color];
+    NSLog(@"%s, Graph color name %@", __PRETTY_FUNCTION__, color);
+    
+}
+
+- (IBAction)getAreaColor:(id)sender{
+    NSColor *color  = [areaColor color];
+    NSLog(@"%s, aREA color name %@", __PRETTY_FUNCTION__, color);
+    
+}
+
 - (IBAction)openFile:(id)sender {
     [[self beda] openFile:nil];
 
@@ -72,6 +93,13 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"Selected column = %d", [[self tvc] selectedTableColumn]);
     NSLog(@"Selected column name = %@", [[self tvc] selectedTableColumnName]);
+    NSString *selectedColumn = [[self tvc] selectedTableColumnName];
+    if([selectedColumn isEqualToString:@"EDA"] ){
+        [s loadEDAGraph];
+    }
+    if([selectedColumn isEqualToString:@"Temp"] ){
+        [s loadEDAGraph];
+    }
 
 }
 

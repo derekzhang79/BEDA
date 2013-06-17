@@ -18,5 +18,5 @@
 @property (retain) NSMutableArray* columns;
 
 - (void)loadFile:(NSURL*)url;
-
+- (void)loadEDAGraph;
 @end
