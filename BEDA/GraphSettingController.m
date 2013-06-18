@@ -10,16 +10,17 @@
 
 @implementation GraphSettingController
 
-- (IBAction)getGraphColor:(id)sender{
+- (NSColor*)getGraphColor{
     NSColor *color  = [graphColor color];
     NSLog(@"%s, Graph color name %@", __PRETTY_FUNCTION__, color);
+    return color;
     
 }
 
-- (IBAction)getAreaColor:(id)sender{
+- (NSColor*)getAreaColor{
     NSColor *color  = [areaColor color];
     NSLog(@"%s, aREA color name %@", __PRETTY_FUNCTION__, color);
-    
+    return color;
 }
 
 

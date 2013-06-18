@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GraphSettingController : NSObject{
+@interface GraphSettingController : NSViewController{
 
     IBOutlet NSColorWell* graphColor;
     IBOutlet NSColorWell* areaColor;
@@ -17,8 +17,7 @@
 
 }
 
-
-- (IBAction)getGraphColor:(id)sender;
-- (IBAction)getAreaColor:(id)sender;
+- (NSColor*)getGraphColor;
+- (NSColor*)getAreaColor;
 
 @end

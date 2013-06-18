@@ -15,6 +15,7 @@
 @implementation GraphWindowController
 
 @synthesize tvc = _tvc;
+@synthesize gsc = _gsc;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -28,10 +29,6 @@
     
 }
 
-
-- (IBAction)onApplySettings:(id)sender{
-     NSLog(@"%s", __PRETTY_FUNCTION__);
-}
 
 - (void) onSourceAdded:(NSNotification*) noti {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -76,21 +73,57 @@
 
 - (IBAction)onAddGraph:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"Selected column = %d", [[self tvc] selectedTableColumn]);
-    NSLog(@"Selected column name = %@", [[self tvc] selectedTableColumnName]);
-    NSString *selectedColumn = [[self tvc] selectedTableColumnName];
+    if ([[self tvc] selectedTableColumn] == -1) {
+        NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
+    }
     
+    NSString* name = [[self tvc] selectedTableColumnName];
+    
+    // Create a tab view item
     NSTabViewItem *item = [[[NSTabViewItem alloc]
-                            initWithIdentifier:selectedColumn] autorelease];
-    [item setLabel:selectedColumn];
-    NSViewController* viewController = [[NSViewController alloc]
-                                           initWithNibName:@"GraphSettingView" bundle:nil];
+                            initWithIdentifier:name] autorelease];
+    [item setLabel:name];
     
-    [item setView:[viewController view]];
+    GraphSettingController* graphSettingController = [[GraphSettingController alloc]
+                                                initWithNibName:@"GraphSettingView" bundle:nil];
+    [self setGsc:graphSettingController];
+    [item setView:[graphSettingController view]];
     [graphControlTabview addTabViewItem:item];
-    
+
 }
 
+
+- (IBAction)onApplySettings:(id)sender{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    s = [[[self beda] sources] lastObject];
+    
+    // Step 1. Create the proper channel
+    ChannelTimeData *ch = [[ChannelTimeData alloc] init];
+    [ch setSource:s];
+    
+    // Step 2. initialize the graph
+    int index = [[self tvc] selectedTableColumn];
+    NSString* name = [[self tvc] selectedTableColumnName];
+    double min = 0.0;
+    double max = 10.0;
+
+    BOOL isBottom = YES;
+    BOOL hasArea = YES;
+    
+    NSColor *lc = [[self gsc] getGraphColor];
+    NSColor *ac = [[self gsc] getAreaColor];
+    NSLog(@"GRAPH COLOR:%@, AREA COLOR:%@",lc, ac);
+    
+    [ch initGraph:name atIndex:index range:min to:max withLineColor:lc areaColor:ac isBottom:isBottom hasArea:hasArea];
+    
+    // Step 3. Add to the created channel to the source
+    [[s channels] addObject:ch];
+    
+    // Step 4. Create a corresponding view
+    [ch createGraphViewFor:[self beda]];
+    [[self beda] spaceProportionalyMainSplit];
+
+}
 
 - (BedaController*) beda {
     return [BedaController getInstance];

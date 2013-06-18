@@ -72,27 +72,6 @@
             
         }
     }
-//    if ([tableColumn.identifier isEqualToString:@"Time"]) {
-//        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:0]];
-//        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
-//
-//    }
-//    
-//    if ([tableColumn.identifier isEqualToString:@"EDA"]) {
-//        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:1]];
-//        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
-//    }
-//    
-//    if ([tableColumn.identifier isEqualToString:@"Temp"]) {
-//        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:2]];
-//        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
-//    }
-//    
-//    if ([tableColumn.identifier isEqualToString:@"Accel"]) {
-//        NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:3]];
-//        result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
-//    }
-//    
     
     return result;
 }
