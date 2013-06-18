@@ -423,6 +423,10 @@ static BedaController* g_instance = nil;
     [splitView adjustSubviews];
 }
 
+- (void)spaceProportionalyMainSplit {
+    [self spaceProportionaly:splitview];
+}
+
 - (void)spaceProportionaly:(NSSplitView *)splitView {
     int cnt = 0;
     float factor[20];
@@ -486,18 +490,18 @@ static BedaController* g_instance = nil;
     [[self sources] addObject:s];
     NSLog(@"%s: sources.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self sources] count]);
     
-    // Create a movie view for
-    ChannelTimeData* chEda = [[s channels] objectAtIndex:0];
-    ChannelTimeData* chTemp = [[s channels] objectAtIndex:1];
-    ChannelTimeData* chAccel = [[s channels] objectAtIndex:2];
-    if (chEda) {
-        [chEda createEDAViewFor:self];
-        [chTemp createTempViewFor:self];
-        [chAccel createAccelViewFor:self];
-    }
+//    // Create a movie view for
+//    ChannelTimeData* chEda = [[s channels] objectAtIndex:0];
+//    ChannelTimeData* chTemp = [[s channels] objectAtIndex:1];
+//    ChannelTimeData* chAccel = [[s channels] objectAtIndex:2];
+//    if (chEda) {
+//        [chEda createEDAViewFor:self];
+//        [chTemp createTempViewFor:self];
+//        [chAccel createAccelViewFor:self];
+//    }
     
 //    [self spaceEvenly:splitview];
-    [self spaceProportionaly:splitview];
+//    [self spaceProportionaly:splitview];
 
 }
 

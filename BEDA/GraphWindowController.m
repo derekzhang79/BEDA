@@ -10,6 +10,7 @@
 #import "BedaController.h"
 #import "Source.h"
 #import "SourceTimeData.h"
+#import "ChannelTimeData.h"
 
 @implementation GraphWindowController
 

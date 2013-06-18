@@ -20,11 +20,11 @@
     return (SourceTimeData*)[self source];
 }
 
+//- (void)initGraph:(int)data {
+- (void)initGraph:(NSString*)name atIndex:(int)index range:(double)minValue to:(double)maxValue withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea {
 
-- (void)initGraph :(int)data {
-    
-    NSLog(@"%s: init data = %d ", __PRETTY_FUNCTION__, data);
-    [self setChannelIndex:data];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self setChannelIndex:index];
     [self setPlayTimer:Nil];
     [self setPlayBase:Nil];
     
@@ -48,21 +48,10 @@
     graph.plotAreaFrame.paddingRight = 0.0f;
     graph.plotAreaFrame.paddingLeft = 57.0f;
     
-    switch ([self channelIndex]) {
-        case 1:
-        {
-            graph.plotAreaFrame.paddingBottom = 5.0f;
-            break;
-        }
-        case 2:{
-            graph.plotAreaFrame.paddingBottom = 5.0f;
-            break;
-            
-        }
-        case 3:{
-            graph.plotAreaFrame.paddingBottom = 20.0f;
-            break;
-        }
+    if (isBottom) {
+        graph.plotAreaFrame.paddingBottom = 20.0f;
+    } else {
+        graph.plotAreaFrame.paddingBottom = 5.0f;
     }
    
     // Add some padding to the graph, with more at the bottom for axis labels.
@@ -85,26 +74,9 @@
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 60.0f)];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 5000.0f)];
     //////////////////////////////////////////////////////////////////////yRange should be dfferent
-    switch ([self channelIndex]) {
-        case 1:
-        {
-            plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
-            plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
-            break;
-        }
-        case 2:{
-            plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(31.0) length:CPTDecimalFromFloat(6.0)];
-            plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(31.0) length:CPTDecimalFromFloat(6.0)];
-            break;
-            
-        }
-        case 3:{
-            plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
-            plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(5.0)];
-            break;
-            
-        }
-    }
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minValue) length:CPTDecimalFromFloat(maxValue)];
+    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minValue) length:CPTDecimalFromFloat(maxValue)];
+
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 10.0;
     
@@ -175,36 +147,15 @@
     CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
     lineStyle.lineWidth              = 1.f;
     
-
-    switch ([self channelIndex]) {
-        case 1:
-        {
-            y.title = @"EDA";
-            lineStyle.lineColor              = [CPTColor colorWithComponentRed:0.50f green:0.67f blue:0.65f alpha:1.0f];
-            CPTFill *areaFill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0.50f green:0.67f blue:0.65f alpha:0.4f]];
-            dataSourceLinePlot.areaFill      = areaFill;
-            dataSourceLinePlot.dataLineStyle = lineStyle;
-            dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
-            break;
-        }
-        case 2:{
-            y.title = @"Temperature";
-            lineStyle.lineColor              = [CPTColor colorWithComponentRed:0.8f green:0.0f blue:0.0f alpha:0.6f];
-            CPTFill *areaFill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0.8f green:0.0f blue:0.0f alpha:0.2f]];
-            dataSourceLinePlot.areaFill      = areaFill;
-            dataSourceLinePlot.dataLineStyle = lineStyle;
-            dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
-            break;
-            
-        }
-        case 3:{
-            y.title = @"Accel";
-            lineStyle.lineColor              = [CPTColor colorWithComponentRed:0.0f green:0.0f blue:1.0f alpha:1.0f];
-            dataSourceLinePlot.dataLineStyle = lineStyle;
-            break;
-   
-        }   
+    y.title = name;
+    lineStyle.lineColor              = [self toCPT:lc];
+    dataSourceLinePlot.dataLineStyle = lineStyle;
+    if (hasArea) {
+        CPTFill *areaFill = [CPTFill fillWithColor:[self toCPT:ac]];
+        dataSourceLinePlot.areaFill      = areaFill;
+        dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
     }
+
     
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
@@ -220,11 +171,6 @@
     [self createAnnotationPlot];
     
     
-    // Example usage of annotations
-    NSLog(@"# annotations = %d", [[self source] numAnnotations]);
-    for (int i = 0; i < [ [self source] numAnnotations]; i++) {
-        NSLog(@"Annot %d at %lf : text = %@", i, [[self source] annotationTime:i], [[self source] annotationText:i]);
-    }
 }
 
 - (void) reload {
@@ -260,6 +206,18 @@
     [plotAnnotation reloadData];
 }
 
+- (void)createGraphViewFor:(BedaController*)beda {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
+    view.hostedGraph = graph;
+    
+    NSSplitView* splitview = [beda getSplitView];
+    CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
+    
+    [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
+    
+    [self setView:view];
+}
 
 - (void)createEDAViewFor:(BedaController*)beda {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -303,6 +261,14 @@
     
     [self setView:view];
 
+}
+
+- (CPTColor*) toCPT:(NSColor*)nc {
+    CGFloat r = [nc redComponent];
+    CGFloat g = [nc greenComponent];
+    CGFloat b = [nc blueComponent];
+    CGFloat a = [nc alphaComponent];
+    return [CPTColor colorWithComponentRed:r green:g blue:b alpha:a];
 }
 
 - (void)keyDown:(NSEvent *)theEvent {

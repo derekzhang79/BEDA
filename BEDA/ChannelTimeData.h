@@ -36,11 +36,14 @@
 
 
 - (SourceTimeData*) sourceTimeData;
-- (void)initGraph:(int)data;
+//- (void)initGraph:(int)data;
+- (void)initGraph:(NSString*)name atIndex:(int)index range:(double)minValue to:(double)maxValue withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea;
+- (void)createGraphViewFor:(BedaController*)beda;
+
 - (void)createEDAViewFor:(BedaController*)beda;
 - (void)createTempViewFor:(BedaController*)beda;
 - (void)createAccelViewFor:(BedaController*)beda;
-
+- (CPTColor*) toCPT:(NSColor*)nc;
 
 
 // Play/stop
