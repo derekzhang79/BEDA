@@ -103,9 +103,11 @@
     
     // Step 2. initialize the graph
     int index = [[self tvc] selectedTableColumn];
-    NSString* name = [[self tvc] selectedTableColumnName];
-    double min = 0.0;
-    double max = 10.0;
+    double min = [[self gsc] getMinValue];
+    double max = [[self gsc] getMaxValue];
+    
+//    double min = 0.0;
+//    double max = 5.0;
 
     BOOL isBottom = YES;
     BOOL hasArea = YES;
@@ -113,6 +115,9 @@
     NSColor *lc = [[self gsc] getGraphColor];
     NSColor *ac = [[self gsc] getAreaColor];
     NSLog(@"GRAPH COLOR:%@, AREA COLOR:%@",lc, ac);
+    
+    NSString* name = [[self gsc] getGraphName];
+    NSLog(@"GRAPH Name:%@",name);
     
     [ch initGraph:name atIndex:index range:min to:max withLineColor:lc areaColor:ac isBottom:isBottom hasArea:hasArea];
     

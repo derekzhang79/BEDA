@@ -12,12 +12,22 @@
 
     IBOutlet NSColorWell* graphColor;
     IBOutlet NSColorWell* areaColor;
-    NSString *graphName;
-    NSString *graphType;
-
+    IBOutlet NSTextField* graphName;
+    IBOutlet NSTextField* minValue;
+    IBOutlet NSTextField* maxValue;
 }
+
+
+//@property (retain) NSString *graphName;
+//@property (retain) NSString *graphType;
+//
+//@property double minY;
+//@property double maxY;
 
 - (NSColor*)getGraphColor;
 - (NSColor*)getAreaColor;
+- (NSString*)getGraphName;
+- (double)getMinValue;
+- (double)getMaxValue;
 
 @end

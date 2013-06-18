@@ -9,6 +9,10 @@
 #import "GraphSettingController.h"
 
 @implementation GraphSettingController
+//@synthesize graphName;
+//@synthesize graphType;
+//@synthesize minY;
+//@synthesize maxY;
 
 - (NSColor*)getGraphColor{
     NSColor *color  = [graphColor color];
@@ -23,5 +27,16 @@
     return color;
 }
 
+- (NSString*)getGraphName{
+    return [graphName stringValue];
+}
+
+- (double)getMinValue{
+    return [minValue doubleValue];
+}
+
+- (double)getMaxValue{
+    return [maxValue doubleValue];
+}
 
 @end
