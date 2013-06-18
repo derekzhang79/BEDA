@@ -53,6 +53,13 @@ static BedaController* g_instance = nil;
     
     g_instance = self;
     
+    
+    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask) handler:^(NSEvent *event){
+        NSLog(@"Hi there");
+        [self keyDown: event];
+        //Or just put your code here
+    }];
+    
 }
 
 + (BedaController*) getInstance {
@@ -64,6 +71,17 @@ static BedaController* g_instance = nil;
     return splitview;
 }
 
+- (void)keyDown:(NSEvent *)event {
+    NSLog(@"Hi there");
+    NSString *characters = [event characters];
+    if ([characters length]) {
+        switch ([characters characterAtIndex:0]) {
+            case NSUpArrowFunctionKey:
+                NSLog(@"Key UP");
+                break;
+        }
+    }
+}
 
 - (IBAction)openFile:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
