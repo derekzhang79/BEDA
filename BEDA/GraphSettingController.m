@@ -9,11 +9,11 @@
 #import "GraphSettingController.h"
 
 @implementation GraphSettingController
-//@synthesize graphName;
-//@synthesize graphType;
-//@synthesize minY;
-//@synthesize maxY;
 
+- (void) awakeFromNib {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+}
 - (NSColor*)getGraphColor{
     NSColor *color  = [graphColor color];
     NSLog(@"%s, Graph color name %@", __PRETTY_FUNCTION__, color);

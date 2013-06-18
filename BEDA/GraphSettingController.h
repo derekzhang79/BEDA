@@ -17,13 +17,6 @@
     IBOutlet NSTextField* maxValue;
 }
 
-
-//@property (retain) NSString *graphName;
-//@property (retain) NSString *graphType;
-//
-//@property double minY;
-//@property double maxY;
-
 - (NSColor*)getGraphColor;
 - (NSColor*)getAreaColor;
 - (NSString*)getGraphName;

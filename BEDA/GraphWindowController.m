@@ -77,7 +77,11 @@
         NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
     }
     
-    NSString* name = [[self tvc] selectedTableColumnName];
+    NSMutableString* name =  [[NSMutableString alloc] init];
+    
+    [name appendString:[s name]];
+    [name appendString:@":"];
+    [name appendString:[[self tvc] selectedTableColumnName]];
     
     // Create a tab view item
     NSTabViewItem *item = [[[NSTabViewItem alloc]
@@ -105,10 +109,10 @@
     int index = [[self tvc] selectedTableColumn];
     double min = [[self gsc] getMinValue];
     double max = [[self gsc] getMaxValue];
-    
-//    double min = 0.0;
-//    double max = 5.0;
 
+//    double min = [[self tvc] minValue];
+//    double max = [[self tvc] maxValue];
+    
     BOOL isBottom = YES;
     BOOL hasArea = YES;
     

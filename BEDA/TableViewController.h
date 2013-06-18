@@ -19,4 +19,6 @@
 - (int) selectedTableColumn;
 - (NSString*) selectedTableColumnName;
 - (NSMutableArray*) columns; // Mutable array of NSString, with Column Names;
+- (double) minValue;
+- (double) maxValue;
 @end

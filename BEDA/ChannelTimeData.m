@@ -325,13 +325,13 @@
 }
 
 -(void)zoomIn{
-    graphScaleX -= 15;
+    graphScaleX -= 100;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
 
 }
 
 -(void)zoomOut{
-    graphScaleX += 15;
+    graphScaleX += 100;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
 
 }

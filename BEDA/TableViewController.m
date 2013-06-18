@@ -26,10 +26,12 @@
 }
 
 - (int) selectedTableColumn {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return (int)[tableview selectedColumn];
 }
 
 - (NSString*) selectedTableColumnName {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return [[self columns] objectAtIndex:[self selectedTableColumn]];
 }
 
@@ -37,6 +39,24 @@
     return [[self source] columns];
 }
 
+- (double) minValue {
+    NSMutableArray* column = [[self source] columns];
+    NSNumber* min = [[column objectAtIndex:0] objectAtIndex:0];
+    
+    NSLog(@"%s, minValue=%f", __PRETTY_FUNCTION__, [min doubleValue]);
+    
+    //    NSNumber* min = [column valueForKeyPath:@"@min.self"];
+    return [min doubleValue];
+}
+
+
+- (double) maxValue {
+    NSMutableArray* column = [[self source] columns];
+    NSNumber* max = [column valueForKeyPath:@"@max.self"];
+    
+    NSLog(@"%s, maxValue=%f", __PRETTY_FUNCTION__, [max doubleValue]);
+    return [max doubleValue];
+}
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
