@@ -31,6 +31,8 @@
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
 		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
 		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
+		03E9086E17715ABA0078BA59 /* BehaviorSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E9086D17715ABA0078BA59 /* BehaviorSettingView.xib */; };
+		03E908711771781B0078BA59 /* BehaviorSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E908701771781B0078BA59 /* BehaviorSettingController.m */; };
 		B225C4E816FBC2BA00D3C036 /* TempGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */; };
 		B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */; };
 		B22980B6176E6F6D004C2115 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22980B5176E6F6D004C2115 /* TableView.xib */; };
@@ -85,6 +87,9 @@
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		03E9086D17715ABA0078BA59 /* BehaviorSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BehaviorSettingView.xib; sourceTree = "<group>"; };
+		03E9086F1771781B0078BA59 /* BehaviorSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BehaviorSettingController.h; sourceTree = "<group>"; };
+		03E908701771781B0078BA59 /* BehaviorSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BehaviorSettingController.m; sourceTree = "<group>"; };
 		B225C4E616FBC2BA00D3C036 /* TempGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempGraphViewController.h; sourceTree = "<group>"; };
 		B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempGraphViewController.m; sourceTree = "<group>"; };
 		B225C4E916FBC4E400D3C036 /* AccelGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelGraphViewController.h; sourceTree = "<group>"; };
@@ -297,6 +302,9 @@
 				B22980B7176E6F7B004C2115 /* TableViewController.h */,
 				B22980B8176E6F7B004C2115 /* TableViewController.m */,
 				03202519176FC3E500BC7020 /* GraphSettingView.xib */,
+				03E9086D17715ABA0078BA59 /* BehaviorSettingView.xib */,
+				03E9086F1771781B0078BA59 /* BehaviorSettingController.h */,
+				03E908701771781B0078BA59 /* BehaviorSettingController.m */,
 				0320251B176FC43F00BC7020 /* GraphSettingController.h */,
 				0320251C176FC43F00BC7020 /* GraphSettingController.m */,
 			);
@@ -370,6 +378,7 @@
 				0379841A176A8994000CFBEE /* GraphController.xib in Resources */,
 				B22980B6176E6F6D004C2115 /* TableView.xib in Resources */,
 				0320251A176FC3E600BC7020 /* GraphSettingView.xib in Resources */,
+				03E9086E17715ABA0078BA59 /* BehaviorSettingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +409,7 @@
 				B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */,
 				B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */,
 				0320251D176FC44000BC7020 /* GraphSettingController.m in Sources */,
+				03E908711771781B0078BA59 /* BehaviorSettingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
