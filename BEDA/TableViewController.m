@@ -8,6 +8,9 @@
 
 #import "TableViewController.h"
 
+#import "AnnotationManager.h"
+#import "AnnotationBehavior.h"
+
 @implementation TableViewController
 
 @synthesize source = _source;
@@ -23,6 +26,14 @@
         [column setWidth:100];
         [tableview addTableColumn:column];
     }
+    // Special code for annotation
+    {
+        NSString* cname = @"Annotation";
+        NSTableColumn* column = [[NSTableColumn alloc] initWithIdentifier:cname];
+        [[column headerCell] setStringValue:cname];
+        [column setWidth:100];
+        [tableview addTableColumn:column];
+    }
 }
 
 - (int) selectedTableColumn {
@@ -32,7 +43,11 @@
 
 - (NSString*) selectedTableColumnName {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    return [[self columns] objectAtIndex:[self selectedTableColumn]];
+    int index = [self selectedTableColumn];
+    if (index < 0 || index >= [[self columns] count]) {
+        return @"Annotation";
+    }
+    return [[self columns] objectAtIndex:index];
 }
 
 - (NSMutableArray*) columns {
@@ -90,6 +105,16 @@
             NSDecimalNumber *num = [[data objectAtIndex:row] objectForKey:[NSNumber numberWithInt:i]];
             result.stringValue = [NSString stringWithFormat:@"%.3lf", [num doubleValue]];
             
+        }
+    }
+    
+    // Special code for annotation
+    if ([tableColumn.identifier isEqualToString:@"Annotation"]) {
+        AnnotationBehavior* beh = [[[self source] annots] behaviorByIndex:(int)row];
+        if (beh == Nil) {
+            result.stringValue = @"---";
+        } else {
+            result.stringValue = [beh name];
         }
     }
     

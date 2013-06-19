@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BedaController.h"
+#import "AnnotationManager.h"
 
 @interface Source : NSObject {
     
@@ -17,20 +18,22 @@
 @property (retain) NSMutableArray* channels;
 @property (copy) NSString* name;
 @property (copy) NSString* filename;
+@property (retain) AnnotationManager* annots;
+
 
 @property double offset;
 - (void)loadFile:(NSURL*)url;
 
-// Annotations
-@property (retain) NSMutableArray* annots;
-
-- (void)addAnnotation;
-- (void)addAnnotation:(NSString*)text;
-- (void)addAnnotation:(NSString*)text at:(double)time;
-
-- (int) numAnnotations;
-- (double) annotationTime : (int)index;
-- (NSString*) annotationText : (int)index;
-
-- (void)logAnnotations;
+//// Annotations
+//@property (retain) NSMutableArray* annots;
+//
+//- (void)addAnnotation;
+//- (void)addAnnotation:(NSString*)text;
+//- (void)addAnnotation:(NSString*)text at:(double)time;
+//
+//- (int) numAnnotations;
+//- (double) annotationTime : (int)index;
+//- (NSString*) annotationText : (int)index;
+//
+//- (void)logAnnotations;
 @end

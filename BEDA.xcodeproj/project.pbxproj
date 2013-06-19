@@ -42,6 +42,8 @@
 		B26BF2891761835F009BCC7D /* Viewer.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF2881761835F009BCC7D /* Viewer.m */; };
 		B26BF28E176196BD009BCC7D /* SourceMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF28D176196BD009BCC7D /* SourceMovie.m */; };
 		B26BF291176196CC009BCC7D /* ChannelMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF290176196CC009BCC7D /* ChannelMovie.m */; };
+		B27C396B17715FB30025188F /* AnnotationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396A17715FB30025188F /* AnnotationBehavior.m */; };
+		B27C396E17715FC50025188F /* AnnotationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396D17715FC50025188F /* AnnotationManager.m */; };
 		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; };
 		B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */; };
 		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
@@ -106,6 +108,10 @@
 		B26BF28D176196BD009BCC7D /* SourceMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceMovie.m; sourceTree = "<group>"; };
 		B26BF28F176196CC009BCC7D /* ChannelMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelMovie.h; sourceTree = "<group>"; };
 		B26BF290176196CC009BCC7D /* ChannelMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelMovie.m; sourceTree = "<group>"; };
+		B27C396917715FB30025188F /* AnnotationBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationBehavior.h; sourceTree = "<group>"; };
+		B27C396A17715FB30025188F /* AnnotationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationBehavior.m; sourceTree = "<group>"; };
+		B27C396C17715FC50025188F /* AnnotationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationManager.h; sourceTree = "<group>"; };
+		B27C396D17715FC50025188F /* AnnotationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationManager.m; sourceTree = "<group>"; };
 		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
 		B28D32D916D20DB500D58ADA /* EDAGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAGraphViewController.h; sourceTree = "<group>"; };
 		B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAGraphViewController.m; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				B26BF27D176182B6009BCC7D /* AppController */,
+				B27C396817715F340025188F /* Annotation */,
 				B26BF28A176183C1009BCC7D /* Movie */,
 				031463781762F62F007B075B /* TimeData */,
 				B2B7E9C9176AA45100190941 /* GraphWindow */,
@@ -270,6 +277,17 @@
 				038A62D316FD4CCB00E91A65 /* sync.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		B27C396817715F340025188F /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				B27C396917715FB30025188F /* AnnotationBehavior.h */,
+				B27C396A17715FB30025188F /* AnnotationBehavior.m */,
+				B27C396C17715FC50025188F /* AnnotationManager.h */,
+				B27C396D17715FC50025188F /* AnnotationManager.m */,
+			);
+			name = Annotation;
 			sourceTree = "<group>";
 		};
 		B28D32DC16D20DBB00D58ADA /* GraphView */ = {
@@ -400,6 +418,8 @@
 				B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */,
 				B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */,
 				0320251D176FC44000BC7020 /* GraphSettingController.m in Sources */,
+				B27C396B17715FB30025188F /* AnnotationBehavior.m in Sources */,
+				B27C396E17715FC50025188F /* AnnotationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

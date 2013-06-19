@@ -11,8 +11,9 @@
 #import "SourceTimeData.h"
 #import <CorePlot/CorePlot.h>
 
+#define BEDA_INDENTIFIER_DATA_PLOT @"BedaDataPlot"
 #define BEDA_INDENTIFIER_HEADER_PLOT @"BedaHeaderPlot"
-#define BEDA_INDENTIFIER_ANNOTATION_PLOT @"BedaAnnotationPlot"
+//#define BEDA_INDENTIFIER_ANNOTATION_PLOT @"BedaAnnotationPlot"
 
 #define BEDA_NOTI_SOURCE_OFFSET_CHANGED @"BedaNotiSourceOffsetChanged"
 
@@ -20,7 +21,7 @@
     CPTXYGraph *graph;
     CPTXYPlotSpace *plotSpace;
     CPTScatterPlot *plotHeader;
-    CPTScatterPlot *plotAnnotation;
+//    CPTScatterPlot *plotAnnotation;
     
     int graphScaleX;
     int graphScaleY;
@@ -34,15 +35,17 @@
 @property (retain) NSTimer* playTimer;
 @property (retain) NSDate* playBase;
 
+@property (retain) NSMutableArray* arrayPlotAnnots;
+
 
 - (SourceTimeData*) sourceTimeData;
 //- (void)initGraph:(int)data;
 - (void)initGraph:(NSString*)name atIndex:(int)index range:(double)minValue to:(double)maxValue withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea;
 - (void)createGraphViewFor:(BedaController*)beda;
 
-- (void)createEDAViewFor:(BedaController*)beda;
-- (void)createTempViewFor:(BedaController*)beda;
-- (void)createAccelViewFor:(BedaController*)beda;
+//- (void)createEDAViewFor:(BedaController*)beda;
+//- (void)createTempViewFor:(BedaController*)beda;
+//- (void)createAccelViewFor:(BedaController*)beda;
 - (CPTColor*) toCPT:(NSColor*)nc;
 
 
