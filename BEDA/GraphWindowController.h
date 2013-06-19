@@ -24,6 +24,7 @@
 - (IBAction)openFile:(id)sender;
 - (IBAction)onAddGraph:(id)sender;
 - (IBAction)onApplySettings:(id)sender;
+- (void)applySettingsForChannelAnnotation;
 - (BedaController*) beda;
 
 @end

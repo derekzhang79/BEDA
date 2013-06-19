@@ -77,6 +77,30 @@
         NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
     }
     
+    // Special Code for Annotation
+    if ([[[self tvc] selectedTableColumnName] isEqualToString:@"Annotation"]) {
+        // Create custom view HERE
+        NSMutableString* name =  [[NSMutableString alloc] init];
+        
+        [name appendString:[s name]];
+        [name appendString:@":"];
+        [name appendString:[[self tvc] selectedTableColumnName]];
+        
+        // Create a tab view item
+        NSTabViewItem *item = [[[NSTabViewItem alloc]
+                                initWithIdentifier:name] autorelease];
+        [item setLabel:name];
+        
+//        GraphSettingController* graphSettingController = [[GraphSettingController alloc]
+//                                                          initWithNibName:@"GraphSettingView" bundle:nil];
+//        [self setGsc:graphSettingController];
+//        [item setView:[graphSettingController view]];
+        
+        [self setGsc:Nil];
+        [graphControlTabview addTabViewItem:item];
+        return;
+    }
+    
     NSMutableString* name =  [[NSMutableString alloc] init];
     
     [name appendString:[s name]];
@@ -98,6 +122,13 @@
 
 
 - (IBAction)onApplySettings:(id)sender{
+ 
+
+    if ([self gsc] == Nil) {
+        [self applySettingsForChannelAnnotation];
+        return;
+    }
+    
     NSLog(@"%s", __PRETTY_FUNCTION__);
     s = [[[self beda] sources] lastObject];
     
@@ -106,6 +137,9 @@
     [ch setSource:s];
     
     // Step 2. initialize the graph
+
+    NSString* name = [[self gsc] getGraphName];
+    NSLog(@"GRAPH Name:%@",name);
     int index = [[self tvc] selectedTableColumn];
     double min = [[self gsc] getMinValue];
     double max = [[self gsc] getMaxValue];
@@ -120,8 +154,7 @@
     NSColor *ac = [[self gsc] getAreaColor];
     NSLog(@"GRAPH COLOR:%@, AREA COLOR:%@",lc, ac);
     
-    NSString* name = [[self gsc] getGraphName];
-    NSLog(@"GRAPH Name:%@",name);
+
     
     [ch initGraph:name atIndex:index range:min to:max withLineColor:lc areaColor:ac isBottom:isBottom hasArea:hasArea];
     
@@ -132,6 +165,29 @@
     [ch createGraphViewFor:[self beda]];
     [[self beda] spaceProportionalyMainSplit];
 
+}
+
+- (void)applySettingsForChannelAnnotation {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    s = [[[self beda] sources] lastObject];
+    
+    // Step 1. Create the proper channel
+    ChannelTimeData *ch = [[ChannelTimeData alloc] init];
+    [ch setSource:s];
+    
+    // Step 2. initialize the graph
+    [ch initGraph:@"Annotation" atIndex:-1 range:-1 to:4
+        withLineColor: [NSColor redColor] // probably not used
+        areaColor:[NSColor redColor]
+        isBottom:YES hasArea:NO];
+    
+    // Step 3. Add to the created channel to the source
+    [[s channels] addObject:ch];
+    
+    // Step 4. Create a corresponding view
+    [ch createGraphViewFor:[self beda]];
+    [[self beda] spaceProportionalyMainSplit];
 }
 
 - (BedaController*) beda {

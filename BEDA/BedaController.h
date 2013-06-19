@@ -15,6 +15,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @interface BedaController : NSObject {
     IBOutlet NSSegmentedControl* modeSelector;
     IBOutlet NSSplitView* splitview;
+    IBOutlet NSMenu* annotmenu;
 }
 
 // Singleton

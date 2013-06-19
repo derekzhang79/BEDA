@@ -54,11 +54,24 @@ static BedaController* g_instance = nil;
     g_instance = self;
     
     
-    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask) handler:^(NSEvent *event){
-        NSLog(@"Hi there");
-        [self keyDown: event];
-        //Or just put your code here
-    }];
+    
+    NSImage* image = [[NSImage alloc] initWithSize:NSMakeSize(10.0, 10.0)];
+    [image lockFocus];
+    [[NSColor colorWithCalibratedRed:1.0f green:0.5f blue:0.0f alpha:1.0] set];
+    //    [[NSColor redColor] set];
+    NSRectFill(NSMakeRect(0, 0, 10, 20));
+    [image unlockFocus];
+    
+    NSMenuItem* item1 = [[NSMenuItem alloc] initWithTitle:@"HAHAHA" action:@selector(addAnnotation:) keyEquivalent:@"x"];
+    [item1 setTarget:self];
+    [item1 setKeyEquivalentModifierMask:0];
+    [item1 setImage:image];
+    [annotmenu insertItem:item1 atIndex:0];
+//    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask) handler:^(NSEvent *event){
+//        NSLog(@"Hi there");
+//        [self keyDown: event];
+//        //Or just put your code here
+//    }];
     
 }
 
@@ -71,17 +84,17 @@ static BedaController* g_instance = nil;
     return splitview;
 }
 
-- (void)keyDown:(NSEvent *)event {
-    NSLog(@"Hi there");
-    NSString *characters = [event characters];
-    if ([characters length]) {
-        switch ([characters characterAtIndex:0]) {
-            case NSUpArrowFunctionKey:
-                NSLog(@"Key UP");
-                break;
-        }
-    }
-}
+//- (void)keyDown:(NSEvent *)event {
+//    NSLog(@"Hi there");
+//    NSString *characters = [event characters];
+//    if ([characters length]) {
+//        switch ([characters characterAtIndex:0]) {
+//            case NSUpArrowFunctionKey:
+//                NSLog(@"Key UP");
+//                break;
+//        }
+//    }
+//}
 
 - (IBAction)openFile:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
