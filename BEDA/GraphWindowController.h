@@ -10,6 +10,7 @@
 #import "BedaController.h"
 #import "TableViewController.h"
 #import "GraphSettingController.h"
+#import "BehaviorSettingController.h"
 
 @interface GraphWindowController : NSObject {
     IBOutlet NSTabView* tabview;
@@ -20,6 +21,7 @@
 
 @property (retain) TableViewController* tvc;
 @property (retain) GraphSettingController* gsc;
+@property (retain) BehaviorSettingController* bsc;
 
 - (IBAction)openFile:(id)sender;
 - (IBAction)onAddGraph:(id)sender;

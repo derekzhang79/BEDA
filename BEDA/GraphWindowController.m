@@ -16,6 +16,7 @@
 
 @synthesize tvc = _tvc;
 @synthesize gsc = _gsc;
+@synthesize bsc = _bsc;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -91,12 +92,10 @@
                                 initWithIdentifier:name] autorelease];
         [item setLabel:name];
         
-//        GraphSettingController* graphSettingController = [[GraphSettingController alloc]
-//                                                          initWithNibName:@"GraphSettingView" bundle:nil];
-//        [self setGsc:graphSettingController];
-//        [item setView:[graphSettingController view]];
-        
-        [self setGsc:Nil];
+        BehaviorSettingController* behaviorSettingController = [[BehaviorSettingController alloc]
+                                                          initWithNibName:@"BehaviorSettingView" bundle:nil];
+        [self setBsc:behaviorSettingController];
+        [item setView:[behaviorSettingController view]];
         [graphControlTabview addTabViewItem:item];
         return;
     }

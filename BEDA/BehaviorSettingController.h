@@ -11,7 +11,10 @@
 @interface BehaviorSettingController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>{
     IBOutlet NSCell *customCell;
     IBOutlet NSTableView *table;
+    IBOutlet NSSegmentedControl* modeSelector;
     NSMutableArray* data;
 }
 
+- (IBAction)changeModeFromSegmentedControl:(id)sender;
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row;
 @end

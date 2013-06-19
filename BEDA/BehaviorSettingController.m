@@ -14,9 +14,25 @@
     return [data count];
 }
 
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+
+}
+
 - (NSInteger)numberOfSectionsInTableView:(NSTableView *)tableView{
     return 1;
 }
 
+
+- (IBAction)changeModeFromSegmentedControl:(id)sender {
+    NSInteger mymode = [modeSelector selectedSegment];
+    NSLog(@"%s : %ld", __PRETTY_FUNCTION__, (long)mymode);
+    if (mymode == 0) {
+        NSLog(@"add annotation");
+        
+    } else {
+        NSLog(@"Remove annotation");
+    }
+    
+}
 
 @end

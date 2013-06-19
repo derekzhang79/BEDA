@@ -428,6 +428,8 @@
 				B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */,
 				0320251D176FC44000BC7020 /* GraphSettingController.m in Sources */,
 				03E908711771781B0078BA59 /* BehaviorSettingController.m in Sources */,
+				B27C396B17715FB30025188F /* AnnotationBehavior.m in Sources */,
+				B27C396E17715FC50025188F /* AnnotationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
