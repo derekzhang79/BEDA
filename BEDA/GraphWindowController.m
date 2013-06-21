@@ -94,6 +94,7 @@
         
         BehaviorSettingController* behaviorSettingController = [[BehaviorSettingController alloc]
                                                           initWithNibName:@"BehaviorSettingView" bundle:nil];
+        [behaviorSettingController setSource:s];
         [self setBsc:behaviorSettingController];
         [item setView:[behaviorSettingController view]];
         [graphControlTabview addTabViewItem:item];

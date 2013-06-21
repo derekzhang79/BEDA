@@ -224,19 +224,21 @@
     AnnotationManager* am = [[self source] annots];
     [am updateUsedIndexes];
 
-    float margin = 0.2;
+//    float margin = 0;
     float top = [am countUsedBehaviors];
     
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-margin)
-                                                    length:CPTDecimalFromFloat(top + margin)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0)
+                                                    length:CPTDecimalFromFloat(top + 1.0)];
 }
 
 -(void) updateAnnotation {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [self adjustAnnotationPlotRange];
 
     for (CPTScatterPlot* plot in [self arrayPlotAnnots]) {
+        NSLog(@"%s : %@", __PRETTY_FUNCTION__, (NSString*)plot.identifier);
+
         [plot reloadData];
     }
 }
@@ -520,6 +522,7 @@
         
         // Add the plot to the graph
         [graph addPlot:plotAnnotation];
+        [[self arrayPlotAnnots] addObject:plotAnnotation];
     }
     [self adjustAnnotationPlotRange];
 
@@ -528,14 +531,19 @@
 
 
 -(NSUInteger)numberOfRecordsForAnnotationPlot:(CPTPlot *)plot {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 
     AnnotationManager* am = [[self source] annots];
 //    [am updateUsedIndexes];
     AnnotationBehavior* beh = [am behaviorByName:(NSString *)plot.identifier];
+    
+    int cnt = (int)[[beh times] count];
+    NSLog(@"%s : %@ = %d", __PRETTY_FUNCTION__, (NSString*)plot.identifier, cnt);
+
     if (beh == Nil) {
         return 0;
     }
+    
+
     return [[beh times] count];
 }
 

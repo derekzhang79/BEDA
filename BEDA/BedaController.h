@@ -44,6 +44,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (IBAction)zoomOut:(id)sender;
 
 - (IBAction)addAnnotation:(id)sender;
+- (void)createAnnotationMenus;
 
 // Time related functions
 - (double) getGlobalTime;

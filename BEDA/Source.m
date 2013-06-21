@@ -24,7 +24,6 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _channels = [[NSMutableArray alloc] init];
-//        _annots = [[NSMutableArray alloc] init];
         _annots = [[AnnotationManager alloc] init];
         [[self annots] createDefaultBehaviors];
         

@@ -53,20 +53,9 @@ static BedaController* g_instance = nil;
     
     g_instance = self;
     
-    
-    
-    NSImage* image = [[NSImage alloc] initWithSize:NSMakeSize(10.0, 10.0)];
-    [image lockFocus];
-    [[NSColor colorWithCalibratedRed:1.0f green:0.5f blue:0.0f alpha:1.0] set];
-    //    [[NSColor redColor] set];
-    NSRectFill(NSMakeRect(0, 0, 10, 20));
-    [image unlockFocus];
-    
-    NSMenuItem* item1 = [[NSMenuItem alloc] initWithTitle:@"HAHAHA" action:@selector(addAnnotation:) keyEquivalent:@"x"];
-    [item1 setTarget:self];
-    [item1 setKeyEquivalentModifierMask:0];
-    [item1 setImage:image];
-    [annotmenu insertItem:item1 atIndex:0];
+//    [self createAnnotationMenus];
+     
+
 //    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask) handler:^(NSEvent *event){
 //        NSLog(@"Hi there");
 //        [self keyDown: event];
@@ -169,15 +158,55 @@ static BedaController* g_instance = nil;
 
 - (IBAction)addAnnotation:(id)sender{
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSMenuItem* item = (NSMenuItem*)sender;
+    NSString* name = [item title];
+    double t = [self getGlobalTime];
+
+    NSLog(@"item.title %@ at %.lf", name, t);
     for (Source* s in [self sources]) {
-        [s addAnnotation];
-        [s logAnnotations];
+        // To Do: select the proper source in future
+        AnnotationBehavior* beh = [[s annots] behaviorByName:name];
+        [[beh times] addObject:[NSNumber numberWithFloat:t]];
+        
+        NSLog(@"# Source Channels = %d", (int)[[s channels] count]);
         for (Channel* ch in [s channels]) {
             [ch updateAnnotation];
         }
     }
+}
+
+- (void)createAnnotationMenus {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    [annotmenu removeAllItems];
     
+    for (Source* s in [self sources]) {
+        AnnotationManager* am = [s annots];
+        for (int i = 0; i < [am countDefinedBehaviors]; i++) {
+            AnnotationBehavior* beh = [am behaviorByIndex:i];
+            
+            NSImage* image = [[NSImage alloc] initWithSize:NSMakeSize(10.0, 10.0)];
+            [image lockFocus];
+            [[beh color] set];
+            NSRectFill(NSMakeRect(0, 0, 10, 10));
+            [image unlockFocus];
+            
+            NSMenuItem* item = [[NSMenuItem alloc] initWithTitle:[beh name]
+                                                           action:@selector(addAnnotation:)
+                                                    keyEquivalent:[beh key]];
+            [item setTarget:self];
+            [item setKeyEquivalentModifierMask:0];
+            [item setImage:image];
+//            [annotmenu insertItem:item1 atIndex:0];
+            [annotmenu addItem:item];
+        }
+        
+        if (s != [[self sources] lastObject]) {
+            [annotmenu addItem:[NSMenuItem separatorItem]];
+        }
+    }
+
+
 }
 
 -(IBAction)zoomIn:(id)sender
@@ -353,7 +382,7 @@ static BedaController* g_instance = nil;
 {
     // get the subviews of the split view
     NSArray *subviews = [splitView subviews];
-    unsigned int n = [subviews count];
+    int n = (int)[subviews count];
     float divider = [splitView dividerThickness];
     
     if ([splitView isVertical] == YES) {
@@ -402,7 +431,7 @@ static BedaController* g_instance = nil;
 - (void)spaceEvenly:(NSSplitView *)splitView withFirstSize:(float)szFirst {
     // get the subviews of the split view
     NSArray *subviews = [splitView subviews];
-    unsigned int n = [subviews count];
+    int n = (int)[subviews count];
     float divider = [splitView dividerThickness];
     
     if ([splitView isVertical] == YES) {
@@ -488,7 +517,7 @@ static BedaController* g_instance = nil;
     NSLog(@"sum factor = %f", sumFactor);
     
     NSArray *subviews = [splitView subviews];
-    unsigned int n = [subviews count];
+    int n = (int)[subviews count];
     float divider = [splitView dividerThickness];
 
     float availableHeights = [splitView bounds].size.height - (n - 1) * divider;
@@ -521,6 +550,7 @@ static BedaController* g_instance = nil;
     [[self sources] addObject:s];
     NSLog(@"%s: sources.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self sources] count]);
     
+    [self createAnnotationMenus];
 //    // Create a movie view for
 //    ChannelTimeData* chEda = [[s channels] objectAtIndex:0];
 //    ChannelTimeData* chTemp = [[s channels] objectAtIndex:1];

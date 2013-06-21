@@ -28,22 +28,22 @@
 - (void)createDefaultBehaviors {
     AnnotationBehavior* annot = Nil;
     annot = [[AnnotationBehavior alloc]
-             initWithName:@"Pick Up an Item" inCategory:@"Good" withColor:[NSColor blueColor] withKey:@"P"];
+             initWithName:@"Pick Up an Item" inCategory:@"Good" withColor:[NSColor blueColor] withKey:@"p"];
     [self addBehavior:annot ];
     [[annot times] addObject:[NSNumber numberWithFloat:10.0f]];
     [[annot times] addObject:[NSNumber numberWithFloat:20.0f]];
 
     annot = [[AnnotationBehavior alloc]
-             initWithName:@"Put blocks" inCategory:@"Good" withColor:[NSColor magentaColor] withKey:@"B"];
+             initWithName:@"Put blocks" inCategory:@"Good" withColor:[NSColor magentaColor] withKey:@"b"];
     [self addBehavior: annot];
     [[annot times] addObject:[NSNumber numberWithFloat:15.0f]];
 
     annot = [[AnnotationBehavior alloc]
-             initWithName:@"Screaming" inCategory:@"Bad" withColor:[NSColor redColor] withKey:@"S"];
+             initWithName:@"Screaming" inCategory:@"Bad" withColor:[NSColor redColor] withKey:@"s"];
     [self addBehavior:annot];
     
     annot = [[AnnotationBehavior alloc]
-             initWithName:@"Body Slam" inCategory:@"Bad" withColor:[NSColor yellowColor] withKey:@"Y"];
+             initWithName:@"Body Slam" inCategory:@"Bad" withColor:[NSColor yellowColor] withKey:@"y"];
     [self addBehavior:annot];
     
     NSLog(@"%s: # Behaviors = %d", __PRETTY_FUNCTION__, [self countDefinedBehaviors]);

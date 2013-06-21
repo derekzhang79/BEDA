@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SourceTimeData.h"
 
 @interface BehaviorSettingController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>{
-    IBOutlet NSCell *customCell;
     IBOutlet NSTableView *table;
     IBOutlet NSSegmentedControl* modeSelector;
     NSMutableArray* data;
 }
 
+@property (retain) SourceTimeData* source;
+
 - (IBAction)changeModeFromSegmentedControl:(id)sender;
-- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row;
 @end
