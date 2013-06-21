@@ -26,6 +26,9 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property BOOL isNavMode;
 @property double gtAppTime;
 
+@property (assign) double duration;
+@property (assign) double interval;
+
 
 - (NSSplitView*) getSplitView;
 

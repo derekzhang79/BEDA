@@ -17,6 +17,8 @@
 
 #define BEDA_NOTI_SOURCE_OFFSET_CHANGED @"BedaNotiSourceOffsetChanged"
 
+@class AnnotViewController;
+
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
     CPTXYPlotSpace *plotSpace;
@@ -36,6 +38,8 @@
 @property (retain) NSDate* playBase;
 
 @property (retain) NSMutableArray* arrayPlotAnnots;
+
+@property (retain) AnnotViewController* annotViewController;
 
 
 - (SourceTimeData*) sourceTimeData;

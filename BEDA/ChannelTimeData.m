@@ -9,6 +9,7 @@
 #import "ChannelTimeData.h"
 #import "AnnotationManager.h"
 #import "AnnotationBehavior.h"
+#import "AnnotViewController.h"
 
 @implementation ChannelTimeData
 
@@ -18,6 +19,7 @@
 @synthesize playTimer = _playTimer;
 @synthesize playBase = _playBase;
 @synthesize arrayPlotAnnots = _arrayPlotAnnots;
+@synthesize annotViewController = _annotViewController;
 
 -(id) init {
     self = [super init];
@@ -26,7 +28,7 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _arrayPlotAnnots = [[NSMutableArray alloc] init];
-
+        _annotViewController = Nil;
     }
     return self;
     
@@ -241,19 +243,45 @@
 
         [plot reloadData];
     }
+    
+    if ([self annotViewController] != Nil) {
+        NSLog(@"%s : reload annotationTableView", __PRETTY_FUNCTION__);
+
+        [[self annotViewController] reloadTableView];
+    }
 }
 
 - (void)createGraphViewFor:(BedaController*)beda {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
-    view.hostedGraph = graph;
     
-    NSSplitView* splitview = [beda getSplitView];
-    CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
     
-    [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
+    if ([self channelIndex] < 0) {
+        AnnotViewController* avc = [ [AnnotViewController alloc]
+                                    initWithNibName:@"AnnotView" bundle:nil];
+        [avc setGraph:graph];
+        [avc setSource:[self sourceTimeData]];
+        NSView* view = [avc view];
+        [self setAnnotViewController:avc];
+        
+        
+        NSSplitView* splitview = [beda getSplitView];
+        CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
+        
+        [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
+        [self setView:view];
+    } else {
+        CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
+        view.hostedGraph = graph;
+
+        NSSplitView* splitview = [beda getSplitView];
+        CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
+
+        [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
+        
+        [self setView:view];
+    }
     
-    [self setView:view];
+
 }
 
 //- (void)createEDAViewFor:(BedaController*)beda {
@@ -536,8 +564,8 @@
 //    [am updateUsedIndexes];
     AnnotationBehavior* beh = [am behaviorByName:(NSString *)plot.identifier];
     
-    int cnt = (int)[[beh times] count];
-    NSLog(@"%s : %@ = %d", __PRETTY_FUNCTION__, (NSString*)plot.identifier, cnt);
+//    int cnt = (int)[[beh times] count];
+//    NSLog(@"%s : %@ = %d", __PRETTY_FUNCTION__, (NSString*)plot.identifier, cnt);
 
     if (beh == Nil) {
         return 0;

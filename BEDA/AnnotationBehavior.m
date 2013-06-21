@@ -7,6 +7,7 @@
 //
 
 #import "AnnotationBehavior.h"
+#import "BedaController.h"
 
 @implementation AnnotationBehavior
 
@@ -55,5 +56,46 @@
         return NO;
     }
 }
+
+- (int) numBehaviorIntervals {
+    int cnt[BEDA_MAX_INTERVALS];
+    int n = [AnnotationBehavior numTotalIntervals];
+    for (int i = 0; i < n; i++) {
+        cnt[i] = 0;
+    }
+    double interval = [[BedaController getInstance] interval];
+    
+    
+    for (NSNumber* num in [self times]) {
+        double t = [num doubleValue];
+        int index = (int)(t / interval);
+        cnt[index]++;
+    }
+    
+    int answer = 0;
+    for (int i = 0; i < n; i++) {
+        if (cnt[i] > 0) {
+            answer++;
+        }
+        NSLog(@"INTERVAL %d : %d", i, cnt[i]);
+    }
+    return answer;
+}
+
+
++ (int) numTotalIntervals {
+    BedaController* beda = [BedaController getInstance];
+    int n = (int)([beda duration] / [beda interval]);
+    return n;
+}
+
+
+- (double) percentBehaviorIntervals {
+    double a = [self numBehaviorIntervals];
+    double b = [AnnotationBehavior numTotalIntervals];
+    return 100.0 * (a / b);
+}
+
+
 
 @end

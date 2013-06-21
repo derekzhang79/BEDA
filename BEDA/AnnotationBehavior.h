@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define BEDA_MAX_INTERVALS 1000
+
 @interface AnnotationBehavior : NSObject {
     
 }
@@ -22,5 +24,9 @@
 
 - (id) initWithName:(NSString*)n inCategory:(NSString*)c withColor:(NSColor*)cl withKey:(NSString*)k;
 - (bool) isUsed;
+
+- (int) numBehaviorIntervals;
++ (int) numTotalIntervals;
+- (double) percentBehaviorIntervals;
 
 @end

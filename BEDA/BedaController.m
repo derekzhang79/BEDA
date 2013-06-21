@@ -24,6 +24,8 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize movSplitView = _movSplitView;
 @synthesize isNavMode;
 @synthesize gtAppTime;
+@synthesize duration;
+@synthesize interval;
 
 static BedaController* g_instance = nil;
 
@@ -50,8 +52,10 @@ static BedaController* g_instance = nil;
                                                object:nil];
     
     [self navigate:nil];
-    
+    [self setDuration:180];
+    [self setInterval:10];
     g_instance = self;
+    
     
 //    [self createAnnotationMenus];
      
