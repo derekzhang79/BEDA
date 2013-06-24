@@ -14,9 +14,23 @@
 
 @implementation GraphWindowController
 
-@synthesize tvc = _tvc;
-@synthesize gsc = _gsc;
-@synthesize bsc = _bsc;
+@synthesize tableViewControllers = _tableViewControllers;
+@synthesize settingControllers = _settingControllers;
+
+-(id) init {
+    self = [super init];
+    
+    if (self) {
+        // Initialization code here
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+        _tableViewControllers = [[NSMutableArray alloc] init];
+        _settingControllers   = [[NSMutableArray alloc] init];
+//        [[[self graphControlTabview headerView] setMenu:aMenu];
+
+    }
+    
+    return self;
+}
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -26,45 +40,59 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSourceAdded:)
                                                  name:BEDA_NOTI_SOURCE_ADDED object:Nil];
     
-    [self setTvc:Nil];
+    for (int i = 0; i < [[[self beda] sources] count]; i++) {
+        [self addTableViewFor:i];
+        
+        SourceTimeData* source = [[[self beda] sources] objectAtIndex:i];
+        if ([source isKindOfClass:[SourceTimeData class]] == YES) {
+            for (ChannelTimeData* ch in [source channels]) {
+                if ([ch channelIndex] < 0) {
+                    [self addGraphForBehaviorChannel:ch];
+
+                } else {
+                    [self addGraphForGraphChannel:ch];
+
+                }
+            }
+
+        }
+    }
     
 }
 
 
 - (void) onSourceAdded:(NSNotification*) noti {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-
-    s = [[[self beda] sources] lastObject];
-    if ([s isKindOfClass:[SourceTimeData class]]) {
-        [self onSourceTimeDataAdded:noti];
-    } else {
-        NSLog(@"%s: No tab view for source [%@]", __PRETTY_FUNCTION__, [s name]);
-    }
+    int n = (int)[[[self beda] sources] count];
+    [self addTableViewFor:n - 1];
     
 }
 
-- (void) onSourceTimeDataAdded:(NSNotification*) noti {
-    //////////////////// TESTING /////////////////////////
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    s = [[[self beda] sources] lastObject];
-    NSString* name = [s name];
+- (void)addTableViewFor:(int)index {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    SourceTimeData* source = [[[self beda] sources] objectAtIndex:index];
+    if ([source isKindOfClass:[SourceTimeData class]] == NO) {
+        NSLog(@"%s : source is not SourceTimeData", __PRETTY_FUNCTION__);
+        return;
+    }
+    
+    NSString* name = [source name];
     NSLog(@"creating a tab for source [%@]", name);
     // Create a tab view item
     NSTabViewItem *item = [[[NSTabViewItem alloc]
                             initWithIdentifier:name] autorelease];
     [item setLabel:name];
-
+    
     // Create a custum view and assign it to the tab view item
-    TableViewController* tableViewController = [[TableViewController alloc]
-                                            initWithNibName:@"TableView" bundle:nil];
-    [self setTvc:tableViewController];
-    [tableViewController setSource:s];
-    [item setView:[tableViewController view]];
-
+    TableViewController* tvc = [[TableViewController alloc]
+                                                initWithNibName:@"TableView" bundle:nil];
+    [[self tableViewControllers] addObject:tvc];
+    [tvc setSource:source];
+    [item setView:[tvc view]];
+    
     // Add a new tab to the tabview
     [tabview addTabViewItem:item];
-
 }
 
 - (IBAction)openFile:(id)sender {
@@ -74,38 +102,91 @@
 
 - (IBAction)onAddGraph:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    if ([[self tvc] selectedTableColumn] == -1) {
-        NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
-    }
     
-    // Special Code for Annotation
-    if ([[[self tvc] selectedTableColumnName] isEqualToString:@"Annotation"]) {
-        // Create custom view HERE
-        NSMutableString* name =  [[NSMutableString alloc] init];
-        
-        [name appendString:[s name]];
-        [name appendString:@":"];
-        [name appendString:[[self tvc] selectedTableColumnName]];
-        
-        // Create a tab view item
-        NSTabViewItem *item = [[[NSTabViewItem alloc]
-                                initWithIdentifier:name] autorelease];
-        [item setLabel:name];
-        
-        BehaviorSettingController* behaviorSettingController = [[BehaviorSettingController alloc]
-                                                          initWithNibName:@"BehaviorSettingView" bundle:nil];
-        [behaviorSettingController setSource:s];
-        [self setBsc:behaviorSettingController];
-        [item setView:[behaviorSettingController view]];
-        [graphControlTabview addTabViewItem:item];
+    NSTabViewItem* selectedItem = [tabview selectedTabViewItem];
+    if (selectedItem == Nil) {
+        NSLog(@"%s: selectedItem is Nil", __PRETTY_FUNCTION__);
         return;
     }
     
-    NSMutableString* name =  [[NSMutableString alloc] init];
+    int selectedIndex = (int)[tabview indexOfTabViewItem:selectedItem];
+    NSLog(@"%s: selectedIndex = %d", __PRETTY_FUNCTION__, selectedIndex);
     
-    [name appendString:[s name]];
+    TableViewController* tvc = [[self tableViewControllers] objectAtIndex:selectedIndex];
+    
+    if ([tvc selectedTableColumn] == -1) {
+        NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
+    }
+    SourceTimeData* s = [[[self beda] sources] objectAtIndex:selectedIndex];
+    BOOL isAnnotation = [[tvc selectedTableColumnName] isEqualToString:@"Annotation"];
+    ////// Create a channel
+    // Step 1. Create the proper channel
+    ChannelTimeData *ch = [[ChannelTimeData alloc] init];
+    [ch setSource:s];
+    [ch setName:[tvc selectedTableColumnName]];
+    
+    // Step 2. initialize the graph
+    int index;
+    double minValue;
+    double maxValue;
+    
+    if (isAnnotation) {
+        index = -1;
+        minValue = -1;
+        maxValue = 4;
+    } else {
+        index = [tvc selectedTableColumn];
+        minValue = [s minValueForColumn:index];
+        maxValue = [s maxValueForColumn:index];
+    }
+    
+    [ch initGraph:@"Annotation" atIndex:index range:minValue to:maxValue
+    withLineColor: [NSColor blueColor] 
+        areaColor:[NSColor magentaColor]
+         isBottom:YES hasArea:NO];
+    
+    [[s channels] addObject:ch];
+
+    
+    if (isAnnotation) {
+        [self addGraphForBehaviorChannel:ch];
+
+    } else {
+        [self addGraphForGraphChannel:ch];
+    }
+}
+
+- (void)addGraphForBehaviorChannel:(ChannelTimeData*)ch {
+
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    SourceTimeData* source = [ch sourceTimeData];
+    NSMutableString* name =  [[NSMutableString alloc] init];
+    [name appendString:[source name]];
     [name appendString:@":"];
-    [name appendString:[[self tvc] selectedTableColumnName]];
+    [name appendString:[ch name]];
+
+    // Create a tab view item
+    NSTabViewItem *item = [[[NSTabViewItem alloc]
+                            initWithIdentifier:name] autorelease];
+    [item setLabel:name];
+    
+    BehaviorSettingController* behaviorSettingController = [[BehaviorSettingController alloc]
+                                                            initWithNibName:@"BehaviorSettingView" bundle:nil];
+    [behaviorSettingController setSource:source];
+    [[self settingControllers] addObject:behaviorSettingController];
+    
+    
+    [item setView:[behaviorSettingController view]];
+    [graphControlTabview addTabViewItem:item];
+}
+
+- (void)addGraphForGraphChannel:(ChannelTimeData*)ch  {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    SourceTimeData* source = [ch sourceTimeData];
+    NSMutableString* name =  [[NSMutableString alloc] init];
+    [name appendString:[source name]];
+    [name appendString:@":"];
+    [name appendString:[ch name]];
     
     // Create a tab view item
     NSTabViewItem *item = [[[NSTabViewItem alloc]
@@ -113,8 +194,12 @@
     [item setLabel:name];
     
     GraphSettingController* graphSettingController = [[GraphSettingController alloc]
-                                                initWithNibName:@"GraphSettingView" bundle:nil];
-    [self setGsc:graphSettingController];
+                                                      initWithNibName:@"GraphSettingView" bundle:nil];
+    [graphSettingController setSource:source];
+    [graphSettingController setChannel:ch];
+    int columnIndex = [ch channelIndex];
+    [graphSettingController setColumnIndex:columnIndex];
+    [[self settingControllers] addObject:graphSettingController];
     [item setView:[graphSettingController view]];
     [graphControlTabview addTabViewItem:item];
 
@@ -122,39 +207,56 @@
 
 
 - (IBAction)onApplySettings:(id)sender{
- 
-
-    if ([self gsc] == Nil) {
-        [self applySettingsForChannelAnnotation];
+    NSTabViewItem* selectedItem = [graphControlTabview selectedTabViewItem];
+    if (selectedItem == Nil) {
+        NSLog(@"%s: selectedItem is Nil", __PRETTY_FUNCTION__);
         return;
     }
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    s = [[[self beda] sources] lastObject];
+    int selectedIndex = (int)[graphControlTabview indexOfTabViewItem:selectedItem];
+    NSViewController* settingController = [[self settingControllers] objectAtIndex:selectedIndex];
     
+    if ([settingController isKindOfClass:[BehaviorSettingController class]] == YES) {
+        [self applySettingsForBehaviorSettingController:(BehaviorSettingController*)settingController];
+        return;
+    } else if ([settingController isKindOfClass:[GraphSettingController class]] == YES) {
+        [self applySettingsForGraphSettingController:(GraphSettingController*)settingController];
+        return;
+    }
+    
+}
+- (void)applySettingsForGraphSettingController:(GraphSettingController*)gsc {
+
+    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    SourceTimeData* s = [gsc source];
     // Step 1. Create the proper channel
     ChannelTimeData *ch = [[ChannelTimeData alloc] init];
     [ch setSource:s];
     
+    if ([gsc isGraphVisible] == YES){
+        
+    }
+    
     // Step 2. initialize the graph
-
-    NSString* name = [[self gsc] getGraphName];
+    NSString* name = [gsc getGraphName];
     NSLog(@"GRAPH Name:%@",name);
-    int index = [[self tvc] selectedTableColumn];
-    double min = [[self gsc] getMinValue];
-    double max = [[self gsc] getMaxValue];
-
-//    double min = [[self tvc] minValue];
-//    double max = [[self tvc] maxValue];
+    double min, max;
+    int index = [gsc columnIndex];
+    if( [gsc isAutomatic] == YES){
+        min = [ch minValue];
+        max = [ch maxValue];
+    } else {
+        min = [[gsc txtMinValue] doubleValue];
+        max = [[gsc txtMaxValue] doubleValue];
+    }
     
     BOOL isBottom = YES;
     BOOL hasArea = YES;
     
-    NSColor *lc = [[self gsc] getGraphColor];
-    NSColor *ac = [[self gsc] getAreaColor];
+    NSColor *lc = [gsc getGraphColor];
+    NSColor *ac = [gsc getAreaColor];
     NSLog(@"GRAPH COLOR:%@, AREA COLOR:%@",lc, ac);
-    
-
     
     [ch initGraph:name atIndex:index range:min to:max withLineColor:lc areaColor:ac isBottom:isBottom hasArea:hasArea];
     
@@ -167,10 +269,10 @@
 
 }
 
-- (void)applySettingsForChannelAnnotation {
+- (void)applySettingsForBehaviorSettingController:(BehaviorSettingController*)bsc {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    s = [[[self beda] sources] lastObject];
+    SourceTimeData* s = [bsc source];
     
     // Step 1. Create the proper channel
     ChannelTimeData *ch = [[ChannelTimeData alloc] init];

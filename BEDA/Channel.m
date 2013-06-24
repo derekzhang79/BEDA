@@ -13,6 +13,7 @@
 @synthesize source = _source;
 @synthesize view = _view;
 @synthesize offsetOverlay = _offsetOverlay;
+@synthesize name;
 
 -(id) init {
     self = [super init];

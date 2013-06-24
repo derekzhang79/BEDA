@@ -16,6 +16,7 @@
 @property (assign) Source* source;
 @property (assign) NSView* view;
 @property (assign) NSTextField* offsetOverlay;
+@property (copy) NSString* name;
 
 - (void)play;
 - (void)stop;

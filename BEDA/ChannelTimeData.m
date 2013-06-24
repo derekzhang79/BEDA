@@ -20,6 +20,8 @@
 @synthesize playBase = _playBase;
 @synthesize arrayPlotAnnots = _arrayPlotAnnots;
 @synthesize annotViewController = _annotViewController;
+@synthesize minValue;
+@synthesize maxValue;
 
 -(id) init {
     self = [super init];
@@ -38,13 +40,14 @@
     return (SourceTimeData*)[self source];
 }
 
-//- (void)initGraph:(int)data {
-- (void)initGraph:(NSString*)name atIndex:(int)index range:(double)minValue to:(double)maxValue withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea {
+- (void)initGraph:(NSString*)name atIndex:(int)index range:(double)min to:(double)max withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea {
 
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [self setChannelIndex:index];
     [self setPlayTimer:Nil];
     [self setPlayBase:Nil];
+    [self setMinValue:min];
+    [self setMaxValue:max];
     
     [super awakeFromNib];
     
@@ -52,7 +55,6 @@
     // worry about daylight savings. If you use midnight, you will have to adjust
     // for daylight savings time.
     NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"12:00:00"];
-    //    NSTimeInterval oneDay = 24 * 60 * 60;
     NSTimeInterval oneSec = 1;
     
     // Create graph from theme
@@ -88,12 +90,13 @@
     plotSpace.delegate = self;
     
     NSTimeInterval xLow       = 0.0f;
+    double len = max - min;
     graphScaleX = 60;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 60.0f)];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 5000.0f)];
     //////////////////////////////////////////////////////////////////////yRange should be dfferent
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minValue) length:CPTDecimalFromFloat(maxValue)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minValue) length:CPTDecimalFromFloat(maxValue)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
+    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
 
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 10.0;

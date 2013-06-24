@@ -11,6 +11,7 @@
 @implementation BehaviorSettingController
 
 @synthesize source;
+@synthesize channel;
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     int cnt = [[[self source]annots]countDefinedBehaviors];

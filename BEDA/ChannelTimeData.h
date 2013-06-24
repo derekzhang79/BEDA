@@ -13,7 +13,6 @@
 
 #define BEDA_INDENTIFIER_DATA_PLOT @"BedaDataPlot"
 #define BEDA_INDENTIFIER_HEADER_PLOT @"BedaHeaderPlot"
-//#define BEDA_INDENTIFIER_ANNOTATION_PLOT @"BedaAnnotationPlot"
 
 #define BEDA_NOTI_SOURCE_OFFSET_CHANGED @"BedaNotiSourceOffsetChanged"
 
@@ -33,23 +32,18 @@
 @property (assign) int channelIndex;
 @property (assign) BOOL isHeaderSelected;
 @property (assign) double headerTime;
-
+@property (assign) double minValue;
+@property (assign) double maxValue;
 @property (retain) NSTimer* playTimer;
 @property (retain) NSDate* playBase;
-
 @property (retain) NSMutableArray* arrayPlotAnnots;
-
 @property (retain) AnnotViewController* annotViewController;
 
 
 - (SourceTimeData*) sourceTimeData;
-//- (void)initGraph:(int)data;
-- (void)initGraph:(NSString*)name atIndex:(int)index range:(double)minValue to:(double)maxValue withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea;
+- (void)initGraph:(NSString*)name atIndex:(int)index range:(double)min to:(double)max withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea;
 - (void)createGraphViewFor:(BedaController*)beda;
 
-//- (void)createEDAViewFor:(BedaController*)beda;
-//- (void)createTempViewFor:(BedaController*)beda;
-//- (void)createAccelViewFor:(BedaController*)beda;
 - (CPTColor*) toCPT:(NSColor*)nc;
 
 
@@ -61,7 +55,6 @@
 - (void)zoomIn;
 - (void)zoomOut;
 
-//- (void)addAnnotation;
 
 - (double) getMyTimeInGlobal;
 - (void) setMyTimeInGlobal:(double)gt;

@@ -7,20 +7,33 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SourceTimeData.h"
+#import "ChannelTimeData.h"
 
 @interface GraphSettingController : NSViewController{
 
     IBOutlet NSColorWell* graphColor;
     IBOutlet NSColorWell* areaColor;
     IBOutlet NSTextField* graphName;
-    IBOutlet NSTextField* minValue;
-    IBOutlet NSTextField* maxValue;
+    IBOutlet NSTextField* selectedColumnName;
 }
 
+@property (retain) SourceTimeData* source;
+@property (retain) ChannelTimeData* channel;
+@property (assign) int columnIndex;
+@property (assign) BOOL isAutomatic;
+@property (assign) BOOL isGraphVisible;
+
+@property (nonatomic, retain) IBOutlet NSTextField* txtMinValue;
+@property (nonatomic, retain) IBOutlet NSTextField* txtMaxValue;
+@property (nonatomic, retain) IBOutlet NSButton* btnIsVisible;
+
+
+- (IBAction)radioButton:(id)sender;
 - (NSColor*)getGraphColor;
 - (NSColor*)getAreaColor;
 - (NSString*)getGraphName;
-- (double)getMinValue;
-- (double)getMaxValue;
+- (void)setGraphTitle:(NSString*)name;
+- (void)setSelectedColumnTitle:(NSString*)name;
 
 @end

@@ -201,7 +201,6 @@ static BedaController* g_instance = nil;
             [item setTarget:self];
             [item setKeyEquivalentModifierMask:0];
             [item setImage:image];
-//            [annotmenu insertItem:item1 atIndex:0];
             [annotmenu addItem:item];
         }
         

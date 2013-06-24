@@ -113,16 +113,37 @@
     NSLog(@"data.count = %ld", (unsigned long)[[self timedata] count]);
     
     
-//    [self loadEDAGraph];
-//    [self loadTempGraph];
-//    [self loadAccelGraph];
-    
     NSString* fileName = [[url absoluteString] lastPathComponent];
     [self setName:fileName];
     
     NSLog(@"%s: channels.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self channels] count]);
 
 }
+
+- (double)minValueForColumn:(int)index {
+    double minValue = 999999999.9;
+    NSMutableArray* data = [self timedata];
+    for (int i = 0; i < [[self timedata] count]; i++) {
+        double v = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:index]] doubleValue];
+        if (minValue > v) {
+            minValue = v;
+        }
+    }
+    return minValue;
+}
+
+- (double)maxValueForColumn:(int)index {
+    double maxValue = -999999999.9;
+    NSMutableArray* data = [self timedata];
+    for (int i = 0; i < [[self timedata] count]; i++) {
+        double v = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:index]] doubleValue];
+        if (maxValue < v) {
+            maxValue = v;
+        }
+    }
+    return maxValue;
+}
+
 
 //-(void)loadEDAGraph {
 //    ChannelTimeData *chEda = [[ChannelTimeData alloc] init];

@@ -15,18 +15,20 @@
 @interface GraphWindowController : NSObject {
     IBOutlet NSTabView* tabview;
     IBOutlet NSTabView* graphControlTabview;
-    SourceTimeData* s;
-    
 }
 
-@property (retain) TableViewController* tvc;
-@property (retain) GraphSettingController* gsc;
-@property (retain) BehaviorSettingController* bsc;
+@property (retain) NSMutableArray* tableViewControllers;
+@property (retain) NSMutableArray* settingControllers;
+
+- (void)addTableViewFor:(int)index;
 
 - (IBAction)openFile:(id)sender;
 - (IBAction)onAddGraph:(id)sender;
 - (IBAction)onApplySettings:(id)sender;
-- (void)applySettingsForChannelAnnotation;
+
+- (void)applySettingsForGraphSettingController:(GraphSettingController*)gsc;
+- (void)applySettingsForBehaviorSettingController:(BehaviorSettingController*)bsc;
 - (BedaController*) beda;
+
 
 @end
