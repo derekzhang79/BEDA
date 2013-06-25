@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SourceTimeData.h"
 #import "ChannelTimeData.h"
+#import "ColorCellView.h"
 
 @interface BehaviorSettingController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>{
     IBOutlet NSTableView *table;
@@ -18,6 +19,7 @@
 
 @property (retain) SourceTimeData* source;
 @property (retain) ChannelTimeData* channel;
+@property (retain) NSMutableDictionary* controls;
 
 - (IBAction)changeModeFromSegmentedControl:(id)sender;
 @end

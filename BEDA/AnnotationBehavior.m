@@ -77,7 +77,7 @@
         if (cnt[i] > 0) {
             answer++;
         }
-        NSLog(@"INTERVAL %d : %d", i, cnt[i]);
+//        NSLog(@"INTERVAL %d : %d", i, cnt[i]);
     }
     return answer;
 }

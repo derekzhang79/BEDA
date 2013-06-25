@@ -30,6 +30,10 @@
     [[self txtMaxValue] setDoubleValue:[channel maxValue]];
     [self setGraphTitle:name];
     [self setSelectedColumnTitle:name];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onApplySettingPressed:)
+                                                 name:BEDA_NOTI_APPLY_SETTING_PRESSED object:Nil];
+    
 }
 
 -(IBAction)radioButton:(id)sender {
@@ -79,8 +83,18 @@
 }
 
 - (void)setSelectedColumnTitle:(NSString*)name{
-     NSLog(@"%s:%@", __PRETTY_FUNCTION__, name);
+    NSLog(@"%s:%@", __PRETTY_FUNCTION__, name);
     [selectedColumnName setStringValue:name];
+}
+
+- (void) onApplySettingPressed:(NSNotification*) noti {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [[self channel] setLineColor:[self getGraphColor]];
+    [[self channel] setAreaColor:[self getAreaColor]];
+    [[self channel] setGraphName:[self getGraphName]];
+    if(isAutomatic == NO){
+        [[self channel] setRangeFrom:[[self txtMinValue] doubleValue] to:[[self txtMaxValue] doubleValue]];
+    }
 }
 
 @end

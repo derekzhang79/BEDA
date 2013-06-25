@@ -28,7 +28,6 @@
 //        [[[self graphControlTabview headerView] setMenu:aMenu];
 
     }
-    
     return self;
 }
 
@@ -113,7 +112,6 @@
     NSLog(@"%s: selectedIndex = %d", __PRETTY_FUNCTION__, selectedIndex);
     
     TableViewController* tvc = [[self tableViewControllers] objectAtIndex:selectedIndex];
-    
     if ([tvc selectedTableColumn] == -1) {
         NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
     }
@@ -132,7 +130,7 @@
     
     if (isAnnotation) {
         index = -1;
-        minValue = -1;
+        minValue = 0;
         maxValue = 4;
     } else {
         index = [tvc selectedTableColumn];
@@ -175,7 +173,6 @@
     [behaviorSettingController setSource:source];
     [[self settingControllers] addObject:behaviorSettingController];
     
-    
     [item setView:[behaviorSettingController view]];
     [graphControlTabview addTabViewItem:item];
 }
@@ -200,6 +197,7 @@
     int columnIndex = [ch channelIndex];
     [graphSettingController setColumnIndex:columnIndex];
     [[self settingControllers] addObject:graphSettingController];
+    
     [item setView:[graphSettingController view]];
     [graphControlTabview addTabViewItem:item];
 
@@ -207,89 +205,19 @@
 
 
 - (IBAction)onApplySettings:(id)sender{
-    NSTabViewItem* selectedItem = [graphControlTabview selectedTabViewItem];
-    if (selectedItem == Nil) {
-        NSLog(@"%s: selectedItem is Nil", __PRETTY_FUNCTION__);
-        return;
-    }
-    
-    int selectedIndex = (int)[graphControlTabview indexOfTabViewItem:selectedItem];
-    NSViewController* settingController = [[self settingControllers] objectAtIndex:selectedIndex];
-    
-    if ([settingController isKindOfClass:[BehaviorSettingController class]] == YES) {
-        [self applySettingsForBehaviorSettingController:(BehaviorSettingController*)settingController];
-        return;
-    } else if ([settingController isKindOfClass:[GraphSettingController class]] == YES) {
-        [self applySettingsForGraphSettingController:(GraphSettingController*)settingController];
-        return;
-    }
-    
-}
-- (void)applySettingsForGraphSettingController:(GraphSettingController*)gsc {
-
-    
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    SourceTimeData* s = [gsc source];
-    // Step 1. Create the proper channel
-    ChannelTimeData *ch = [[ChannelTimeData alloc] init];
-    [ch setSource:s];
-    
-    if ([gsc isGraphVisible] == YES){
-        
-    }
-    
-    // Step 2. initialize the graph
-    NSString* name = [gsc getGraphName];
-    NSLog(@"GRAPH Name:%@",name);
-    double min, max;
-    int index = [gsc columnIndex];
-    if( [gsc isAutomatic] == YES){
-        min = [ch minValue];
-        max = [ch maxValue];
-    } else {
-        min = [[gsc txtMinValue] doubleValue];
-        max = [[gsc txtMaxValue] doubleValue];
-    }
-    
-    BOOL isBottom = YES;
-    BOOL hasArea = YES;
-    
-    NSColor *lc = [gsc getGraphColor];
-    NSColor *ac = [gsc getAreaColor];
-    NSLog(@"GRAPH COLOR:%@, AREA COLOR:%@",lc, ac);
-    
-    [ch initGraph:name atIndex:index range:min to:max withLineColor:lc areaColor:ac isBottom:isBottom hasArea:hasArea];
-    
-    // Step 3. Add to the created channel to the source
-    [[s channels] addObject:ch];
-    
-    // Step 4. Create a corresponding view
-    [ch createGraphViewFor:[self beda]];
-    [[self beda] spaceProportionalyMainSplit];
-
-}
-
-- (void)applySettingsForBehaviorSettingController:(BehaviorSettingController*)bsc {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    SourceTimeData* s = [bsc source];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_APPLY_SETTING_PRESSED
+     object:nil];
     
-    // Step 1. Create the proper channel
-    ChannelTimeData *ch = [[ChannelTimeData alloc] init];
-    [ch setSource:s];
     
-    // Step 2. initialize the graph
-    [ch initGraph:@"Annotation" atIndex:-1 range:-1 to:4
-        withLineColor: [NSColor redColor] // probably not used
-        areaColor:[NSColor redColor]
-        isBottom:YES hasArea:NO];
+//    if ([gsc isGraphVisible] == YES){
+//        
+//    }
     
-    // Step 3. Add to the created channel to the source
-    [[s channels] addObject:ch];
+    [[self beda] createViewsForAllChannels];
     
-    // Step 4. Create a corresponding view
-    [ch createGraphViewFor:[self beda]];
-    [[self beda] spaceProportionalyMainSplit];
 }
 
 - (BedaController*) beda {

@@ -11,6 +11,8 @@
 
 extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 #define BEDA_NOTI_SOURCE_ADDED @"BedaNotiSourceAdded"
+#define BEDA_NOTI_APPLY_SETTING_PRESSED @"BedaNotiApplySettingPressed"
+#define BEDA_NOTI_ANNOTATION_CHANGED @"BedaNotiAnnotationChanged"
 
 @interface BedaController : NSObject {
     IBOutlet NSSegmentedControl* modeSelector;
@@ -23,6 +25,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 @property (retain) NSMutableArray* sources;
 @property (retain) NSSplitView* movSplitView;
+@property (retain) NSWindowController* controllerWindow;
 @property BOOL isNavMode;
 @property double gtAppTime;
 
@@ -69,5 +72,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 - (void)addSourceTimeData:(NSURL*)url;
 
-
+// Manipulate views
+- (void)clearAllViews;
+- (void)createViewsForAllChannels;
 @end

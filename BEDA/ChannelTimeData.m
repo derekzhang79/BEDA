@@ -94,7 +94,6 @@
     graphScaleX = 60;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 60.0f)];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 5000.0f)];
-    //////////////////////////////////////////////////////////////////////yRange should be dfferent
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
 
@@ -145,7 +144,6 @@
     
     CPTXYAxis *y = axisSet.yAxis;
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
-    //////////////////////////////////////////////////////////////////////yRange should be dfferent
     y.majorIntervalLength         = CPTDecimalFromString(@"1.0");
     y.minorTicksPerInterval       = 0.5;
     y.axisLineStyle = majorGridLineStyle;
@@ -154,14 +152,10 @@
     y.titleTextStyle = titleText;
     y.titleOffset = 35;
     
-    // Add an extra y axis (red)
-    // We add constraints to this axis below
-    CPTXYAxis *y2 = [[(CPTXYAxis *)[CPTXYAxis alloc] initWithFrame:CGRectZero] autorelease];
-
-    graph.axisSet.axes = [NSArray arrayWithObjects:x, y, y2, nil];
+    graph.axisSet.axes = [NSArray arrayWithObjects:x, y, nil];
     
     // Create a plot that uses the data source method
-    CPTScatterPlot *dataSourceLinePlot = [[[CPTScatterPlot alloc] init] autorelease];
+    dataSourceLinePlot = [[[CPTScatterPlot alloc] init] autorelease];
     dataSourceLinePlot.identifier = BEDA_INDENTIFIER_DATA_PLOT;
     
     // Actual graph line & fill
@@ -183,9 +177,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSourceOffsetUpdated:)
                                                  name:BEDA_NOTI_SOURCE_OFFSET_CHANGED object:Nil];
-
     
-    //    // Register self as notification observer
+    // Register self as notification observer
     [self reload];
     // Create a header plot
     [self createHeaderPlot];
@@ -195,6 +188,37 @@
     }
     
     
+}
+
+- (void)setLineColor:(NSColor*)lc {
+    // Actual graph line & fill
+    CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
+    lineStyle.lineWidth              = 1.f;
+    lineStyle.lineColor              = [self toCPT:lc];
+    dataSourceLinePlot.dataLineStyle = lineStyle;
+}
+
+- (void)setAreaColor:(NSColor*)ac {
+    // Actual graph line & fill
+    CPTFill *areaFill = [CPTFill fillWithColor:[self toCPT:ac]];
+    dataSourceLinePlot.areaFill      = areaFill;
+    dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
+}
+
+- (void)setGraphName:(NSString*)gName {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    // Actual graph line & fill
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+    CPTXYAxis *y = axisSet.yAxis;
+    y.title = gName;
+}
+
+- (void)setRangeFrom:(double)min to:(double)max{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
+    double len = max - min;
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
+    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
 }
 
 - (void) reload {
@@ -229,9 +253,7 @@
     AnnotationManager* am = [[self source] annots];
     [am updateUsedIndexes];
 
-//    float margin = 0;
     float top = [am countUsedBehaviors];
-    
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0)
                                                     length:CPTDecimalFromFloat(top + 1.0)];
 }
@@ -256,7 +278,6 @@
 
 - (void)createGraphViewFor:(BedaController*)beda {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    
     
     if ([self channelIndex] < 0) {
         AnnotViewController* avc = [ [AnnotViewController alloc]
@@ -283,53 +304,8 @@
         
         [self setView:view];
     }
-    
-
 }
 
-//- (void)createEDAViewFor:(BedaController*)beda {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
-//    view.hostedGraph = graph;
-//    
-//    NSSplitView* splitview = [beda getSplitView];
-//    CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
-//    
-//    [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
-//    
-//    [self setView:view];
-//
-//}
-//
-//
-//- (void)createTempViewFor:(BedaController*)beda {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
-//    view.hostedGraph = graph;
-//    
-//    NSSplitView* splitview = [beda getSplitView];
-//    CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
-//    
-//    [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
-//    
-//    [self setView:view];
-//
-//}
-//
-//
-//- (void)createAccelViewFor:(BedaController*)beda {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
-//    view.hostedGraph = graph;
-//    
-//    NSSplitView* splitview = [beda getSplitView];
-//    CPTGraphHostingView* lastView = [ [splitview subviews] lastObject];
-//    
-//    [splitview addSubview:view positioned:NSWindowAbove relativeTo:lastView];
-//    
-//    [self setView:view];
-//
-//}
 
 - (CPTColor*) toCPT:(NSColor*)nc {
     CGFloat r = [nc redComponent];
@@ -395,13 +371,11 @@
 -(void)zoomIn{
     graphScaleX -= 100;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
-
 }
 
 -(void)zoomOut{
     graphScaleX += 100;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
-
 }
 
 - (double) getMyTimeInGlobal {
@@ -542,7 +516,6 @@
         CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol diamondPlotSymbol];
         headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
 
-
         headerPlotSymbol.size = CGSizeMake(15.0f, 15.0f);
         plotAnnotation.plotSymbol = headerPlotSymbol;
         
@@ -556,20 +529,13 @@
         [[self arrayPlotAnnots] addObject:plotAnnotation];
     }
     [self adjustAnnotationPlotRange];
-
-
 }
-
 
 -(NSUInteger)numberOfRecordsForAnnotationPlot:(CPTPlot *)plot {
 
     AnnotationManager* am = [[self source] annots];
-//    [am updateUsedIndexes];
     AnnotationBehavior* beh = [am behaviorByName:(NSString *)plot.identifier];
     
-//    int cnt = (int)[[beh times] count];
-//    NSLog(@"%s : %@ = %d", __PRETTY_FUNCTION__, (NSString*)plot.identifier, cnt);
-
     if (beh == Nil) {
         return 0;
     }
@@ -638,7 +604,6 @@
     CGPoint pointInPlotArea = [graph convertPoint:point toLayer:graph.plotAreaFrame];
 
     NSDecimal pt[2];
- //   [graph.defaultPlotSpace plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
     [space plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
 
 
@@ -694,11 +659,9 @@
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
     // If plot is header plot
-    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
-    {
+    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT]){
         return [self numberForHeaderPlotField:fieldEnum recordIndex:index];
-    } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_DATA_PLOT])
-    {
+    } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_DATA_PLOT]){
         int key = [self channelIndex];
         // Otherwise, plot it data plot
         NSMutableArray* data = [[self sourceTimeData] timedata];
@@ -714,9 +677,5 @@
         return [self numberForAnnotationPlot:plot Field:fieldEnum recordIndex:index];
 
     }
-    
-
 }
-
-
 @end

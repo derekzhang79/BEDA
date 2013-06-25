@@ -21,6 +21,7 @@
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
     CPTXYPlotSpace *plotSpace;
+    CPTScatterPlot *dataSourceLinePlot;
     CPTScatterPlot *plotHeader;
 //    CPTScatterPlot *plotAnnotation;
     
@@ -46,11 +47,10 @@
 
 - (CPTColor*) toCPT:(NSColor*)nc;
 
-
 // Play/stop
 - (void)play;
 - (void)stop;
-- (void)onPlayTimer : (id)sender ;
+- (void)onPlayTimer : (id)sender;
 
 - (void)zoomIn;
 - (void)zoomOut;
@@ -61,7 +61,7 @@
 - (double) windowHeightFactor;
 
 - (void) onSourceOffsetUpdated:(NSNotification*) noti;
-- (void)updateAnnotation;
+- (void) updateAnnotation;
 
 // Header related functions
 - (void)createHeaderPlot;
@@ -70,5 +70,10 @@
 -(NSUInteger)numberOfRecordsForHeaderPlot;
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index;
 
+// Change style
+- (void)setLineColor:(NSColor*)lc;
+- (void)setAreaColor:(NSColor*)ac;
+- (void)setGraphName:(NSString*)gName;
+- (void)setRangeFrom:(double)min to:(double)max;
 
 @end

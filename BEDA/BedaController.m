@@ -26,6 +26,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize gtAppTime;
 @synthesize duration;
 @synthesize interval;
+@synthesize controllerWindow;
 
 static BedaController* g_instance = nil;
 
@@ -51,20 +52,16 @@ static BedaController* g_instance = nil;
                                                  name:@"channelCurrentTimeUpdate"
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onAnnotationChanged:)
+                                                 name:BEDA_NOTI_ANNOTATION_CHANGED
+                                               object:nil];
+    
     [self navigate:nil];
     [self setDuration:180];
     [self setInterval:10];
     g_instance = self;
-    
-    
-//    [self createAnnotationMenus];
-     
-
-//    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask) handler:^(NSEvent *event){
-//        NSLog(@"Hi there");
-//        [self keyDown: event];
-//        //Or just put your code here
-//    }];
+    [self setControllerWindow:Nil];
     
 }
 
@@ -77,17 +74,6 @@ static BedaController* g_instance = nil;
     return splitview;
 }
 
-//- (void)keyDown:(NSEvent *)event {
-//    NSLog(@"Hi there");
-//    NSString *characters = [event characters];
-//    if ([characters length]) {
-//        switch ([characters characterAtIndex:0]) {
-//            case NSUpArrowFunctionKey:
-//                NSLog(@"Key UP");
-//                break;
-//        }
-//    }
-//}
 
 - (IBAction)openFile:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -129,11 +115,29 @@ static BedaController* g_instance = nil;
 
 - (IBAction)openGraphController:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    if ([self controllerWindow] != Nil) {
+        [[[self controllerWindow] window] makeMainWindow];
+        NSLog(@"%s : we already has ControllerWindow", __PRETTY_FUNCTION__);
+        return;
+    }
+
     
-    NSWindowController *controllerWindow = [[NSWindowController alloc] initWithWindowNibName:@"GraphController"];
-    [controllerWindow showWindow:self];
+    NSWindowController *cw = [[NSWindowController alloc] initWithWindowNibName:@"GraphController"];
+    [cw showWindow:self];
+    [self setControllerWindow:cw];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onGraphControllerClosed:)
+                                                 name:NSWindowWillCloseNotification
+                                               object:[controllerWindow window]];
 }
 
+- (void) onGraphControllerClosed:(NSNotification*) noti {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self setControllerWindow:Nil];
+
+}
 
 
 - (IBAction)play:(id)sender {
@@ -227,11 +231,12 @@ static BedaController* g_instance = nil;
 -(IBAction)zoomOut:(id)sender
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            [ch zoomOut];
-        }
-    }
+    [self clearAllViews];
+//    for (Source* s in [self sources]) {
+//        for (Channel* ch in [s channels]) {
+//            [ch zoomOut];
+//        }
+//    }
 }
 
 - (IBAction)navigate:(id)sender {
@@ -334,6 +339,11 @@ static BedaController* g_instance = nil;
     }
     [self setGtAppTime:[self getGlobalTime]];
 
+}
+
+- (void) onAnnotationChanged:(NSNotification *) notification {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self createAnnotationMenus];
 }
 
 - (void)addSourceMov:(NSURL*)url {
@@ -567,6 +577,37 @@ static BedaController* g_instance = nil;
 //    [self spaceEvenly:splitview];
 //    [self spaceProportionaly:splitview];
 
+}
+
+- (void)clearAllViews {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    while([[splitview subviews] count] > 0) {
+        [[[splitview subviews] objectAtIndex:0] removeFromSuperview];
+    }
+}
+
+- (void)createViewsForAllChannels {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self clearAllViews];
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            if ([ch isKindOfClass:[ChannelMovie class]]) {
+                ChannelMovie* chm = (ChannelMovie*)ch;
+                [chm createMovieViewFor:self];
+            } else if ([ch isKindOfClass:[ChannelTimeData class]]) {
+                ChannelTimeData* chtd = (ChannelTimeData*)ch;
+                [chtd createGraphViewFor:self];
+                
+            } else {
+                NSLog(@"%s: unknown channel", __PRETTY_FUNCTION__);
+            }
+        }
+    }
+    
+    [self spaceProportionaly:splitview];
+
+    
 }
 
 @end

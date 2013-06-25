@@ -28,6 +28,7 @@
 		0379841A176A8994000CFBEE /* GraphController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03798419176A8994000CFBEE /* GraphController.xib */; };
 		038A62D416FD4CCB00E91A65 /* annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D216FD4CCB00E91A65 /* annotation.png */; };
 		038A62D516FD4CCB00E91A65 /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D316FD4CCB00E91A65 /* sync.png */; };
+		038E9D1C177932E400ACE963 /* ColorCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D1B177932E400ACE963 /* ColorCellView.m */; };
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
 		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
 		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
@@ -88,6 +89,8 @@
 		03798419176A8994000CFBEE /* GraphController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphController.xib; sourceTree = "<group>"; };
 		038A62D216FD4CCB00E91A65 /* annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotation.png; sourceTree = "<group>"; };
 		038A62D316FD4CCB00E91A65 /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
+		038E9D1A177932E400ACE963 /* ColorCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCellView.h; sourceTree = "<group>"; };
+		038E9D1B177932E400ACE963 /* ColorCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCellView.m; sourceTree = "<group>"; };
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
@@ -333,6 +336,8 @@
 				03E908701771781B0078BA59 /* BehaviorSettingController.m */,
 				0320251B176FC43F00BC7020 /* GraphSettingController.h */,
 				0320251C176FC43F00BC7020 /* GraphSettingController.m */,
+				038E9D1A177932E400ACE963 /* ColorCellView.h */,
+				038E9D1B177932E400ACE963 /* ColorCellView.m */,
 			);
 			name = GraphWindow;
 			sourceTree = "<group>";
@@ -440,6 +445,7 @@
 				B27C396B17715FB30025188F /* AnnotationBehavior.m in Sources */,
 				B27C396E17715FC50025188F /* AnnotationManager.m in Sources */,
 				03E90878177418240078BA59 /* AnnotViewController.m in Sources */,
+				038E9D1C177932E400ACE963 /* ColorCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

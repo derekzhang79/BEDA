@@ -12,6 +12,7 @@
 #import "GraphSettingController.h"
 #import "BehaviorSettingController.h"
 
+
 @interface GraphWindowController : NSObject {
     IBOutlet NSTabView* tabview;
     IBOutlet NSTabView* graphControlTabview;
@@ -26,8 +27,6 @@
 - (IBAction)onAddGraph:(id)sender;
 - (IBAction)onApplySettings:(id)sender;
 
-- (void)applySettingsForGraphSettingController:(GraphSettingController*)gsc;
-- (void)applySettingsForBehaviorSettingController:(BehaviorSettingController*)bsc;
 - (BedaController*) beda;
 
 
