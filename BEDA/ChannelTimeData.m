@@ -190,6 +190,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSourceOffsetUpdated:)
                                                  name:BEDA_NOTI_SOURCE_OFFSET_CHANGED object:Nil];
     
+    ///////////////////////////
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onChannelHeadMoved:)
+                                                 name:BEDA_NOTI_CHANNEL_HEAD_MOVED
+                                               object:nil];
+    
     // Register self as notification observer
     [self reload];
     // Create a header plot
@@ -339,6 +345,24 @@
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////
+- (void) onChannelHeadMoved:(NSNotification *) notification {
+    [self updateOffsetOverlay];
+    Channel* ch = (Channel*)[notification object];
+    if (self == ch) {
+        return;
+    }
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    double gt = [[[self source] beda] gtAppTime];
+    [self setMyTimeInGlobal:gt];
+
+    
+//    [self setGtAppTime:[ch getMyTimeInGlobal]];
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Play/stop
 - (void)play {
@@ -402,6 +426,7 @@
 
 - (void) setMyTimeInGlobal:(double)gt {
     double lt = [self globalToLocalTime:gt];
+    NSLog(@"name: %@ lt = %lf gt = %lf", [self name], lt, gt);
     [self setHeaderTime:lt];
     [plotHeader reloadData];
 }
@@ -627,23 +652,13 @@
     if ([self isHeaderSelected]) {
         [self setHeaderTime:x];
     }
+  
     
-    if ([self isNavMode] == NO) {
-        double gt = [self getGlobalTime];
-        double lt = [self headerTime];
-        // gt + offset = lt
-        double offset = lt - gt;
-        [[self source] setOffset:offset];
-        NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:BEDA_NOTI_SOURCE_OFFSET_CHANGED
-         object:nil];
-    } else {
-        [plotHeader reloadData];
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"channelCurrentTimeUpdate"
-         object:self];
-    }
+    [plotHeader reloadData];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
+     object:self];
+    
     
     return YES;
 }

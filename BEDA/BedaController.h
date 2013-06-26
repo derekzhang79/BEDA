@@ -16,6 +16,9 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 #define BEDA_NOTI_APPLY_SETTING_PRESSED @"BedaNotiApplySettingPressed"
 #define BEDA_NOTI_ANNOTATION_CHANGED @"BedaNotiAnnotationChanged"
 
+// Notification for the new structure
+#define BEDA_NOTI_CHANNEL_HEAD_MOVED @"BedaNotiChannelHeadMoved"
+
 @interface BedaController : NSObject {
     IBOutlet NSSegmentedControl* modeSelector;
     IBOutlet NSSplitView* splitview;
@@ -42,6 +45,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (assign) double interval;
 
 
+- (BOOL)isSyncMode;
 - (NSSplitView*) getSplitView;
 
 // Responde to menu
@@ -69,7 +73,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 // Responde to notifications
 - (void) receiveChannelPlayed:(NSNotification *) notification;
 - (void) receiveChannelStoped:(NSNotification *) notification;
-- (void) receiveChannelCurrentTimeUpdated:(NSNotification *) notification;
+//- (void) receiveChannelCurrentTimeUpdated:(NSNotification *) notification;
 
 
 - (void)addSourceMov:(NSURL*)url;

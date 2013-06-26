@@ -18,7 +18,7 @@
 @property (retain) NSMutableArray* columns;
 
 - (void)loadFile:(NSURL*)url;
-- (void)loadEDAGraph;
+//- (void)loadEDAGraph;
 
 - (double)minValueForColumn:(int)index;
 - (double)maxValueForColumn:(int)index;

@@ -149,9 +149,9 @@
     double t = [self getMyTimeInGlobal];
     NSLog(@"%s : %lf", __PRETTY_FUNCTION__, t);
     
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"channelCurrentTimeUpdate"
-     object:self];
+//    [[NSNotificationCenter defaultCenter]
+//     postNotificationName:@"channelCurrentTimeUpdate"
+//     object:self];
 
 }
 

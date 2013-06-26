@@ -49,14 +49,20 @@ static BedaController* g_instance = nil;
                                                  name:@"channelStop"
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(receiveChannelCurrentTimeUpdated:)
-                                                 name:@"channelCurrentTimeUpdate"
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(receiveChannelCurrentTimeUpdated:)
+//                                                 name:@"channelCurrentTimeUpdate"
+//                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onAnnotationChanged:)
                                                  name:BEDA_NOTI_ANNOTATION_CHANGED
+                                               object:nil];
+    
+    ///////////////////////////
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onChannelHeadMoved:)
+                                                 name:BEDA_NOTI_CHANNEL_HEAD_MOVED
                                                object:nil];
     
     [self navigate:nil];
@@ -108,6 +114,11 @@ static BedaController* g_instance = nil;
 
 + (BedaController*) getInstance {
     return g_instance;
+}
+
+- (BOOL)isSyncMode {
+    if ([self isNavMode]) return NO;
+    else return YES;
 }
 
 
@@ -331,6 +342,21 @@ static BedaController* g_instance = nil;
     return [ch getMyTimeInGlobal];
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////
+- (void) onChannelHeadMoved:(NSNotification *) notification {
+    if ([self isSyncMode] == YES) {
+        return;
+    }
+    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    Channel* ch = (Channel*)[notification object];
+//    NSLog(@"channel time = %lf", [ch getMyTimeInGlobal]);
+    [self setGtAppTime:[ch getMyTimeInGlobal]];
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
 - (void) receiveChannelPlayed:(NSNotification *) notification {
     if ([self isNavMode] == NO) {
         return;
@@ -358,28 +384,28 @@ static BedaController* g_instance = nil;
 
 }
 
-- (void) receiveChannelCurrentTimeUpdated:(NSNotification *) notification {
-    if ([self isNavMode] == NO) {
-        return;
-    }
-    
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    Channel* lhs = [notification object];
-//    QTMovie* lhs = [senderChannel movie];
-
-    for (Source* s in [self sources]) {
-        for (Channel* rhs in [s channels]) {
-  //          QTMovie* rhs = [ch movie];
-            if (lhs == rhs) {
-                continue;
-            }
-            [rhs setMyTimeInGlobal:[lhs getMyTimeInGlobal]];
-
-        }
-    }
-    [self setGtAppTime:[self getGlobalTime]];
-
-}
+//- (void) receiveChannelCurrentTimeUpdated:(NSNotification *) notification {
+//    if ([self isNavMode] == NO) {
+//        return;
+//    }
+//    
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    Channel* lhs = [notification object];
+////    QTMovie* lhs = [senderChannel movie];
+//
+//    for (Source* s in [self sources]) {
+//        for (Channel* rhs in [s channels]) {
+//  //          QTMovie* rhs = [ch movie];
+//            if (lhs == rhs) {
+//                continue;
+//            }
+//            [rhs setMyTimeInGlobal:[lhs getMyTimeInGlobal]];
+//
+//        }
+//    }
+//    [self setGtAppTime:[self getGlobalTime]];
+//
+//}
 
 - (void) onAnnotationChanged:(NSNotification *) notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
