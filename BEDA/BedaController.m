@@ -26,7 +26,9 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize gtAppTime;
 @synthesize duration;
 @synthesize interval;
-@synthesize controllerWindow;
+@synthesize graphWindowController;
+@synthesize dataWindowController;
+@synthesize window;
 
 static BedaController* g_instance = nil;
 
@@ -61,8 +63,47 @@ static BedaController* g_instance = nil;
     [self setDuration:180];
     [self setInterval:10];
     g_instance = self;
-    [self setControllerWindow:Nil];
+    [self setGraphWindowController:Nil];
     
+    ipc = [[IntervalPlayerController alloc] initWithWindowNibName:@"IntervalPlayerWindow"];
+    
+}
+
+-(IBAction)openDataAnalysisWindow:(id)sender{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([self dataWindowController] != Nil) {
+        [[[self dataWindowController] window] makeMainWindow];
+        NSLog(@"%s : we already has DataWindowController", __PRETTY_FUNCTION__);
+        return;
+    }
+    
+    
+    NSWindowController *cw = [[NSWindowController alloc] initWithWindowNibName:@"DataAnalysisWindow"];
+    [cw showWindow:self];
+    [self setDataWindowController:cw];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onDataWindowControllerClosed:)
+                                                 name:NSWindowWillCloseNotification
+                                               object:[dataWindowController window]];
+}
+
+- (void) onDataWindowControllerClosed:(NSNotification*) noti {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self setDataWindowController:Nil];
+    
+}
+
+-(IBAction)showIntervalPlayerSheet:(id)sender
+{
+    assert ([ipc window]);
+    assert (window);
+    [NSApp beginSheet: [ipc window]
+       modalForWindow: window
+        modalDelegate: ipc
+       didEndSelector: @selector(didEndSheet:returnCode:contextInfo:)
+          contextInfo: nil];
 }
 
 + (BedaController*) getInstance {
@@ -116,8 +157,8 @@ static BedaController* g_instance = nil;
 - (IBAction)openGraphController:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    if ([self controllerWindow] != Nil) {
-        [[[self controllerWindow] window] makeMainWindow];
+    if ([self graphWindowController] != Nil) {
+        [[[self graphWindowController] window] makeMainWindow];
         NSLog(@"%s : we already has ControllerWindow", __PRETTY_FUNCTION__);
         return;
     }
@@ -125,17 +166,17 @@ static BedaController* g_instance = nil;
     
     NSWindowController *cw = [[NSWindowController alloc] initWithWindowNibName:@"GraphController"];
     [cw showWindow:self];
-    [self setControllerWindow:cw];
+    [self setGraphWindowController:cw];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onGraphControllerClosed:)
                                                  name:NSWindowWillCloseNotification
-                                               object:[controllerWindow window]];
+                                               object:[graphWindowController window]];
 }
 
 - (void) onGraphControllerClosed:(NSNotification*) noti {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self setControllerWindow:Nil];
+    [self setGraphWindowController:Nil];
 
 }
 

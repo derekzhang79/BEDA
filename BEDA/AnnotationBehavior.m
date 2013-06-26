@@ -34,7 +34,7 @@
 
 }
 
-- (id) initWithName:(NSString*)n inCategory:(NSString*)c withColor:(NSColor*)cl withKey:(NSString*)k {
+- (id) initWithName:(NSString*)n withColor:(NSColor*)cl withKey:(NSString*)k {
     self = [super init];
     
     if (self) {
@@ -42,9 +42,9 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _times = [[NSMutableArray alloc] init];
         [self setName:n];
-        [self setCategory:c];
         [self setColor:cl];
         [self setKey:k];
+        [self setCategory:@""];
     }
     return self;
 }

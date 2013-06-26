@@ -14,7 +14,6 @@
 @interface BehaviorSettingController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>{
     IBOutlet NSTableView *table;
     IBOutlet NSSegmentedControl* modeSelector;
-    NSMutableArray* data;
 }
 
 @property (retain) SourceTimeData* source;

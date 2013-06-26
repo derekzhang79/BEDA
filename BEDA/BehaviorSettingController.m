@@ -67,26 +67,26 @@
         
         [controlArray insertObject:key atIndex:row ];
         return key;
-    } else if ([tableColumn.identifier isEqualToString:@"Behavior Category"]) {
-        NSTextField *category = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 50, 10)] autorelease];
-        NSString* myCategory = [[[[self source]annots] behaviorByIndex:(int)row] category];
-        [category setStringValue:myCategory];
-        category.identifier = @"BehaviorView";
-        [category setBezeled:YES];
-        [category setDrawsBackground:NO];
-        [category setEditable:YES];
-        [category setSelectable:YES];
-        
-        [controlArray insertObject:category atIndex:row];
-
-        return category;
-    } else
+    }
+//        else if ([tableColumn.identifier isEqualToString:@"Behavior Category"]) {
+//        NSTextField *category = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 50, 10)] autorelease];
+//        NSString* myCategory = [[[[self source]annots] behaviorByIndex:(int)row] category];
+//        [category setStringValue:myCategory];
+//        category.identifier = @"BehaviorView";
+//        [category setBezeled:YES];
+//        [category setDrawsBackground:NO];
+//        [category setEditable:YES];
+//        [category setSelectable:YES];
+//        
+//        [controlArray insertObject:category atIndex:row];
+//
+//        return category;
+//    } 
     
     // Behavior Description
-    if ([tableColumn.identifier isEqualToString:@"Behavior Description"]) {
+    else if ([tableColumn.identifier isEqualToString:@"Behavior Kind"]) {
 //        NSTextField *behaviorDesc = [tableView makeViewWithIdentifier:@"descriptionView" owner:self];
-        NSTextField *behaviorDesc = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 50, 10)] autorelease];
-            behaviorDesc.identifier = @"descriptionView";
+        NSTextField *behaviorDesc = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 100, 10)] autorelease];
             NSString* myDesc = [[[[self source]annots] behaviorByIndex:(int)row] name];
             [behaviorDesc setStringValue:myDesc];
             [behaviorDesc setBezeled:YES];
@@ -114,7 +114,7 @@
         NSLog(@"add annotation");
         AnnotationBehavior* annot = Nil;
         annot = [[AnnotationBehavior alloc]
-                 initWithName:@"hi" inCategory:@"hello" withColor:[NSColor blueColor] withKey:@"k"];
+                 initWithName:@"hi" withColor:[NSColor blueColor] withKey:@"k"];
         [[[self source] annots] addBehavior:annot];
         NSUInteger n = [[[self source] annots] countDefinedBehaviors];
         //[table reloadData];
@@ -144,13 +144,13 @@
             NSTextField *v = [array objectAtIndex:i];
             [ab setKey:[v stringValue]];
         }
+//        {
+//            NSMutableArray* array = [[self controls] objectForKey:@"Behavior Category"];
+//            NSTextField *v = [array objectAtIndex:i];
+//            [ab setCategory:[v stringValue]];
+//        }
         {
-            NSMutableArray* array = [[self controls] objectForKey:@"Behavior Category"];
-            NSTextField *v = [array objectAtIndex:i];
-            [ab setCategory:[v stringValue]];
-        }
-        {
-            NSMutableArray* array = [[self controls] objectForKey:@"Behavior Description"];
+            NSMutableArray* array = [[self controls] objectForKey:@"Behavior Kind"];
             NSTextField *v = [array objectAtIndex:i];
             [ab setName:[v stringValue]];
         }

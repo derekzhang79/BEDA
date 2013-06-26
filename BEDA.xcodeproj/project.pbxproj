@@ -29,6 +29,11 @@
 		038A62D416FD4CCB00E91A65 /* annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D216FD4CCB00E91A65 /* annotation.png */; };
 		038A62D516FD4CCB00E91A65 /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D316FD4CCB00E91A65 /* sync.png */; };
 		038E9D1C177932E400ACE963 /* ColorCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D1B177932E400ACE963 /* ColorCellView.m */; };
+		038E9D1F177961E500ACE963 /* PopupBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D1E177961E500ACE963 /* PopupBtnCell.m */; };
+		038E9D2217796D0400ACE963 /* IntervalPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D2117796D0400ACE963 /* IntervalPlayerController.m */; };
+		038E9D2417796FE000ACE963 /* IntervalPlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D2317796FE000ACE963 /* IntervalPlayerWindow.xib */; };
+		038E9D2B177A6D8E00ACE963 /* DataAnalysisWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D2A177A6D8E00ACE963 /* DataAnalysisWindow.xib */; };
+		038E9D2E177A6DE800ACE963 /* DataAnalysisController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D2D177A6DE800ACE963 /* DataAnalysisController.m */; };
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
 		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
 		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
@@ -91,6 +96,14 @@
 		038A62D316FD4CCB00E91A65 /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
 		038E9D1A177932E400ACE963 /* ColorCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCellView.h; sourceTree = "<group>"; };
 		038E9D1B177932E400ACE963 /* ColorCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCellView.m; sourceTree = "<group>"; };
+		038E9D1D177961E500ACE963 /* PopupBtnCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupBtnCell.h; sourceTree = "<group>"; };
+		038E9D1E177961E500ACE963 /* PopupBtnCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupBtnCell.m; sourceTree = "<group>"; };
+		038E9D2017796D0400ACE963 /* IntervalPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalPlayerController.h; sourceTree = "<group>"; };
+		038E9D2117796D0400ACE963 /* IntervalPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalPlayerController.m; sourceTree = "<group>"; };
+		038E9D2317796FE000ACE963 /* IntervalPlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntervalPlayerWindow.xib; sourceTree = "<group>"; };
+		038E9D2A177A6D8E00ACE963 /* DataAnalysisWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataAnalysisWindow.xib; sourceTree = "<group>"; };
+		038E9D2C177A6DE800ACE963 /* DataAnalysisController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAnalysisController.h; sourceTree = "<group>"; };
+		038E9D2D177A6DE800ACE963 /* DataAnalysisController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAnalysisController.m; sourceTree = "<group>"; };
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
@@ -214,7 +227,6 @@
 				B25CBBE516D1DDB300626FA9 /* Data */,
 				036723D216D181D9004F14D6 /* AppDelegate.h */,
 				036723D316D181D9004F14D6 /* AppDelegate.m */,
-				036723D516D181DA004F14D6 /* MainMenu.xib */,
 				036723C716D181D9004F14D6 /* Supporting Files */,
 			);
 			path = BEDA;
@@ -254,7 +266,10 @@
 			isa = PBXGroup;
 			children = (
 				B26BF27E176182EE009BCC7D /* BedaController.h */,
+				038E9D2C177A6DE800ACE963 /* DataAnalysisController.h */,
+				038E9D2D177A6DE800ACE963 /* DataAnalysisController.m */,
 				B26BF27F176182EE009BCC7D /* BedaController.m */,
+				038E9D2A177A6D8E00ACE963 /* DataAnalysisWindow.xib */,
 				B26BF28417618344009BCC7D /* Channel.h */,
 				B26BF28517618344009BCC7D /* Channel.m */,
 				B26BF28117618336009BCC7D /* Source.h */,
@@ -263,6 +278,12 @@
 				B26BF2881761835F009BCC7D /* Viewer.m */,
 				B299F6BA176AE8E6004BCD35 /* ProjectManager.h */,
 				B299F6BB176AE8E6004BCD35 /* ProjectManager.m */,
+				038E9D1D177961E500ACE963 /* PopupBtnCell.h */,
+				038E9D1E177961E500ACE963 /* PopupBtnCell.m */,
+				038E9D2317796FE000ACE963 /* IntervalPlayerWindow.xib */,
+				038E9D2017796D0400ACE963 /* IntervalPlayerController.h */,
+				038E9D2117796D0400ACE963 /* IntervalPlayerController.m */,
+				036723D516D181DA004F14D6 /* MainMenu.xib */,
 			);
 			name = AppController;
 			sourceTree = "<group>";
@@ -411,6 +432,8 @@
 				0320251A176FC3E600BC7020 /* GraphSettingView.xib in Resources */,
 				03E9086E17715ABA0078BA59 /* BehaviorSettingView.xib in Resources */,
 				03E90875177418180078BA59 /* AnnotView.xib in Resources */,
+				038E9D2417796FE000ACE963 /* IntervalPlayerWindow.xib in Resources */,
+				038E9D2B177A6D8E00ACE963 /* DataAnalysisWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +469,9 @@
 				B27C396E17715FC50025188F /* AnnotationManager.m in Sources */,
 				03E90878177418240078BA59 /* AnnotViewController.m in Sources */,
 				038E9D1C177932E400ACE963 /* ColorCellView.m in Sources */,
+				038E9D1F177961E500ACE963 /* PopupBtnCell.m in Sources */,
+				038E9D2217796D0400ACE963 /* IntervalPlayerController.m in Sources */,
+				038E9D2E177A6DE800ACE963 /* DataAnalysisController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

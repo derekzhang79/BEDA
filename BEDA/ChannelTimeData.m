@@ -130,7 +130,7 @@
     
     x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 10);
     //////////////////////////////////////////////////////////////////////xOrthogonal coordinate decimal should be set to starting y range
-    x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
+    x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(min);
     x.minorTicksPerInterval       = 1;
     
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -144,11 +144,23 @@
     
     CPTXYAxis *y = axisSet.yAxis;
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
-    y.majorIntervalLength         = CPTDecimalFromString(@"1.0");
-    y.minorTicksPerInterval       = 0.5;
+    if ( [self channelIndex] >= 0) {  // If channelIndex is -1 (less than zero), it means this is annotation channel
+        y.majorIntervalLength         = CPTDecimalFromString(@"1.0");
+        y.minorTicksPerInterval       = 0.5;
+        y.labelTextStyle = titleText;
+
+    } else {
+        y.majorIntervalLength         = CPTDecimalFromString(@"5.0");
+        y.minorTicksPerInterval       = 5.0;
+        
+        CPTMutableTextStyle *invisible = [CPTMutableTextStyle textStyle];
+        invisible.color = [CPTColor colorWithComponentRed:0.0f green:0.0f blue:0.0f alpha:0.0f];
+        invisible.fontSize = 12;
+        invisible.fontName = @"Helvetica";
+        y.labelTextStyle = invisible;
+    }
     y.axisLineStyle = majorGridLineStyle;
     y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
-    y.labelTextStyle = titleText;
     y.titleTextStyle = titleText;
     y.titleOffset = 35;
     
@@ -219,6 +231,10 @@
     double len = max - min;
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
+    // Axes
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+    CPTXYAxis *x          = axisSet.xAxis;
+    x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(min);
 }
 
 - (void) reload {
@@ -474,13 +490,11 @@
 }
 
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
-    double minY = 0.1;
-    double maxY = 4.9;
-    if ([self channelIndex] == 2) {
-        minY = 31.1;
-        maxY = 36.9;
-    }
-    
+//    double minY = 0.1;
+//    double maxY = 4.9;
+    double minY = [self minValue] + 0.1;
+    double maxY = [self maxValue] - 0.1;
+
     double px[6] = {0.0, 0.0, 0.5, 0.0, 0.0, 0.0};
     double py[6] = {maxY, minY, 4.8, 4.0, 0.2, 0.0};
     double t = [self headerTime];
@@ -556,7 +570,7 @@
         return [[beh times] objectAtIndex:index];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
         // Returns Y values
-        return [NSNumber numberWithInt: [beh usedIndex]];
+        return [NSNumber numberWithInt: [beh usedIndex] + 1];
     } else {
         return nil;
     }

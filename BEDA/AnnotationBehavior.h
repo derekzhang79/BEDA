@@ -22,7 +22,7 @@
 
 @property (retain) NSMutableArray* times;
 
-- (id) initWithName:(NSString*)n inCategory:(NSString*)c withColor:(NSColor*)cl withKey:(NSString*)k;
+- (id) initWithName:(NSString*)n withColor:(NSColor*)cl withKey:(NSString*)k;
 - (bool) isUsed;
 
 - (int) numBehaviorIntervals;

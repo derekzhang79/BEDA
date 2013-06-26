@@ -211,13 +211,7 @@
      postNotificationName:BEDA_NOTI_APPLY_SETTING_PRESSED
      object:nil];
     
-    
-//    if ([gsc isGraphVisible] == YES){
-//        
-//    }
-    
     [[self beda] createViewsForAllChannels];
-    
 }
 
 - (BedaController*) beda {
