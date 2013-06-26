@@ -12,6 +12,13 @@
 #import "SourceTimeData.h"
 #import "ChannelTimeData.h"
 
+
+@implementation SourceTabViewItem
+
+@synthesize tvc;
+
+@end
+
 @implementation GraphWindowController
 
 @synthesize tableViewControllers = _tableViewControllers;
@@ -79,8 +86,9 @@
     NSString* name = [source name];
     NSLog(@"creating a tab for source [%@]", name);
     // Create a tab view item
-    NSTabViewItem *item = [[[NSTabViewItem alloc]
+    SourceTabViewItem *item = [[[SourceTabViewItem alloc]
                             initWithIdentifier:name] autorelease];
+    
     [item setLabel:name];
     
     // Create a custum view and assign it to the tab view item
@@ -89,6 +97,7 @@
     [[self tableViewControllers] addObject:tvc];
     [tvc setSource:source];
     [item setView:[tvc view]];
+    [item setTvc:tvc];
     
     // Add a new tab to the tabview
     [tabview addTabViewItem:item];
@@ -102,7 +111,7 @@
 - (IBAction)onAddGraph:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSTabViewItem* selectedItem = [tabview selectedTabViewItem];
+    SourceTabViewItem* selectedItem = (SourceTabViewItem*)[tabview selectedTabViewItem];
     if (selectedItem == Nil) {
         NSLog(@"%s: selectedItem is Nil", __PRETTY_FUNCTION__);
         return;
@@ -111,11 +120,14 @@
     int selectedIndex = (int)[tabview indexOfTabViewItem:selectedItem];
     NSLog(@"%s: selectedIndex = %d", __PRETTY_FUNCTION__, selectedIndex);
     
-    TableViewController* tvc = [[self tableViewControllers] objectAtIndex:selectedIndex];
+    // TableViewController* tvc = [[self tableViewControllers] objectAtIndex:selectedIndex];
+    TableViewController* tvc = [selectedItem tvc];
     if ([tvc selectedTableColumn] == -1) {
         NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
     }
-    SourceTimeData* s = [[[self beda] sources] objectAtIndex:selectedIndex];
+//    SourceTimeData* s = [[[self beda] sources] objectAtIndex:selectedIndex];
+    SourceTimeData* s = [tvc source];
+
     BOOL isAnnotation = [[tvc selectedTableColumnName] isEqualToString:@"Annotation"];
     ////// Create a channel
     // Step 1. Create the proper channel

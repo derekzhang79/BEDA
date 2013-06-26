@@ -38,6 +38,12 @@
 												 name:QTMovieTimeDidChangeNotification
                                                object:newMovie];
     
+    ///////////////////////////
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onChannelHeadMoved:)
+                                                 name:BEDA_NOTI_CHANNEL_HEAD_MOVED
+                                               object:nil];
+    
     
 }
 
@@ -92,6 +98,8 @@
 }
 
 - (void) setMyTimeInGlobal:(double)gt {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
     if (fabs(gt - [self getMyTimeInGlobal]) < 0.01) {
         return;
     }
@@ -135,25 +143,50 @@
 }
 
 - (void) timeDidChanged: (NSNotification *)notification {
-    if ([self isNavMode] == NO) {
-        double gt = [self getGlobalTime];
-        double lt = [self getMyTimeInLocal];
-        // gt + offset = lt
-        double offset = lt - gt;
-        [[self source] setOffset:offset];
-        NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
-        [self updateOffsetOverlay];
-        return;
-    }
-
     double t = [self getMyTimeInGlobal];
     NSLog(@"%s : %lf", __PRETTY_FUNCTION__, t);
+
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
+     object:self];
+//    if ([self isNavMode] == NO) {
+//        double gt = [self getGlobalTime];
+//        double lt = [self getMyTimeInLocal];
+//        // gt + offset = lt
+//        double offset = lt - gt;
+//        [[self source] setOffset:offset];
+//        NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
+//        [self updateOffsetOverlay];
+//        return;
+//    }
+//
+//    double t = [self getMyTimeInGlobal];
+//    NSLog(@"%s : %lf", __PRETTY_FUNCTION__, t);
     
 //    [[NSNotificationCenter defaultCenter]
 //     postNotificationName:@"channelCurrentTimeUpdate"
 //     object:self];
 
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+- (void) onChannelHeadMoved:(NSNotification *) notification {
+    [self updateOffsetOverlay];
+    Channel* ch = (Channel*)[notification object];
+    if (self == ch) {
+        return;
+    }
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    double gt = [[[self source] beda] gtAppTime];
+    [self setMyTimeInGlobal:gt];
+    
+    
+    //    [self setGtAppTime:[ch getMyTimeInGlobal]];
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+
 
 - (NSString*) SMPTEStringFromTime:(QTTime)time
 {

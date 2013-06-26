@@ -11,6 +11,26 @@
 
 @implementation SourceMovie
 
+-(id) init {
+    self = [super init];
+    
+    if (self) {
+        // Initialization code here
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+
+        
+        ///////////////////////////
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onChannelHeadMoved:)
+                                                     name:BEDA_NOTI_CHANNEL_HEAD_MOVED
+                                                   object:nil];
+        
+    }
+    
+    return self;
+}
+
+
 - (void)loadFile:(NSURL*)url {
     NSLog(@"%s: Load URL %@ ", __PRETTY_FUNCTION__, url);
     
@@ -28,6 +48,30 @@
     [self setName:@"SourceMovie"];
 
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+- (void) onChannelHeadMoved:(NSNotification *) notification {
+    if ([ [self beda] isNavMode] == YES) {
+        return;
+    }
+    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    ChannelMovie* ch = (ChannelMovie*)[notification object];
+    
+    if (self != [ch source]) {
+        return;
+    }
+    
+    double gt = [[self beda] gtAppTime];
+    double lt = [ch getMyTimeInLocal];
+    // gt + offset = lt
+    [self setOffset:lt - gt];
+    //    NSLog(@"gt = %lf lt = %lf offset = %lf", gt, lt, [self offset]);
+    
+    
+}
+///////////////////////////////////////////////////////////////////////////////////////////
 
 
 @end

@@ -12,6 +12,13 @@
 #import "GraphSettingController.h"
 #import "BehaviorSettingController.h"
 
+@interface SourceTabViewItem : NSTabViewItem {
+    
+}
+
+@property (assign) TableViewController* tvc;
+
+@end
 
 @interface GraphWindowController : NSObject {
     IBOutlet NSTabView* tabview;

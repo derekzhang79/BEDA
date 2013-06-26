@@ -432,6 +432,7 @@ static BedaController* g_instance = nil;
     }
     
     [self spaceProportionaly:splitview];
+    [self spaceEvenly:[self movSplitView]];
     
 }
 
@@ -478,7 +479,9 @@ static BedaController* g_instance = nil;
         {
             NSRect frame = [subview frame];
             frame.origin.x = rintf(x);
+//            frame.origin.y = 0;
             frame.size.width = rintf(x + width) - frame.origin.x;
+//            frame.size.height = [splitView bounds].size.height;
             [subview setFrame:frame];
             x += width + divider;
         }
@@ -648,19 +651,28 @@ static BedaController* g_instance = nil;
 - (void)clearAllViews {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
+    while([[[self movSplitView] subviews] count] > 0) {
+        [[[[self movSplitView] subviews] objectAtIndex:0] removeFromSuperview];
+    }
+    
     while([[splitview subviews] count] > 0) {
         [[[splitview subviews] objectAtIndex:0] removeFromSuperview];
     }
+    
+    [self setMovSplitView:Nil];
 }
 
 - (void)createViewsForAllChannels {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [self clearAllViews];
+    
     for (Source* s in [self sources]) {
         for (Channel* ch in [s channels]) {
             if ([ch isKindOfClass:[ChannelMovie class]]) {
+                [self createMovSplitViewIfNotExist];
                 ChannelMovie* chm = (ChannelMovie*)ch;
                 [chm createMovieViewFor:self];
+
             } else if ([ch isKindOfClass:[ChannelTimeData class]]) {
                 ChannelTimeData* chtd = (ChannelTimeData*)ch;
                 [chtd createGraphViewFor:self];
