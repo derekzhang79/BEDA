@@ -272,12 +272,11 @@ static BedaController* g_instance = nil;
 -(IBAction)zoomOut:(id)sender
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self clearAllViews];
-//    for (Source* s in [self sources]) {
-//        for (Channel* ch in [s channels]) {
-//            [ch zoomOut];
-//        }
-//    }
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            [ch zoomOut];
+        }
+    }
 }
 
 - (IBAction)navigate:(id)sender {

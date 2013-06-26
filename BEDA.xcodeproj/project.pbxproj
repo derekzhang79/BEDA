@@ -34,6 +34,9 @@
 		038E9D2417796FE000ACE963 /* IntervalPlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D2317796FE000ACE963 /* IntervalPlayerWindow.xib */; };
 		038E9D2B177A6D8E00ACE963 /* DataAnalysisWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D2A177A6D8E00ACE963 /* DataAnalysisWindow.xib */; };
 		038E9D2E177A6DE800ACE963 /* DataAnalysisController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D2D177A6DE800ACE963 /* DataAnalysisController.m */; };
+		038E9D31177A9EE600ACE963 /* summary.R in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D30177A9C8100ACE963 /* summary.R */; };
+		038E9D33177ABF0300ACE963 /* mean.R in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D32177ABEE900ACE963 /* mean.R */; };
+		038E9D35177AC12900ACE963 /* median.R in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D34177AC10D00ACE963 /* median.R */; };
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
 		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
 		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
@@ -104,6 +107,9 @@
 		038E9D2A177A6D8E00ACE963 /* DataAnalysisWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataAnalysisWindow.xib; sourceTree = "<group>"; };
 		038E9D2C177A6DE800ACE963 /* DataAnalysisController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAnalysisController.h; sourceTree = "<group>"; };
 		038E9D2D177A6DE800ACE963 /* DataAnalysisController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAnalysisController.m; sourceTree = "<group>"; };
+		038E9D30177A9C8100ACE963 /* summary.R */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = summary.R; sourceTree = "<group>"; };
+		038E9D32177ABEE900ACE963 /* mean.R */ = {isa = PBXFileReference; explicitFileType = text.script; path = mean.R; sourceTree = "<group>"; };
+		038E9D34177AC10D00ACE963 /* median.R */ = {isa = PBXFileReference; explicitFileType = text.script; path = median.R; sourceTree = "<group>"; };
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
@@ -221,6 +227,7 @@
 				B26BF28A176183C1009BCC7D /* Movie */,
 				031463781762F62F007B075B /* TimeData */,
 				B2B7E9C9176AA45100190941 /* GraphWindow */,
+				038E9D2F177A9C4D00ACE963 /* Script */,
 				B26BF28B176183D5009BCC7D /* Resources */,
 				B28D32DC16D20DBB00D58ADA /* GraphView */,
 				B25CBBE616D1DDBD00626FA9 /* Controller */,
@@ -242,6 +249,16 @@
 				036723CF16D181D9004F14D6 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		038E9D2F177A9C4D00ACE963 /* Script */ = {
+			isa = PBXGroup;
+			children = (
+				038E9D30177A9C8100ACE963 /* summary.R */,
+				038E9D32177ABEE900ACE963 /* mean.R */,
+				038E9D34177AC10D00ACE963 /* median.R */,
+			);
+			name = Script;
 			sourceTree = "<group>";
 		};
 		B25CBBE516D1DDB300626FA9 /* Data */ = {
@@ -266,9 +283,9 @@
 			isa = PBXGroup;
 			children = (
 				B26BF27E176182EE009BCC7D /* BedaController.h */,
+				B26BF27F176182EE009BCC7D /* BedaController.m */,
 				038E9D2C177A6DE800ACE963 /* DataAnalysisController.h */,
 				038E9D2D177A6DE800ACE963 /* DataAnalysisController.m */,
-				B26BF27F176182EE009BCC7D /* BedaController.m */,
 				038E9D2A177A6D8E00ACE963 /* DataAnalysisWindow.xib */,
 				B26BF28417618344009BCC7D /* Channel.h */,
 				B26BF28517618344009BCC7D /* Channel.m */,
@@ -434,6 +451,9 @@
 				03E90875177418180078BA59 /* AnnotView.xib in Resources */,
 				038E9D2417796FE000ACE963 /* IntervalPlayerWindow.xib in Resources */,
 				038E9D2B177A6D8E00ACE963 /* DataAnalysisWindow.xib in Resources */,
+				038E9D31177A9EE600ACE963 /* summary.R in Resources */,
+				038E9D33177ABF0300ACE963 /* mean.R in Resources */,
+				038E9D35177AC12900ACE963 /* median.R in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

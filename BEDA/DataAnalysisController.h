@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataAnalysisController : NSObject  {
-    
+@interface DataAnalysisController : NSObject<NSTableViewDelegate, NSTableViewDataSource>  {
+    IBOutlet NSTableView* tableview;
+    IBOutlet NSComboBox* comboBoxScriptSelection;
 }
+
+@property (retain) NSMutableArray* channels;
+@property (retain) NSMutableDictionary* results;
+
+-(IBAction)doAnalysis:(id)sender;
+
 
 @end
