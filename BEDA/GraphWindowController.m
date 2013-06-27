@@ -101,6 +101,8 @@
     
     // Add a new tab to the tabview
     [tabview addTabViewItem:item];
+    [tabview selectTabViewItem:item];
+
 }
 
 - (IBAction)openFile:(id)sender {
@@ -187,6 +189,7 @@
     
     [item setView:[behaviorSettingController view]];
     [graphControlTabview addTabViewItem:item];
+    [graphControlTabview selectTabViewItem:item];
 }
 
 - (void)addGraphForGraphChannel:(ChannelTimeData*)ch  {
@@ -212,6 +215,7 @@
     
     [item setView:[graphSettingController view]];
     [graphControlTabview addTabViewItem:item];
+    [graphControlTabview selectTabViewItem:item];
 
 }
 

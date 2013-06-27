@@ -9,6 +9,9 @@
 #import "ProjectManager.h"
 #import "BedaController.h"
 #import "Source.h"
+#import "SourceTimeData.h"
+#import "Channel.h"
+#import "ChannelTimeData.h"
 
 @implementation ProjectManager
 
@@ -63,6 +66,15 @@
     [self saveFile:url];
 }
 
+- (NSString*) NSStringFromDouble : (double)v {
+    return [NSString stringWithFormat:@"%lf", v];
+}
+
+
+- (NSString*) NSStringFromInt : (int)v {
+    return [NSString stringWithFormat:@"%d", v];
+}
+
 
 - (void)saveFile:(NSURL*)url {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -73,6 +85,12 @@
     
     [xmlDoc setVersion:@"0.1"];
     [xmlDoc setCharacterEncoding:@"UTF-8"];
+    NSMutableDictionary* bedaAttrs = [[NSMutableDictionary alloc] init];
+    double apptime = [[self beda] gtAppTime];
+    [bedaAttrs setObject: [NSString stringWithFormat:@"%lf", apptime ]
+                  forKey:@"apptime"];
+    [root setAttributesWithDictionary:bedaAttrs];
+
     
     for (Source* s in [ [self beda] sources]) {
         NSXMLElement *nodeSource =
@@ -86,6 +104,28 @@
         
         // Add to the root
         [root addChild:nodeSource];
+        
+        if ([s isKindOfClass:[SourceTimeData class]] == YES) {
+            for (ChannelTimeData* ch in [s channels]) {
+                NSXMLElement *nodeChannel = (NSXMLElement *)[NSXMLNode elementWithName:@"channeltimedata"];
+                NSMutableDictionary* chattrs = [[NSMutableDictionary alloc] init];
+
+                [chattrs setObject:[ch name] forKey:@"name"];
+                [chattrs setObject:[self NSStringFromInt:[ch channelIndex]] forKey:@"index"];
+                [chattrs setObject:[self NSStringFromDouble:[ch minValue]]  forKey:@"minValue"];
+                [chattrs setObject:[self NSStringFromDouble:[ch maxValue]]  forKey:@"maxValue"];
+
+                
+//                [ch initGraph:@"Annotation" atIndex:index range:minValue to:maxValue
+//                withLineColor: [NSColor blueColor]
+//                    areaColor:[NSColor magentaColor]
+//                     isBottom:YES hasArea:NO];
+                [nodeChannel setAttributesWithDictionary:chattrs];
+//                
+                [nodeSource addChild:nodeChannel];
+            }
+        }
+
     }
     NSLog(@"\n\n%@\n\n",     [xmlDoc XMLStringWithOptions:NSXMLNodePrettyPrint]);
     
@@ -124,6 +164,11 @@
     NSLog(@"Load OK on file %@", url);
     
     NSXMLElement *root = [xmlDoc rootElement];
+    // Read app time
+    double apptime = [[[root attributeForName:@"apptime"] stringValue] doubleValue];
+    [[self beda] setGtAppTime:apptime];
+    NSLog(@"AppTime = %lf", apptime);
+    
     for (NSXMLElement* child in [root children]) {
         NSString* name = [child name];
         if ([name isEqualToString:@"source"] == NO) {
@@ -134,13 +179,46 @@
         NSString* offsetStr = [[child attributeForName:@"offset"] stringValue];
         double offset = [offsetStr doubleValue];
 
-        NSLog(@"name: %@, url: %@, offset = %lf\n",  name, fileurl, offset);
         [[self beda] openFileAtURL:fileurl];
         
         Source* source = [[[self beda] sources] lastObject];
         [source setOffset:offset];
+        
+        for (NSXMLElement* child2 in [child children]) {
+            NSString* name2 = [child2 name];
+            if ([name2 isEqualToString:@"channeltimedata"] == NO) {
+                continue;
+            }
+            
+            int index = [[[child2 attributeForName:@"index"] stringValue] intValue];
+            double maxValue = [[[child2 attributeForName:@"maxValue"] stringValue] doubleValue];
+            double minValue = [[[child2 attributeForName:@"minValue"] stringValue] doubleValue];
+            NSString* name = [[child2 attributeForName:@"name"] stringValue];
+            
+            ChannelTimeData *ch = [[ChannelTimeData alloc] init];
+            [ch setSource:source];
+            
+            [ch initGraph:@"Annotation" atIndex:index range:minValue to:maxValue
+            withLineColor: [NSColor blueColor]
+                areaColor:[NSColor magentaColor]
+                 isBottom:YES hasArea:NO];
+            [ch setName:name];
+            [[source channels] addObject:ch];
+        }
+        NSLog(@"name: %@, url: %@, offset = %lf\n",  name, fileurl, offset);
+
     }
 
+    
+    [[self beda] createViewsForAllChannels];
+
+    NSLog(@"gtAppTime = %lf\n",  [[self beda] gtAppTime]);
+
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
+     object:nil];
+    
+    
 //    NSLog(@"\n\n%@\n\n",     [xmlDoc XMLStringWithOptions:NSXMLNodePrettyPrint]);
 
     

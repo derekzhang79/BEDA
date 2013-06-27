@@ -40,6 +40,9 @@
     if ([ [self beda] isNavMode] == YES) {
         return;
     }
+    if ([notification object] == Nil) {
+        return;
+    }
     
     NSLog(@"%s", __PRETTY_FUNCTION__);
     ChannelTimeData* ch = (ChannelTimeData*)[notification object];
@@ -172,5 +175,9 @@
         }
     }
     return round(maxValue);
+}
+
+-(double) maxTimeInSecond:(int)index {
+    return [self maxValueForColumn:0];
 }
 @end

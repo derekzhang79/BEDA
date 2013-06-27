@@ -17,10 +17,12 @@
 @property (retain) NSDate* basedate;
 @property (retain) NSMutableArray* columns;
 
+
 - (void)loadFile:(NSURL*)url;
 //- (void)loadEDAGraph;
 
 - (double)minValueForColumn:(int)index;
 - (double)maxValueForColumn:(int)index;
+- (double)maxTimeInSecond:(int)index;
 
 @end

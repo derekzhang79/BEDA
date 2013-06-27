@@ -348,10 +348,12 @@ static BedaController* g_instance = nil;
     if ([self isSyncMode] == YES) {
         return;
     }
+    if ([notification object] == Nil) {
+        return;
+    }
     
     NSLog(@"%s", __PRETTY_FUNCTION__);
     Channel* ch = (Channel*)[notification object];
-//    NSLog(@"channel time = %lf", [ch getMyTimeInGlobal]);
     [self setGtAppTime:[ch getMyTimeInGlobal]];
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -479,9 +481,7 @@ static BedaController* g_instance = nil;
         {
             NSRect frame = [subview frame];
             frame.origin.x = rintf(x);
-//            frame.origin.y = 0;
             frame.size.width = rintf(x + width) - frame.origin.x;
-//            frame.size.height = [splitView bounds].size.height;
             [subview setFrame:frame];
             x += width + divider;
         }
@@ -633,19 +633,6 @@ static BedaController* g_instance = nil;
     NSLog(@"%s: sources.size() = %lu ", __PRETTY_FUNCTION__, (unsigned long)[[self sources] count]);
     
     [self createAnnotationMenus];
-//    // Create a movie view for
-//    ChannelTimeData* chEda = [[s channels] objectAtIndex:0];
-//    ChannelTimeData* chTemp = [[s channels] objectAtIndex:1];
-//    ChannelTimeData* chAccel = [[s channels] objectAtIndex:2];
-//    if (chEda) {
-//        [chEda createEDAViewFor:self];
-//        [chTemp createTempViewFor:self];
-//        [chAccel createAccelViewFor:self];
-//    }
-    
-//    [self spaceEvenly:splitview];
-//    [self spaceProportionaly:splitview];
-
 }
 
 - (void)clearAllViews {
@@ -684,8 +671,6 @@ static BedaController* g_instance = nil;
     }
     
     [self spaceProportionaly:splitview];
-
-    
 }
 
 @end

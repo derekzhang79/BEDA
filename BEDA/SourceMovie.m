@@ -55,6 +55,9 @@
     if ([ [self beda] isNavMode] == YES) {
         return;
     }
+    if ([notification object] == Nil) {
+        return;
+    }
     
     NSLog(@"%s", __PRETTY_FUNCTION__);
     ChannelMovie* ch = (ChannelMovie*)[notification object];
