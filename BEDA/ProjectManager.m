@@ -260,7 +260,6 @@
             [ch setName:name];
             [[source channels] addObject:ch];
             
-            
             //for (AnnotationBehavior* beh in [[[ch source] annots] behaviors]) 
         }
         NSLog(@"name: %@, url: %@, offset = %lf\n",  name, fileurl, offset);
