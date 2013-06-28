@@ -223,7 +223,22 @@
         for (NSXMLElement* child2 in [child children]) {
             NSString* name2 = [child2 name];
             if ([name2 isEqualToString:@"channeltimedata"] == NO) {
+                NSString* name = [[child2 attributeForName:@"name"] stringValue];
+                NSColor* color = [self colorFromString:[[child2 attributeForName:@"color"] stringValue]] ;
+                NSString* key = [[child2 attributeForName:@"hotkey"] stringValue];
                 
+                AnnotationBehavior* annot = [[AnnotationBehavior alloc]
+                         initWithName:name withColor:color withKey:key];
+                [[source annots] addBehavior:annot];
+                
+                for(NSXMLElement* child3 in [child2 children]) {
+                    NSString* name3 = [child3 name];
+                    if ([name3 isEqualToString:@"time"] == NO){
+                        continue;
+                    }
+                    float t = [[[child3 attributeForName:@"t"] stringValue] floatValue];
+                    [[annot times] addObject:[NSNumber numberWithFloat:t]];
+                }
                 continue;
             }
             
