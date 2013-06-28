@@ -219,10 +219,14 @@
         
         Source* source = [[[self beda] sources] lastObject];
         [source setOffset:offset];
+        // Clear old behaviors
+        [[[source annots] behaviors] removeAllObjects];
         
         for (NSXMLElement* child2 in [child children]) {
             NSString* name2 = [child2 name];
             if ([name2 isEqualToString:@"channeltimedata"] == NO) {
+                NSLog(@"Annotation behavior: %@",  name);
+
                 NSString* name = [[child2 attributeForName:@"name"] stringValue];
                 NSColor* color = [self colorFromString:[[child2 attributeForName:@"color"] stringValue]] ;
                 NSString* key = [[child2 attributeForName:@"hotkey"] stringValue];
@@ -238,6 +242,8 @@
                     }
                     float t = [[[child3 attributeForName:@"t"] stringValue] floatValue];
                     [[annot times] addObject:[NSNumber numberWithFloat:t]];
+                    NSLog(@"Time : %f",  t);
+
                 }
                 continue;
             }
@@ -272,6 +278,10 @@
 
     [[NSNotificationCenter defaultCenter]
      postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
+     object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_ANNOTATION_CHANGED
      object:nil];
 
     
