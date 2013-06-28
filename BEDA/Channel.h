@@ -19,6 +19,7 @@
 @property (copy) NSString* name;
 
 - (void)play;
+- (void)fastplay;
 - (void)stop;
 
 - (void)zoomIn;

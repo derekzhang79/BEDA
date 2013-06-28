@@ -48,6 +48,7 @@
     [self setPlayBase:Nil];
     [self setMinValue:min];
     [self setMaxValue:max];
+    [self setRate:1.0];
     
     [super awakeFromNib];
     
@@ -402,18 +403,44 @@
     NSTimer* _timer = [self playTimer];
     if (_timer == nil)
     {
+        [self setRate:1.0];
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
                                                   target:self
                                                 selector:@selector(onPlayTimer:)
                                                 userInfo:nil
                                                  repeats:YES];
         [self setPlayTimer:_timer];
+        double playoffset = -[self rate] * [self headerTime];
         NSDate* clickedTime = [NSDate date];
-        NSDate* adjustedTime = [clickedTime dateByAddingTimeInterval:-[self headerTime]];
+        NSDate* adjustedTime = [clickedTime dateByAddingTimeInterval:playoffset];
         [self setPlayBase:adjustedTime];
         NSLog(@"%s", __PRETTY_FUNCTION__);
     }
 }
+
+- (void)fastplay {
+    if ([self isNavMode] == NO) {
+        NSLog(@"%s : graph only plays in Navigation Mode", __PRETTY_FUNCTION__);
+        return;
+    }
+    NSTimer* _timer = [self playTimer];
+    if (_timer == nil)
+    {
+        [self setRate:10.0];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                                  target:self
+                                                selector:@selector(onPlayTimer:)
+                                                userInfo:nil
+                                                 repeats:YES];
+        [self setPlayTimer:_timer];
+        double playoffset = -[self headerTime] / [self rate];
+        NSDate* clickedTime = [NSDate date];
+        NSDate* adjustedTime = [clickedTime dateByAddingTimeInterval:playoffset];
+        [self setPlayBase:adjustedTime];
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+    }
+}
+
 
 - (void)stop {
     NSTimer* _timer = [self playTimer];
@@ -426,10 +453,17 @@
     }
     
 }
+
+// newHeader = (now - clicked) + originalHeader
+// == newHeader = (now - (clicked - originalHeader) )
+
+// newHeader = rate * (now - clicked) + original
+// == newHeader = rate * (now - (clicked - original / rate))
 - (void)onPlayTimer : (id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    double t = -[[self playBase] timeIntervalSinceNow];
+    double t = -[self rate] * [[self playBase] timeIntervalSinceNow];
+    
     [self setHeaderTime:t];
     
     [plotHeader reloadData];

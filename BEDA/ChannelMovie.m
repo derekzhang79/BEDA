@@ -76,6 +76,10 @@
     }
 }
 
+- (void)fastplay {
+    /////???????????????
+}
+
 - (void)stop {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     if ([self movie] && [[self movie] rate] != 0.0f) {
@@ -126,15 +130,17 @@
     }
     
     if ([[self movie] rate] > 0) {
+        // If it's start
         NSLog(@"%s : PLAY", __PRETTY_FUNCTION__);
         [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"channelPlay"
+//         postNotificationName:@"channelPlay"
+         postNotificationName:BEDA_NOTI_CHANNEL_PLAY
          object:self];
         [self updateOffsetOverlay];
     } else {
         NSLog(@"%s : STOP", __PRETTY_FUNCTION__);
         [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"channelStop"
+         postNotificationName:BEDA_NOTI_CHANNEL_STOP
          object:self];
         [self updateOffsetOverlay];
 

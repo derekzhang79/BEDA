@@ -22,6 +22,25 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         [self setSource:nil];
+        
+        ///////////////////////////
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onPlay:)
+                                                     name:BEDA_NOTI_CHANNEL_PLAY
+                                                   object:nil];
+        
+        ///////////////////////////
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onFastPlay:)
+                                                     name:BEDA_NOTI_CHANNEL_FASTPLAY
+                                                   object:nil];
+
+         ///////////////////////////
+         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                  selector:@selector(onStop:)
+                                                      name:BEDA_NOTI_CHANNEL_STOP
+                                                    object:nil];
+        
     }
     
     return self;
@@ -31,6 +50,12 @@
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
     
 }
+
+- (void)fastplay {
+    NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
+    
+}
+
 
 - (void)stop {
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
@@ -111,6 +136,37 @@
     [self offsetOverlay].alphaValue = 1.0f;
     [self updateOffsetOverlay];
     
+}
+
+- (void) onPlay:(NSNotification *) notification {
+    Channel* ch = (Channel*)[notification object];
+    if (self == ch) {
+        return;
+    }
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self play];
+}
+
+- (void) onFastPlay:(NSNotification *) notification {
+    Channel* ch = (Channel*)[notification object];
+    if (self == ch) {
+        return;
+    }
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self fastplay];
+}
+
+- (void) onStop:(NSNotification *) notification {
+    
+    
+    Channel* ch = (Channel*)[notification object];
+    if (self == ch) {
+        return;
+    }
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self stop];
+//    [self setGtAppTime:[ch getMyTimeInGlobal]];
+    [[[self source] beda] setGtAppTime:[self getMyTimeInGlobal]];
 }
 
 - (void) hideOffsetOverlay {

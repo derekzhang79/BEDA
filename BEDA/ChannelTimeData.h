@@ -37,6 +37,7 @@
 @property (assign) double headerTime;
 @property (assign) double minValue;
 @property (assign) double maxValue;
+@property (assign) double rate;
 @property (retain) NSTimer* playTimer;
 @property (retain) NSDate* playBase;
 @property (retain) NSMutableArray* arrayPlotAnnots;
@@ -51,6 +52,7 @@
 
 // Play/stop
 - (void)play;
+- (void)fastplay;
 - (void)stop;
 - (void)onPlayTimer : (id)sender;
 
