@@ -28,6 +28,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize interval;
 @synthesize graphWindowController;
 @synthesize dataWindowController;
+@synthesize summaryProjectsController;
 @synthesize window;
 
 static BedaController* g_instance = nil;
@@ -89,6 +90,22 @@ static BedaController* g_instance = nil;
                                              selector:@selector(onDataWindowControllerClosed:)
                                                  name:NSWindowWillCloseNotification
                                                object:[dataWindowController window]];
+}
+
+-(IBAction)openSummaryProjectsWindow:(id)sender{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([self summaryProjectsController] != Nil) {
+        [[[self summaryProjectsController] window] makeMainWindow];
+        NSLog(@"%s : we already has DataWindowController", __PRETTY_FUNCTION__);
+        return;
+    }
+    
+    
+    NSWindowController *cw = [[NSWindowController alloc] initWithWindowNibName:@"SummaryProjectsWindow"];
+    [cw showWindow:self];
+    [self setSummaryProjectsController:cw];
+
 }
 
 - (void) onDataWindowControllerClosed:(NSNotification*) noti {

@@ -10,6 +10,7 @@
 #import <QTKit/QTKit.h>
 #import "IntervalPlayerController.h"
 #import "DataAnalysisController.h"
+#import "SummaryProjectsController.h"
 
 extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 #define BEDA_NOTI_SOURCE_ADDED @"BedaNotiSourceAdded"
@@ -29,6 +30,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
     
     IntervalPlayerController* ipc;
     DataAnalysisController* dac;
+    SummaryProjectsController* spc;
 }
 
 @property (retain) IBOutlet NSWindow *window;
@@ -41,6 +43,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (retain) NSSplitView* movSplitView;
 @property (retain) NSWindowController* graphWindowController;
 @property (retain) NSWindowController* dataWindowController;
+@property (retain) NSWindowController* summaryProjectsController;
 @property BOOL isNavMode;
 @property double gtAppTime;
 
@@ -56,6 +59,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (void)openFileAtURL:(NSURL*)url;
 
 -(IBAction)openDataAnalysisWindow:(id)sender;
+-(IBAction)openSummaryProjectsWindow:(id)sender;
 
 - (IBAction)openGraphController:(id)sender;
 - (IBAction)play:(id)sender;

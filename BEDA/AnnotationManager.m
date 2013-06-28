@@ -19,7 +19,7 @@
     if (self) {
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
-        _behaviors = [[NSMutableArray alloc] init];
+        _behaviors= [[NSMutableArray alloc] init];
     }
     return self;
     

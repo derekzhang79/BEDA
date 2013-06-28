@@ -15,6 +15,21 @@
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     graphview.hostedGraph = [self graph];
+    plotXData = [[[NSMutableArray alloc] init] autorelease];
+    plotYData = [[[NSMutableArray alloc] init] autorelease];
+    
+    [plotXData addObject:@"03_05csv"];
+    [plotYData addObject:[NSNumber numberWithFloat:10.0f]];
+    [plotXData addObject:@"03_07csv"];
+    [plotYData addObject:[NSNumber numberWithFloat:15.0f]];
+    
+    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
+    view.hostedGraph = graph;
+    
+    [self initGraph];
+    
+
+    
 }
 
 - (void)initGraph{
@@ -140,14 +155,20 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    return [plotData count];
+    return [plotXData count];
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
-    NSDecimalNumber *num = [[plotData objectAtIndex:index] objectForKey:[NSNumber numberWithInt:fieldEnum]];
-    
-    return num;
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+        // Otherwise, plot it data plot
+        switch (fieldEnum) {
+            case CPTScatterPlotFieldX:
+                return [plotXData objectAtIndex:index];
+            case CPTScatterPlotFieldY:
+                return [plotYData objectAtIndex:index];
+        }
+    return nil;
 }
 
 @end

@@ -13,10 +13,9 @@
     IBOutlet CPTGraphHostingView* graphview;
     CPTXYPlotSpace *plotSpace;
     CPTScatterPlot *dataSourceLinePlot;
-    NSArray *plotData;
+    NSMutableArray *plotXData;
+    NSMutableArray *plotYData;
 }
 
 @property (retain) CPTXYGraph* graph;
-
-- (CPTGraphHostingView*) getGraphView;
 @end
