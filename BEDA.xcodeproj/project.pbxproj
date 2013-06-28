@@ -39,6 +39,7 @@
 		038E9D35177AC12900ACE963 /* median.R in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D34177AC10D00ACE963 /* median.R */; };
 		038E9D37177E00E200ACE963 /* SummaryProjectsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D36177E00E200ACE963 /* SummaryProjectsWindow.xib */; };
 		038E9D3A177E010900ACE963 /* SummaryProjectsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D39177E010900ACE963 /* SummaryProjectsController.m */; };
+		038E9D3F177E34CA00ACE963 /* SummaryProjectsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */; };
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
 		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
 		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
@@ -115,6 +116,8 @@
 		038E9D36177E00E200ACE963 /* SummaryProjectsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryProjectsWindow.xib; sourceTree = "<group>"; };
 		038E9D38177E010800ACE963 /* SummaryProjectsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryProjectsController.h; sourceTree = "<group>"; };
 		038E9D39177E010900ACE963 /* SummaryProjectsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryProjectsController.m; sourceTree = "<group>"; };
+		038E9D3D177E34C900ACE963 /* SummaryProjectsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryProjectsManager.h; sourceTree = "<group>"; };
+		038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryProjectsManager.m; sourceTree = "<group>"; };
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				038E9D36177E00E200ACE963 /* SummaryProjectsWindow.xib */,
 				038E9D38177E010800ACE963 /* SummaryProjectsController.h */,
 				038E9D39177E010900ACE963 /* SummaryProjectsController.m */,
+				038E9D3D177E34C900ACE963 /* SummaryProjectsManager.h */,
+				038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */,
 			);
 			name = Annotation;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 				038E9D2217796D0400ACE963 /* IntervalPlayerController.m in Sources */,
 				038E9D2E177A6DE800ACE963 /* DataAnalysisController.m in Sources */,
 				038E9D3A177E010900ACE963 /* SummaryProjectsController.m in Sources */,
+				038E9D3F177E34CA00ACE963 /* SummaryProjectsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

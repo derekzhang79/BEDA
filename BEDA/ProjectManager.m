@@ -154,13 +154,6 @@
                         
                     }
                 }
-
-//                - (id) initWithName:(NSString*)n withColor:(NSColor*)cl withKey:(NSString*)k {
-                
-//                [ch initGraph:@"Annotation" atIndex:index range:minValue to:maxValue
-//                withLineColor: [NSColor blueColor]
-//                    areaColor:[NSColor magentaColor]
-//                     isBottom:YES hasArea:NO];
             }
         }
 
@@ -249,14 +242,6 @@
                 for(NSXMLElement* child3 in [child2 children]) {
                     NSString* name3 = [child3 name];
                     if ([name3 isEqualToString:@"time"] == NO){
-//                        if ([name3 isEqualToString:@"stat"] == YES){
-//                            int nBehvIntervals = [[[child3 attributeForName:@"nBehIntervals"] stringValue] intValue];
-//                            int nTotalIntervals = [[[child3 attributeForName:@"nTotalIntervals"] stringValue] intValue];
-//                            double percentBehIntervals = [[[child3 attributeForName:@"percentBehIntervals"] stringValue] doubleValue];
-////                            [[NSNotificationCenter defaultCenter]
-////                             postNotificationName:BEDA_NOTI_ANNOTATION_CHANGED
-////                             object:nil];
-//                        }
                         continue;
                     }
                     float t = [[[child3 attributeForName:@"t"] stringValue] floatValue];

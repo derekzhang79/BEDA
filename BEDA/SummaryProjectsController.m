@@ -11,36 +11,37 @@
 @implementation SummaryProjectsController
 
 @synthesize graph;
+@synthesize plotXData;
+@synthesize plotYData;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     graphview.hostedGraph = [self graph];
-    plotXData = [[[NSMutableArray alloc] init] autorelease];
-    plotYData = [[[NSMutableArray alloc] init] autorelease];
-    
-    [plotXData addObject:@"03_05csv"];
-    [plotYData addObject:[NSNumber numberWithFloat:10.0f]];
-    [plotXData addObject:@"03_07csv"];
-    [plotYData addObject:[NSNumber numberWithFloat:15.0f]];
-    
-    CPTGraphHostingView* view = [[CPTGraphHostingView alloc] init];
-    view.hostedGraph = graph;
+    plotXData =  [[NSMutableArray alloc] initWithObjects:@"03/05.csv", @"A", @"B", @"C", @"D", @"E", nil];
+    plotYData =  [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],
+                              [NSNumber numberWithInt:20],
+                              [NSNumber numberWithInt:50],
+                              [NSNumber numberWithInt:30],
+                              [NSNumber numberWithInt:70],
+                              [NSNumber numberWithInt:85],
+                              nil];
     
     [self initGraph];
     
+}
 
-    
+-(void)reloadGraph{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [graph reloadData];
 }
 
 - (void)initGraph{
-    
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [super awakeFromNib];
     
     // If you make sure your dates are calculated at noon, you shouldn't have to
     // worry about daylight savings. If you use midnight, you will have to adjust
     // for daylight savings time.
-    NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"12:00:00"];
     NSTimeInterval aProject = 1;
     
     // Create graph from theme
@@ -53,6 +54,7 @@
     graph.plotAreaFrame.paddingTop = 5.0f;
     graph.plotAreaFrame.paddingRight = 0.0f;
     graph.plotAreaFrame.paddingLeft = 57.0f;
+    graph.plotAreaFrame.paddingBottom = 20.0f;
     
     graph.paddingRight = 0.0f;
     graph.paddingLeft = 0.0f;
@@ -69,17 +71,15 @@
     
     int min = 0;
     int max = 100;
-    NSTimeInterval xLow       = 0.0f;
     double len = max - min;
     
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(aProject * 5.0f)];
-    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(aProject * 5000.0f)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(6)];
+    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(aProject * 5000.0f)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
+    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
     
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 10.0;
-    
     // Grid line styles
     CPTMutableLineStyle *majorGridLineStyle = [CPTMutableLineStyle lineStyle];
     majorGridLineStyle.lineWidth = 1;
@@ -97,42 +97,43 @@
     titleText.fontSize = 12;
     titleText.fontName = @"Helvetica";
     
-    // Axes
+    // Setting X-Axis
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
-    CPTXYAxis *x          = axisSet.xAxis;
+    CPTXYAxis *x = axisSet.xAxis;
+    x.labelingPolicy = CPTAxisLabelingPolicyNone;
+    x.title = @"Project Name";
+    x.titleOffset = 30.0f;
+    x.majorTickLineStyle = nil;
+    x.minorTickLineStyle = nil;
+    x.majorIntervalLength = CPTDecimalFromString(@"1");
+    x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
+    x.labelExclusionRanges = [NSArray arrayWithObjects:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(6) length:CPTDecimalFromInt(1)], nil];
     
-    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
-    x.majorGridLineStyle = majorGridLineStyle;
-    x.minorGridLineStyle = minorGridLineStyle;
-    x.axisLineStyle = majorGridLineStyle;
-    x.labelFormatter     = labelFormatter;
-    x.labelTextStyle = titleText;
+    // Use custom x-axis label so it will display product A, B, C... instead of 1, 2, 3, 4
+    NSMutableArray *labels = [[NSMutableArray alloc] initWithCapacity:[plotXData count]];
+    int idx = 0;
+    for (NSString *product in plotXData)
+    {
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:product textStyle:x.labelTextStyle];
+        label.tickLocation = CPTDecimalFromInt(idx);
+        label.offset = 5.0f;
+        [labels addObject:label];
+        [label release];
+        idx++;
+    }
+    x.axisLabels = [NSSet setWithArray:labels];
+    [labels release];
     
-    x.majorIntervalLength         = CPTDecimalFromFloat(aProject * 10);
-    //////////////////////////////////////////////////////////////////////xOrthogonal coordinate decimal should be set to starting y range
-    x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(min);
-    x.minorTicksPerInterval       = 1;
+   
+    // Setting up y-axis
+	CPTXYAxis *y = axisSet.yAxis;
+    y.majorIntervalLength = CPTDecimalFromInt(1000);
+    y.minorTicksPerInterval = 0;
+    y.minorGridLineStyle = nil;
+    y.title = @"Cost Per Unit";
+    y.labelExclusionRanges = [NSArray arrayWithObjects:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(0)], nil];
     
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
-    
-    
-    CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
-    timeFormatter.referenceDate = refDate;
-    x.labelFormatter            = timeFormatter;
-    x.labelTextStyle = titleText;
-    
-    CPTXYAxis *y = axisSet.yAxis;
-    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
-    y.majorIntervalLength         = CPTDecimalFromString(@"1.0");
-    y.minorTicksPerInterval       = 0.5;
-    y.labelTextStyle = titleText;
-    
-    y.axisLineStyle = majorGridLineStyle;
-    y.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0);
-    y.titleTextStyle = titleText;
-    y.titleOffset = 35;
-    
+
     graph.axisSet.axes = [NSArray arrayWithObjects:x, y, nil];
     
     // Create a plot that uses the data source method
@@ -142,12 +143,13 @@
     // Actual graph line & fill
     CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
     lineStyle.lineWidth              = 1.f;
-    y.title = @"Day view Graph";
+    y.title = @"Day View Graph";
     lineStyle.lineColor              = [CPTColor greenColor];
     dataSourceLinePlot.dataLineStyle = lineStyle;
     
     dataSourceLinePlot.dataSource = self;
     [graph addPlot:dataSourceLinePlot];
+    graphview.hostedGraph = graph;
 }
 
 #pragma mark -
@@ -164,7 +166,7 @@
         // Otherwise, plot it data plot
         switch (fieldEnum) {
             case CPTScatterPlotFieldX:
-                return [plotXData objectAtIndex:index];
+                return [NSNumber numberWithInt:index];
             case CPTScatterPlotFieldY:
                 return [plotYData objectAtIndex:index];
         }
