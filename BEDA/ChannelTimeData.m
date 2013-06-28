@@ -300,7 +300,6 @@
 
     for (CPTScatterPlot* plot in [self arrayPlotAnnots]) {
         NSLog(@"%s : %@", __PRETTY_FUNCTION__, (NSString*)plot.identifier);
-
         [plot reloadData];
     }
     

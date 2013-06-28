@@ -79,16 +79,14 @@
 - (void)saveFile:(NSURL*)url {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSXMLElement *root =
-    (NSXMLElement *)[NSXMLNode elementWithName:@"bedaproject"];
+    NSXMLElement *root = (NSXMLElement *)[NSXMLNode elementWithName:@"bedaproject"];
     NSXMLDocument *xmlDoc = [[NSXMLDocument alloc] initWithRootElement:root];
     
     [xmlDoc setVersion:@"0.1"];
     [xmlDoc setCharacterEncoding:@"UTF-8"];
     NSMutableDictionary* bedaAttrs = [[NSMutableDictionary alloc] init];
     double apptime = [[self beda] gtAppTime];
-    [bedaAttrs setObject: [NSString stringWithFormat:@"%lf", apptime ]
-                  forKey:@"apptime"];
+    [bedaAttrs setObject: [NSString stringWithFormat:@"%lf", apptime ] forKey:@"apptime"];
     [root setAttributesWithDictionary:bedaAttrs];
 
     
@@ -121,14 +119,37 @@
                 [chattrs setObject:[self NSStringFromDouble:[ch maxValue]]  forKey:@"maxValue"];
                 [chattrs setObject:[ch getLineColor]  forKey:@"lineColor"];
                 [chattrs setObject:[ch getAreaColor]  forKey:@"areaColor"];
+                [nodeChannel setAttributesWithDictionary:chattrs];
+                [nodeSource addChild:nodeChannel];
+                
+                if([ch channelIndex] < 0){
+                    for (AnnotationBehavior* beh in [[[ch source] annots] behaviors]) {
+                        NSXMLElement *nodeAnnot = (NSXMLElement *)[NSXMLNode elementWithName:@"annotbehavior"];
+                        NSMutableDictionary* abattrs = [[NSMutableDictionary alloc] init];
+                        
+                        [abattrs setObject:[beh name] forKey:@"name"];
+                        [abattrs setObject:[beh color] forKey:@"color"];
+                        [abattrs setObject:[beh key] forKey:@"hotkey"];
+                        
+                        [nodeAnnot setAttributesWithDictionary:abattrs];
+                        [nodeSource addChild:nodeAnnot];
+                        
+                        for (NSNumber* time in [beh times]) {
+                            NSXMLElement *nodeTime = (NSXMLElement *)[NSXMLNode elementWithName:@"time"];
+                            NSMutableDictionary* tattrs = [[NSMutableDictionary alloc] init];
+                            [tattrs setObject: [NSString stringWithFormat:@"%lf", [time doubleValue]] forKey:@"t"];
+                            [nodeTime setAttributesWithDictionary:tattrs];
+                            [nodeAnnot addChild:nodeTime];
+                        }
+                    }
+                }
+
+//                - (id) initWithName:(NSString*)n withColor:(NSColor*)cl withKey:(NSString*)k {
                 
 //                [ch initGraph:@"Annotation" atIndex:index range:minValue to:maxValue
 //                withLineColor: [NSColor blueColor]
 //                    areaColor:[NSColor magentaColor]
 //                     isBottom:YES hasArea:NO];
-                [nodeChannel setAttributesWithDictionary:chattrs];
-//                
-                [nodeSource addChild:nodeChannel];
             }
         }
 
@@ -202,6 +223,7 @@
         for (NSXMLElement* child2 in [child children]) {
             NSString* name2 = [child2 name];
             if ([name2 isEqualToString:@"channeltimedata"] == NO) {
+                
                 continue;
             }
             
@@ -222,12 +244,13 @@
                  isBottom:YES hasArea:YES];
             [ch setName:name];
             [[source channels] addObject:ch];
+            
+            
+            //for (AnnotationBehavior* beh in [[[ch source] annots] behaviors]) 
         }
         NSLog(@"name: %@, url: %@, offset = %lf\n",  name, fileurl, offset);
 
     }
-
-    
     [[self beda] createViewsForAllChannels];
 
     NSLog(@"gtAppTime = %lf\n",  [[self beda] gtAppTime]);
@@ -235,9 +258,6 @@
     [[NSNotificationCenter defaultCenter]
      postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
      object:nil];
-    
-    
-//    NSLog(@"\n\n%@\n\n",     [xmlDoc XMLStringWithOptions:NSXMLNodePrettyPrint]);
 
     
 }
