@@ -181,9 +181,6 @@
     
     double gt = [[[self source] beda] gtAppTime];
     [self setMyTimeInGlobal:gt];
-    
-    
-    //    [self setGtAppTime:[ch getMyTimeInGlobal]];
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 

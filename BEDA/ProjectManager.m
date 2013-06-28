@@ -141,6 +141,17 @@
                             [nodeTime setAttributesWithDictionary:tattrs];
                             [nodeAnnot addChild:nodeTime];
                         }
+                        
+                        NSXMLElement *nodeStat = (NSXMLElement *)[NSXMLNode elementWithName:@"stat"];
+                        NSMutableDictionary* sattrs = [[NSMutableDictionary alloc] init];
+                        [sattrs setObject: [self NSStringFromInt:[beh numBehaviorIntervals]] forKey:@"nBehIntervals"];
+                        [sattrs setObject: [self NSStringFromInt:[AnnotationBehavior numTotalIntervals]] forKey:@"nTotalIntervals"];
+                        [sattrs setObject: [self NSStringFromDouble:[beh percentBehaviorIntervals]] forKey:@"percentBehIntervals"];
+                        
+                        [nodeStat setAttributesWithDictionary:sattrs];
+                        [nodeAnnot addChild:nodeStat];
+                        
+                        
                     }
                 }
 
@@ -238,6 +249,14 @@
                 for(NSXMLElement* child3 in [child2 children]) {
                     NSString* name3 = [child3 name];
                     if ([name3 isEqualToString:@"time"] == NO){
+//                        if ([name3 isEqualToString:@"stat"] == YES){
+//                            int nBehvIntervals = [[[child3 attributeForName:@"nBehIntervals"] stringValue] intValue];
+//                            int nTotalIntervals = [[[child3 attributeForName:@"nTotalIntervals"] stringValue] intValue];
+//                            double percentBehIntervals = [[[child3 attributeForName:@"percentBehIntervals"] stringValue] doubleValue];
+////                            [[NSNotificationCenter defaultCenter]
+////                             postNotificationName:BEDA_NOTI_ANNOTATION_CHANGED
+////                             object:nil];
+//                        }
                         continue;
                     }
                     float t = [[[child3 attributeForName:@"t"] stringValue] floatValue];
@@ -245,6 +264,7 @@
                     NSLog(@"Time : %f",  t);
 
                 }
+                
                 continue;
             }
             

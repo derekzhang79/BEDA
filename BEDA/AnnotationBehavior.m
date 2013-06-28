@@ -65,7 +65,6 @@
     }
     double interval = [[BedaController getInstance] interval];
     
-    
     for (NSNumber* num in [self times]) {
         double t = [num doubleValue];
         int index = (int)(t / interval);
