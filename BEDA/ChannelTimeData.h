@@ -27,6 +27,8 @@
     
     int graphScaleX;
     int graphScaleY;
+    NSColor* lineColor;
+    NSColor* areaColor;
 
 }
 
@@ -73,6 +75,8 @@
 // Change style
 - (void)setLineColor:(NSColor*)lc;
 - (void)setAreaColor:(NSColor*)ac;
+- (NSColor*)getLineColor;
+- (NSColor*)getAreaColor;
 - (void)setGraphName:(NSString*)gName;
 - (void)setRangeFrom:(double)min to:(double)max;
 

@@ -68,6 +68,9 @@
     graph.plotAreaFrame.paddingRight = 0.0f;
     graph.plotAreaFrame.paddingLeft = 57.0f;
     
+    lineColor = lc;
+    areaColor = ac;
+    
     if (isBottom) {
         graph.plotAreaFrame.paddingBottom = 20.0f;
     } else {
@@ -214,14 +217,23 @@
     CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
     lineStyle.lineWidth              = 1.f;
     lineStyle.lineColor              = [self toCPT:lc];
+    lineColor                        = lc;
     dataSourceLinePlot.dataLineStyle = lineStyle;
 }
 
+- (NSColor*)getLineColor {
+    return lineColor;
+}
 - (void)setAreaColor:(NSColor*)ac {
     // Actual graph line & fill
     CPTFill *areaFill = [CPTFill fillWithColor:[self toCPT:ac]];
     dataSourceLinePlot.areaFill      = areaFill;
+    areaColor = ac;
     dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
+}
+
+- (NSColor*)getAreaColor {
+    return areaColor;
 }
 
 - (void)setGraphName:(NSString*)gName {

@@ -22,5 +22,6 @@
 
 - (void)saveFile:(NSURL*)url;
 - (void)loadFile:(NSURL*)url;
+- (NSColor*) colorFromString:(NSString*)string;
 
 @end
