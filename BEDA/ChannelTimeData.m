@@ -200,6 +200,11 @@
                                                  name:BEDA_NOTI_CHANNEL_HEAD_MOVED
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onAnnotationChanged:)
+                                                 name:BEDA_NOTI_ANNOTATION_CHANGED
+                                               object:nil];
+    
     // Register self as notification observer
     [self reload];
     // Create a header plot
@@ -372,6 +377,18 @@
     
 //    [self setGtAppTime:[ch getMyTimeInGlobal]];
 }
+
+- (void) onAnnotationChanged:(NSNotification *) notification {
+    if ([self channelIndex] >= 0) {
+        return;
+    }
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self clearAnnotationPlot];
+    [self createAnnotationPlot];
+    [self updateAnnotation];
+
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -548,6 +565,15 @@
     }
 }
 
+-(void) clearAnnotationPlot {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    for (CPTScatterPlot* plot in [self arrayPlotAnnots]) {
+        NSLog(@"%s : %@", __PRETTY_FUNCTION__, (NSString*)plot.identifier);
+        [graph removePlot:plot];
+    }
+    [[self arrayPlotAnnots] removeAllObjects];
+}
+
 -(void) createAnnotationPlot{
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -632,6 +658,7 @@
     for (ChannelTimeData* ch in [[self source] channels]) {
         [ch deselectHeaderPlot];
     }
+    [[NSCursor arrowCursor] set];
     return YES;
 }
 
@@ -644,6 +671,7 @@
         for (ChannelTimeData* ch in [[self source] channels]) {
             [ch selectHeaderPlot];
         }
+        [[NSCursor resizeLeftRightCursor] set];
     }
 }
 
@@ -664,7 +692,8 @@
     if ([self isHeaderSelected]) {
         [self setHeaderTime:x];
     }
-  
+    [[NSCursor resizeLeftRightCursor] set];
+
     
     [plotHeader reloadData];
     [[NSNotificationCenter defaultCenter]
