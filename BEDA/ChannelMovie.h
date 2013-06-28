@@ -23,6 +23,8 @@
 
 // Channel Inherited Functions
 - (void)play;
+- (void)fastplay;
+
 - (void)stop;
 - (double) getMyTimeInLocal;
 - (double) getMyTimeInGlobal;

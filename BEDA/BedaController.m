@@ -39,15 +39,15 @@ static BedaController* g_instance = nil;
     _movSplitView = Nil;
 
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(receiveChannelPlayed:)
-                                                 name:@"channelPlay"
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(receiveChannelStoped:)
-                                                 name:@"channelStop"
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(receiveChannelPlayed:)
+//                                                 name:@"channelPlay"
+//                                               object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(receiveChannelStoped:)
+//                                                 name:@"channelStop"
+//                                               object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onAnnotationChanged:)
@@ -59,6 +59,7 @@ static BedaController* g_instance = nil;
                                              selector:@selector(onChannelHeadMoved:)
                                                  name:BEDA_NOTI_CHANNEL_HEAD_MOVED
                                                object:nil];
+    
     
     [self navigate:nil];
     [self setDuration:180];
@@ -192,11 +193,18 @@ static BedaController* g_instance = nil;
         return;
     }
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            [ch play];
-        }
-    }
+//    for (Source* s in [self sources]) {
+//        for (Channel* ch in [s channels]) {
+//            [ch play];
+//        }
+//    }
+//    [[NSNotificationCenter defaultCenter]
+//     postNotificationName:BEDA_NOTI_CHANNEL_PLAY
+//     object:self];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNEL_FASTPLAY
+     object:self];
+
 }
 
 - (IBAction)stop:(id)sender {
@@ -204,11 +212,15 @@ static BedaController* g_instance = nil;
         return;
     }
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            [ch stop];
-        }
-    }
+//    for (Source* s in [self sources]) {
+//        for (Channel* ch in [s channels]) {
+//            [ch stop];
+//        }
+//    }
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNEL_STOP
+     object:self];
+
 }
 
 - (IBAction)addAnnotation:(id)sender{
@@ -351,35 +363,31 @@ static BedaController* g_instance = nil;
     Channel* ch = (Channel*)[notification object];
     [self setGtAppTime:[ch getMyTimeInGlobal]];
 }
+
+
+//- (void) onChannelPlay:(NSNotification *) notification {
+//    if ([self isNavMode] == NO) {
+//        return;
+//    }
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    // Do Nothing
+//}
+//
+//- (void) onChannelStop:(NSNotification *) notification {
+//    if ([self isNavMode] == NO) {
+//        return;
+//    }
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    for (Source* s in [self sources]) {
+//        for (Channel* ch in [s channels]) {
+//            [ch stop];
+//        }
+//    }
+//    [self setGtAppTime:[self getGlobalTime]];
+//}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
-- (void) receiveChannelPlayed:(NSNotification *) notification {
-    if ([self isNavMode] == NO) {
-        return;
-    }
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            [ch play];
-        }
-    }
-    [self setGtAppTime:[self getGlobalTime]];
-}
-
-- (void) receiveChannelStoped:(NSNotification *) notification {
-    if ([self isNavMode] == NO) {
-        return;
-    }
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            [ch stop];
-        }
-    }
-    [self setGtAppTime:[self getGlobalTime]];
-
-}
 
 - (void) onAnnotationChanged:(NSNotification *) notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);

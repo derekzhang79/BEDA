@@ -17,6 +17,9 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 #define BEDA_NOTI_ANNOTATION_CHANGED @"BedaNotiAnnotationChanged"
 
 // Notification for the new structure
+#define BEDA_NOTI_CHANNEL_PLAY @"BedaNotiChannelPlay"
+#define BEDA_NOTI_CHANNEL_FASTPLAY @"BedaNotiChannelFastPlay"
+#define BEDA_NOTI_CHANNEL_STOP @"BedaNotiCHannelStop"
 #define BEDA_NOTI_CHANNEL_HEAD_MOVED @"BedaNotiChannelHeadMoved"
 
 @interface BedaController : NSObject {
@@ -71,8 +74,8 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (double) getGlobalTime;
 
 // Responde to notifications
-- (void) receiveChannelPlayed:(NSNotification *) notification;
-- (void) receiveChannelStoped:(NSNotification *) notification;
+//- (void) receiveChannelPlayed:(NSNotification *) notification;
+//- (void) receiveChannelStoped:(NSNotification *) notification;
 //- (void) receiveChannelCurrentTimeUpdated:(NSNotification *) notification;
 
 
