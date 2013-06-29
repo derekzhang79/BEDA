@@ -32,7 +32,32 @@
 
 -(void)reloadGraph{
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    // Setting X-Axis
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+    CPTXYAxis *x = axisSet.xAxis;
+    
+//    NSMutableArray* test =  [[NSMutableArray alloc] initWithObjects:@"HAHA", @"HOHO", @"B", @"C", @"D", @"E", nil];
+//    [self setPlotXData:test];
+    
+    // Use custom x-axis label so it will display product A, B, C... instead of 1, 2, 3, 4
+    NSMutableArray *labels = [[NSMutableArray alloc] initWithCapacity:[plotXData count]];
+    int idx = 0;
+    for (NSString *product in plotXData)
+    {
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:product textStyle:x.labelTextStyle];
+        label.tickLocation = CPTDecimalFromInt(idx);
+        label.offset = 5.0f;
+        [labels addObject:label];
+        [label release];
+        idx++;
+    }
+    x.axisLabels = [NSMutableSet setWithArray:labels];
+    
+
     [graph reloadData];
+//    [x setAxisLabels:[NSSet setWithArray:test]];
+   // x.axisLabels = ;
+
 }
 
 - (void)initGraph{
@@ -121,7 +146,7 @@
         [label release];
         idx++;
     }
-    x.axisLabels = [NSSet setWithArray:labels];
+    x.axisLabels = [NSMutableSet setWithArray:labels];
     [labels release];
     
    
@@ -157,6 +182,8 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
+
+
     return [plotXData count];
 }
 
@@ -166,7 +193,7 @@
         // Otherwise, plot it data plot
         switch (fieldEnum) {
             case CPTScatterPlotFieldX:
-                return [NSNumber numberWithInt:index];
+                return [NSNumber numberWithInt:(int)index];
             case CPTScatterPlotFieldY:
                 return [plotYData objectAtIndex:index];
         }

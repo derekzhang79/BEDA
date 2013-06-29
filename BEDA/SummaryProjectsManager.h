@@ -10,7 +10,7 @@
 #import "SummaryProjectsController.h"
 
 @interface SummaryProjectsManager : NSObject {
-    SummaryProjectsController *spc;
+    IBOutlet SummaryProjectsController *spc;
 }
 - (IBAction)loadProject:(id)sender;
 @end

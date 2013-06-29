@@ -11,7 +11,7 @@
 @implementation SummaryProjectsManager
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    spc = [[SummaryProjectsController alloc] init];
+//    spc = [[SummaryProjectsController alloc] init];
     
 }
 

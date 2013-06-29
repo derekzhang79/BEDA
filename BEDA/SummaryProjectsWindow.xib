@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C3103</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">3084</string>
@@ -67,10 +67,9 @@
 							<string key="NSToolbarItemPaletteLabel">Custom View</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSButton" key="NSToolbarItemView" id="894998444">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {132, 32}}</string>
-								<reference key="NSSuperview"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="678154949">
@@ -225,7 +224,7 @@
 							</object>
 						</object>
 					</dictionary>
-					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
+					<array key="NSToolbarIBAllowedItems">
 						<reference ref="494381298"/>
 						<reference ref="483221017"/>
 						<reference ref="331236337"/>
@@ -233,7 +232,7 @@
 						<reference ref="749895689"/>
 						<reference ref="488805731"/>
 					</array>
-					<array class="NSMutableArray" key="NSToolbarIBDefaultItems">
+					<array key="NSToolbarIBDefaultItems">
 						<reference ref="483221017"/>
 						<reference ref="749895689"/>
 						<reference ref="488805731"/>
@@ -251,7 +250,6 @@
 							<string key="NSFrame">{{20, 28}, {515, 369}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSClassName">CPTGraphHostingView</string>
 						</object>
@@ -289,6 +287,14 @@
 						<reference key="destination" ref="488805731"/>
 					</object>
 					<int key="connectionID">32</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">spc</string>
+						<reference key="source" ref="521893738"/>
+						<reference key="destination" ref="529470365"/>
+					</object>
+					<int key="connectionID">33</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -530,7 +536,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">32</int>
+			<int key="maxID">33</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -581,6 +587,17 @@
 						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">loadProject:</string>
 							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">spc</string>
+						<string key="NS.object.0">SummaryProjectsController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">spc</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">spc</string>
+							<string key="candidateClassName">SummaryProjectsController</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
