@@ -12,13 +12,17 @@
 
 @synthesize graph;
 @synthesize plotXData;
-@synthesize plotYData;
+@synthesize plotYData = _plotYData;
+@synthesize cptplots = _cptplots;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     graphview.hostedGraph = [self graph];
     plotXData =  [[NSMutableArray alloc] init];
-    plotYData =  [[NSMutableArray alloc] init];
+//    plotYData =  [[NSMutableArray alloc] init];
+    _plotYData = [[NSMutableDictionary alloc] init];
+    _cptplots =  [[NSMutableArray alloc] init];
+
     [self initGraph];
 }
 
@@ -143,44 +147,82 @@
     y.minorTicksPerInterval = 0;
     y.minorGridLineStyle = nil;
     y.labelExclusionRanges = [NSArray arrayWithObjects:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(0)], nil];
-    
+    y.title = @"Day View Graph";
+    y.titleOffset = 45;
 
     graph.axisSet.axes = [NSArray arrayWithObjects:x, y, nil];
     
-    // Create a plot that uses the data source method
-    dataSourceLinePlot = [[[CPTScatterPlot alloc] init] autorelease];
-    dataSourceLinePlot.identifier = @"Date Plot";
-    
-    // Actual graph line & fill
-    CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
-    lineStyle.lineWidth              = 2.f;
-    y.title = @"Day View Graph";
-    y.titleOffset = 45;
-    lineStyle.lineColor              = [CPTColor greenColor];
-    dataSourceLinePlot.dataLineStyle = lineStyle;
-    
-    dataSourceLinePlot.dataSource = self;
-    [graph addPlot:dataSourceLinePlot];
     graphview.hostedGraph = graph;
 }
+
+- (CPTColor*) toCPT:(NSColor*)nc {
+    CGFloat r = [nc redComponent];
+    CGFloat g = [nc greenComponent];
+    CGFloat b = [nc blueComponent];
+    CGFloat a = [nc alphaComponent];
+    return [CPTColor colorWithComponentRed:r green:g blue:b alpha:a];
+}
+
+-(void) addPlotAndDataWithName:(NSString*)name inColor:(NSColor*) color {
+    if ([self findYDataWithName:name] != Nil) {
+        return;
+    }
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    // Create a plot that uses the data source method
+    CPTScatterPlot* plot = [[[CPTScatterPlot alloc] init] autorelease];
+    plot.identifier = name;
+    
+    // Actual graph line & fill
+    CPTMutableLineStyle *lineStyle = [[plot.dataLineStyle mutableCopy] autorelease];
+    lineStyle.lineWidth              = 2.f;
+
+    lineStyle.lineColor              = [self toCPT:color];
+//    lineStyle.lineColor              = [CPTColor greenColor];
+
+    plot.dataLineStyle = lineStyle;
+    
+    plot.dataSource = self;
+    
+    [graph addPlot:plot];
+    [[self cptplots] addObject:plot];
+    
+    NSMutableArray* plotdata = [[NSMutableArray alloc] init];
+    [[self plotYData] setObject:plotdata forKey:name];
+    
+}
+
+-(NSMutableArray*) findYDataWithName:(NSString*)name {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSMutableArray* data = [[self plotYData] objectForKey:name];
+//    if (data == nil) {
+//        [self addPlotAndDataWithName:name];
+//        data = [[self plotYData] objectForKey:name];
+//    }
+    return data;
+}
+
 
 #pragma mark -
 #pragma mark Plot Data Source Methods
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    return [plotXData count];
+    NSMutableArray* data = [[self plotYData] objectForKey:plot.identifier];
+    return [data count];
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
+    NSMutableArray* data = [[self plotYData] objectForKey:plot.identifier];
+
     NSLog(@"%s", __PRETTY_FUNCTION__);
         // Otherwise, plot it data plot
         switch (fieldEnum) {
             case CPTScatterPlotFieldX:
                 return [NSNumber numberWithInt:(int)index];
             case CPTScatterPlotFieldY:
-                return [plotYData objectAtIndex:index];
+                return [data objectAtIndex:index];
         }
     return nil;
 }

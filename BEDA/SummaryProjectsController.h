@@ -12,12 +12,19 @@
 @interface SummaryProjectsController : NSObject<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate> {
     IBOutlet CPTGraphHostingView* graphview;
     CPTXYPlotSpace *plotSpace;
-    CPTScatterPlot *dataSourceLinePlot;
+//    CPTScatterPlot *dataSourceLinePlot;
 }
 
 - (void) reloadGraph;
 
 @property (retain) CPTXYGraph* graph;
 @property (retain) NSMutableArray *plotXData;
-@property (retain) NSMutableArray *plotYData;
+// @property (retain) NSMutableArray *plotYData;
+@property (retain) NSMutableDictionary* plotYData;
+@property (retain) NSMutableArray *cptplots;
+
+
+-(void) addPlotAndDataWithName:(NSString*)name inColor:(NSColor*) color;
+-(NSMutableArray*) findYDataWithName:(NSString*)name;
+
 @end
