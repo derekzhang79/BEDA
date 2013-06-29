@@ -123,6 +123,12 @@
                 [nodeSource addChild:nodeChannel];
                 
                 if([ch channelIndex] < 0){
+                    NSXMLElement *nodeNumBeh = (NSXMLElement *)[NSXMLNode elementWithName:@"defbehaviors"];
+                    NSMutableDictionary* nbattrs = [[NSMutableDictionary alloc] init];
+                    [nbattrs setObject:[self NSStringFromInt:[[[ch source] annots] countDefinedBehaviors]] forKey:@"num"];
+                    [nodeNumBeh setAttributesWithDictionary:nbattrs];
+                    [nodeSource addChild:nodeNumBeh];
+                    
                     for (AnnotationBehavior* beh in [[[ch source] annots] behaviors]) {
                         NSXMLElement *nodeAnnot = (NSXMLElement *)[NSXMLNode elementWithName:@"annotbehavior"];
                         NSMutableDictionary* abattrs = [[NSMutableDictionary alloc] init];
@@ -144,13 +150,13 @@
                         
                         NSXMLElement *nodeStat = (NSXMLElement *)[NSXMLNode elementWithName:@"stat"];
                         NSMutableDictionary* sattrs = [[NSMutableDictionary alloc] init];
+                        [sattrs setObject: [[ch source] name] forKey:@"projectName"];
                         [sattrs setObject: [self NSStringFromInt:[beh numBehaviorIntervals]] forKey:@"nBehIntervals"];
                         [sattrs setObject: [self NSStringFromInt:[AnnotationBehavior numTotalIntervals]] forKey:@"nTotalIntervals"];
                         [sattrs setObject: [self NSStringFromDouble:[beh percentBehaviorIntervals]] forKey:@"percentBehIntervals"];
                         
                         [nodeStat setAttributesWithDictionary:sattrs];
                         [nodeAnnot addChild:nodeStat];
-                        
                         
                     }
                 }

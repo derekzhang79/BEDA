@@ -17,17 +17,9 @@
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     graphview.hostedGraph = [self graph];
-    plotXData =  [[NSMutableArray alloc] initWithObjects:@"03/05.csv", @"A", @"B", @"C", @"D", @"E", nil];
-    plotYData =  [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],
-                              [NSNumber numberWithInt:20],
-                              [NSNumber numberWithInt:50],
-                              [NSNumber numberWithInt:30],
-                              [NSNumber numberWithInt:70],
-                              [NSNumber numberWithInt:85],
-                              nil];
-    
+    plotXData =  [[NSMutableArray alloc] init];
+    plotYData =  [[NSMutableArray alloc] init];
     [self initGraph];
-    
 }
 
 -(void)reloadGraph{
@@ -35,9 +27,6 @@
     // Setting X-Axis
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x = axisSet.xAxis;
-    
-//    NSMutableArray* test =  [[NSMutableArray alloc] initWithObjects:@"HAHA", @"HOHO", @"B", @"C", @"D", @"E", nil];
-//    [self setPlotXData:test];
     
     // Use custom x-axis label so it will display product A, B, C... instead of 1, 2, 3, 4
     NSMutableArray *labels = [[NSMutableArray alloc] initWithCapacity:[plotXData count]];
@@ -55,8 +44,6 @@
     
 
     [graph reloadData];
-//    [x setAxisLabels:[NSSet setWithArray:test]];
-   // x.axisLabels = ;
 
 }
 
@@ -78,7 +65,7 @@
     
     graph.plotAreaFrame.paddingTop = 5.0f;
     graph.plotAreaFrame.paddingRight = 0.0f;
-    graph.plotAreaFrame.paddingLeft = 57.0f;
+    graph.plotAreaFrame.paddingLeft = 70.0f;
     graph.plotAreaFrame.paddingBottom = 20.0f;
     
     graph.paddingRight = 0.0f;
@@ -98,7 +85,7 @@
     int max = 100;
     double len = max - min;
     
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(6)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(20)];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(aProject * 5000.0f)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
@@ -152,10 +139,9 @@
    
     // Setting up y-axis
 	CPTXYAxis *y = axisSet.yAxis;
-    y.majorIntervalLength = CPTDecimalFromInt(1000);
+    y.majorIntervalLength = CPTDecimalFromInt(10);
     y.minorTicksPerInterval = 0;
     y.minorGridLineStyle = nil;
-    y.title = @"Cost Per Unit";
     y.labelExclusionRanges = [NSArray arrayWithObjects:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(0)], nil];
     
 
@@ -167,8 +153,9 @@
     
     // Actual graph line & fill
     CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot.dataLineStyle mutableCopy] autorelease];
-    lineStyle.lineWidth              = 1.f;
+    lineStyle.lineWidth              = 2.f;
     y.title = @"Day View Graph";
+    y.titleOffset = 45;
     lineStyle.lineColor              = [CPTColor greenColor];
     dataSourceLinePlot.dataLineStyle = lineStyle;
     
@@ -182,8 +169,6 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-
-
     return [plotXData count];
 }
 

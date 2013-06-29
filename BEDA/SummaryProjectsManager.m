@@ -11,8 +11,8 @@
 @implementation SummaryProjectsManager
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-//    spc = [[SummaryProjectsController alloc] init];
-    
+    [[spc plotXData] removeAllObjects];
+    [[spc plotYData] removeAllObjects];
 }
 
 - (IBAction)loadProject:(id)sender{
@@ -64,8 +64,6 @@
     // Read app time
     for (NSXMLElement* child in [root children]) {
         NSString* name = [child name];
-         [[spc plotXData] removeAllObjects];
-         [[spc plotYData] removeAllObjects];
         if ([name isEqualToString:@"source"] == NO) {
             continue;
         }
@@ -76,11 +74,11 @@
                 for(NSXMLElement* child3 in [child2 children]) {
                     NSString* name3 = [child3 name];
                        if ([name3 isEqualToString:@"stat"] == YES){
-//                           int nBehvIntervals = [[[child3 attributeForName:@"nBehIntervals"] stringValue] intValue];
-//                           int nTotalIntervals = [[[child3 attributeForName:@"nTotalIntervals"] stringValue] intValue];
                            double percentBehIntervals = [[[child3 attributeForName:@"percentBehIntervals"] stringValue] doubleValue];
+                           NSString* projectName = [[child3 attributeForName:@"projectName"] stringValue];
                            NSLog(@"percentBehIntervals = %lf%%", percentBehIntervals);
-                           [[spc plotXData] addObject:@"hello"];
+                           
+                           [[spc plotXData] addObject:projectName];
                            [[spc plotYData] addObject:[NSNumber numberWithDouble:percentBehIntervals]];
                            [spc reloadGraph];
                        }
