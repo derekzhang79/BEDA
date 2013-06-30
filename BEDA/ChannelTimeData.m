@@ -10,6 +10,7 @@
 #import "AnnotationManager.h"
 #import "AnnotationBehavior.h"
 #import "AnnotViewController.h"
+#import "ChannelSelector.h"
 
 @implementation ChannelTimeData
 
@@ -22,6 +23,7 @@
 @synthesize annotViewController = _annotViewController;
 @synthesize minValue;
 @synthesize maxValue;
+@synthesize channelSelector = _channelSelector;
 
 -(id) init {
     self = [super init];
@@ -31,6 +33,7 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _arrayPlotAnnots = [[NSMutableArray alloc] init];
         _annotViewController = Nil;
+        _channelSelector = Nil;
     }
     return self;
     
@@ -38,6 +41,10 @@
 
 - (SourceTimeData*) sourceTimeData {
     return (SourceTimeData*)[self source];
+}
+
+- (CPTXYGraph*) getGraph {
+    return graph;
 }
 
 - (void)initGraph:(NSString*)name atIndex:(int)index range:(double)min to:(double)max withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea {
@@ -210,6 +217,10 @@
     [self reload];
     // Create a header plot
     [self createHeaderPlot];
+    // For selecting data range
+    ChannelSelector* cs = [[ChannelSelector alloc] initWithChannel:self];
+    [self setChannelSelector:cs];
+    
     
     if ( [self channelIndex] < 0) {  // If channelIndex is -1 (less than zero), it means this is annotation channel
         [self createAnnotationPlot];
@@ -687,11 +698,14 @@
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     // Restore the vertical line plot to its initial color.
-    
+
+
     for (ChannelTimeData* ch in [[self source] channels]) {
         [ch deselectHeaderPlot];
     }
-    [[NSCursor arrowCursor] set];
+    [[self channelSelector] deselect];
+    
+//    [[NSCursor arrowCursor] set];
     return YES;
 }
 
@@ -704,34 +718,42 @@
         for (ChannelTimeData* ch in [[self source] channels]) {
             [ch selectHeaderPlot];
         }
-        [[NSCursor resizeLeftRightCursor] set];
+//        [[NSCursor resizeLeftRightCursor] set];
+    } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]) {
+        [[self channelSelector] select:index];
     }
+
 }
 
 - (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(id)event atPoint:(CGPoint)point
 {
-    point.x -= graph.plotAreaFrame.paddingLeft;
-
-    // Convert the touch point to plot area frame location
-    CGPoint pointInPlotArea = [graph convertPoint:point toLayer:graph.plotAreaFrame];
-
-    NSDecimal pt[2];
-    [space plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
-
-
-    double x = [[NSDecimalNumber decimalNumberWithDecimal:pt[0]] doubleValue];
-    double y = [[NSDecimalNumber decimalNumberWithDecimal:pt[1]] doubleValue];
-    NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
-    if ([self isHeaderSelected]) {
-        [self setHeaderTime:x];
-    }
-    [[NSCursor resizeLeftRightCursor] set];
-
+    [[self channelSelector] plotSpace:space shouldHandlePointingDeviceDraggedEvent:event atPoint:point];
     
-    [plotHeader reloadData];
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
-     object:self];
+    if ([self isHeaderSelected]) {
+        point.x -= graph.plotAreaFrame.paddingLeft;
+        
+        // Convert the touch point to plot area frame location
+        CGPoint pointInPlotArea = [graph convertPoint:point toLayer:graph.plotAreaFrame];
+        
+        NSDecimal pt[2];
+        [space plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
+        
+        
+        double x = [[NSDecimalNumber decimalNumberWithDecimal:pt[0]] doubleValue];
+        double y = [[NSDecimalNumber decimalNumberWithDecimal:pt[1]] doubleValue];
+        NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
+        if ([self isHeaderSelected]) {
+            [self setHeaderTime:x];
+        }
+        [[NSCursor resizeLeftRightCursor] set];
+        
+        
+        [plotHeader reloadData];
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
+         object:self];
+    }
+
     
     
     return YES;
@@ -752,6 +774,9 @@
             return [[[self sourceTimeData] timedata] count];
 
         }
+    } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]){
+        return [[self channelSelector] numberOfRecords];
+
     } else {
         return [self numberOfRecordsForAnnotationPlot:plot];
     }
@@ -776,6 +801,8 @@
         }
         return nil;
 
+    } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]){
+        return [[self channelSelector] numberForField:fieldEnum recordIndex:index];
     } else {
         return [self numberForAnnotationPlot:plot Field:fieldEnum recordIndex:index];
 

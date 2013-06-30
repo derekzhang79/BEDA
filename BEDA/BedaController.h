@@ -23,6 +23,9 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 #define BEDA_NOTI_CHANNEL_STOP @"BedaNotiCHannelStop"
 #define BEDA_NOTI_CHANNEL_HEAD_MOVED @"BedaNotiChannelHeadMoved"
 
+#define BEDA_NOTI_CHANNELSELECTOR_TOGGLE @"BedaNotiChannelSelectorToggle"
+#define BEDA_NOTI_CHANNELSELECTOR_UPDATE @"BedaNotiChannelSelectorUpdate" 
+
 @interface BedaController : NSObject {
     IBOutlet NSSegmentedControl* modeSelector;
     IBOutlet NSSplitView* splitview;
@@ -73,6 +76,9 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 - (IBAction)addAnnotation:(id)sender;
 - (void)createAnnotationMenus;
+
+- (IBAction)toggleChannelSelector:(id)sender;
+
 
 // Time related functions
 - (double) getGlobalTime;

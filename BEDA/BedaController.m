@@ -292,6 +292,15 @@ static BedaController* g_instance = nil;
 
 }
 
+- (IBAction)toggleChannelSelector:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
+     object:self];
+
+}
+
+
 -(IBAction)zoomIn:(id)sender
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);

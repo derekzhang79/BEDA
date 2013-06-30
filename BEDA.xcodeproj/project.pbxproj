@@ -64,6 +64,7 @@
 		B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */; };
 		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
 		B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B7E9CB176AA4A900190941 /* GraphWindowController.m */; };
+		B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,6 +160,8 @@
 		B299F6BB176AE8E6004BCD35 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 		B2B7E9CA176AA4A900190941 /* GraphWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphWindowController.h; sourceTree = "<group>"; };
 		B2B7E9CB176AA4A900190941 /* GraphWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphWindowController.m; sourceTree = "<group>"; };
+		B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelSelector.h; sourceTree = "<group>"; };
+		B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelSelector.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +183,8 @@
 			children = (
 				031463791762F675007B075B /* ChannelTimeData.h */,
 				0314637A1762F675007B075B /* ChannelTimeData.m */,
+				B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */,
+				B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */,
 				03E90874177418180078BA59 /* AnnotView.xib */,
 				03E90876177418240078BA59 /* AnnotViewController.h */,
 				03E90877177418240078BA59 /* AnnotViewController.m */,
@@ -508,6 +513,7 @@
 				038E9D2E177A6DE800ACE963 /* DataAnalysisController.m in Sources */,
 				038E9D3A177E010900ACE963 /* SummaryProjectsController.m in Sources */,
 				038E9D3F177E34CA00ACE963 /* SummaryProjectsManager.m in Sources */,
+				B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

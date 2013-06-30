@@ -13,10 +13,12 @@
 
 #define BEDA_INDENTIFIER_DATA_PLOT @"BedaDataPlot"
 #define BEDA_INDENTIFIER_HEADER_PLOT @"BedaHeaderPlot"
+#define BEDA_INDENTIFIER_SELECT_PLOT @"BedaSelectPlot"
 
 #define BEDA_NOTI_SOURCE_OFFSET_CHANGED @"BedaNotiSourceOffsetChanged"
 
 @class AnnotViewController;
+@class ChannelSelector;
 
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
@@ -42,9 +44,11 @@
 @property (retain) NSDate* playBase;
 @property (retain) NSMutableArray* arrayPlotAnnots;
 @property (retain) AnnotViewController* annotViewController;
+@property (retain) ChannelSelector* channelSelector;
 
 
 - (SourceTimeData*) sourceTimeData;
+- (CPTXYGraph*) getGraph;
 - (void)initGraph:(NSString*)name atIndex:(int)index range:(double)min to:(double)max withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea;
 - (void)createGraphViewFor:(BedaController*)beda;
 
