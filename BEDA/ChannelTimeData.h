@@ -86,4 +86,7 @@
 - (void)setGraphName:(NSString*)gName;
 - (void)setRangeFrom:(double)min to:(double)max;
 
+//
+- (BOOL)isSelectedTime:(double)t;
+
 @end

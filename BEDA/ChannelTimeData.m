@@ -374,6 +374,13 @@
 }
 
 
+- (BOOL)isSelectedTime:(double)t {
+    if (t < [[self channelSelector] left]) return NO;
+    if (t > [[self channelSelector] right]) return NO;
+    return YES;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 - (void) onChannelHeadMoved:(NSNotification *) notification {
     [self updateOffsetOverlay];
