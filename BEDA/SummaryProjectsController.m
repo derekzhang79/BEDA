@@ -19,7 +19,6 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     graphview.hostedGraph = [self graph];
     plotXData =  [[NSMutableArray alloc] init];
-//    plotYData =  [[NSMutableArray alloc] init];
     _plotYData = [[NSMutableDictionary alloc] init];
     _cptplots =  [[NSMutableArray alloc] init];
 
