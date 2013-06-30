@@ -180,4 +180,66 @@
 -(double) maxTimeInSecond:(int)index {
     return [self maxValueForColumn:0];
 }
+
+- (BOOL)exportSelection {
+    if ([[self channels] count] == 0) {
+        return [super exportSelection];
+    }
+    
+    ChannelTimeData* ch = (ChannelTimeData*)[[self channels] objectAtIndex:0];
+    
+    NSString* newfilename = [NSString stringWithFormat:@"%@.selection.csv", [self filename]];
+    NSURL* newurl = [[NSURL alloc] initWithString:newfilename];
+    newfilename = [newfilename stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
+    NSLog(@"%s: %@ --> %@", __PRETTY_FUNCTION__, [self filename], newfilename);
+    
+
+    
+    NSMutableString* content =  [[NSMutableString alloc] init];
+    [content appendString:@"File Exported by Q - (c) 2009 Affectiva Inc.\n"];
+    [content appendString:@"File Version: 1.01\n"];
+    [content appendString:@"Firmware Version: 1.61\n"];
+    [content appendString:@"UUID: AQL0712005M\n"];
+    [content appendString:@"Sampling Rate: 32\n"];
+    [content appendString:@"Start Time: 2013-02-06 09:12:39 Offset:-06\n"];
+    [content appendString:@"Z-axis,Y-axis,X-axis,Battery,nssCelsius,EDA(uS),Time\n"];
+    [content appendString:@"---------------------------------------------------------\n"];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm:ss.SSS"];
+    
+    NSMutableArray* data = [self timedata];
+    int validDataCounter = 0;
+    for (int i = 0; i < [data count]; i++) {
+        double t = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:0]] doubleValue];
+        if ([ch isSelectedTime:t] == NO) {
+            continue;
+        }
+        validDataCounter++;
+        
+        double eda = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:1]] doubleValue];
+        double cel = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:2]] doubleValue];
+        double zaxis = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:3]] doubleValue];
+        double yaxis = 0.0;
+        double xaxis = 0.0;
+        int bat = -1;
+        NSDate* date = [NSDate dateWithTimeInterval:t sinceDate:[self basedate]];
+        NSString* tStr = [formatter stringFromDate:date];
+        
+        
+        [content appendString:[NSString stringWithFormat:@"%.3lf,%.3lf,%.3lf,%d,%.3lf,%.3lf,%@\n", zaxis, yaxis, xaxis, bat, cel, eda, tStr]];
+    }
+    NSLog(@"\n\n%@\n\n", content);
+
+    NSError* error = nil;
+    [content writeToURL:newurl atomically:YES encoding:NSStringEncodingConversionAllowLossy error:&error];
+                                                                                             
+    if(error != nil)
+        NSLog(@"write error %@", error);
+    
+    NSLog(@"Total %d data are written", validDataCounter);
+
+    return YES;
+}
+
 @end

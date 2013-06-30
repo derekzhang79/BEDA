@@ -23,5 +23,6 @@
 
 @property double offset;
 - (void)loadFile:(NSURL*)url;
+- (BOOL)exportSelection;
 
 @end

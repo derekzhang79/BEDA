@@ -300,6 +300,12 @@ static BedaController* g_instance = nil;
 
 }
 
+- (IBAction)exportSelection:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    for (Source* s in [self sources]) {
+        [s exportSelection];
+    }
+}
 
 -(IBAction)zoomIn:(id)sender
 {

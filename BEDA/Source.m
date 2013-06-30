@@ -41,4 +41,10 @@
 
 }
 
+- (BOOL)exportSelection {
+    NSLog(@"%s: %@ : Do NOTHING", __PRETTY_FUNCTION__, [self filename]);
+    return NO;
+}
+
+
 @end

@@ -78,6 +78,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (void)createAnnotationMenus;
 
 - (IBAction)toggleChannelSelector:(id)sender;
+- (IBAction)exportSelection:(id)sender;
 
 
 // Time related functions

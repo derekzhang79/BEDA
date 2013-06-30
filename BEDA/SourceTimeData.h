@@ -25,4 +25,7 @@
 - (double)maxValueForColumn:(int)index;
 - (double)maxTimeInSecond:(int)index;
 
+- (BOOL)exportSelection;
+
+
 @end
