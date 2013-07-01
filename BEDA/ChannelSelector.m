@@ -23,7 +23,7 @@
     if (self) {
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
-        [self setVisible:YES];
+        [self setVisible:NO];
         [self setLeft:10.0];
         [self setRight:20.0];
         [self setChannel:ch];
@@ -49,29 +49,10 @@
     plot.identifier = BEDA_INDENTIFIER_SELECT_PLOT;
     plot.dataSource = [self channel];
     plot.delegate = [self channel];
-    
+    CPTFill *areaFill = [CPTFill fillWithColor:[[CPTColor colorWithGenericGray:0.2] colorWithAlphaComponent:0.15]];
+    plot.areaFill      = areaFill;
+    plot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
     [self deselect];
-//    [self deselectHeaderPlot];
-//    [self setHeaderTime:0.0];
-    
-//    CPTColor *selectedPlotColor = [CPTColor magentaColor];
-//    
-//    CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
-//    symbolLineStyle.lineColor = selectedPlotColor;
-//    
-//    CPTPlotSymbol *plotSymbol = nil;
-//    plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-//    plotSymbol.fill = [CPTFill fillWithColor:selectedPlotColor];
-//    plotSymbol.lineStyle = symbolLineStyle;
-//    plotSymbol.size = CGSizeMake(15.0f, 15.0f);
-//    
-//    plot.plotSymbol = plotSymbol;
-//    
-//    CPTMutableLineStyle *selectedLineStyle = [CPTMutableLineStyle lineStyle];
-//    selectedLineStyle.lineColor = [CPTColor magentaColor];
-//    selectedLineStyle.lineWidth = 5.0f;
-//    
-//    plot.dataLineStyle = selectedLineStyle;
     
     // Add the plot to the graph
     [[[self channel] getGraph] addPlot:plot];
@@ -136,7 +117,7 @@
     
     CPTMutableLineStyle *selectedLineStyle = [CPTMutableLineStyle lineStyle];
     selectedLineStyle.lineColor = [CPTColor purpleColor];
-    selectedLineStyle.lineWidth = 5.0f;
+    selectedLineStyle.lineWidth = 2.0f;
     
     plot.dataLineStyle = selectedLineStyle;
 }

@@ -133,14 +133,15 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
     
-    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
+//    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
+    x.labelingPolicy     =  CPTAxisLabelingPolicyFixedInterval;
     x.majorGridLineStyle = majorGridLineStyle;
     x.minorGridLineStyle = minorGridLineStyle;
     x.axisLineStyle = majorGridLineStyle;
     x.labelFormatter     = labelFormatter;
     x.labelTextStyle = titleText;
     
-    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 10);
+    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 120);
     //////////////////////////////////////////////////////////////////////xOrthogonal coordinate decimal should be set to starting y range
     x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(min);
     x.minorTicksPerInterval       = 1;
