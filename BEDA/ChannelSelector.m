@@ -7,6 +7,7 @@
 //
 
 #import "ChannelSelector.h"
+#import "BedaController.h"
 #import "ChannelTimeData.h"
 
 @implementation ChannelSelector
@@ -195,6 +196,11 @@
     if (self == cs) {
         return;
     }
+    if ([[BedaController getInstance] isSyncMode] == YES
+        && [[self channel] sourceTimeData] != [[cs channel] sourceTimeData]) {
+        return;
+    }
+    
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
     [self setLeft:[cs left]];
