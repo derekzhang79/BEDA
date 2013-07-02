@@ -96,12 +96,19 @@
 //    NSString* scriptname = @"mean.R";
     NSString* scriptname = [comboBoxScriptSelection stringValue];
     NSMutableArray* currentResult = [[NSMutableArray alloc] init];
+    
+    int chIndex = 0;
     for (ChannelTimeData* ch in [self channels]) {
+        chIndex ++;
         [self writeToCSV:ch];
         [self runScript:scriptname];
         NSString* result = [self readFromCSV];
         NSLog(@"result = %@", result);
         [currentResult addObject:result];
+        
+        if ([scriptname isEqualToString:@"peak.R"]) {
+            [self copyResultResultImages:chIndex];
+        }
     }
     [[self results] setObject:currentResult forKey:scriptname];
 
@@ -177,6 +184,50 @@
     NSString* output = [NSString stringWithContentsOfFile:filename encoding:NSStringEncodingConversionAllowLossy error:Nil];
     return output;
 }
+
+- (void) copyResultResultImages : (int)index {
+    {
+        NSMutableString* src =  [[NSMutableString alloc] init];
+        [src appendString:[[NSBundle mainBundle] resourcePath]];
+        [src appendString:@"/baseline.jpg"];
+        
+        NSMutableString* dst = [[NSMutableString alloc] init];
+        [dst appendString:NSHomeDirectory()];
+        [dst appendString:[NSString stringWithFormat:@"/Documents/baseline_%02d.jpg", index]];
+        
+        NSLog(@"src = %@", src);
+        NSLog(@"dst = %@", dst);
+        
+        NSError *err=nil;
+
+        [[NSFileManager defaultManager] copyItemAtPath:src toPath:dst error:&err];
+        if (err) {
+            NSLog(@"Error: %@", err);
+            
+        }
+    }
+    {
+        NSMutableString* src =  [[NSMutableString alloc] init];
+        [src appendString:[[NSBundle mainBundle] resourcePath]];
+        [src appendString:@"/peaks.jpg"];
+        
+        NSMutableString* dst = [[NSMutableString alloc] init];
+        [dst appendString:NSHomeDirectory()];
+        [dst appendString:[NSString stringWithFormat:@"/Documents/peaks_%02d.jpg", index]];
+        
+        NSLog(@"src = %@", src);
+        NSLog(@"dst = %@", dst);
+        
+        NSError *err=nil;
+        
+        [[NSFileManager defaultManager] copyItemAtPath:src toPath:dst error:&err];
+        if (err) {
+            NSLog(@"Error: %@", err);
+            
+        }
+    }
+}
+
 
 - (BedaController*) beda {
     return [BedaController getInstance];
