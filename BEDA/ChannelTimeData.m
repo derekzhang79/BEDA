@@ -272,6 +272,10 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
     x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(min);
+    
+    [self setMinValue:min];
+    [self setMaxValue:max];
+    
 }
 
 - (void) reload {

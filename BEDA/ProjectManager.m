@@ -115,6 +115,7 @@
                 [chattrs setObject:[ch name] forKey:@"name"];
                 [chattrs setObject:graphName forKey:@"graphName"];
                 [chattrs setObject:[self NSStringFromInt:[ch channelIndex]] forKey:@"index"];
+                
                 [chattrs setObject:[self NSStringFromDouble:[ch minValue]]  forKey:@"minValue"];
                 [chattrs setObject:[self NSStringFromDouble:[ch maxValue]]  forKey:@"maxValue"];
                 [chattrs setObject:[ch getLineColor]  forKey:@"lineColor"];

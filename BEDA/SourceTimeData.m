@@ -174,7 +174,7 @@
             maxValue = v;
         }
     }
-    return round(maxValue);
+    return ceil(maxValue);
 }
 
 -(double) maxTimeInSecond:(int)index {
