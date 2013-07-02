@@ -40,6 +40,7 @@
 		038E9D37177E00E200ACE963 /* SummaryProjectsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9D36177E00E200ACE963 /* SummaryProjectsWindow.xib */; };
 		038E9D3A177E010900ACE963 /* SummaryProjectsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D39177E010900ACE963 /* SummaryProjectsController.m */; };
 		038E9D3F177E34CA00ACE963 /* SummaryProjectsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */; };
+		039095B3178277BD00876F23 /* std.R in Resources */ = {isa = PBXBuildFile; fileRef = 039095B21782778900876F23 /* std.R */; };
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
 		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
 		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
@@ -119,6 +120,7 @@
 		038E9D39177E010900ACE963 /* SummaryProjectsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryProjectsController.m; sourceTree = "<group>"; };
 		038E9D3D177E34C900ACE963 /* SummaryProjectsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryProjectsManager.h; sourceTree = "<group>"; };
 		038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryProjectsManager.m; sourceTree = "<group>"; };
+		039095B21782778900876F23 /* std.R */ = {isa = PBXFileReference; explicitFileType = text.script; path = std.R; sourceTree = "<group>"; };
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				038E9D30177A9C8100ACE963 /* summary.R */,
 				038E9D32177ABEE900ACE963 /* mean.R */,
 				038E9D34177AC10D00ACE963 /* median.R */,
+				039095B21782778900876F23 /* std.R */,
 			);
 			name = Script;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				038E9D33177ABF0300ACE963 /* mean.R in Resources */,
 				038E9D35177AC12900ACE963 /* median.R in Resources */,
 				038E9D37177E00E200ACE963 /* SummaryProjectsWindow.xib in Resources */,
+				039095B3178277BD00876F23 /* std.R in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

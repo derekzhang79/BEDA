@@ -73,7 +73,6 @@
         NSScrollView* scroll = [[[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 150, 50)] autorelease];
         [scroll setHasVerticalScroller:YES];
         
-//        NSTextField *text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 30, 10)] autorelease];
         NSTextView *text = [[[NSTextView alloc] initWithFrame:NSMakeRect(0, 0, 180, 50)] autorelease];
 //        [text setStringValue:value];
         [text setString:value];
@@ -176,7 +175,6 @@
     NSLog(@"filename = %@", filename);
 
     NSString* output = [NSString stringWithContentsOfFile:filename encoding:NSStringEncodingConversionAllowLossy error:Nil];
-    // output = [output stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
     return output;
 }
 
