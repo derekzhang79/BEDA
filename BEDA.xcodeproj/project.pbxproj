@@ -66,6 +66,7 @@
 		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
 		B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B7E9CB176AA4A900190941 /* GraphWindowController.m */; };
 		B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */; };
+		B2E3F3EE17828BD900428531 /* peak.R in Resources */ = {isa = PBXBuildFile; fileRef = B2E3F3ED17828BA100428531 /* peak.R */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,6 +165,7 @@
 		B2B7E9CB176AA4A900190941 /* GraphWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphWindowController.m; sourceTree = "<group>"; };
 		B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelSelector.h; sourceTree = "<group>"; };
 		B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelSelector.m; sourceTree = "<group>"; };
+		B2E3F3ED17828BA100428531 /* peak.R */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = peak.R; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 		038E9D2F177A9C4D00ACE963 /* Script */ = {
 			isa = PBXGroup;
 			children = (
+				B2E3F3ED17828BA100428531 /* peak.R */,
 				038E9D30177A9C8100ACE963 /* summary.R */,
 				038E9D32177ABEE900ACE963 /* mean.R */,
 				038E9D34177AC10D00ACE963 /* median.R */,
@@ -477,6 +480,7 @@
 				038E9D35177AC12900ACE963 /* median.R in Resources */,
 				038E9D37177E00E200ACE963 /* SummaryProjectsWindow.xib in Resources */,
 				039095B3178277BD00876F23 /* std.R in Resources */,
+				B2E3F3EE17828BD900428531 /* peak.R in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
