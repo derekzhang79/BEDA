@@ -20,4 +20,6 @@
 
 }
 
+@property (assign) NSWindow* mywindow;
+
 @end

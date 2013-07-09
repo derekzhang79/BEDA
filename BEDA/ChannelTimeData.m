@@ -449,7 +449,7 @@
     NSTimer* _timer = [self playTimer];
     if (_timer == nil)
     {
-        [self setRate:10.0];
+        [self setRate:[[[self beda] intervalPlayerManager] fastPlayRate]];
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
                                                   target:self
                                                 selector:@selector(onPlayTimer:)
@@ -460,7 +460,7 @@
         NSDate* clickedTime = [NSDate date];
         NSDate* adjustedTime = [clickedTime dateByAddingTimeInterval:playoffset];
         [self setPlayBase:adjustedTime];
-        NSLog(@"%s", __PRETTY_FUNCTION__);
+        NSLog(@"%s: rate = %lf", __PRETTY_FUNCTION__, [[[self beda] intervalPlayerManager] fastPlayRate]);
     }
 }
 
@@ -483,7 +483,7 @@
 // newHeader = rate * (now - clicked) + original
 // == newHeader = rate * (now - (clicked - original / rate))
 - (void)onPlayTimer : (id)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     double t = -[self rate] * [[self playBase] timeIntervalSinceNow];
     

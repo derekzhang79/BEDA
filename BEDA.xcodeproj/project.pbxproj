@@ -52,6 +52,7 @@
 		B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */; };
 		B22980B6176E6F6D004C2115 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22980B5176E6F6D004C2115 /* TableView.xib */; };
 		B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22980B8176E6F7B004C2115 /* TableViewController.m */; };
+		B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */; };
 		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
 		B26BF280176182EE009BCC7D /* BedaController.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF27F176182EE009BCC7D /* BedaController.m */; };
 		B26BF28317618336009BCC7D /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF28217618336009BCC7D /* Source.m */; };
@@ -138,6 +139,8 @@
 		B22980B5176E6F6D004C2115 /* TableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		B22980B7176E6F7B004C2115 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		B22980B8176E6F7B004C2115 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		B22FF562178BD168008CBFFE /* IntervalPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalPlayerManager.h; sourceTree = "<group>"; };
+		B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalPlayerManager.m; sourceTree = "<group>"; };
 		B25CBBE716D1DDE100626FA9 /* DataAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAddController.h; sourceTree = "<group>"; };
 		B25CBBE816D1DDE100626FA9 /* DataAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAddController.m; sourceTree = "<group>"; };
 		B26BF27E176182EE009BCC7D /* BedaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BedaController.h; sourceTree = "<group>"; };
@@ -319,6 +322,8 @@
 				038E9D2317796FE000ACE963 /* IntervalPlayerWindow.xib */,
 				038E9D2017796D0400ACE963 /* IntervalPlayerController.h */,
 				038E9D2117796D0400ACE963 /* IntervalPlayerController.m */,
+				B22FF562178BD168008CBFFE /* IntervalPlayerManager.h */,
+				B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */,
 				036723D516D181DA004F14D6 /* MainMenu.xib */,
 			);
 			name = AppController;
@@ -522,6 +527,7 @@
 				038E9D3A177E010900ACE963 /* SummaryProjectsController.m in Sources */,
 				038E9D3F177E34CA00ACE963 /* SummaryProjectsManager.m in Sources */,
 				B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */,
+				B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

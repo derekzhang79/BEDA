@@ -11,6 +11,7 @@
 #import "IntervalPlayerController.h"
 #import "DataAnalysisController.h"
 #import "SummaryProjectsController.h"
+#import "IntervalPlayerManager.h"
 
 extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 #define BEDA_NOTI_SOURCE_ADDED @"BedaNotiSourceAdded"
@@ -47,8 +48,14 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (retain) NSWindowController* graphWindowController;
 @property (retain) NSWindowController* dataWindowController;
 @property (retain) NSWindowController* summaryProjectsController;
+
+@property (nonatomic, retain) IBOutlet NSButton* playButton;
+@property (retain) IntervalPlayerManager* intervalPlayerManager;
+
 @property BOOL isNavMode;
+@property BOOL isPlaying;
 @property double gtAppTime;
+@property (retain) NSTimer* playTimer;
 
 @property (assign) double duration;
 @property (assign) double interval;

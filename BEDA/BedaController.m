@@ -23,12 +23,15 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize sources = _sources;
 @synthesize movSplitView = _movSplitView;
 @synthesize isNavMode;
+@synthesize isPlaying;
 @synthesize gtAppTime;
 @synthesize duration;
 @synthesize interval;
 @synthesize graphWindowController;
 @synthesize dataWindowController;
 @synthesize summaryProjectsController;
+@synthesize intervalPlayerManager;
+@synthesize playTimer;
 @synthesize window;
 
 static BedaController* g_instance = nil;
@@ -62,6 +65,7 @@ static BedaController* g_instance = nil;
                                                object:nil];
     
     
+    [self setIsPlaying:NO];
     [self navigate:nil];
     [self setDuration:180];
     [self setInterval:10];
@@ -69,6 +73,8 @@ static BedaController* g_instance = nil;
     [self setGraphWindowController:Nil];
     
     ipc = [[IntervalPlayerController alloc] initWithWindowNibName:@"IntervalPlayerWindow"];
+    
+    [self setIntervalPlayerManager: [[IntervalPlayerManager alloc] init]];
     
 }
 
@@ -123,7 +129,9 @@ static BedaController* g_instance = nil;
         modalDelegate: ipc
        didEndSelector: @selector(didEndSheet:returnCode:contextInfo:)
           contextInfo: nil];
+    [ipc setMywindow:[ipc window]];
 }
+
 
 + (BedaController*) getInstance {
     return g_instance;
@@ -215,13 +223,42 @@ static BedaController* g_instance = nil;
 //            [ch play];
 //        }
 //    }
-//    [[NSNotificationCenter defaultCenter]
-//     postNotificationName:BEDA_NOTI_CHANNEL_PLAY
-//     object:self];
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:BEDA_NOTI_CHANNEL_FASTPLAY
-     object:self];
+    if ([[self intervalPlayerManager] isFastMode]) {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:BEDA_NOTI_CHANNEL_FASTPLAY
+         object:self];
+    } else {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:BEDA_NOTI_CHANNEL_PLAY
+         object:self];
+        
+    }
+    
+    [self setIsPlaying:YES];
+    
+    [self setPlayTimer:
+        [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                              target:self
+                                            selector:@selector(onPlayTimer:)
+                                            userInfo:nil
+                                             repeats:YES]
+     ];
+    
+}
 
+- (void)onPlayTimer : (id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            // Just for any channel
+            double gt = [ch getMyTimeInGlobal];
+            NSLog(@"%s : %lf", __PRETTY_FUNCTION__, gt);
+            [self setGtAppTime:gt];
+            // We are done with update: return
+            return;
+        }
+    }
 }
 
 - (IBAction)stop:(id)sender {
@@ -237,6 +274,10 @@ static BedaController* g_instance = nil;
     [[NSNotificationCenter defaultCenter]
      postNotificationName:BEDA_NOTI_CHANNEL_STOP
      object:self];
+    
+    [[self playTimer] invalidate];
+    [self setPlayTimer:Nil];
+    [self setIsPlaying:NO];
 
 }
 
