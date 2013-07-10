@@ -42,6 +42,8 @@
 - (BOOL)isTimeInFastMode {
     int total_seconds = (int)[[self beda] gtAppTime];
     int duration = [self ffInterval] + [self normalInterval];
+//    NSLog(@"total_seconds: %d and duration: %d, (%d/%d)", total_seconds, duration, [self ffInterval], [self normalInterval]);
+
     if (total_seconds % duration < [self ffInterval]) {
         return YES;
     } else {

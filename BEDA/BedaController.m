@@ -72,10 +72,9 @@ static BedaController* g_instance = nil;
     g_instance = self;
     [self setGraphWindowController:Nil];
     
-    ipc = [[IntervalPlayerController alloc] initWithWindowNibName:@"IntervalPlayerWindow"];
     
     [self setIntervalPlayerManager: [[IntervalPlayerManager alloc] init]];
-    
+
 }
 
 -(IBAction)openDataAnalysisWindow:(id)sender{
@@ -122,8 +121,10 @@ static BedaController* g_instance = nil;
 
 -(IBAction)showIntervalPlayerSheet:(id)sender
 {
-    assert ([ipc window]);
     assert (window);
+    ipc = [[IntervalPlayerController alloc] initWithWindowNibName:@"IntervalPlayerWindow"];
+    assert ([ipc window]);
+
     [NSApp beginSheet: [ipc window]
        modalForWindow: window
         modalDelegate: ipc
@@ -247,7 +248,7 @@ static BedaController* g_instance = nil;
 }
 
 - (void)onPlayTimer : (id)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     for (Source* s in [self sources]) {
         for (Channel* ch in [s channels]) {
