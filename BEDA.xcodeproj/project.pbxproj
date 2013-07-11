@@ -62,6 +62,7 @@
 		B26BF291176196CC009BCC7D /* ChannelMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF290176196CC009BCC7D /* ChannelMovie.m */; };
 		B27C396B17715FB30025188F /* AnnotationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396A17715FB30025188F /* AnnotationBehavior.m */; };
 		B27C396E17715FC50025188F /* AnnotationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396D17715FC50025188F /* AnnotationManager.m */; };
+		B28CD6D6178E62D100BC7719 /* ViewRangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28CD6D5178E62D100BC7719 /* ViewRangeController.m */; };
 		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; };
 		B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */; };
 		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
@@ -159,6 +160,8 @@
 		B27C396A17715FB30025188F /* AnnotationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationBehavior.m; sourceTree = "<group>"; };
 		B27C396C17715FC50025188F /* AnnotationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationManager.h; sourceTree = "<group>"; };
 		B27C396D17715FC50025188F /* AnnotationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationManager.m; sourceTree = "<group>"; };
+		B28CD6D4178E62D100BC7719 /* ViewRangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewRangeController.h; sourceTree = "<group>"; };
+		B28CD6D5178E62D100BC7719 /* ViewRangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewRangeController.m; sourceTree = "<group>"; };
 		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
 		B28D32D916D20DB500D58ADA /* EDAGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAGraphViewController.h; sourceTree = "<group>"; };
 		B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAGraphViewController.m; sourceTree = "<group>"; };
@@ -324,6 +327,8 @@
 				038E9D2117796D0400ACE963 /* IntervalPlayerController.m */,
 				B22FF562178BD168008CBFFE /* IntervalPlayerManager.h */,
 				B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */,
+				B28CD6D4178E62D100BC7719 /* ViewRangeController.h */,
+				B28CD6D5178E62D100BC7719 /* ViewRangeController.m */,
 				036723D516D181DA004F14D6 /* MainMenu.xib */,
 			);
 			name = AppController;
@@ -528,6 +533,7 @@
 				038E9D3F177E34CA00ACE963 /* SummaryProjectsManager.m in Sources */,
 				B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */,
 				B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */,
+				B28CD6D6178E62D100BC7719 /* ViewRangeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
