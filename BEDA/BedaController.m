@@ -25,6 +25,8 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize isNavMode;
 @synthesize isPlaying;
 @synthesize gtAppTime;
+@synthesize gtViewLeft;
+@synthesize gtViewRight;
 @synthesize duration;
 @synthesize interval;
 @synthesize graphWindowController;
@@ -69,6 +71,8 @@ static BedaController* g_instance = nil;
     [self navigate:nil];
     [self setDuration:180];
     [self setInterval:10];
+    [self setGtViewLeft:0.0];
+    [self setGtViewRight:330.0];
     g_instance = self;
     [self setGraphWindowController:Nil];
     
@@ -179,6 +183,20 @@ static BedaController* g_instance = nil;
     } else {
         [self addSourceMov:url];
     }
+    
+    
+    // Update duration
+    double maxDuration = 0.0;
+    for (Source* s in [self sources]) {
+        double d = [s duration];
+        if (maxDuration < d) {
+            maxDuration = d;
+        }
+        NSLog(@"duration = %lf max duration = %lf", d, maxDuration);
+    }
+    [self setDuration:maxDuration];
+    [self setGtViewLeft:0.0];
+    [self setGtViewRight:[self duration]];
     
     [[NSNotificationCenter defaultCenter]
      postNotificationName:BEDA_NOTI_SOURCE_ADDED
@@ -352,11 +370,21 @@ static BedaController* g_instance = nil;
 -(IBAction)zoomIn:(id)sender
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            [ch zoomIn];
-        }
-    }
+
+    double d = [self gtViewRight] - [self gtViewLeft];
+    d *= 0.8;
+    [self setGtViewRight:[self gtViewLeft] + d];
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_VIEW_UPDATE
+     object:self];
+    
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    for (Source* s in [self sources]) {
+//        for (Channel* ch in [s channels]) {
+//            [ch zoomIn];
+//        }
+//    }
 
 }
 
@@ -364,11 +392,22 @@ static BedaController* g_instance = nil;
 -(IBAction)zoomOut:(id)sender
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            [ch zoomOut];
-        }
-    }
+    double d = [self gtViewRight] - [self gtViewLeft];
+    d *= 1.25;
+    [self setGtViewRight:[self gtViewLeft] + d];
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_VIEW_UPDATE
+     object:self];
+    
+//    [[NSNotificationCenter defaultCenter]
+//     postNotificationName:BEDA_NOTI_VIEW_UPDATE
+//     object:self];
+//    for (Source* s in [self sources]) {
+//        for (Channel* ch in [s channels]) {
+//            [ch zoomOut];
+//        }
+//    }
 }
 
 - (IBAction)navigate:(id)sender {

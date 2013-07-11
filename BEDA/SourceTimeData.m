@@ -242,4 +242,9 @@
     return YES;
 }
 
+- (double)duration {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return (double)[self maxValueForColumn:0];
+}
+
 @end

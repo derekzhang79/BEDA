@@ -76,5 +76,13 @@
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+- (double)duration {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    if ([[self channels] count] > 0) {
+        ChannelMovie* ch = [[self channels] objectAtIndex:0];
+        return [ch duration];
+    }
+    return 0.0;
+}
 
 @end

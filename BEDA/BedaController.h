@@ -27,6 +27,8 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 #define BEDA_NOTI_CHANNELSELECTOR_TOGGLE @"BedaNotiChannelSelectorToggle"
 #define BEDA_NOTI_CHANNELSELECTOR_UPDATE @"BedaNotiChannelSelectorUpdate" 
 
+#define BEDA_NOTI_VIEW_UPDATE @"BedatNotiViewUpdate"
+
 @interface BedaController : NSObject {
     IBOutlet NSSegmentedControl* modeSelector;
     IBOutlet NSSplitView* splitview;
@@ -55,6 +57,8 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property BOOL isNavMode;
 @property BOOL isPlaying;
 @property double gtAppTime;
+@property double gtViewLeft;
+@property double gtViewRight;
 @property (retain) NSTimer* playTimer;
 
 @property (assign) double duration;

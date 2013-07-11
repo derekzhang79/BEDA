@@ -118,6 +118,13 @@
     [[self movie] setCurrentTime:qt];
 }
 
+- (double)duration {
+    QTTime d = [[self movie] duration];
+    double dd = (double)d.timeValue / (double)d.timeScale;
+    return dd;
+}
+
+
 - (double) windowHeightFactor {
     return 3.0;
 }
