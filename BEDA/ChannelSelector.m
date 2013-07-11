@@ -118,7 +118,7 @@
     
     CPTMutableLineStyle *selectedLineStyle = [CPTMutableLineStyle lineStyle];
     selectedLineStyle.lineColor = [CPTColor purpleColor];
-    selectedLineStyle.lineWidth = 2.0f;
+    selectedLineStyle.lineWidth = 1.0f;
     
     plot.dataLineStyle = selectedLineStyle;
 }

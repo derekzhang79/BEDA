@@ -147,7 +147,7 @@
     x.minorTicksPerInterval       = 1;
     
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
+    dateFormatter.timeStyle = kCFDateFormatterShortStyle;
     
     
     CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
