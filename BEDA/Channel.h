@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "Source.h"
 
+@class BedaController;
+
 @interface Channel : NSObject {
     
 }
@@ -17,6 +19,8 @@
 @property (assign) NSView* view;
 @property (assign) NSTextField* offsetOverlay;
 @property (copy) NSString* name;
+
+- (BedaController*) beda;
 
 - (void)play;
 - (void)fastplay;

@@ -46,5 +46,11 @@
     return NO;
 }
 
+- (double)duration {
+    NSLog(@"%s: %@ : Do NOTHING", __PRETTY_FUNCTION__, [self filename]);
+    return 0.0;
+}
+
+
 
 @end

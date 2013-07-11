@@ -35,6 +35,7 @@
 - (void) rateDidChanged: (NSNotification *)notification;
 - (void) timeDidChanged: (NSNotification *)notification;
 - (NSString*) SMPTEStringFromTime:(QTTime)time;
+- (double)duration;
 
 
 @end

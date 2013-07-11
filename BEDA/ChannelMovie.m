@@ -77,7 +77,11 @@
 }
 
 - (void)fastplay {
-    /////???????????????
+    NSLog(@"%s: rate = %lf", __PRETTY_FUNCTION__, [[[self beda] intervalPlayerManager] fastPlayRate]);
+    if ([self movie] && [[self movie] rate] != 1.0f) {
+        [[self movie] play];
+        [[self movie] setRate: [[[self beda] intervalPlayerManager] fastPlayRate]];
+    }
 }
 
 - (void)stop {
@@ -113,6 +117,13 @@
     qt.timeValue = (long long)(lt * (double)qt.timeScale);
     [[self movie] setCurrentTime:qt];
 }
+
+- (double)duration {
+    QTTime d = [[self movie] duration];
+    double dd = (double)d.timeValue / (double)d.timeScale;
+    return dd;
+}
+
 
 - (double) windowHeightFactor {
     return 3.0;

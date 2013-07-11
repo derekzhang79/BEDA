@@ -214,6 +214,11 @@
                                                  name:BEDA_NOTI_ANNOTATION_CHANGED
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onViewUpdated:)
+                                                 name:BEDA_NOTI_VIEW_UPDATE
+                                               object:nil];
+    
     // Register self as notification observer
     [self reload];
     // Create a header plot
@@ -413,6 +418,21 @@
 
 }
 
+- (void) onViewUpdated:(NSNotification *) notification {
+    double l = [[self beda] gtViewLeft];
+    double r = [[self beda] gtViewRight];
+    NSLog(@"%s : {%lf, %lf}", __PRETTY_FUNCTION__, l, r);
+
+    if (l > r) {
+        double temp = l;
+        l = r;
+        r = temp;
+    }
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(l) length:CPTDecimalFromFloat(r - l)];
+
+
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -449,7 +469,7 @@
     NSTimer* _timer = [self playTimer];
     if (_timer == nil)
     {
-        [self setRate:10.0];
+        [self setRate:[[[self beda] intervalPlayerManager] fastPlayRate]];
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
                                                   target:self
                                                 selector:@selector(onPlayTimer:)
@@ -460,7 +480,7 @@
         NSDate* clickedTime = [NSDate date];
         NSDate* adjustedTime = [clickedTime dateByAddingTimeInterval:playoffset];
         [self setPlayBase:adjustedTime];
-        NSLog(@"%s", __PRETTY_FUNCTION__);
+        NSLog(@"%s: rate = %lf", __PRETTY_FUNCTION__, [[[self beda] intervalPlayerManager] fastPlayRate]);
     }
 }
 
@@ -483,7 +503,7 @@
 // newHeader = rate * (now - clicked) + original
 // == newHeader = rate * (now - (clicked - original / rate))
 - (void)onPlayTimer : (id)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     double t = -[self rate] * [[self playBase] timeIntervalSinceNow];
     
@@ -495,8 +515,12 @@
 }
 
 -(void)zoomIn{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
     graphScaleX -= 100;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
+//    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(60) length:CPTDecimalFromFloat(300)];
+
 }
 
 -(void)zoomOut{
