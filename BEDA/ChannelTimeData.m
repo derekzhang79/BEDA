@@ -97,17 +97,17 @@
     // Setup scatter plot space
     plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     
-    plotSpace.allowsUserInteraction = YES;
+    plotSpace.allowsUserInteraction = NO;
     plotSpace.delegate = self;
     
     NSTimeInterval xLow       = 0.0f;
     float xMax = (float)[[self sourceTimeData] maxTimeInSecond:0];
     double len = max - min;
-    graphScaleX = 60.0f;
+    graphScaleX = 0.0f;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * xMax)];
-    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 5000.0f)];
+//    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xLow) length:CPTDecimalFromFloat(oneSec * 5000.0f)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
+//    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(min) length:CPTDecimalFromFloat(len)];
 
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 10.0;
@@ -133,15 +133,16 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
     
-//    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
-    x.labelingPolicy     =  CPTAxisLabelingPolicyFixedInterval;
+    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
+//    x.labelingPolicy     =  CPTAxisLabelingPolicyFixedInterval;
+    x.preferredNumberOfMajorTicks = 10;
     x.majorGridLineStyle = majorGridLineStyle;
     x.minorGridLineStyle = minorGridLineStyle;
     x.axisLineStyle = majorGridLineStyle;
     x.labelFormatter     = labelFormatter;
     x.labelTextStyle = titleText;
     
-    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 120);
+    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 180);
     //////////////////////////////////////////////////////////////////////xOrthogonal coordinate decimal should be set to starting y range
     x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(min);
     x.minorTicksPerInterval       = 1;
@@ -156,6 +157,7 @@
     x.labelTextStyle = titleText;
     
     CPTXYAxis *y = axisSet.yAxis;
+    y.labelingPolicy = CPTAxisLabelingPolicyAutomatic;
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
     if ( [self channelIndex] >= 0) {  // If channelIndex is -1 (less than zero), it means this is annotation channel
         y.majorIntervalLength         = CPTDecimalFromString(@"1.0");
@@ -519,7 +521,6 @@
 
     graphScaleX -= 100;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
-//    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(60) length:CPTDecimalFromFloat(300)];
 
 }
 
@@ -726,7 +727,7 @@
           atPoint:(CGPoint)point
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-
+    
     return YES;
 }
 
@@ -735,26 +736,26 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     // Restore the vertical line plot to its initial color.
 
-
     for (ChannelTimeData* ch in [[self source] channels]) {
         [ch deselectHeaderPlot];
     }
     [[self channelSelector] deselect];
     
-//    [[NSCursor arrowCursor] set];
+    
+    [[NSCursor arrowCursor] set];
+    
     return YES;
 }
 
 - (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index
 {
+    
     if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
     {
         NSLog(@"%s", __PRETTY_FUNCTION__);
-        //[self selectHeaderPlot];
         for (ChannelTimeData* ch in [[self source] channels]) {
             [ch selectHeaderPlot];
         }
-//        [[NSCursor resizeLeftRightCursor] set];
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]) {
         [[self channelSelector] select:index];
     }
@@ -766,6 +767,7 @@
     [[self channelSelector] plotSpace:space shouldHandlePointingDeviceDraggedEvent:event atPoint:point];
     
     if ([self isHeaderSelected]) {
+        
         point.x -= graph.plotAreaFrame.paddingLeft;
         
         // Convert the touch point to plot area frame location
@@ -776,13 +778,20 @@
         
         
         double x = [[NSDecimalNumber decimalNumberWithDecimal:pt[0]] doubleValue];
+        if(x < 0 ){
+            x = 0;
+        }
+        
+        if(x > [[self beda]duration] ){
+            x = [[self beda]duration];
+        }
+        
         double y = [[NSDecimalNumber decimalNumberWithDecimal:pt[1]] doubleValue];
         NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
         if ([self isHeaderSelected]) {
             [self setHeaderTime:x];
         }
-        [[NSCursor resizeLeftRightCursor] set];
-        
+        [[NSCursor closedHandCursor] set];
         
         [plotHeader reloadData];
         [[NSNotificationCenter defaultCenter]
@@ -790,8 +799,6 @@
          object:self];
     }
 
-    
-    
     return YES;
 }
 

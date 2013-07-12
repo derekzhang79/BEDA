@@ -478,30 +478,6 @@ static BedaController* g_instance = nil;
 }
 
 
-//- (void) onChannelPlay:(NSNotification *) notification {
-//    if ([self isNavMode] == NO) {
-//        return;
-//    }
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    // Do Nothing
-//}
-//
-//- (void) onChannelStop:(NSNotification *) notification {
-//    if ([self isNavMode] == NO) {
-//        return;
-//    }
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    for (Source* s in [self sources]) {
-//        for (Channel* ch in [s channels]) {
-//            [ch stop];
-//        }
-//    }
-//    [self setGtAppTime:[self getGlobalTime]];
-//}
-
-///////////////////////////////////////////////////////////////////////////////////////////
-
-
 - (void) onAnnotationChanged:(NSNotification *) notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [self createAnnotationMenus];

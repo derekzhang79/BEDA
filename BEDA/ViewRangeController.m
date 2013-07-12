@@ -53,8 +53,8 @@
     graph.plotAreaFrame.fill = [CPTFill fillWithColor:[CPTColor clearColor]];
     
     graph.plotAreaFrame.paddingTop = 5.0f;
-    graph.plotAreaFrame.paddingRight = 0.0f;
-    graph.plotAreaFrame.paddingLeft = 70.0f;
+    graph.plotAreaFrame.paddingRight = 5.0f;
+    graph.plotAreaFrame.paddingLeft = 67.0f;
     graph.plotAreaFrame.paddingBottom = 20.0f;
     
     graph.paddingRight = 0.0f;
@@ -67,7 +67,7 @@
     // Setup scatter plot space
     plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     
-    plotSpace.allowsUserInteraction = YES;
+    plotSpace.allowsUserInteraction = NO;
     plotSpace.delegate = self;
     
     int min = 0;
@@ -75,9 +75,9 @@
     double len = max - min;
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(300)];
-    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(aProject * 5000.0f)];
+//    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(aProject * 5000.0f)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
+//    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
     
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 10.0;
@@ -104,25 +104,24 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x = axisSet.xAxis;
     
-    x.labelingPolicy     =  CPTAxisLabelingPolicyFixedInterval;
+    x.labelingPolicy     =  CPTAxisLabelingPolicyAutomatic;
+    x.preferredNumberOfMajorTicks = 10;
     x.majorGridLineStyle = majorGridLineStyle;
     x.minorGridLineStyle = minorGridLineStyle;
     x.axisLineStyle = majorGridLineStyle;
     x.labelFormatter     = labelFormatter;
     x.labelTextStyle = titleText;
     
-    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 120);
+    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 60);
     
     // Setting up y-axis
 	CPTXYAxis *y = axisSet.yAxis;
     y.labelingPolicy = CPTAxisLabelingPolicyNone;
 
-    y.majorIntervalLength = CPTDecimalFromInt(10);
+    y.majorIntervalLength = CPTDecimalFromInt(12);
     y.minorTicksPerInterval = 0;
     y.majorTickLineStyle = nil;
     y.minorGridLineStyle = nil;
-//    y.labelExclusionRanges = [NSArray arrayWithObjects:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(0)], nil];
-//    y.titleOffset = 45;
     
     graph.axisSet.axes = [NSArray arrayWithObjects:x, y, nil];
     
@@ -179,7 +178,6 @@
     selectedLineStyle.lineWidth = 5.0f;
     
     plot.dataLineStyle = selectedLineStyle;
-//    [self setIsHeaderSelected:YES];
     [self setSelectedIndex:index];
 
 }
@@ -248,6 +246,9 @@
         
         
         double x = [[NSDecimalNumber decimalNumberWithDecimal:pt[0]] doubleValue];
+        if( x < 0 ){
+            x = 0;
+        }
         double y = [[NSDecimalNumber decimalNumberWithDecimal:pt[1]] doubleValue];
         NSLog(@"%s: %lf, %lf", __PRETTY_FUNCTION__, x, y);
         
