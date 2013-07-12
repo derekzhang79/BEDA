@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CorePlot/CorePlot.h>
 
+#define BEDA_CONST_VIEW_RANGE_ALL_SELECTED 100
+
 @interface ViewRangeController : NSObject<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate> {
     IBOutlet CPTGraphHostingView* graphview;
     CPTXYPlotSpace *plotSpace;
@@ -19,5 +21,7 @@
 
 @property (retain) CPTXYGraph* graph;
 @property int selectedIndex;
+@property double xToLeft;
+@property double xToRight;
 
 @end

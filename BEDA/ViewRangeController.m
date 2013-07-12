@@ -213,7 +213,27 @@
 - (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(id)event
           atPoint:(CGPoint)point
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    point.x -= graph.plotAreaFrame.paddingLeft;
+    
+    // Convert the touch point to plot area frame location
+    CGPoint pointInPlotArea = [graph convertPoint:point toLayer:graph.plotAreaFrame];
+    
+    NSDecimal pt[2];
+    [space plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
+    
+    
+    double x = [[NSDecimalNumber decimalNumberWithDecimal:pt[0]] doubleValue];
+    double l = [[self beda] gtViewLeft];
+    double r = [[self beda] gtViewRight];
+    if (l <= x && x <= r) {
+        [self setXToLeft:l - x];
+        [self setXToRight:r - x];
+        NSLog(@"%s: to left/right = {%lf %lf}", __PRETTY_FUNCTION__, [self xToLeft], [self xToRight]);
+
+        [self select:BEDA_CONST_VIEW_RANGE_ALL_SELECTED];
+
+    }
     
     return YES;
 }
@@ -261,6 +281,9 @@
             case 3:
                 [[self beda] setGtViewRight:x];
                 break;
+            case BEDA_CONST_VIEW_RANGE_ALL_SELECTED:
+                [[self beda] setGtViewLeft:x + [self xToLeft]];
+                [[self beda] setGtViewRight:x + [self xToRight]];
             default:
                 break;
         }
@@ -281,7 +304,7 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
     if ([[[self beda] sources] count] > 0) {
         return 4;
     } else {
@@ -302,10 +325,10 @@
     double px[6] = {l, l, r, r, 0.0, 0.0};
     double py[6] = {d, u, u, d, 0.2, 0.0};
     
-    NSLog(@"%s, {%lf, %lf}, {%lf, %lf}", __PRETTY_FUNCTION__, l, r, d, u);
+//    NSLog(@"%s, {%lf, %lf}, {%lf, %lf}", __PRETTY_FUNCTION__, l, r, d, u);
 
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    if (fieldEnum == CPTScatterPlotFieldX) {        
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+    if (fieldEnum == CPTScatterPlotFieldX) {
         // Returns X values
         return [NSNumber numberWithDouble: (px[index]) ];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
