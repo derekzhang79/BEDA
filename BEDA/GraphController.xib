@@ -150,7 +150,7 @@
 						<object class="NSTabView" id="664313726">
 							<reference key="NSNextResponder" ref="261722634"/>
 							<int key="NSvFlags">12</int>
-							<string key="NSFrame">{{57, 43}, {511, 321}}</string>
+							<string key="NSFrame">{{55, 43}, {513, 323}}</string>
 							<reference key="NSSuperview" ref="261722634"/>
 							<reference key="NSWindow"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -180,7 +180,7 @@
 				<array class="NSMutableArray" key="NSMenuItems">
 					<object class="NSMenuItem" id="891249151">
 						<reference key="NSMenu" ref="517808298"/>
-						<string key="NSTitle">Item 1</string>
+						<string key="NSTitle">remove a tab</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<object class="NSCustomResource" key="NSOnImage" id="64888421">
@@ -252,6 +252,22 @@
 						<reference key="destination" ref="664313726"/>
 					</object>
 					<int key="connectionID">529</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">removeTabViewItem:</string>
+						<reference key="source" ref="173241058"/>
+						<reference key="destination" ref="891249151"/>
+					</object>
+					<int key="connectionID">551</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">menu</string>
+						<reference key="source" ref="664313726"/>
+						<reference key="destination" ref="517808298"/>
+					</object>
+					<int key="connectionID">550</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -743,7 +759,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">549</int>
+			<int key="maxID">551</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -797,6 +813,7 @@
 						<string key="onAddGraph:">id</string>
 						<string key="onApplySettings:">id</string>
 						<string key="openFile:">id</string>
+						<string key="removeTabViewItem:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="onAddGraph:">
@@ -809,6 +826,10 @@
 						</object>
 						<object class="IBActionInfo" key="openFile:">
 							<string key="name">openFile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="removeTabViewItem:">
+							<string key="name">removeTabViewItem:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

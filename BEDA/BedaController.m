@@ -44,17 +44,6 @@ static BedaController* g_instance = nil;
     _sources = [[NSMutableArray alloc] init];
     _movSplitView = Nil;
 
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(receiveChannelPlayed:)
-//                                                 name:@"channelPlay"
-//                                               object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(receiveChannelStoped:)
-//                                                 name:@"channelStop"
-//                                               object:nil];
-
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onAnnotationChanged:)
                                                  name:BEDA_NOTI_ANNOTATION_CHANGED

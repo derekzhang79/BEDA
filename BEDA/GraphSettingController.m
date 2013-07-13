@@ -16,8 +16,6 @@
 @synthesize isAutomatic;
 @synthesize txtMaxValue;
 @synthesize txtMinValue;
-@synthesize btnIsVisible;
-@synthesize isGraphVisible;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -47,16 +45,6 @@
         isAutomatic = YES;
     } else if (row == 1){// user input min max
         isAutomatic = NO;
-    }
-}
-
-- (IBAction)CheckBoxStatus:(id) sender
-{
-	NSLog([btnIsVisible state] ? @"Checkbox is ON" : @"Checkbox is OFF");
-    if( [btnIsVisible state] == YES) {
-        isGraphVisible = YES;
-    } else {
-        isGraphVisible = NO;
     }
 }
 

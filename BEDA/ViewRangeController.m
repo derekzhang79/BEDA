@@ -40,6 +40,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [super awakeFromNib];
     
+    NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
     // If you make sure your dates are calculated at noon, you shouldn't have to
     // worry about daylight savings. If you use midnight, you will have to adjust
     // for daylight savings time.
@@ -54,10 +55,10 @@
     
     graph.plotAreaFrame.paddingTop = 5.0f;
     graph.plotAreaFrame.paddingRight = 5.0f;
-    graph.plotAreaFrame.paddingLeft = 67.0f;
+    graph.plotAreaFrame.paddingLeft = 5.0f;
     graph.plotAreaFrame.paddingBottom = 20.0f;
     
-    graph.paddingRight = 0.0f;
+    graph.paddingRight = 3.0f;
     graph.paddingLeft = 0.0f;
     graph.paddingTop = 0.0f;
     graph.paddingBottom = 0.0f;
@@ -71,7 +72,7 @@
     plotSpace.delegate = self;
     
     int min = 0;
-    int max = 100;
+    int max = 50;
     double len = max - min;
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(300)];
@@ -103,7 +104,7 @@
     // Setting X-Axis
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x = axisSet.xAxis;
-    
+
     x.labelingPolicy     =  CPTAxisLabelingPolicyAutomatic;
     x.preferredNumberOfMajorTicks = 10;
     x.majorGridLineStyle = majorGridLineStyle;
@@ -111,8 +112,18 @@
     x.axisLineStyle = majorGridLineStyle;
     x.labelFormatter     = labelFormatter;
     x.labelTextStyle = titleText;
-    
     x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 60);
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    if ([[self beda] duration] > 3600) {
+        [dateFormatter setDateFormat: @"h:mm:ss"];
+    } else {
+        [dateFormatter setDateFormat: @"mm:ss"];
+    }
+    
+    CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
+    timeFormatter.referenceDate = refDate;
+    x.labelFormatter            = timeFormatter;
+    
     
     // Setting up y-axis
 	CPTXYAxis *y = axisSet.yAxis;
@@ -227,6 +238,7 @@
     double l = [[self beda] gtViewLeft];
     double r = [[self beda] gtViewRight];
     if (l <= x && x <= r) {
+        [[NSCursor openHandCursor] set];
         [self setXToLeft:l - x];
         [self setXToRight:r - x];
         NSLog(@"%s: to left/right = {%lf %lf}", __PRETTY_FUNCTION__, [self xToLeft], [self xToRight]);
@@ -244,7 +256,7 @@
     // Restore the vertical line plot to its initial color.
     
     [self deselect];
-
+    [[NSCursor arrowCursor] set];
     return YES;
 }
 
@@ -292,8 +304,6 @@
          postNotificationName:BEDA_NOTI_VIEW_UPDATE
          object:self];
     }
-    
-    
     
     return YES;
 }

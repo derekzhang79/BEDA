@@ -41,6 +41,7 @@
 		038E9D3A177E010900ACE963 /* SummaryProjectsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D39177E010900ACE963 /* SummaryProjectsController.m */; };
 		038E9D3F177E34CA00ACE963 /* SummaryProjectsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */; };
 		039095B3178277BD00876F23 /* std.R in Resources */ = {isa = PBXBuildFile; fileRef = 039095B21782778900876F23 /* std.R */; };
+		0394D2681791129500DDD8F9 /* intervalplay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0394D2671791129500DDD8F9 /* intervalplay.png */; };
 		03B663F216FD84C600781105 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663EF16FD84C600781105 /* backward.png */; };
 		03B663F316FD84C600781105 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F016FD84C600781105 /* ff.png */; };
 		03B663F416FD84C600781105 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B663F116FD84C600781105 /* play.png */; };
@@ -124,6 +125,7 @@
 		038E9D3D177E34C900ACE963 /* SummaryProjectsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryProjectsManager.h; sourceTree = "<group>"; };
 		038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryProjectsManager.m; sourceTree = "<group>"; };
 		039095B21782778900876F23 /* std.R */ = {isa = PBXFileReference; explicitFileType = text.script; path = std.R; sourceTree = "<group>"; };
+		0394D2671791129500DDD8F9 /* intervalplay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intervalplay.png; sourceTree = "<group>"; };
 		03B663EF16FD84C600781105 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		03B663F016FD84C600781105 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 		03B663F116FD84C600781105 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 		B26BF28B176183D5009BCC7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0394D2671791129500DDD8F9 /* intervalplay.png */,
 				031463871765B277007B075B /* Data-Zoom-in-icon.png */,
 				031463881765B277007B075B /* Data-Zoom-out-icon.png */,
 				031463851765B1D4007B075B /* minus.png */,
@@ -491,6 +494,7 @@
 				038E9D37177E00E200ACE963 /* SummaryProjectsWindow.xib in Resources */,
 				039095B3178277BD00876F23 /* std.R in Resources */,
 				B2E3F3EE17828BD900428531 /* peak.R in Resources */,
+				0394D2681791129500DDD8F9 /* intervalplay.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

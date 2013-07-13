@@ -32,8 +32,6 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _tableViewControllers = [[NSMutableArray alloc] init];
         _settingControllers   = [[NSMutableArray alloc] init];
-//        [[[self graphControlTabview headerView] setMenu:aMenu];
-
     }
     return self;
 }
@@ -105,6 +103,11 @@
 
 }
 
+- (IBAction) removeTabViewItem:(id)sender {
+    
+    [graphControlTabview removeTabViewItem:[graphControlTabview selectedTabViewItem]];
+}
+
 - (IBAction)openFile:(id)sender {
     [[self beda] openFile:nil];
 
@@ -122,12 +125,11 @@
     int selectedIndex = (int)[tabview indexOfTabViewItem:selectedItem];
     NSLog(@"%s: selectedIndex = %d", __PRETTY_FUNCTION__, selectedIndex);
     
-    // TableViewController* tvc = [[self tableViewControllers] objectAtIndex:selectedIndex];
     TableViewController* tvc = [selectedItem tvc];
     if ([tvc selectedTableColumn] == -1) {
         NSLog(@"%s: there's no selected graph", __PRETTY_FUNCTION__);
     }
-//    SourceTimeData* s = [[[self beda] sources] objectAtIndex:selectedIndex];
+    
     SourceTimeData* s = [tvc source];
 
     BOOL isAnnotation = [[tvc selectedTableColumnName] isEqualToString:@"Annotation"];

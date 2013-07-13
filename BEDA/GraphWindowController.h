@@ -33,6 +33,7 @@
 - (IBAction)openFile:(id)sender;
 - (IBAction)onAddGraph:(id)sender;
 - (IBAction)onApplySettings:(id)sender;
+- (IBAction) removeTabViewItem:(id)sender;
 
 - (BedaController*) beda;
 

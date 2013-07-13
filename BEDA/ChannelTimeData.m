@@ -150,7 +150,6 @@
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     dateFormatter.timeStyle = kCFDateFormatterShortStyle;
     
-    
     CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
     timeFormatter.referenceDate = refDate;
     x.labelFormatter            = timeFormatter;

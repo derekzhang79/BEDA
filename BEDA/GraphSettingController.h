@@ -26,7 +26,6 @@
 
 @property (nonatomic, retain) IBOutlet NSTextField* txtMinValue;
 @property (nonatomic, retain) IBOutlet NSTextField* txtMaxValue;
-@property (nonatomic, retain) IBOutlet NSButton* btnIsVisible;
 
 
 - (IBAction)radioButton:(id)sender;
