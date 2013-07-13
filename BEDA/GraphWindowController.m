@@ -104,8 +104,13 @@
 }
 
 - (IBAction) removeTabViewItem:(id)sender {
-    
-    [graphControlTabview removeTabViewItem:[graphControlTabview selectedTabViewItem]];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSTabViewItem* item = [graphControlTabview selectedTabViewItem];
+    Channel* ch = [item identifier];
+    for (Source* s in [[self beda] sources]) {
+        [s deleteChannel:ch];
+    }
+    [graphControlTabview removeTabViewItem:item];
 }
 
 - (IBAction)openFile:(id)sender {
@@ -183,6 +188,7 @@
     NSTabViewItem *item = [[[NSTabViewItem alloc]
                             initWithIdentifier:name] autorelease];
     [item setLabel:name];
+    [item setIdentifier:ch];
     
     BehaviorSettingController* behaviorSettingController = [[BehaviorSettingController alloc]
                                                             initWithNibName:@"BehaviorSettingView" bundle:nil];
@@ -206,7 +212,8 @@
     NSTabViewItem *item = [[[NSTabViewItem alloc]
                             initWithIdentifier:name] autorelease];
     [item setLabel:name];
-    
+    [item setIdentifier:ch];
+
     GraphSettingController* graphSettingController = [[GraphSettingController alloc]
                                                       initWithNibName:@"GraphSettingView" bundle:nil];
     [graphSettingController setSource:source];
