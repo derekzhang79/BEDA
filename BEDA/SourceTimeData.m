@@ -54,18 +54,24 @@
             NSLog(@"reject");
             return;
         }
-        //        NSLog(@"accept");
+        double gt = [[self beda] gtAppTime];
+        double lt = [ch getMyTimeInLocal];
+        double offset = [[ch source] offset];
+        // gt + offset + projoffset = lt
+        [self setProjoffset:lt - gt - offset];
+        NSLog(@"projoffset = %lf", [self projoffset]);
     } else {
         if (self != [ch source]) {
             return;
         }
+        double gt = [[self beda] gtAppTime];
+        double lt = [ch getMyTimeInLocal];
+        // gt + offset = lt
+        [self setOffset:lt - gt];
     }
 
     
-    double gt = [[self beda] gtAppTime];
-    double lt = [ch getMyTimeInLocal];
-    // gt + offset = lt
-    [self setOffset:lt - gt];
+
 //    NSLog(@"gt = %lf lt = %lf offset = %lf", gt, lt, [self offset]);
 
 

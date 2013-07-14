@@ -33,6 +33,7 @@
         [self setProjname:@""];
         
         [self setOffset:0.0];
+        [self setProjoffset:0.0];
     }
     
     return self;

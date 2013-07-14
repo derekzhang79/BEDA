@@ -105,13 +105,21 @@
     return [[self source] offset];
 }
 
+- (double) projoffset {
+    if ([self source] == nil) {
+        return 0.0;
+    }
+    return [[self source] projoffset];
+}
+
+
 - (double) localToGlobalTime:(double)lt {
-    return lt - [self offset];
+    return lt - [self offset] - [self projoffset];
 
 }
 
 - (double) globalToLocalTime:(double)gt {
-    return gt + [self offset];
+    return gt + [self offset] + [self projoffset];
 }
 
 - (double) windowHeightFactor {

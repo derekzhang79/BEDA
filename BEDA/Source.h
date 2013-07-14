@@ -24,6 +24,8 @@
 
 
 @property double offset;
+@property double projoffset;
+
 - (void)loadFile:(NSURL*)url;
 - (BOOL)exportSelection;
 - (double)duration;
