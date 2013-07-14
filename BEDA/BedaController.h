@@ -39,8 +39,12 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
     SummaryProjectsController* spc;
 }
 
+@property (retain) IBOutlet NSView* intervalPlayerView;
 @property (retain) IBOutlet NSWindow *window;
 -(IBAction)showIntervalPlayerSheet:(id)sender;
+
+@property BOOL isIntervalPlayerVisible;
+
 
 // Singleton
 + (BedaController*) getInstance;
@@ -91,14 +95,10 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (IBAction)toggleChannelSelector:(id)sender;
 - (IBAction)exportSelection:(id)sender;
 
+- (IBAction)showIntervalPlayerView:(id)sender;
 
 // Time related functions
 - (double) getGlobalTime;
-
-// Responde to notifications
-//- (void) receiveChannelPlayed:(NSNotification *) notification;
-//- (void) receiveChannelStoped:(NSNotification *) notification;
-//- (void) receiveChannelCurrentTimeUpdated:(NSNotification *) notification;
 
 
 - (void)addSourceMov:(NSURL*)url;

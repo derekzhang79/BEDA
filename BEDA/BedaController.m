@@ -34,7 +34,9 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize summaryProjectsController;
 @synthesize intervalPlayerManager;
 @synthesize playTimer;
+@synthesize intervalPlayerView;
 @synthesize window;
+@synthesize isIntervalPlayerVisible;
 
 static BedaController* g_instance = nil;
 
@@ -62,6 +64,7 @@ static BedaController* g_instance = nil;
     [self setInterval:10];
     [self setGtViewLeft:0.0];
     [self setGtViewRight:330.0];
+    [self setIsIntervalPlayerVisible:NO];
     g_instance = self;
     [self setGraphWindowController:Nil];
     
@@ -126,6 +129,15 @@ static BedaController* g_instance = nil;
     [ipc setMywindow:[ipc window]];
 }
 
+- (IBAction)showIntervalPlayerView:(id)sender
+{
+    if(isIntervalPlayerVisible == YES){
+        [intervalPlayerView setHidden:NO];
+    } else{
+        
+        [intervalPlayerView setHidden:YES];
+    }
+}
 
 + (BedaController*) getInstance {
     return g_instance;
