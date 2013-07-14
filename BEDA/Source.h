@@ -25,5 +25,6 @@
 - (void)loadFile:(NSURL*)url;
 - (BOOL)exportSelection;
 - (double)duration;
+- (BOOL)deleteChannel:(id)ch;
 
 @end

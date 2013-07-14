@@ -51,6 +51,14 @@
     return 0.0;
 }
 
+- (BOOL)deleteChannel:(id)ch {
+    int prevCnt = (int)[[self channels] count];
+    [[self channels] removeObject:ch];
+    int nowCnt = (int)[[self channels] count];
+    NSLog(@"%s: %d -> %d", __PRETTY_FUNCTION__, prevCnt, nowCnt);
+
+    return YES;
+}
 
 
 @end
