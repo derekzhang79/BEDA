@@ -24,6 +24,9 @@
         [self setFfInterval:10];
         [self setNormalInterval:2];
         [self setFastPlayRate:4.0];
+        [txtFFInterval setIntValue:ffInterval];
+        [txtNormalInterval setIntValue:normalInterval];
+        NSLog(@"%s", __PRETTY_FUNCTION__);
         
         [NSTimer scheduledTimerWithTimeInterval:0.05f
                                                   target:self
