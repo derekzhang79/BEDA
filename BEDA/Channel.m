@@ -74,6 +74,12 @@
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
 }
 
+- (double) getMyTimeInLocal {
+    NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
+    return 0;
+}
+
+
 - (double) getMyTimeInGlobal {
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
     return 0;

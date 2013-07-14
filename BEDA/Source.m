@@ -16,6 +16,7 @@
 @synthesize annots = _annots;
 @synthesize name;
 @synthesize filename;
+@synthesize projname;
 
 -(id) init {
     self = [super init];
@@ -29,6 +30,7 @@
         
         [self setName:@""];
         [self setFilename:@""];
+        [self setProjname:@""];
         
         [self setOffset:0.0];
     }

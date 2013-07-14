@@ -44,15 +44,26 @@
         return;
     }
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    ChannelTimeData* ch = (ChannelTimeData*)[notification object];
+
+    NSLog(@"%s: MultiMode = %d", __PRETTY_FUNCTION__, [[self beda] isMultiProjectMode]);
+    Channel* ch = (Channel*)[notification object];
     
-    if (self != [ch source]) {
-        return;
+    if ([[self beda] isMultiProjectMode]) {
+        //        NSLog(@"compare %@ <--> %@", [self projname], [[ch source] projname]);
+        if ([[self projname] isEqualToString:[[ch source] projname]] == NO) {
+            NSLog(@"reject");
+            return;
+        }
+        //        NSLog(@"accept");
+    } else {
+        if (self != [ch source]) {
+            return;
+        }
     }
+
     
     double gt = [[self beda] gtAppTime];
-    double lt = [ch headerTime];
+    double lt = [ch getMyTimeInLocal];
     // gt + offset = lt
     [self setOffset:lt - gt];
 //    NSLog(@"gt = %lf lt = %lf offset = %lf", gt, lt, [self offset]);

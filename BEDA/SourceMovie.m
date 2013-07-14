@@ -59,12 +59,22 @@
         return;
     }
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"%s: MultiMode = %d", __PRETTY_FUNCTION__, [[self beda] isMultiProjectMode]);
     ChannelMovie* ch = (ChannelMovie*)[notification object];
     
-    if (self != [ch source]) {
-        return;
+    if ([[self beda] isMultiProjectMode]) {
+//        NSLog(@"compare %@ <--> %@", [self projname], [[ch source] projname]);
+        if ([[self projname] isEqualToString:[[ch source] projname]] == NO) {
+            NSLog(@"reject");
+            return;
+        }
+//        NSLog(@"accept");
+    } else {
+        if (self != [ch source]) {
+            return;
+        }
     }
+
     
     double gt = [[self beda] gtAppTime];
     double lt = [ch getMyTimeInLocal];

@@ -18,6 +18,8 @@
 @property (retain) NSMutableArray* channels;
 @property (copy) NSString* name;
 @property (copy) NSString* filename;
+@property (copy) NSString* projname;
+
 @property (retain) AnnotationManager* annots;
 
 

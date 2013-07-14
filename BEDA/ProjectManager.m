@@ -44,6 +44,9 @@
     NSLog(@"url = %@ [ext = %@]", url, ext);
     [self loadFile:url];
     
+    [[self beda]setNumProjects:[[self beda]numProjects] + 1];
+    NSLog(@"# projects = %d", [[self beda ]numProjects]);
+
 }
 
 - (IBAction)saveProject:(id)sender {
@@ -209,6 +212,8 @@
         return;
     }
     NSLog(@"Load OK on file %@", url);
+    NSString* projname = [url absoluteString];
+    NSLog(@"projname = %@", projname);
     
     NSXMLElement *root = [xmlDoc rootElement];
     // Read app time
@@ -230,6 +235,7 @@
         
         Source* source = [[[self beda] sources] lastObject];
         [source setOffset:offset];
+        [source setProjname:projname];
         // Clear old behaviors
         [[[source annots] behaviors] removeAllObjects];
         
