@@ -528,6 +528,11 @@
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:plotSpace.xRange.location length:CPTDecimalFromFloat(graphScaleX)];
 }
 
+- (double) getMyTimeInLocal {
+    return [self headerTime];
+}
+
+
 - (double) getMyTimeInGlobal {
     double ltSeconds = [self headerTime];
     double gtSeconds = [self localToGlobalTime:ltSeconds];

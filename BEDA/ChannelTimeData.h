@@ -64,6 +64,7 @@
 - (void)zoomOut;
 
 
+- (double) getMyTimeInLocal;
 - (double) getMyTimeInGlobal;
 - (void) setMyTimeInGlobal:(double)gt;
 - (double) windowHeightFactor;

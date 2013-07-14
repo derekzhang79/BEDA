@@ -23,6 +23,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize sources = _sources;
 @synthesize movSplitView = _movSplitView;
 @synthesize isNavMode;
+@synthesize numProjects;
 @synthesize isPlaying;
 @synthesize gtAppTime;
 @synthesize gtViewLeft;
@@ -58,6 +59,7 @@ static BedaController* g_instance = nil;
                                                object:nil];
     
     
+    [self setNumProjects:0];
     [self setIsPlaying:NO];
     [self navigate:nil];
     [self setDuration:180];
@@ -146,6 +148,14 @@ static BedaController* g_instance = nil;
 - (BOOL)isSyncMode {
     if ([self isNavMode]) return NO;
     else return YES;
+}
+
+- (BOOL)isMultiProjectMode {
+    if ([self numProjects] > 1) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 

@@ -59,6 +59,8 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (retain) IntervalPlayerManager* intervalPlayerManager;
 
 @property BOOL isNavMode;
+@property int numProjects;
+
 @property BOOL isPlaying;
 @property double gtAppTime;
 @property double gtViewLeft;
@@ -70,6 +72,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 
 - (BOOL)isSyncMode;
+- (BOOL)isMultiProjectMode;
 - (NSSplitView*) getSplitView;
 
 // Responde to menu
