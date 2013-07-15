@@ -402,6 +402,9 @@
 - (void) onChannelHeadMoved:(NSNotification *) notification {
     [self updateOffsetOverlay];
     Channel* ch = (Channel*)[notification object];
+    
+    // Update header time text, without doubts
+//    [self updateHeaderTimeText];
     if (self == ch) {
         return;
     }
@@ -731,6 +734,53 @@
 }
 
 
+//- (void)updateHeaderTimeText {
+//    NSDate* basedate = [[self sourceTimeData] basedate];
+//    double t = [self headerTime];
+//    NSDate* now = [NSDate dateWithTimeInterval:t sinceDate:basedate];
+//    
+//    NSLog(@"basedate = %@", basedate);
+//    NSLog(@"t = %lf, now = %@", t, now);
+//
+//    
+//    if ( symbolTextAnnotation ) {
+//        [graph.plotAreaFrame.plotArea removeAnnotation:symbolTextAnnotation];
+//        [symbolTextAnnotation release];
+//        symbolTextAnnotation = nil;
+//    }
+//    
+//    // Setup a style for the annotation
+//    CPTMutableTextStyle *hitAnnotationTextStyle = [CPTMutableTextStyle textStyle];
+//    hitAnnotationTextStyle.color    = [CPTColor whiteColor];
+//    hitAnnotationTextStyle.fontSize = 15.0f;
+//    hitAnnotationTextStyle.fontName = @"Helvetica";
+//    
+//    // Determine point of symbol in plot coordinates
+//    NSNumber *x          = [NSNumber numberWithDouble:[self headerTime]];
+//    NSNumber *y          = 0;
+//    NSArray *anchorPoint = [NSArray arrayWithObjects:x, y, nil];
+//    
+//    NSDateFormatter *hmsFormatter = [[NSDateFormatter alloc] init];
+//    [hmsFormatter setDateFormat:@"HH:mm:ss"];
+//    [hmsFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:-4]];
+////    [hmsFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
+//    //            CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:hmsFormatter] autorelease];
+//    //            timeFormatter.referenceDate = [[self sourceTimeData] basedate];
+//    NSString *yString = [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[self headerTime]]];
+//
+//    NSLog(@"formatted date: %@", yString);
+//    
+//    // Add annotation
+//    // First make a string for the y value
+//    
+//    // Now add the annotation to the plot area
+//    CPTTextLayer *textLayer = [[[CPTTextLayer alloc] initWithText:yString style:hitAnnotationTextStyle] autorelease];
+//    symbolTextAnnotation              = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:graph.defaultPlotSpace anchorPlotPoint:anchorPoint];
+//    symbolTextAnnotation.contentLayer = textLayer;
+//    symbolTextAnnotation.displacement = CGPointMake(0.0f, 20.0f);
+//    [graph.plotAreaFrame.plotArea addAnnotation:symbolTextAnnotation];
+//}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Delegation functions
@@ -774,42 +824,7 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         for (ChannelTimeData* ch in [[self source] channels]) {
             [ch selectHeaderPlot];
-            
-            if ( symbolTextAnnotation ) {
-                [graph.plotAreaFrame.plotArea removeAnnotation:symbolTextAnnotation];
-                [symbolTextAnnotation release];
-                symbolTextAnnotation = nil;
-            }
-            
-            // Setup a style for the annotation
-            CPTMutableTextStyle *hitAnnotationTextStyle = [CPTMutableTextStyle textStyle];
-            hitAnnotationTextStyle.color    = [CPTColor whiteColor];
-            hitAnnotationTextStyle.fontSize = 15.0f;
-            hitAnnotationTextStyle.fontName = @"Helvetica";
-            
-            // Determine point of symbol in plot coordinates
-            NSNumber *x          = [NSNumber numberWithDouble:[ch headerTime]];
-            NSNumber *y          = 0;
-            NSArray *anchorPoint = [NSArray arrayWithObjects:x, y, nil];
-            
-            NSDateFormatter *hmsFormatter = [[NSDateFormatter alloc] init];
-            [hmsFormatter setDateFormat:@"HH:mm:ss"];
-            [hmsFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-//            CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:hmsFormatter] autorelease];
-//            timeFormatter.referenceDate = [[self sourceTimeData] basedate];
 
-            NSLog(@"formatted date: %@", [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[ch headerTime]]]);
-            
-            // Add annotation
-            // First make a string for the y value
-            NSString *yString = [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[ch headerTime]]];
-            
-            // Now add the annotation to the plot area
-            CPTTextLayer *textLayer = [[[CPTTextLayer alloc] initWithText:yString style:hitAnnotationTextStyle] autorelease];
-            symbolTextAnnotation              = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:graph.defaultPlotSpace anchorPlotPoint:anchorPoint];
-            symbolTextAnnotation.contentLayer = textLayer;
-            symbolTextAnnotation.displacement = CGPointMake(0.0f, 20.0f);
-            [graph.plotAreaFrame.plotArea addAnnotation:symbolTextAnnotation];
         }
         
         
@@ -909,4 +924,30 @@
 
     }
 }
+
+-(CPTLayer *)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)index
+{
+    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT]){
+        double t = [self headerTime];
+
+        CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+        CPTXYAxis *x          = axisSet.xAxis;
+        CPTTimeFormatter *timeFormatter = (CPTTimeFormatter *)x.labelFormatter;
+        NSString * headerString = [timeFormatter stringFromNumber:[NSNumber numberWithDouble:t]];
+
+        
+        CPTTextLayer *textLayer = [CPTTextLayer layer];
+        textLayer.text = headerString;
+        CPTMutableTextStyle *labelTextStyle = [CPTMutableTextStyle textStyle];
+        labelTextStyle.fontSize = 16;
+        labelTextStyle.color = [CPTColor purpleColor];
+        textLayer.textStyle = labelTextStyle;
+        textLayer.paddingBottom = 10.0;
+        textLayer.paddingLeft = 50.0;
+
+        return textLayer;
+    }
+    return nil;
+}
+
 @end
