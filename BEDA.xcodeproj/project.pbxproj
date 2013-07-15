@@ -51,6 +51,7 @@
 		03E90878177418240078BA59 /* AnnotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E90877177418240078BA59 /* AnnotViewController.m */; };
 		B225C4E816FBC2BA00D3C036 /* TempGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */; };
 		B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */; };
+		B225ED9C1793ACA0002FF5A7 /* ChannelAnnotationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B225ED9B1793ACA0002FF5A7 /* ChannelAnnotationManager.m */; };
 		B22980B6176E6F6D004C2115 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22980B5176E6F6D004C2115 /* TableView.xib */; };
 		B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22980B8176E6F7B004C2115 /* TableViewController.m */; };
 		B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */; };
@@ -139,6 +140,8 @@
 		B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempGraphViewController.m; sourceTree = "<group>"; };
 		B225C4E916FBC4E400D3C036 /* AccelGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelGraphViewController.h; sourceTree = "<group>"; };
 		B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccelGraphViewController.m; sourceTree = "<group>"; };
+		B225ED9A1793ACA0002FF5A7 /* ChannelAnnotationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelAnnotationManager.h; sourceTree = "<group>"; };
+		B225ED9B1793ACA0002FF5A7 /* ChannelAnnotationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelAnnotationManager.m; sourceTree = "<group>"; };
 		B22980B5176E6F6D004C2115 /* TableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		B22980B7176E6F7B004C2115 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		B22980B8176E6F7B004C2115 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 				0314637A1762F675007B075B /* ChannelTimeData.m */,
 				B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */,
 				B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */,
+				B225ED9A1793ACA0002FF5A7 /* ChannelAnnotationManager.h */,
+				B225ED9B1793ACA0002FF5A7 /* ChannelAnnotationManager.m */,
 				03E90874177418180078BA59 /* AnnotView.xib */,
 				03E90876177418240078BA59 /* AnnotViewController.h */,
 				03E90877177418240078BA59 /* AnnotViewController.m */,
@@ -538,6 +543,7 @@
 				B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */,
 				B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */,
 				B28CD6D6178E62D100BC7719 /* ViewRangeController.m in Sources */,
+				B225ED9C1793ACA0002FF5A7 /* ChannelAnnotationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
