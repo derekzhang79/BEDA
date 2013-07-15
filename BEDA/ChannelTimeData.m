@@ -133,7 +133,7 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
     
-    x.labelingPolicy     = CPTAxisLabelingPolicyAutomatic;
+    x.labelingPolicy     = CPTAxisLabelingPolicyEqualDivisions;
 //    x.labelingPolicy     =  CPTAxisLabelingPolicyFixedInterval;
     x.preferredNumberOfMajorTicks = 10;
     x.majorGridLineStyle = majorGridLineStyle;
@@ -156,7 +156,7 @@
     x.labelTextStyle = titleText;
     
     CPTXYAxis *y = axisSet.yAxis;
-    y.labelingPolicy = CPTAxisLabelingPolicyAutomatic;
+    y.labelingPolicy = CPTAxisLabelingPolicyEqualDivisions;
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
     if ( [self channelIndex] >= 0) {  // If channelIndex is -1 (less than zero), it means this is annotation channel
         y.majorIntervalLength         = CPTDecimalFromString(@"1.0");
@@ -679,7 +679,7 @@
         CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol diamondPlotSymbol];
         headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
 
-        headerPlotSymbol.size = CGSizeMake(15.0f, 15.0f);
+        headerPlotSymbol.size = CGSizeMake(10.0f, 10.0f);
         plotAnnotation.plotSymbol = headerPlotSymbol;
         
         CPTMutableLineStyle *annotationLineStyle = [CPTMutableLineStyle lineStyle];
@@ -725,8 +725,11 @@
 }
 
 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Delegation functions
+
+
 - (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(id)event
           atPoint:(CGPoint)point
 {
@@ -759,12 +762,51 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         for (ChannelTimeData* ch in [[self source] channels]) {
             [ch selectHeaderPlot];
+            
+            if ( symbolTextAnnotation ) {
+                [graph.plotAreaFrame.plotArea removeAnnotation:symbolTextAnnotation];
+                [symbolTextAnnotation release];
+                symbolTextAnnotation = nil;
+            }
+            
+            // Setup a style for the annotation
+            CPTMutableTextStyle *hitAnnotationTextStyle = [CPTMutableTextStyle textStyle];
+            hitAnnotationTextStyle.color    = [CPTColor whiteColor];
+            hitAnnotationTextStyle.fontSize = 15.0f;
+            hitAnnotationTextStyle.fontName = @"Helvetica";
+            
+            // Determine point of symbol in plot coordinates
+            NSNumber *x          = [NSNumber numberWithDouble:[ch headerTime]];
+            NSNumber *y          = 0;
+            NSArray *anchorPoint = [NSArray arrayWithObjects:x, y, nil];
+            
+            NSDateFormatter *hmsFormatter = [[NSDateFormatter alloc] init];
+            [hmsFormatter setDateFormat:@"HH:mm:ss"];
+            [hmsFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+//            CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:hmsFormatter] autorelease];
+//            timeFormatter.referenceDate = [[self sourceTimeData] basedate];
+
+            NSLog(@"formatted date: %@", [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[ch headerTime]]]);
+            
+            // Add annotation
+            // First make a string for the y value
+            NSString *yString = [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[ch headerTime]]];
+            
+            // Now add the annotation to the plot area
+            CPTTextLayer *textLayer = [[[CPTTextLayer alloc] initWithText:yString style:hitAnnotationTextStyle] autorelease];
+            symbolTextAnnotation              = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:graph.defaultPlotSpace anchorPlotPoint:anchorPoint];
+            symbolTextAnnotation.contentLayer = textLayer;
+            symbolTextAnnotation.displacement = CGPointMake(0.0f, 20.0f);
+            [graph.plotAreaFrame.plotArea addAnnotation:symbolTextAnnotation];
         }
+        
+        
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]) {
         [[self channelSelector] select:index];
     }
 
 }
+
 
 - (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(id)event atPoint:(CGPoint)point
 {
