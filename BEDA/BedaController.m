@@ -75,6 +75,15 @@ static BedaController* g_instance = nil;
 
 }
 
+- (IBAction)showInfoPopover:(id)sender {
+    [[self popover] showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+}
+
+
+- (IBAction)hideInfoPopover:(id)sender {
+    [[self popover] close];
+}
+
 -(IBAction)openDataAnalysisWindow:(id)sender{
     NSLog(@"%s", __PRETTY_FUNCTION__);
     

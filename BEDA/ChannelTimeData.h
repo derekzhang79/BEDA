@@ -47,6 +47,9 @@
 @property (retain) AnnotViewController* annotViewController;
 @property (retain) ChannelSelector* channelSelector;
 
+@property (assign) IBOutlet NSPopover* popover;
+- (IBAction)showInfoPopover:(id)sender;
+
 
 - (SourceTimeData*) sourceTimeData;
 - (CPTXYGraph*) getGraph;

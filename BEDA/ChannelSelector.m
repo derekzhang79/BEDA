@@ -143,7 +143,7 @@
     
     CPTMutableLineStyle *selectedLineStyle = [CPTMutableLineStyle lineStyle];
     selectedLineStyle.lineColor = [CPTColor magentaColor];
-    selectedLineStyle.lineWidth = 5.0f;
+    selectedLineStyle.lineWidth = 1.0f;
     
     plot.dataLineStyle = selectedLineStyle;
 }

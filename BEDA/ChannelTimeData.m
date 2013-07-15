@@ -679,7 +679,7 @@
         CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol diamondPlotSymbol];
         headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
 
-        headerPlotSymbol.size = CGSizeMake(10.0f, 10.0f);
+        headerPlotSymbol.size = CGSizeMake(13.0f, 13.0f);
         plotAnnotation.plotSymbol = headerPlotSymbol;
         
         CPTMutableLineStyle *annotationLineStyle = [CPTMutableLineStyle lineStyle];
@@ -756,7 +756,12 @@
 
 - (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index
 {
-    
+ 
+//    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
+//    {
+//        [[[self beda] popover] showRelativeToRect:<#(NSRect)#> ofView:<#(NSView *)#> preferredEdge:<#(NSRectEdge)#>];
+//    }
+//    
     if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
     {
         NSLog(@"%s", __PRETTY_FUNCTION__);

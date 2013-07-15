@@ -69,7 +69,8 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 @property (assign) double duration;
 @property (assign) double interval;
-
+@property (retain) IBOutlet NSPopover* popover;
+- (IBAction)showInfoPopover:(id)sender;
 
 - (BOOL)isSyncMode;
 - (BOOL)isMultiProjectMode;
