@@ -11,6 +11,7 @@
 #import "AnnotationBehavior.h"
 #import "AnnotViewController.h"
 #import "ChannelSelector.h"
+#import "ChannelAnnotationManager.h"
 
 @implementation ChannelTimeData
 
@@ -232,6 +233,11 @@
     if ( [self channelIndex] < 0) {  // If channelIndex is -1 (less than zero), it means this is annotation channel
         [self createAnnotationPlot];
     }
+    
+    // For Channel Annotation
+    [self setChannelAnnotationManager:
+     [[ChannelAnnotationManager alloc] initWithChannel:self]
+     ];
     
     
 }
@@ -735,6 +741,12 @@
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    NSUInteger flags = [[NSApp currentEvent] modifierFlags];
+    if ( (flags & NSCommandKeyMask) ) {
+        NSLog(@"Detect CMD+Click: create an UI for annotation");
+        [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@"NEW AT HEAD"];
+
+    }
     return YES;
 }
 

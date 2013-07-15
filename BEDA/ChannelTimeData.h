@@ -14,11 +14,13 @@
 #define BEDA_INDENTIFIER_DATA_PLOT @"BedaDataPlot"
 #define BEDA_INDENTIFIER_HEADER_PLOT @"BedaHeaderPlot"
 #define BEDA_INDENTIFIER_SELECT_PLOT @"BedaSelectPlot"
+#define BEDA_INDENTIFIER_CHANNEL_ANNOT_PLOT @"BedaChannelAnnotPlot"
 
 #define BEDA_NOTI_SOURCE_OFFSET_CHANGED @"BedaNotiSourceOffsetChanged"
 
 @class AnnotViewController;
 @class ChannelSelector;
+@class ChannelAnnotationManager;
 
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
@@ -46,6 +48,7 @@
 @property (retain) NSMutableArray* arrayPlotAnnots;
 @property (retain) AnnotViewController* annotViewController;
 @property (retain) ChannelSelector* channelSelector;
+@property (retain) ChannelAnnotationManager* channelAnnotationManager;
 
 @property (assign) IBOutlet NSPopover* popover;
 - (IBAction)showInfoPopover:(id)sender;
