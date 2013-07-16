@@ -183,8 +183,6 @@
     }
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [self stop];
-//    [self setGtAppTime:[ch getMyTimeInGlobal]];
-//    [[[self source] beda] setGtAppTime:[self getMyTimeInGlobal]];
 }
 
 - (void) hideOffsetOverlay {
@@ -205,8 +203,12 @@
     overlay.frame = CGRectMake(sz.width - my.width - 10, sz.height - my.height - 10, my.width, my.height);
 
 //    NSLog(@"overlay.frame.size = %@", NSStringFromSize(overlay.frame.size) );
-
-    [[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%lf", [self offset]]];
+    if ([[[self source] beda]isMultiProjectMode] ){
+        NSString* theProjName = [[[self source] projname] lastPathComponent];
+        [[self offsetOverlay] setStringValue:theProjName];
+    } else {
+        [[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%lf", [self offset]]];
+    }
 }
 
 

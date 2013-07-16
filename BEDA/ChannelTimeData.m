@@ -157,7 +157,7 @@
     x.labelTextStyle = titleText;
     
     CPTXYAxis *y = axisSet.yAxis;
-    y.labelingPolicy = CPTAxisLabelingPolicyEqualDivisions;
+    y.labelingPolicy = CPTAxisLabelingPolicyAutomatic;
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
     if ( [self channelIndex] >= 0) {  // If channelIndex is -1 (less than zero), it means this is annotation channel
         y.majorIntervalLength         = CPTDecimalFromString(@"1.0");
@@ -403,8 +403,6 @@
     [self updateOffsetOverlay];
     Channel* ch = (Channel*)[notification object];
     
-    // Update header time text, without doubts
-//    [self updateHeaderTimeText];
     if (self == ch) {
         return;
     }
@@ -734,54 +732,6 @@
 }
 
 
-//- (void)updateHeaderTimeText {
-//    NSDate* basedate = [[self sourceTimeData] basedate];
-//    double t = [self headerTime];
-//    NSDate* now = [NSDate dateWithTimeInterval:t sinceDate:basedate];
-//    
-//    NSLog(@"basedate = %@", basedate);
-//    NSLog(@"t = %lf, now = %@", t, now);
-//
-//    
-//    if ( symbolTextAnnotation ) {
-//        [graph.plotAreaFrame.plotArea removeAnnotation:symbolTextAnnotation];
-//        [symbolTextAnnotation release];
-//        symbolTextAnnotation = nil;
-//    }
-//    
-//    // Setup a style for the annotation
-//    CPTMutableTextStyle *hitAnnotationTextStyle = [CPTMutableTextStyle textStyle];
-//    hitAnnotationTextStyle.color    = [CPTColor whiteColor];
-//    hitAnnotationTextStyle.fontSize = 15.0f;
-//    hitAnnotationTextStyle.fontName = @"Helvetica";
-//    
-//    // Determine point of symbol in plot coordinates
-//    NSNumber *x          = [NSNumber numberWithDouble:[self headerTime]];
-//    NSNumber *y          = 0;
-//    NSArray *anchorPoint = [NSArray arrayWithObjects:x, y, nil];
-//    
-//    NSDateFormatter *hmsFormatter = [[NSDateFormatter alloc] init];
-//    [hmsFormatter setDateFormat:@"HH:mm:ss"];
-//    [hmsFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:-4]];
-////    [hmsFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
-//    //            CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:hmsFormatter] autorelease];
-//    //            timeFormatter.referenceDate = [[self sourceTimeData] basedate];
-//    NSString *yString = [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[self headerTime]]];
-//
-//    NSLog(@"formatted date: %@", yString);
-//    
-//    // Add annotation
-//    // First make a string for the y value
-//    
-//    // Now add the annotation to the plot area
-//    CPTTextLayer *textLayer = [[[CPTTextLayer alloc] initWithText:yString style:hitAnnotationTextStyle] autorelease];
-//    symbolTextAnnotation              = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:graph.defaultPlotSpace anchorPlotPoint:anchorPoint];
-//    symbolTextAnnotation.contentLayer = textLayer;
-//    symbolTextAnnotation.displacement = CGPointMake(0.0f, 20.0f);
-//    [graph.plotAreaFrame.plotArea addAnnotation:symbolTextAnnotation];
-//}
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Delegation functions
 
@@ -829,14 +779,17 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         for (ChannelTimeData* ch in [[self source] channels]) {
             [ch selectHeaderPlot];
-
         }
         
         
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]) {
         [[self channelSelector] select:index];
+    } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_CHANNEL_ANNOT_PLOT]) {
+        [[self channelSelector] select:index];
     }
 
+    
+   
 }
 
 
@@ -944,8 +897,8 @@
         CPTTextLayer *textLayer = [CPTTextLayer layer];
         textLayer.text = headerString;
         CPTMutableTextStyle *labelTextStyle = [CPTMutableTextStyle textStyle];
-        labelTextStyle.fontSize = 16;
-        labelTextStyle.color = [CPTColor purpleColor];
+        labelTextStyle.fontSize = 13;
+        labelTextStyle.color = [CPTColor blackColor];
         textLayer.textStyle = labelTextStyle;
         textLayer.paddingBottom = 10.0;
         textLayer.paddingLeft = 50.0;

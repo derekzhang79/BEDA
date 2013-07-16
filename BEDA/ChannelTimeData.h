@@ -27,8 +27,6 @@
     CPTXYPlotSpace *plotSpace;
     CPTScatterPlot *dataSourceLinePlot;
     CPTScatterPlot *plotHeader;
-    CPTPlotSpaceAnnotation *symbolTextAnnotation;
-//    CPTScatterPlot *plotAnnotation;
     
     int graphScaleX;
     int graphScaleY;

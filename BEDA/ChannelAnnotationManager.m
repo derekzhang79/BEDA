@@ -67,10 +67,9 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         [self setChannel:ch];        
         [self initPlot];
-        _annots = [[NSMutableArray alloc] init];
-        
-        [self addSingleAt:45 as:@"Single Annot"];
-        [self addDoubleAt:60 during:25 as:@"Double Annot"];
+        _annots = [[NSMutableArray alloc] init];        
+//        [self addSingleAt:45 as:@"Single Annot"];
+//        [self addDoubleAt:60 during:25 as:@"Double Annot"];
 
     }
     return self;
@@ -94,7 +93,7 @@
     CPTPlotSymbol *symbol = [CPTPlotSymbol diamondPlotSymbol];
     symbol.fill = [CPTFill fillWithColor:color];
     
-    symbol.size = CGSizeMake(20.0f, 20.0f);
+    symbol.size = CGSizeMake(15.0f, 15.0f);
     p.plotSymbol = symbol;
     
     CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
@@ -126,7 +125,9 @@
     [[self plot] reloadData];
 }
 
-
+- (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index{
+    
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CPTPlotDataSource functions
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
