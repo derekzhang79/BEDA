@@ -21,7 +21,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @implementation BedaController
 
 @synthesize sources = _sources;
-@synthesize movSplitView = _movSplitView;
+@synthesize movSplitView;
 @synthesize isNavMode;
 @synthesize numProjects;
 @synthesize isPlaying;
@@ -45,7 +45,7 @@ static BedaController* g_instance = nil;
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     _sources = [[NSMutableArray alloc] init];
-    _movSplitView = Nil;
+//    _movSplitView = Nil;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onAnnotationChanged:)
@@ -506,8 +506,8 @@ static BedaController* g_instance = nil;
 - (void)addSourceMov:(NSURL*)url {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    // If we do not have movSplitView, create one
-    [self createMovSplitViewIfNotExist];
+//    // If we do not have movSplitView, create one
+//    [self createMovSplitViewIfNotExist];
     
     // Create a source
     SourceMovie* s = [[SourceMovie alloc] init];
@@ -527,27 +527,27 @@ static BedaController* g_instance = nil;
     
 }
 
-- (void)createMovSplitViewIfNotExist {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    if ([self movSplitView] != Nil) {
-        return;
-    }
-    NSLog(@"%s : create a movSplitView", __PRETTY_FUNCTION__);
-    
-    NSSplitView* sv = [[NSSplitView alloc] init];
-    [sv setVertical:YES];
-    
-    NSArray* v = [splitview subviews];
-    NSView* firstView = Nil;
-    if ([[splitview subviews] count] > 0) {
-        firstView = [v objectAtIndex:0];
-    }
-    
-    [splitview addSubview:sv positioned:NSWindowBelow relativeTo:firstView];
-    
-    [self setMovSplitView:sv];
-    
-}
+//- (void)createMovSplitViewIfNotExist {
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    if ([self movSplitView] != Nil) {
+//        return;
+//    }
+//    NSLog(@"%s : create a movSplitView", __PRETTY_FUNCTION__);
+//    
+//    NSSplitView* sv = [[NSSplitView alloc] init];
+//    [sv setVertical:YES];
+//    
+//    NSArray* v = [splitview subviews];
+//    NSView* firstView = Nil;
+//    if ([[splitview subviews] count] > 0) {
+//        firstView = [v objectAtIndex:0];
+//    }
+//    
+//    [splitview addSubview:sv positioned:NSWindowBelow relativeTo:firstView];
+//    
+//    [self setMovSplitView:sv];
+//    
+//}
 
 - (void)spaceEvenly:(NSSplitView *)splitView
 {
@@ -663,17 +663,17 @@ static BedaController* g_instance = nil;
     float factor[20];
     float sumFactor = 0.0;
 
-    if ([self movSplitView] != Nil) {
-        for (Source* s in [self sources]) {
-            for (Channel* ch in [s channels]) {
-                if ([ch isKindOfClass:[ChannelMovie class]] && cnt == 0) {
-                    factor[cnt] = [ch windowHeightFactor];
-                    sumFactor += factor[cnt];
-                    cnt++;
-                }
-            }
-        }
-    }
+//    if ([self movSplitView] != Nil) {
+//        for (Source* s in [self sources]) {
+//            for (Channel* ch in [s channels]) {
+//                if ([ch isKindOfClass:[ChannelMovie class]] && cnt == 0) {
+//                    factor[cnt] = [ch windowHeightFactor];
+//                    sumFactor += factor[cnt];
+//                    cnt++;
+//                }
+//            }
+//        }
+//    }
     for (Source* s in [self sources]) {
         for (Channel* ch in [s channels]) {
             if ([ch isKindOfClass:[ChannelMovie class]]) {
@@ -686,6 +686,18 @@ static BedaController* g_instance = nil;
     }
     for (int i = 0; i < cnt; i++) NSLog(@"factor %d: %f", i, factor[i]);
     NSLog(@"sum factor = %f", sumFactor);
+    
+    int MIN_SCROLL_NUM_GRAPHS = 2;
+    if (cnt > MIN_SCROLL_NUM_GRAPHS) {
+        NSRect frame;
+        frame.origin.x = 0;
+        frame.origin.y = 0;
+        frame.size.width = [splitview bounds].size.width;
+        frame.size.height = 500 + 200 * (cnt - MIN_SCROLL_NUM_GRAPHS);
+        [[splitview superview] setFrame:frame];
+        NSLog(@"adjust graphSplitView height = %lf", frame.size.height);
+
+    }
     
     NSArray *subviews = [splitView subviews];
     int n = (int)[subviews count];
@@ -735,7 +747,7 @@ static BedaController* g_instance = nil;
         [[[splitview subviews] objectAtIndex:0] removeFromSuperview];
     }
     
-    [self setMovSplitView:Nil];
+//    [self setMovSplitView:Nil];
 }
 
 - (void)createViewsForAllChannels {
@@ -745,7 +757,7 @@ static BedaController* g_instance = nil;
     for (Source* s in [self sources]) {
         for (Channel* ch in [s channels]) {
             if ([ch isKindOfClass:[ChannelMovie class]]) {
-                [self createMovSplitViewIfNotExist];
+//                [self createMovSplitViewIfNotExist];
                 ChannelMovie* chm = (ChannelMovie*)ch;
                 [chm createMovieViewFor:self];
 

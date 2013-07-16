@@ -50,7 +50,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 + (BedaController*) getInstance;
 
 @property (retain) NSMutableArray* sources;
-@property (retain) NSSplitView* movSplitView;
+@property (nonatomic, retain) IBOutlet NSSplitView* movSplitView;
 @property (retain) NSWindowController* graphWindowController;
 @property (retain) NSWindowController* dataWindowController;
 @property (retain) NSWindowController* summaryProjectsController;
@@ -107,7 +107,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 
 - (void)addSourceMov:(NSURL*)url;
-- (void)createMovSplitViewIfNotExist;
+//- (void)createMovSplitViewIfNotExist;
 - (void)spaceEvenly:(NSSplitView *)splitView;
 - (void)spaceEvenly:(NSSplitView *)splitView withFirstSize:(float)szFirst;
 
