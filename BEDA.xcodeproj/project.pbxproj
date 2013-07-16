@@ -29,6 +29,7 @@
 		038A62D416FD4CCB00E91A65 /* annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D216FD4CCB00E91A65 /* annotation.png */; };
 		038A62D516FD4CCB00E91A65 /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D316FD4CCB00E91A65 /* sync.png */; };
 		038E9BC51794E5FC00606594 /* ChannelAnnotationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */; };
+		038E9BC81794ED1200606594 /* ChannelAnnotationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9BC71794ED1200606594 /* ChannelAnnotationController.m */; };
 		038E9D1C177932E400ACE963 /* ColorCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D1B177932E400ACE963 /* ColorCellView.m */; };
 		038E9D1F177961E500ACE963 /* PopupBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D1E177961E500ACE963 /* PopupBtnCell.m */; };
 		038E9D2217796D0400ACE963 /* IntervalPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D2117796D0400ACE963 /* IntervalPlayerController.m */; };
@@ -109,6 +110,8 @@
 		038A62D216FD4CCB00E91A65 /* annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotation.png; sourceTree = "<group>"; };
 		038A62D316FD4CCB00E91A65 /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
 		038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelAnnotationWindow.xib; sourceTree = "<group>"; };
+		038E9BC61794ED1100606594 /* ChannelAnnotationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelAnnotationController.h; sourceTree = "<group>"; };
+		038E9BC71794ED1200606594 /* ChannelAnnotationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelAnnotationController.m; sourceTree = "<group>"; };
 		038E9D1A177932E400ACE963 /* ColorCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCellView.h; sourceTree = "<group>"; };
 		038E9D1B177932E400ACE963 /* ColorCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCellView.m; sourceTree = "<group>"; };
 		038E9D1D177961E500ACE963 /* PopupBtnCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupBtnCell.h; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				0314637A1762F675007B075B /* ChannelTimeData.m */,
 				B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */,
 				B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */,
+				038E9BC61794ED1100606594 /* ChannelAnnotationController.h */,
+				038E9BC71794ED1200606594 /* ChannelAnnotationController.m */,
 				B225ED9A1793ACA0002FF5A7 /* ChannelAnnotationManager.h */,
 				B225ED9B1793ACA0002FF5A7 /* ChannelAnnotationManager.m */,
 				038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */,
@@ -548,6 +553,7 @@
 				B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */,
 				B28CD6D6178E62D100BC7719 /* ViewRangeController.m in Sources */,
 				B225ED9C1793ACA0002FF5A7 /* ChannelAnnotationManager.m in Sources */,
+				038E9BC81794ED1200606594 /* ChannelAnnotationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -757,7 +757,15 @@
 
     if ( [event clickCount] == 2 ) {
         NSLog(@"%@", @"double clicked");
+        if ([self channelAnnotWindowController] != Nil) {
+            [[[self channelAnnotWindowController] window] makeMainWindow];
+            NSLog(@"%s : we already has DataWindowController", __PRETTY_FUNCTION__);
+        }
         
+        NSWindowController *cw = [[NSWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
+        [cw showWindow:self];
+        [self setChannelAnnotWindowController:cw];
+
         [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@"NEW AT HEAD"];
     }
     

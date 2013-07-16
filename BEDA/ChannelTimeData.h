@@ -21,6 +21,7 @@
 @class AnnotViewController;
 @class ChannelSelector;
 @class ChannelAnnotationManager;
+@class ChannelAnnotationController;
 
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
@@ -28,12 +29,16 @@
     CPTScatterPlot *dataSourceLinePlot;
     CPTScatterPlot *plotHeader;
     
+    
+    ChannelAnnotationController* cac;
+    
     int graphScaleX;
     int graphScaleY;
     NSColor* lineColor;
     NSColor* areaColor;
 
 }
+
 
 @property (assign) int channelIndex;
 @property (assign) BOOL isHeaderSelected;
@@ -47,10 +52,7 @@
 @property (retain) AnnotViewController* annotViewController;
 @property (retain) ChannelSelector* channelSelector;
 @property (retain) ChannelAnnotationManager* channelAnnotationManager;
-
-@property (assign) IBOutlet NSPopover* popover;
-@property (assign) IBOutlet NSViewController* popoverViewController;
-- (IBAction)showInfoPopover:(id)sender;
+@property (retain) NSWindowController* channelAnnotWindowController;
 
 - (SourceTimeData*) sourceTimeData;
 - (CPTXYGraph*) getGraph;

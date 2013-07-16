@@ -10,48 +10,48 @@
 #import "BedaController.h"
 #import "ChannelTimeData.h"
 
-@implementation ChannelAnnotion
-
-@synthesize t;
-@synthesize duration;
-@synthesize text;
-
-
-- (id) initAtTime:(double) _t withText:(NSString*) _text {
-    self = [super init];
-    
-    if (self) {
-        // Initialization code here
-        NSLog(@"%s", __PRETTY_FUNCTION__);
-        [self setT:_t];
-        [self setDuration:0.0];
-        [self setText:_text];
-    }
-    return self;
-}
-
-- (id) initAtTime:(double) _t during:(double)_duration withText:(NSString*) _text {
-    self = [super init];
-    
-    if (self) {
-        // Initialization code here
-        NSLog(@"%s", __PRETTY_FUNCTION__);
-        [self setT:_t];
-        [self setDuration:_duration];
-        [self setText:_text];
-    }
-    return self;
-}
-
-- (BOOL) isSingle {
-    if ([self duration] < 0.00001) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-@end
+//@implementation ChannelAnnotion
+//
+//@synthesize t;
+//@synthesize duration;
+//@synthesize text;
+//
+//
+//- (id) initAtTime:(double) _t withText:(NSString*) _text {
+//    self = [super init];
+//    
+//    if (self) {
+//        // Initialization code here
+//        NSLog(@"%s", __PRETTY_FUNCTION__);
+//        [self setT:_t];
+//        [self setDuration:0.0];
+//        [self setText:_text];
+//    }
+//    return self;
+//}
+//
+//- (id) initAtTime:(double) _t during:(double)_duration withText:(NSString*) _text {
+//    self = [super init];
+//    
+//    if (self) {
+//        // Initialization code here
+//        NSLog(@"%s", __PRETTY_FUNCTION__);
+//        [self setT:_t];
+//        [self setDuration:_duration];
+//        [self setText:_text];
+//    }
+//    return self;
+//}
+//
+//- (BOOL) isSingle {
+//    if ([self duration] < 0.00001) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+//}
+//
+//@end
 
 @implementation ChannelAnnotationManager
 
@@ -111,7 +111,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
     [[self annots] addObject:
-     [[ChannelAnnotion alloc] initAtTime:t withText:text]
+     [[ChannelAnnotationController alloc] initAtTime:t withText:text]
      ];
     [[self plot] reloadData];
 }
@@ -120,7 +120,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
     [[self annots] addObject:
-     [[ChannelAnnotion alloc] initAtTime:t during:dur withText:text]
+     [[ChannelAnnotationController alloc] initAtTime:t during:dur withText:text]
      ];
     [[self plot] reloadData];
 }
@@ -139,7 +139,7 @@
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
     int annotIndex = (int)(index / 3);
-    ChannelAnnotion* ann = [[self annots] objectAtIndex:annotIndex];
+    ChannelAnnotationController* ann = [[self annots] objectAtIndex:annotIndex];
 
     // Do not display the second point of Single annotation
     if ([ann isSingle] && (index % 3) == 1) {
@@ -171,7 +171,7 @@
 -(CPTLayer *)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)index
 {
     int annotIndex = (int)(index / 3);
-    ChannelAnnotion* ann = [[self annots] objectAtIndex:annotIndex];
+    ChannelAnnotationController* ann = [[self annots] objectAtIndex:annotIndex];
 
     CPTTextLayer *textLayer = [CPTTextLayer layer];
     textLayer.text = [ann text];

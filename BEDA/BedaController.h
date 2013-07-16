@@ -82,6 +82,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 -(IBAction)openDataAnalysisWindow:(id)sender;
 -(IBAction)openSummaryProjectsWindow:(id)sender;
+-(IBAction)openChannelAnnotationWindow:(id)sender;
 
 - (IBAction)openGraphController:(id)sender;
 - (IBAction)play:(id)sender;
