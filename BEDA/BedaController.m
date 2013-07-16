@@ -687,13 +687,13 @@ static BedaController* g_instance = nil;
     for (int i = 0; i < cnt; i++) NSLog(@"factor %d: %f", i, factor[i]);
     NSLog(@"sum factor = %f", sumFactor);
     
-    int MIN_SCROLL_NUM_GRAPHS = 2;
+    int MIN_SCROLL_NUM_GRAPHS = 3;
     if (cnt > MIN_SCROLL_NUM_GRAPHS) {
         NSRect frame;
         frame.origin.x = 0;
         frame.origin.y = 0;
         frame.size.width = [splitview bounds].size.width;
-        frame.size.height = 500 + 200 * (cnt - MIN_SCROLL_NUM_GRAPHS);
+        frame.size.height = 220 + 150 * (cnt - MIN_SCROLL_NUM_GRAPHS);
         [[splitview superview] setFrame:frame];
         NSLog(@"adjust graphSplitView height = %lf", frame.size.height);
 
