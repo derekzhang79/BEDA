@@ -49,8 +49,8 @@
 @property (retain) ChannelAnnotationManager* channelAnnotationManager;
 
 @property (assign) IBOutlet NSPopover* popover;
+@property (assign) IBOutlet NSViewController* popoverViewController;
 - (IBAction)showInfoPopover:(id)sender;
-
 
 - (SourceTimeData*) sourceTimeData;
 - (CPTXYGraph*) getGraph;

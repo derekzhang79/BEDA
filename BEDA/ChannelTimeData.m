@@ -741,20 +741,26 @@
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSUInteger flags = [[NSApp currentEvent] modifierFlags];
-    if ( (flags & NSCommandKeyMask) ) {
-        NSLog(@"Detect CMD+Click: create an UI for annotation");
-        [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@"NEW AT HEAD"];
-
-    }
+//    NSUInteger flags = [[NSApp currentEvent] modifierFlags];
+//    if ( (flags & NSCommandKeyMask) ) {
+//        NSLog(@"Detect CMD+Click: create an UI for annotation");
+//        [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@"NEW AT HEAD"];
+//
+//    }
     return YES;
 }
 
-- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceUpEvent:(id)event atPoint:(CGPoint)point
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceUpEvent:(id)event atPoint:(CGPoint)interactionPoint
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     // Restore the vertical line plot to its initial color.
 
+    if ( [event clickCount] == 2 ) {
+        NSLog(@"%@", @"double clicked");
+        
+        [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@"NEW AT HEAD"];
+    }
+    
     for (ChannelTimeData* ch in [[self source] channels]) {
         [ch deselectHeaderPlot];
     }

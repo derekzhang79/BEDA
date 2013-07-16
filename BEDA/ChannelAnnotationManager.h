@@ -20,6 +20,7 @@
 @property double t;
 @property double duration;
 @property (copy) NSString* text;
+@property (assign) IBOutlet NSTextField* annotationtext;
 
 - (BOOL) isSingle;
 
