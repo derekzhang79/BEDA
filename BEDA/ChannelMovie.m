@@ -131,13 +131,45 @@
 
 - (void) rateDidChanged: (NSNotification *)notification {
     if ([self isNavMode] == NO) {
-        double gt = [self getGlobalTime];
-        double lt = [self getMyTimeInLocal];
-        // gt + offset = lt
-        double offset = lt - gt;
-        [[self source] setOffset:offset];
-        NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
+        if ([[self beda] isMultiProjectMode] == NO) {
+            double gt = [self getGlobalTime];
+            double lt = [self getMyTimeInLocal];
+            // gt + offset = lt
+            double offset = lt - gt;
+            [[self source] setOffset:offset];
+            NSLog(@"%s : gt = %lf offset = %lf lt = %lf", __PRETTY_FUNCTION__, gt, offset, lt);
+            return;
+        } else {
+
+            NSString* myprojname = [[self source] projname];
+            for (Source* s in [[self beda ]sources]) {
+                NSString* projname = [s projname];
+                if ([myprojname isEqualToString:projname] == NO) {
+                    continue;
+                }
+                if ([[self movie] rate] > 0) {
+                    NSLog(@"IN MultiProject Mode, Sync Mode, Play Source ( #Channels = %d )", (int)[[s channels] count]);
+                    for (Channel* ch in [s channels]) {
+                        if (ch == self) {
+                            continue;
+                        }
+                        [ch play];
+                    }
+                } else {
+                    NSLog(@"IN MultiProject Mode, Sync Mode, Stop Source ( #Channels = %d )", (int)[[s channels] count]);
+                    for (Channel* ch in [s channels]) {
+                        if (ch == self) {
+                            continue;
+                        }
+                        [ch stop];
+                    }
+                }
+
+            } // end for
+            return;
+        }
         return;
+
     }
     
     if ([[self movie] rate] > 0) {

@@ -447,7 +447,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Play/stop
 - (void)play {
-    if ([self isNavMode] == NO) {
+    if ([[self beda] isMultiProjectMode] == NO && [self isNavMode] == NO) {
         NSLog(@"%s : graph only plays in Navigation Mode", __PRETTY_FUNCTION__);
         return;
     }

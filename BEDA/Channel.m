@@ -197,12 +197,19 @@
     if ([self offsetOverlay] == Nil) {
         return;
     }
+    if ([[[self source] beda]isMultiProjectMode]) {
+        NSString* theProjName = [[[self source] projname] lastPathComponent];
+        if ([[[self offsetOverlay] stringValue] isEqualToString:theProjName]) {
+            return;
+        }
+        
+    }
     NSTextField* overlay = [self offsetOverlay];
     NSSize sz = [self view].frame.size;
     NSSize my = overlay.frame.size;
     overlay.frame = CGRectMake(sz.width - my.width - 10, sz.height - my.height - 10, my.width, my.height);
 
-//    NSLog(@"overlay.frame.size = %@", NSStringFromSize(overlay.frame.size) );
+//    NSLog(@"%@: overlay.frame.size = %@", [[self source] projname ], NSStringFromSize(overlay.frame.size) );
     if ([[[self source] beda]isMultiProjectMode] ){
         NSString* theProjName = [[[self source] projname] lastPathComponent];
         [[self offsetOverlay] setStringValue:theProjName];
