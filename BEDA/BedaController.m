@@ -257,31 +257,33 @@ static BedaController* g_instance = nil;
         return;
     }
     NSLog(@"%s", __PRETTY_FUNCTION__);
-//    for (Source* s in [self sources]) {
-//        for (Channel* ch in [s channels]) {
-//            [ch play];
-//        }
-//    }
-    if ([[self intervalPlayerManager] isFastMode]) {
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:BEDA_NOTI_CHANNEL_FASTPLAY
-         object:self];
+    
+    if ([self isIntervalPlayerVisible] == YES){
+    
+        if ([[self intervalPlayerManager] isFastMode]) {
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNEL_FASTPLAY
+             object:self];
+        }   else {
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNEL_PLAY
+             object:self];
+        
+        }
+        [self setIsPlaying:YES];
+        
+        [self setPlayTimer:
+         [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                          target:self
+                                        selector:@selector(onPlayTimer:)
+                                        userInfo:nil
+                                         repeats:YES]
+         ];
     } else {
         [[NSNotificationCenter defaultCenter]
          postNotificationName:BEDA_NOTI_CHANNEL_PLAY
          object:self];
-        
     }
-    
-    [self setIsPlaying:YES];
-    
-    [self setPlayTimer:
-        [NSTimer scheduledTimerWithTimeInterval:0.05f
-                                              target:self
-                                            selector:@selector(onPlayTimer:)
-                                            userInfo:nil
-                                             repeats:YES]
-     ];
     
 }
 
@@ -305,18 +307,20 @@ static BedaController* g_instance = nil;
         return;
     }
     NSLog(@"%s", __PRETTY_FUNCTION__);
-//    for (Source* s in [self sources]) {
-//        for (Channel* ch in [s channels]) {
-//            [ch stop];
-//        }
-//    }
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:BEDA_NOTI_CHANNEL_STOP
-     object:self];
-    
-    [[self playTimer] invalidate];
-    [self setPlayTimer:Nil];
-    [self setIsPlaying:NO];
+
+    if( [self isIntervalPlayerVisible] == YES){
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:BEDA_NOTI_CHANNEL_STOP
+         object:self];
+        
+        [[self playTimer] invalidate];
+        [self setPlayTimer:Nil];
+        [self setIsPlaying:NO];
+    } else {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:BEDA_NOTI_CHANNEL_STOP
+         object:self];
+    }
 
 }
 

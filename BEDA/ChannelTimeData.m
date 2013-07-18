@@ -447,7 +447,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Play/stop
 - (void)play {
-    if ([[self beda] isMultiProjectMode] == NO && [self isNavMode] == NO) {
+    if ([[self beda] isMultiProjectMode] == NO && [self isNavMode] == NO && [[self beda] isIntervalPlayerVisible] == NO) {
         NSLog(@"%s : graph only plays in Navigation Mode", __PRETTY_FUNCTION__);
         return;
     }
@@ -470,7 +470,7 @@
 }
 
 - (void)fastplay {
-    if ([self isNavMode] == NO) {
+    if ([self isNavMode] == NO && [[self beda] isIntervalPlayerVisible] == NO) {
         NSLog(@"%s : graph only plays in Navigation Mode", __PRETTY_FUNCTION__);
         return;
     }
@@ -766,7 +766,7 @@
         [cw showWindow:self];
         [self setChannelAnnotWindowController:cw];
 
-        [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@"NEW AT HEAD"];
+        [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
     }
     
     for (ChannelTimeData* ch in [[self source] channels]) {

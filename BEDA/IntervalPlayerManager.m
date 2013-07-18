@@ -21,8 +21,8 @@
     if (self) {
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
-        [self setFfInterval:10];
-        [self setNormalInterval:2];
+        [self setFfInterval:9];
+        [self setNormalInterval:1];
         [self setFastPlayRate:4.0];
         [txtFFInterval setIntValue:ffInterval];
         [txtNormalInterval setIntValue:normalInterval];
