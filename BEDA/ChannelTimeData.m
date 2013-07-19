@@ -328,8 +328,12 @@
 }
 
 -(void) updateAnnotation {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    if ([self channelIndex] >= 0) {
+        return;
+    }
     
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
     [self adjustAnnotationPlotRange];
 
     for (CPTScatterPlot* plot in [self arrayPlotAnnots]) {
@@ -556,7 +560,7 @@
 - (double) windowHeightFactor {
     switch ([self channelIndex]) {
         case -1:
-            return 0.5;
+            return 2.0;
         case 1:
             return 2.0;
         case 2:

@@ -163,7 +163,7 @@
     withLineColor: [NSColor blueColor] 
         areaColor:[NSColor magentaColor]
          isBottom:YES hasArea:NO];
-    
+    [ch setMyTimeInGlobal:[[self beda] gtAppTime]];
     [[s channels] addObject:ch];
 
     

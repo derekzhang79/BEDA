@@ -429,7 +429,11 @@ static BedaController* g_instance = nil;
     for (Source* s in [self sources]) {
         // To Do: select the proper source in future
         AnnotationBehavior* beh = [[s annots] behaviorByName:name];
-        [[beh times] addObject:[NSNumber numberWithFloat:t]];
+        
+        double offset = [s offset];
+        double projeoffset = [s projoffset];
+        double lt = t + offset + projeoffset;
+        [[beh times] addObject:[NSNumber numberWithFloat:lt]];
         
         NSLog(@"# Source Channels = %d", (int)[[s channels] count]);
         for (Channel* ch in [s channels]) {
@@ -788,11 +792,12 @@ static BedaController* g_instance = nil;
     
     int MIN_SCROLL_NUM_GRAPHS = 3;
     if (cnt > MIN_SCROLL_NUM_GRAPHS) {
+        double fixedHeight = [[splitview superview] frame].size.height;
         NSRect frame;
         frame.origin.x = 0;
         frame.origin.y = 0;
         frame.size.width = [splitview bounds].size.width;
-        frame.size.height = 220 + 150 * (cnt - MIN_SCROLL_NUM_GRAPHS);
+        frame.size.height = fixedHeight + 150 * (cnt - MIN_SCROLL_NUM_GRAPHS);
         [[splitview superview] setFrame:frame];
         NSLog(@"adjust graphSplitView height = %lf", frame.size.height);
 
