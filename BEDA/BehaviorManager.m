@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
-#import "AnnotationManager.h"
+#import "BehaviorManager.h"
 
-@implementation AnnotationManager
+@implementation BehaviorManager
 
 
 @synthesize behaviors = _behaviors;
@@ -26,14 +26,14 @@
 }
 
 - (void)createDefaultBehaviors {
-    AnnotationBehavior* annot = Nil;
-    annot = [[AnnotationBehavior alloc]
+    Behavior* annot = Nil;
+    annot = [[Behavior alloc]
              initWithName:@"Engaged & Ontask Behaviors" withColor:[NSColor blueColor] withKey:@"e"];
     [self addBehavior:annot ];
     [[annot times] addObject:[NSNumber numberWithFloat:10.0f]];
     [[annot times] addObject:[NSNumber numberWithFloat:20.0f]];
 
-    annot = [[AnnotationBehavior alloc]
+    annot = [[Behavior alloc]
              initWithName:@"Undesired Behaviors" withColor:[NSColor redColor] withKey:@"u"];
     [self addBehavior: annot];
     [[annot times] addObject:[NSNumber numberWithFloat:15.0f]];
@@ -42,19 +42,19 @@
 
 }
 
-- (void) addBehavior:(AnnotationBehavior*)behavior {
+- (void) addBehavior:(Behavior*)behavior {
     [[self behaviors] addObject:behavior];
 }
 
-- (AnnotationBehavior*) behaviorByIndex : (int)index {
+- (Behavior*) behaviorByIndex : (int)index {
     if (index < 0 || index >= [[self behaviors] count]) {
         return Nil;
     }
     return [[self behaviors] objectAtIndex:index];
 }
 
-- (AnnotationBehavior*) behaviorByName  : (NSString*)name {
-    for (AnnotationBehavior* b in [self behaviors]) {
+- (Behavior*) behaviorByName  : (NSString*)name {
+    for (Behavior* b in [self behaviors]) {
         if ([[b name] isEqualToString:name]) {
             return b;
         }
@@ -68,7 +68,7 @@
 
 - (int) countUsedBehaviors {
     int count = 0;
-    for (AnnotationBehavior* b in [self behaviors]) {
+    for (Behavior* b in [self behaviors]) {
         if ([b isUsed]) {
             count++;
         }
@@ -78,7 +78,7 @@
 
 - (void) updateUsedIndexes {
     int count = 0;
-    for (AnnotationBehavior* b in [self behaviors]) {
+    for (Behavior* b in [self behaviors]) {
         if ([b isUsed]) {
             [b setUsedIndex:count];
             count++;

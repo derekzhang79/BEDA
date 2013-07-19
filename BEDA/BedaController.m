@@ -428,7 +428,7 @@ static BedaController* g_instance = nil;
     NSLog(@"item.title %@ at %.lf", name, t);
     for (Source* s in [self sources]) {
         // To Do: select the proper source in future
-        AnnotationBehavior* beh = [[s annots] behaviorByName:name];
+        Behavior* beh = [[s behavs] behaviorByName:name];
         
         double offset = [s offset];
         double projeoffset = [s projoffset];
@@ -448,9 +448,9 @@ static BedaController* g_instance = nil;
     [annotmenu removeAllItems];
     
     for (Source* s in [self sources]) {
-        AnnotationManager* am = [s annots];
+        BehaviorManager* am = [s behavs];
         for (int i = 0; i < [am countDefinedBehaviors]; i++) {
-            AnnotationBehavior* beh = [am behaviorByIndex:i];
+            Behavior* beh = [am behaviorByIndex:i];
             
             NSImage* image = [[NSImage alloc] initWithSize:NSMakeSize(10.0, 10.0)];
             [image lockFocus];

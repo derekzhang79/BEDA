@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BedaController.h"
-#import "AnnotationManager.h"
+#import "BehaviorManager.h"
 
 @interface Source : NSObject {
     
@@ -20,7 +20,7 @@
 @property (copy) NSString* filename;
 @property (copy) NSString* projname;
 
-@property (retain) AnnotationManager* annots;
+@property (retain) BehaviorManager* behavs;
 
 
 @property double offset;

@@ -7,8 +7,8 @@
 //
 
 #import "ChannelTimeData.h"
-#import "AnnotationManager.h"
-#import "AnnotationBehavior.h"
+#import "BehaviorManager.h"
+#import "Behavior.h"
 #import "AnnotViewController.h"
 #import "ChannelSelector.h"
 #import "ChannelAnnotationManager.h"
@@ -319,7 +319,7 @@
 }
 
 -(void) adjustAnnotationPlotRange {
-    AnnotationManager* am = [[self source] annots];
+    BehaviorManager* am = [[self source] annots];
     [am updateUsedIndexes];
 
     float top = [am countUsedBehaviors];
@@ -674,7 +674,7 @@
 -(void) createAnnotationPlot{
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    for (AnnotationBehavior* beh in [[[self source] annots] behaviors]) {
+    for (Behavior* beh in [[[self source] annots] behaviors]) {
         // Create header plot
         CPTScatterPlot* plotAnnotation = [[[CPTScatterPlot alloc] initWithFrame:CGRectNull] autorelease];
         plotAnnotation.identifier = [beh name];
@@ -707,8 +707,8 @@
 
 -(NSUInteger)numberOfRecordsForAnnotationPlot:(CPTPlot *)plot {
 
-    AnnotationManager* am = [[self source] annots];
-    AnnotationBehavior* beh = [am behaviorByName:(NSString *)plot.identifier];
+    BehaviorManager* am = [[self source] annots];
+    Behavior* beh = [am behaviorByName:(NSString *)plot.identifier];
     
     if (beh == Nil) {
         return 0;
@@ -718,8 +718,8 @@
 }
 
 -(NSNumber *)numberForAnnotationPlot:(CPTPlot *)plot Field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
-    AnnotationManager* am = [[self source] annots];
-    AnnotationBehavior* beh = [am behaviorByName:(NSString *)plot.identifier];
+    BehaviorManager* am = [[self source] annots];
+    Behavior* beh = [am behaviorByName:(NSString *)plot.identifier];
     if (beh == Nil) {
         return nil;
     }

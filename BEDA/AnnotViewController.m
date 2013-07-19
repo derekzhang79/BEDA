@@ -34,7 +34,7 @@
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    AnnotationBehavior* beh = [[[self source]annots] behaviorByIndex:(int)row] ;
+    Behavior* beh = [[[self source]annots] behaviorByIndex:(int)row] ;
     // Behavior Name
     if ([tableColumn.identifier isEqualToString:@"Behavior Name"]) {
         NSTextField *behaviorName = [tableView makeViewWithIdentifier:@"behaviorNameView" owner:self];
@@ -78,7 +78,7 @@
                     [totalIntervals setEditable:NO];
                     [totalIntervals setSelectable:NO];
                 }
-                int totalNumOfIntervals = [AnnotationBehavior numTotalIntervals];
+                int totalNumOfIntervals = [Behavior numTotalIntervals];
                 [totalIntervals setIntValue:totalNumOfIntervals];
                 return totalIntervals;
             } else

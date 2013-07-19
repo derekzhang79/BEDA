@@ -112,8 +112,8 @@
         [self onApplySettingPressed:nil];
         
         NSLog(@"add annotation");
-        AnnotationBehavior* annot = Nil;
-        annot = [[AnnotationBehavior alloc]
+        Behavior* annot = Nil;
+        annot = [[Behavior alloc]
                  initWithName:@"hi" withColor:[NSColor blueColor] withKey:@"k"];
         [[[self source] annots] addBehavior:annot];
         NSUInteger n = [[[self source] annots] countDefinedBehaviors];
@@ -132,7 +132,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     for (int i = 0; i < [[[self source] annots] countDefinedBehaviors]; i++) {
-        AnnotationBehavior* ab = [[[self source] annots] behaviorByIndex:i];
+        Behavior* ab = [[[self source] annots] behaviorByIndex:i];
         
         {
             NSMutableArray* array = [[self controls] objectForKey:@"Color"];

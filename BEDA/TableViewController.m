@@ -2,14 +2,14 @@
 //  TableViewController.m
 //  BEDA
 //
-//  Created by Sehoon Ha on 6/16/13.
+//  Created by Jennifer Kim on 6/16/13.
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
 #import "TableViewController.h"
 
-#import "AnnotationManager.h"
-#import "AnnotationBehavior.h"
+#import "BehaviorManager.h"
+#import "Behavior.h"
 
 @implementation TableViewController
 
@@ -110,7 +110,7 @@
     
     // Special code for annotation
     if ([tableColumn.identifier isEqualToString:@"Annotation"]) {
-        AnnotationBehavior* beh = [[[self source] annots] behaviorByIndex:(int)row];
+        Behavior* beh = [[[self source] annots] behaviorByIndex:(int)row];
         if (beh == Nil) {
             result.stringValue = @"---";
         } else {

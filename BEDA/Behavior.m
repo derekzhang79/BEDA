@@ -2,14 +2,14 @@
 //  AnnotationBehavior.m
 //  BEDA
 //
-//  Created by Sehoon Ha on 6/18/13.
+//  Created by Jennifer Kim on 6/18/13.
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
-#import "AnnotationBehavior.h"
+#import "Behavior.h"
 #import "BedaController.h"
 
-@implementation AnnotationBehavior
+@implementation Behavior
 
 @synthesize category;
 @synthesize name;
@@ -59,7 +59,7 @@
 
 - (int) numBehaviorIntervals {
     int cnt[BEDA_MAX_INTERVALS];
-    int n = [AnnotationBehavior numTotalIntervals];
+    int n = [Behavior numTotalIntervals];
     for (int i = 0; i < n; i++) {
         cnt[i] = 0;
     }
@@ -91,7 +91,7 @@
 
 - (double) percentBehaviorIntervals {
     double a = [self numBehaviorIntervals];
-    double b = [AnnotationBehavior numTotalIntervals];
+    double b = [Behavior numTotalIntervals];
     return 100.0 * (a / b);
 }
 

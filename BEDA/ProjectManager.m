@@ -2,7 +2,7 @@
 //  ProjectManager.m
 //  BEDA
 //
-//  Created by Sehoon Ha on 6/14/13.
+//  Created by Jennifer Kim on 6/14/13.
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
@@ -133,7 +133,7 @@
                     [nodeNumBeh setAttributesWithDictionary:nbattrs];
                     [nodeSource addChild:nodeNumBeh];
                     
-                    for (AnnotationBehavior* beh in [[[ch source] annots] behaviors]) {
+                    for (Behavior* beh in [[[ch source] annots] behaviors]) {
                         NSXMLElement *nodeAnnot = (NSXMLElement *)[NSXMLNode elementWithName:@"annotbehavior"];
                         NSMutableDictionary* abattrs = [[NSMutableDictionary alloc] init];
                         
@@ -156,7 +156,7 @@
                         NSMutableDictionary* sattrs = [[NSMutableDictionary alloc] init];
                         [sattrs setObject: [[ch source] name] forKey:@"projectName"];
                         [sattrs setObject: [self NSStringFromInt:[beh numBehaviorIntervals]] forKey:@"nBehIntervals"];
-                        [sattrs setObject: [self NSStringFromInt:[AnnotationBehavior numTotalIntervals]] forKey:@"nTotalIntervals"];
+                        [sattrs setObject: [self NSStringFromInt:[Behavior numTotalIntervals]] forKey:@"nTotalIntervals"];
                         [sattrs setObject: [self NSStringFromDouble:[beh percentBehaviorIntervals]] forKey:@"percentBehIntervals"];
                         
                         [nodeStat setAttributesWithDictionary:sattrs];
@@ -237,7 +237,7 @@
         [source setOffset:offset];
         [source setProjname:projname];
         // Clear old behaviors
-        [[[source annots] behaviors] removeAllObjects];
+        [[[source behavs] behaviors] removeAllObjects];
         
         for (NSXMLElement* child2 in [child children]) {
             NSString* name2 = [child2 name];
@@ -248,9 +248,9 @@
                 NSColor* color = [self colorFromString:[[child2 attributeForName:@"color"] stringValue]] ;
                 NSString* key = [[child2 attributeForName:@"hotkey"] stringValue];
                 
-                AnnotationBehavior* annot = [[AnnotationBehavior alloc]
+                Behavior* annot = [[Behavior alloc]
                          initWithName:name withColor:color withKey:key];
-                [[source annots] addBehavior:annot];
+                [[source behavs] addBehavior:annot];
                 
                 for(NSXMLElement* child3 in [child2 children]) {
                     NSString* name3 = [child3 name];

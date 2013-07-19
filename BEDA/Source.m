@@ -13,7 +13,7 @@
 @synthesize beda;
 @synthesize channels = _channels;
 @synthesize offset;
-@synthesize annots = _annots;
+@synthesize behavs = _annots;
 @synthesize name;
 @synthesize filename;
 @synthesize projname;
@@ -25,8 +25,8 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _channels = [[NSMutableArray alloc] init];
-        _annots = [[AnnotationManager alloc] init];
-        [[self annots] createDefaultBehaviors];
+        _annots = [[BehaviorManager alloc] init];
+        [[self behavs] createDefaultBehaviors];
         
         [self setName:@""];
         [self setFilename:@""];

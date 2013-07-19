@@ -64,8 +64,8 @@
 		B26BF2891761835F009BCC7D /* Viewer.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF2881761835F009BCC7D /* Viewer.m */; };
 		B26BF28E176196BD009BCC7D /* SourceMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF28D176196BD009BCC7D /* SourceMovie.m */; };
 		B26BF291176196CC009BCC7D /* ChannelMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF290176196CC009BCC7D /* ChannelMovie.m */; };
-		B27C396B17715FB30025188F /* AnnotationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396A17715FB30025188F /* AnnotationBehavior.m */; };
-		B27C396E17715FC50025188F /* AnnotationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396D17715FC50025188F /* AnnotationManager.m */; };
+		B27C396B17715FB30025188F /* Behavior.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396A17715FB30025188F /* Behavior.m */; };
+		B27C396E17715FC50025188F /* BehaviorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396D17715FC50025188F /* BehaviorManager.m */; };
 		B28CD6D6178E62D100BC7719 /* ViewRangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28CD6D5178E62D100BC7719 /* ViewRangeController.m */; };
 		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; };
 		B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */; };
@@ -166,10 +166,10 @@
 		B26BF28D176196BD009BCC7D /* SourceMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceMovie.m; sourceTree = "<group>"; };
 		B26BF28F176196CC009BCC7D /* ChannelMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelMovie.h; sourceTree = "<group>"; };
 		B26BF290176196CC009BCC7D /* ChannelMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelMovie.m; sourceTree = "<group>"; };
-		B27C396917715FB30025188F /* AnnotationBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationBehavior.h; sourceTree = "<group>"; };
-		B27C396A17715FB30025188F /* AnnotationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationBehavior.m; sourceTree = "<group>"; };
-		B27C396C17715FC50025188F /* AnnotationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationManager.h; sourceTree = "<group>"; };
-		B27C396D17715FC50025188F /* AnnotationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationManager.m; sourceTree = "<group>"; };
+		B27C396917715FB30025188F /* Behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Behavior.h; sourceTree = "<group>"; };
+		B27C396A17715FB30025188F /* Behavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Behavior.m; sourceTree = "<group>"; };
+		B27C396C17715FC50025188F /* BehaviorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BehaviorManager.h; sourceTree = "<group>"; };
+		B27C396D17715FC50025188F /* BehaviorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BehaviorManager.m; sourceTree = "<group>"; };
 		B28CD6D4178E62D100BC7719 /* ViewRangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewRangeController.h; sourceTree = "<group>"; };
 		B28CD6D5178E62D100BC7719 /* ViewRangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewRangeController.m; sourceTree = "<group>"; };
 		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
@@ -381,10 +381,10 @@
 		B27C396817715F340025188F /* Annotation */ = {
 			isa = PBXGroup;
 			children = (
-				B27C396917715FB30025188F /* AnnotationBehavior.h */,
-				B27C396A17715FB30025188F /* AnnotationBehavior.m */,
-				B27C396C17715FC50025188F /* AnnotationManager.h */,
-				B27C396D17715FC50025188F /* AnnotationManager.m */,
+				B27C396917715FB30025188F /* Behavior.h */,
+				B27C396A17715FB30025188F /* Behavior.m */,
+				B27C396C17715FC50025188F /* BehaviorManager.h */,
+				B27C396D17715FC50025188F /* BehaviorManager.m */,
 				038E9D36177E00E200ACE963 /* SummaryProjectsWindow.xib */,
 				038E9D38177E010800ACE963 /* SummaryProjectsController.h */,
 				038E9D39177E010900ACE963 /* SummaryProjectsController.m */,
@@ -540,8 +540,8 @@
 				B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */,
 				0320251D176FC44000BC7020 /* GraphSettingController.m in Sources */,
 				03E908711771781B0078BA59 /* BehaviorSettingController.m in Sources */,
-				B27C396B17715FB30025188F /* AnnotationBehavior.m in Sources */,
-				B27C396E17715FC50025188F /* AnnotationManager.m in Sources */,
+				B27C396B17715FB30025188F /* Behavior.m in Sources */,
+				B27C396E17715FC50025188F /* BehaviorManager.m in Sources */,
 				03E90878177418240078BA59 /* AnnotViewController.m in Sources */,
 				038E9D1C177932E400ACE963 /* ColorCellView.m in Sources */,
 				038E9D1F177961E500ACE963 /* PopupBtnCell.m in Sources */,
