@@ -901,6 +901,7 @@
 {
     if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT]){
         double t = [self headerTime];
+        t = round(t);
 
         CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
         CPTXYAxis *x          = axisSet.xAxis;

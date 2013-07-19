@@ -14,6 +14,8 @@
 @synthesize isFastMode;
 @synthesize ffInterval;
 @synthesize normalInterval;
+@synthesize imageFastPlay;
+@synthesize imagePlay;
 
 -(id) init {
     self = [super init];
@@ -24,19 +26,27 @@
         [self setFfInterval:9];
         [self setNormalInterval:1];
         [self setFastPlayRate:4.0];
-        [txtFFInterval setIntValue:ffInterval];
-        [txtNormalInterval setIntValue:normalInterval];
-        NSLog(@"%s", __PRETTY_FUNCTION__);
         
         [NSTimer scheduledTimerWithTimeInterval:0.05f
                                                   target:self
                                                 selector:@selector(onPlayTimer:)
                                                 userInfo:nil
                                                  repeats:YES];
+        {
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"ff" ofType:@"png"];
+            NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+            [self setImageFastPlay:img];
+        }
+        {
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"png"];
+            NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+            [self setImagePlay:img];
+        }
     }
     
     return self;
 }
+
 
 - (BedaController*) beda {
     return [BedaController getInstance];
@@ -56,17 +66,29 @@
 
 - (void)onPlayTimer : (id)sender {
 //   NSLog(@"%s : %d", __PRETTY_FUNCTION__, [self isFastMode]);
+    
+    
     if ([self isTimeInFastMode]) {
-        [[[self beda] playButton] setIntValue:1];
         [self setIsFastMode:YES];
     } else {
-        [[[self beda] playButton] setIntValue:0];
         [self setIsFastMode:NO];
     }
     
+    if ([[self beda] isIntervalFastPlayMode]) {
+        if ([[[self beda] playButton] image] != [self imageFastPlay]) {
+            NSLog(@"%s : update to FastPlay image", __PRETTY_FUNCTION__);
+            [[[self beda] playButton] setImage:[self imageFastPlay]];
+        }
+    } else {
+        if ([[[self beda] playButton] image] != [self imagePlay]) {
+            NSLog(@"%s : update to Play image", __PRETTY_FUNCTION__);
+            [[[self beda] playButton] setImage:[self imagePlay]];
+        }
+    }
+
     if ([[self beda] isPlaying] && [self prevIsFastMode] != [self isFastMode]) {
-        [[self beda] stop:self];
         NSLog(@"%s : stop (prev = %d, now = %d)", __PRETTY_FUNCTION__, [self prevIsFastMode], [self isFastMode]);
+        [[self beda] stop:self];
 
     }
     

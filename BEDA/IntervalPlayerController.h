@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface IntervalPlayerController : NSWindowController  {
-    IBOutlet NSTextField *txtFFInterval;
-    IBOutlet NSTextField *txtNormalInterval;
-    IBOutlet NSComboBox *cmbFastPlayRate;
-    IBOutlet NSButton *chkMute;
-
-//    BOOL isFastMode;
-//    NSTimer *timerOnPlay;
-//    
-//    int ffRate;
-//    NSString *displayCurrentTime;
-//    BOOL isMuted;
+//    IBOutlet NSTextField *txtFFInterval;
+//    IBOutlet NSTextField *txtNormalInterval;
+//    IBOutlet NSComboBox *cmbFastPlayRate;
+//    IBOutlet NSButton *chkMute;
+//
+////    BOOL isFastMode;
+////    NSTimer *timerOnPlay;
+////    
+////    int ffRate;
+////    NSString *displayCurrentTime;
+////    BOOL isMuted;
 
 }
 

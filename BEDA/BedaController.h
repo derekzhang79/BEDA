@@ -13,6 +13,10 @@
 #import "SummaryProjectsController.h"
 #import "IntervalPlayerManager.h"
 
+#define BEDA_MODE_PLAY 0
+#define BEDA_MODE_FASTPLAY 1
+#define BEDA_MODE_STOP 2
+
 extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 #define BEDA_NOTI_SOURCE_ADDED @"BedaNotiSourceAdded"
 #define BEDA_NOTI_APPLY_SETTING_PRESSED @"BedaNotiApplySettingPressed"
@@ -56,12 +60,12 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (retain) NSWindowController* summaryProjectsController;
 
 @property (nonatomic, retain) IBOutlet NSButton* playButton;
-@property (retain) IntervalPlayerManager* intervalPlayerManager;
+@property (retain) IBOutlet IntervalPlayerManager* intervalPlayerManager;
 
 @property BOOL isNavMode;
 @property int numProjects;
 
-@property BOOL isPlaying;
+@property int playMode;
 @property double gtAppTime;
 @property double gtViewLeft;
 @property double gtViewRight;
@@ -74,6 +78,8 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 - (BOOL)isSyncMode;
 - (BOOL)isMultiProjectMode;
+- (BOOL)isPlaying;
+- (BOOL)isIntervalFastPlayMode;
 - (NSSplitView*) getSplitView;
 
 // Responde to menu

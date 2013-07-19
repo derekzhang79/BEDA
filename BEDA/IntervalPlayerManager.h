@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface IntervalPlayerManager : NSObject {
-    IBOutlet NSTextField *txtFFInterval;
-    IBOutlet NSTextField *txtNormalInterval;
     IBOutlet NSComboBox *cmbFastPlayRate;
     IBOutlet NSButton *chkMute;
 
@@ -22,6 +20,10 @@
 @property (assign) int ffInterval;
 @property (assign) int normalInterval;
 @property (assign) double fastPlayRate;
+
+@property (retain) NSImage* imageFastPlay;
+@property (retain) NSImage* imagePlay;
+
 
 
 @end

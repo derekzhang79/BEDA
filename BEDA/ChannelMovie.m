@@ -11,6 +11,7 @@
 @implementation ChannelMovie
 
 @synthesize movie = _movie;
+@synthesize savedRate;
 
 
 - (void)loadFile:(NSURL*)url {
@@ -26,7 +27,7 @@
     }
     
     [self setMovie:newMovie];
-    
+    [self setSavedRate:0.0];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(rateDidChanged:)
@@ -130,6 +131,13 @@
 }
 
 - (void) rateDidChanged: (NSNotification *)notification {
+    if ([self savedRate] == [[self movie] rate]) {
+        NSLog(@"%s : ignore this since not updated: saved = %lf, rate = %lf"
+              , __PRETTY_FUNCTION__, [self savedRate], [[self movie] rate]);
+        return;
+    }
+    [self setSavedRate:[[self movie] rate]];
+    
     if ([self isNavMode] == NO) {
         if ([[self beda] isMultiProjectMode] == NO) {
             double gt = [self getGlobalTime];
@@ -175,10 +183,19 @@
     if ([[self movie] rate] > 0) {
         // If it's start
         NSLog(@"%s : PLAY", __PRETTY_FUNCTION__);
-        [[NSNotificationCenter defaultCenter]
-//         postNotificationName:@"channelPlay"
-         postNotificationName:BEDA_NOTI_CHANNEL_PLAY
-         object:self];
+        if ([[self beda] isIntervalFastPlayMode]) {
+            double ffrate = [[[self beda] intervalPlayerManager] fastPlayRate];
+            [[self movie] setRate:ffrate];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNEL_FASTPLAY
+             object:self];
+        } else {
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNEL_PLAY
+             object:self];
+        }
+
         [self updateOffsetOverlay];
     } else {
         NSLog(@"%s : STOP", __PRETTY_FUNCTION__);

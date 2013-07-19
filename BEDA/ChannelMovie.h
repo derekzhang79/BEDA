@@ -16,6 +16,7 @@
 }
 
 @property (assign) QTMovie* movie;
+@property double savedRate;
 
 // Initialize functions
 - (void)loadFile:(NSURL*)url;

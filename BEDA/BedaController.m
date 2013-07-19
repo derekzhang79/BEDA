@@ -24,7 +24,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize movSplitView;
 @synthesize isNavMode;
 @synthesize numProjects;
-@synthesize isPlaying;
+@synthesize playMode;
 @synthesize gtAppTime;
 @synthesize gtViewLeft;
 @synthesize gtViewRight;
@@ -58,9 +58,25 @@ static BedaController* g_instance = nil;
                                                  name:BEDA_NOTI_CHANNEL_HEAD_MOVED
                                                object:nil];
     
+    ///////////////////////////
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onPlay:)
+                                                 name:BEDA_NOTI_CHANNEL_PLAY
+                                               object:nil];
     
+    ///////////////////////////
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onFastPlay:)
+                                                 name:BEDA_NOTI_CHANNEL_FASTPLAY
+                                               object:nil];
+    
+    ///////////////////////////
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onStop:)
+                                                 name:BEDA_NOTI_CHANNEL_STOP
+                                               object:nil];
     [self setNumProjects:0];
-    [self setIsPlaying:NO];
+    [self setPlayMode:BEDA_MODE_STOP];
     [self navigate:nil];
     [self setDuration:180];
     [self setInterval:10];
@@ -71,7 +87,7 @@ static BedaController* g_instance = nil;
     [self setGraphWindowController:Nil];
     
     
-    [self setIntervalPlayerManager: [[IntervalPlayerManager alloc] init]];
+//    [self setIntervalPlayerManager: [[IntervalPlayerManager alloc] init]];
 
 }
 
@@ -167,6 +183,23 @@ static BedaController* g_instance = nil;
     }
 }
 
+- (BOOL)isPlaying {
+    if ([self playMode] == BEDA_MODE_STOP) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)isIntervalFastPlayMode {
+    if ([self isIntervalPlayerVisible] && [[self intervalPlayerManager] isFastMode]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+
 
 - (NSSplitView*) getSplitView {
     return splitview;
@@ -251,11 +284,80 @@ static BedaController* g_instance = nil;
 
 }
 
+- (void) onPlay:(NSNotification*) noti {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    
+    [[self playButton] setIntValue:1];
+    [self setPlayMode:BEDA_MODE_PLAY];
+    
+    if ([self playTimer] != Nil) {
+        [[self playTimer] invalidate];
+        [self setPlayTimer:Nil];
+    }
+    
+    [self setPlayTimer:
+     [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                      target:self
+                                    selector:@selector(onPlayTimer:)
+                                    userInfo:nil
+                                     repeats:YES]
+     ];
+
+}
+
+- (void) onFastPlay:(NSNotification*) noti {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self setPlayMode:BEDA_MODE_FASTPLAY];
+    [[self playButton] setIntValue:1];
+    
+    if ([self playTimer] != Nil) {
+        [[self playTimer] invalidate];
+        [self setPlayTimer:Nil];
+    }
+
+    [self setPlayTimer:
+     [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                      target:self
+                                    selector:@selector(onPlayTimer:)
+                                    userInfo:nil
+                                     repeats:YES]
+     ];
+}
+
+- (void) onStop:(NSNotification*) noti {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [[self playTimer] invalidate];
+    [self setPlayTimer:Nil];
+    
+    [self setPlayMode:BEDA_MODE_STOP];
+    
+//    if ([self isIntervalPlayerVisible] && [[self intervalPlayerManager] isFastMode]) {
+//
+//    } else {
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"png"];
+//        NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+//        [[self playButton] setImage:img];
+//    }
+    
+    [[self playButton] setIntValue:0];
+
+
+}
 
 - (IBAction)play:(id)sender {
-    if ([self isNavMode] == NO) {
+    if ([self isPlaying]) {
+        NSLog(@"%s: pass the control to stop function", __PRETTY_FUNCTION__);
+        [self stop:nil];
         return;
     }
+    
+    if ([self isNavMode] == NO) {
+        NSLog(@"%s: not able to play in Sync mode", __PRETTY_FUNCTION__);
+        return;
+    }
+    
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     if ([self isIntervalPlayerVisible] == YES){
@@ -270,15 +372,8 @@ static BedaController* g_instance = nil;
              object:self];
         
         }
-        [self setIsPlaying:YES];
         
-        [self setPlayTimer:
-         [NSTimer scheduledTimerWithTimeInterval:0.05f
-                                          target:self
-                                        selector:@selector(onPlayTimer:)
-                                        userInfo:nil
-                                         repeats:YES]
-         ];
+
     } else {
         [[NSNotificationCenter defaultCenter]
          postNotificationName:BEDA_NOTI_CHANNEL_PLAY
@@ -309,13 +404,13 @@ static BedaController* g_instance = nil;
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
     if( [self isIntervalPlayerVisible] == YES){
+        NSLog(@"%s: isFastMode = %d", __PRETTY_FUNCTION__, [[self intervalPlayerManager] isFastMode]);
+
         [[NSNotificationCenter defaultCenter]
          postNotificationName:BEDA_NOTI_CHANNEL_STOP
          object:self];
-        
-        [[self playTimer] invalidate];
-        [self setPlayTimer:Nil];
-        [self setIsPlaying:NO];
+
+
     } else {
         [[NSNotificationCenter defaultCenter]
          postNotificationName:BEDA_NOTI_CHANNEL_STOP
