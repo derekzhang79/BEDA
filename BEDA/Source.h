@@ -20,7 +20,7 @@
 @property (copy) NSString* filename;
 @property (copy) NSString* projname;
 
-@property (retain) BehaviorManager* behavs;
+@property (retain) BehaviorManager* annots;
 
 
 @property double offset;

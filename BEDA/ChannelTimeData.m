@@ -604,7 +604,7 @@
     
     CPTMutableLineStyle *selectedLineStyle = [CPTMutableLineStyle lineStyle];
     selectedLineStyle.lineColor = [CPTColor yellowColor];
-    selectedLineStyle.lineWidth = 5.0f;
+    selectedLineStyle.lineWidth = 2.0f;
     
     plotHeader.dataLineStyle = selectedLineStyle;
     [self setIsHeaderSelected:YES];
@@ -786,12 +786,6 @@
 
 - (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index
 {
- 
-//    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
-//    {
-//        [[[self beda] popover] showRelativeToRect:<#(NSRect)#> ofView:<#(NSView *)#> preferredEdge:<#(NSRectEdge)#>];
-//    }
-//    
     if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT])
     {
         NSLog(@"%s", __PRETTY_FUNCTION__);

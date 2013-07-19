@@ -237,7 +237,7 @@
         [source setOffset:offset];
         [source setProjname:projname];
         // Clear old behaviors
-        [[[source behavs] behaviors] removeAllObjects];
+        [[[source annots] behaviors] removeAllObjects];
         
         for (NSXMLElement* child2 in [child children]) {
             NSString* name2 = [child2 name];
@@ -250,7 +250,7 @@
                 
                 Behavior* annot = [[Behavior alloc]
                          initWithName:name withColor:color withKey:key];
-                [[source behavs] addBehavior:annot];
+                [[source annots] addBehavior:annot];
                 
                 for(NSXMLElement* child3 in [child2 children]) {
                     NSString* name3 = [child3 name];
