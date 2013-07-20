@@ -79,6 +79,11 @@ static BedaController* g_instance = nil;
                                              selector:@selector(onStop:)
                                                  name:BEDA_NOTI_CHANNEL_STOP
                                                object:nil];
+    
+    
+
+
+    
     [self setNumProjects:0];
     [self setPlayMode:BEDA_MODE_STOP];
     [self navigate:nil];
@@ -96,6 +101,25 @@ static BedaController* g_instance = nil;
     [self updateAbsoluteTimeInfo];
 //    [self setIntervalPlayerManager: [[IntervalPlayerManager alloc] init]];
 
+    NSSplitView* mainview = (NSSplitView* )[movSplitView superview];
+    {
+        NSRect frame = [movSplitView frame];
+        frame.size.height = 300;
+        [movSplitView setFrame:frame];
+    }
+    {
+        NSView* last = [[mainview subviews] lastObject];
+        NSRect frame = [last frame];
+        frame.size.height = 500;
+        [last setFrame:frame];
+        
+    }
+    
+    for (NSView* subview in [mainview subviews]) {
+        
+        NSLog(@"frame.height = %lf", [subview frame].size.height);
+    }
+    [mainview adjustSubviews];
 }
 
 - (IBAction)showInfoPopover:(id)sender {
