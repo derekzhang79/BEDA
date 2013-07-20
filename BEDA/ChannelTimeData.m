@@ -136,7 +136,7 @@
     
     x.labelingPolicy     = CPTAxisLabelingPolicyEqualDivisions;
 //    x.labelingPolicy     =  CPTAxisLabelingPolicyFixedInterval;
-    x.preferredNumberOfMajorTicks = 10;
+    x.preferredNumberOfMajorTicks = 12;
     x.majorGridLineStyle = majorGridLineStyle;
     x.minorGridLineStyle = minorGridLineStyle;
     x.axisLineStyle = majorGridLineStyle;
@@ -414,9 +414,6 @@
 
     double gt = [[[self source] beda] gtAppTime];
     [self setMyTimeInGlobal:gt];
-
-    
-//    [self setGtAppTime:[ch getMyTimeInGlobal]];
 }
 
 - (void) onAnnotationChanged:(NSNotification *) notification {
@@ -441,7 +438,6 @@
         r = temp;
     }
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(l) length:CPTDecimalFromFloat(r - l)];
-
 
 }
 
@@ -687,10 +683,10 @@
         CPTColor *headerPlotColor = [self toCPT:[beh color]];
         
         // 2. Symbol style
-        CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol diamondPlotSymbol];
+        CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol rectanglePlotSymbol];
         headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
 
-        headerPlotSymbol.size = CGSizeMake(13.0f, 13.0f);
+        headerPlotSymbol.size = CGSizeMake(2.0f, 13.0f);
         plotAnnotation.plotSymbol = headerPlotSymbol;
         
         CPTMutableLineStyle *annotationLineStyle = [CPTMutableLineStyle lineStyle];

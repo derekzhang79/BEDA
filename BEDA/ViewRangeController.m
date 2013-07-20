@@ -44,7 +44,6 @@
     // If you make sure your dates are calculated at noon, you shouldn't have to
     // worry about daylight savings. If you use midnight, you will have to adjust
     // for daylight savings time.
-    NSTimeInterval aProject = 1;
     
     // Create graph from theme
     graph = [(CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:CGRectZero];
@@ -105,14 +104,15 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x = axisSet.xAxis;
 
-    x.labelingPolicy     =  CPTAxisLabelingPolicyAutomatic;
-    x.preferredNumberOfMajorTicks = 10;
+    x.labelingPolicy     =  CPTAxisLabelingPolicyFixedInterval;
+    x.preferredNumberOfMajorTicks = 12;
     x.majorGridLineStyle = majorGridLineStyle;
     x.minorGridLineStyle = minorGridLineStyle;
     x.axisLineStyle = majorGridLineStyle;
     x.labelFormatter     = labelFormatter;
     x.labelTextStyle = titleText;
-    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 60);
+    x.majorIntervalLength         = CPTDecimalFromFloat(oneSec * 30);
+    x.minorTicksPerInterval       = 2;
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     if ([[self beda] duration] > 3600) {
         [dateFormatter setDateFormat: @"h:mm:ss"];

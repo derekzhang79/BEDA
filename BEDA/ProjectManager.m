@@ -241,7 +241,7 @@
         
         for (NSXMLElement* child2 in [child children]) {
             NSString* name2 = [child2 name];
-            if ([name2 isEqualToString:@"channeltimedata"] == NO) {
+            if ([name2 isEqualToString:@"annotbehavior"] == YES) {
                 NSLog(@"Annotation behavior: %@",  name);
 
                 NSString* name = [[child2 attributeForName:@"name"] stringValue];
@@ -262,29 +262,29 @@
                     NSLog(@"Time : %f",  t);
 
                 }
+                continue;
+            } else if ([name2 isEqualToString:@"channeltimedata"] == YES) {
+                int index = [[[child2 attributeForName:@"index"] stringValue] intValue];
+                double minValue = [[[child2 attributeForName:@"minValue"] stringValue] doubleValue];
+                double maxValue = [[[child2 attributeForName:@"maxValue"] stringValue] doubleValue];
+                NSString* name = [[child2 attributeForName:@"name"] stringValue];
+                NSString* graphName = [[child2 attributeForName:@"graphName"] stringValue];
+                NSColor* lineColor = [self colorFromString:[[child2 attributeForName:@"lineColor"] stringValue]] ;
+                NSColor* areaColor = [self colorFromString:[[child2 attributeForName:@"areaColor"] stringValue]] ;
                 
+                ChannelTimeData *ch = [[ChannelTimeData alloc] init];
+                [ch setSource:source];
+                
+                [ch initGraph:graphName atIndex:index range:minValue to:maxValue
+                withLineColor: lineColor
+                    areaColor: areaColor
+                     isBottom:YES hasArea:YES];
+                [ch setName:name];
+                [[source channels] addObject:ch];
                 continue;
             }
             
-            int index = [[[child2 attributeForName:@"index"] stringValue] intValue];
-            double minValue = [[[child2 attributeForName:@"minValue"] stringValue] doubleValue];
-            double maxValue = [[[child2 attributeForName:@"maxValue"] stringValue] doubleValue];
-            NSString* name = [[child2 attributeForName:@"name"] stringValue];
-            NSString* graphName = [[child2 attributeForName:@"graphName"] stringValue];
-            NSColor* lineColor = [self colorFromString:[[child2 attributeForName:@"lineColor"] stringValue]] ;
-            NSColor* areaColor = [self colorFromString:[[child2 attributeForName:@"areaColor"] stringValue]] ;
-            
-            ChannelTimeData *ch = [[ChannelTimeData alloc] init];
-            [ch setSource:source];
-            
-            [ch initGraph:graphName atIndex:index range:minValue to:maxValue
-            withLineColor: lineColor
-                areaColor: areaColor
-                 isBottom:YES hasArea:YES];
-            [ch setName:name];
-            [[source channels] addObject:ch];
-            
-            //for (AnnotationBehavior* beh in [[[ch source] annots] behaviors]) 
+
         }
         NSLog(@"name: %@, url: %@, offset = %lf\n",  name, fileurl, offset);
 
