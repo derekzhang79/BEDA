@@ -290,19 +290,51 @@
     
 }
 
-- (void) reload {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    NSDate* basedate = [[self sourceTimeData] basedate];
+- (void)makeRelativeMode {
+    NSDate* basedate = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
     NSLog(@"basedate = %@", basedate);
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
     
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    if ([[self beda] duration] > 3600) {
+        [dateFormatter setDateFormat: @"h:mm:ss"];
+    } else {
+        [dateFormatter setDateFormat: @"mm:ss"];
+    }
+
+    CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
+    timeFormatter.referenceDate = basedate;
+    x.labelFormatter = timeFormatter;
+    
+    [plotHeader reloadData];
+   
+}
+
+- (void)makeAbsoluteMode {
+    NSDate* basedate = [[self sourceTimeData] basedate];
+    NSLog(@"basedate = %@", basedate);
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+    CPTXYAxis *x          = axisSet.xAxis;
+
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
     CPTTimeFormatter *timeFormatter = [[[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
     timeFormatter.referenceDate = basedate;
     x.labelFormatter = timeFormatter;
+    [plotHeader reloadData];
+
+}
+
+- (void) reload {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([[self beda] isAbsoulteTimeMode]) {
+        [self makeAbsoluteMode];
+    } else {
+        [self makeRelativeMode];
+
+    }
     
     [graph reloadData];
     

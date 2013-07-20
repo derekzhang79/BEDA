@@ -70,7 +70,8 @@
         [self setOffset:lt - gt];
     }
 
-    
+    [[self beda] updateAbsoluteTimeInfo];
+
 
 //    NSLog(@"gt = %lf lt = %lf offset = %lf", gt, lt, [self offset]);
 

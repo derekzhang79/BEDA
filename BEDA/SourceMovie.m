@@ -83,7 +83,10 @@
         double lt = [ch getMyTimeInLocal];
         // gt + offset = lt
         [self setOffset:lt - gt];
+
     }
+    [[self beda] updateAbsoluteTimeInfo];
+
 
     
 

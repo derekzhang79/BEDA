@@ -60,20 +60,27 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (retain) NSWindowController* summaryProjectsController;
 
 @property (nonatomic, retain) IBOutlet NSButton* playButton;
+@property (nonatomic, retain) IBOutlet NSPopUpButton* timePopUp;
+@property (nonatomic, retain) IBOutlet NSMenuItem* timeMenuAbsolute;
+@property (nonatomic, retain) IBOutlet NSMenuItem* timeMenuRelative;
+
+
 @property (retain) IBOutlet IntervalPlayerManager* intervalPlayerManager;
 
 @property BOOL isNavMode;
 @property int numProjects;
 
 @property int playMode;
-@property double gtAppTime;
+@property (nonatomic) double gtAppTime;
 @property double gtViewLeft;
 @property double gtViewRight;
 @property (retain) NSTimer* playTimer;
+@property BOOL isAbsoulteTimeMode;
 
 @property (assign) double duration;
 @property (assign) double interval;
 @property (retain) IBOutlet NSPopover* popover;
+
 - (IBAction)showInfoPopover:(id)sender;
 
 - (BOOL)isSyncMode;
@@ -107,6 +114,10 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (IBAction)exportSelection:(id)sender;
 
 - (IBAction)showIntervalPlayerView:(id)sender;
+
+- (IBAction)makeAbsoluteTimeMode:(id)sender;
+- (IBAction)makeRelativeTimeMode:(id)sender;
+- (void)updateAbsoluteTimeInfo;
 
 // Time related functions
 - (double) getGlobalTime;

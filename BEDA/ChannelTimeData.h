@@ -93,6 +93,9 @@
 - (NSColor*)getAreaColor;
 - (void)setGraphName:(NSString*)gName;
 - (void)setRangeFrom:(double)min to:(double)max;
+- (void)makeRelativeMode;
+- (void)makeAbsoluteMode;
+
 
 //
 - (BOOL)isSelectedTime:(double)t;

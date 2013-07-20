@@ -25,7 +25,8 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize isNavMode;
 @synthesize numProjects;
 @synthesize playMode;
-@synthesize gtAppTime;
+@synthesize isAbsoulteTimeMode;
+@synthesize gtAppTime = _gtAppTime;
 @synthesize gtViewLeft;
 @synthesize gtViewRight;
 @synthesize duration;
@@ -38,6 +39,9 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize intervalPlayerView;
 @synthesize window;
 @synthesize isIntervalPlayerVisible;
+@synthesize timePopUp;
+@synthesize timeMenuAbsolute;
+@synthesize timeMenuRelative;
 
 static BedaController* g_instance = nil;
 
@@ -85,8 +89,11 @@ static BedaController* g_instance = nil;
     [self setIsIntervalPlayerVisible:NO];
     g_instance = self;
     [self setGraphWindowController:Nil];
-    
-    
+    [self setGtAppTime:0];
+//    [self setIsAbsoulteTimeMode:NO];
+//    [[self timePopUp] setTitle:@"00:00"];
+    [self makeRelativeTimeMode:nil];
+    [self updateAbsoluteTimeInfo];
 //    [self setIntervalPlayerManager: [[IntervalPlayerManager alloc] init]];
 
 }
@@ -166,8 +173,96 @@ static BedaController* g_instance = nil;
     }
 }
 
+- (IBAction)makeAbsoluteTimeMode:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self setIsAbsoulteTimeMode:YES];
+    [[self timeMenuAbsolute] setState:NSOnState];
+    [[self timeMenuRelative] setState:NSOffState];
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            if ([ch isKindOfClass:[ChannelTimeData class]] == NO) {
+                continue;
+            }
+            ChannelTimeData* cht = (ChannelTimeData*)ch;
+            [cht makeAbsoluteMode];
+        }
+    }
+    [self updateAbsoluteTimeInfo];
+}
+
+- (IBAction)makeRelativeTimeMode:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self setIsAbsoulteTimeMode:NO];
+    [[self timeMenuAbsolute] setState:NSOffState];
+    [[self timeMenuRelative] setState:NSOnState];
+    
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            if ([ch isKindOfClass:[ChannelTimeData class]] == NO) {
+                continue;
+            }
+            ChannelTimeData* cht = (ChannelTimeData*)ch;
+            [cht makeRelativeMode];
+        }
+    }
+}
+
+- (void)updateAbsoluteTimeInfo {
+    SourceTimeData* std = Nil;
+    int stdCnt = 0;
+    for (Source* s in [self sources]) {
+        if ([s isKindOfClass:[SourceTimeData class]]) {
+            stdCnt++;
+            std = (SourceTimeData*)s;
+        }
+    }
+    
+    if (stdCnt != 1) {
+        if ([self isAbsoulteTimeMode]) {
+            [self makeRelativeTimeMode:nil];
+        }
+        [[self timeMenuAbsolute] setEnabled:NO];
+        
+        return;
+    }
+    NSLog(@"%s : enable MenuAbsolute", __PRETTY_FUNCTION__);
+
+    [[self timeMenuAbsolute] setEnabled:YES];
+
+    if ([self isAbsoulteTimeMode] == NO) {
+        return;
+    }
+    
+    NSDate* base = [std basedate];
+    NSLog(@"base = %@", base);
+    
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    dateFormatter.timeStyle = kCFDateFormatterMediumStyle;
+    double t = [self gtAppTime] + [std offset] + [std projoffset];
+    NSDate* now = [NSDate dateWithTimeInterval:t sinceDate:base];
+    NSString* strAppTime = [dateFormatter stringFromDate:now];
+    [[self timePopUp] setTitle:strAppTime];
+}
+
 + (BedaController*) getInstance {
     return g_instance;
+}
+
+- (void)setGtAppTime:(double)gtAppTime {
+    _gtAppTime = gtAppTime;
+    if ([self isAbsoulteTimeMode]) {
+        [self updateAbsoluteTimeInfo];
+    } else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        if ([self duration] > 3600) {
+            [dateFormatter setDateFormat: @"h:mm:ss"];
+        } else {
+            [dateFormatter setDateFormat: @"mm:ss"];
+        }        NSDate* base = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
+        NSDate* now = [NSDate dateWithTimeInterval:gtAppTime sinceDate:base];
+        NSString* strAppTime = [dateFormatter stringFromDate:now];
+        [[self timePopUp] setTitle:strAppTime];
+    }
 }
 
 - (BOOL)isSyncMode {
@@ -254,6 +349,8 @@ static BedaController* g_instance = nil;
     [[NSNotificationCenter defaultCenter]
      postNotificationName:BEDA_NOTI_SOURCE_ADDED
      object:nil];
+    
+    [self updateAbsoluteTimeInfo];
 
     
 }
