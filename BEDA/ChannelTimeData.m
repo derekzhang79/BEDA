@@ -25,6 +25,7 @@
 @synthesize minValue;
 @synthesize maxValue;
 @synthesize channelSelector = _channelSelector;
+@synthesize samplingRate;
 
 -(id) init {
     self = [super init];
@@ -57,6 +58,7 @@
     [self setMinValue:min];
     [self setMaxValue:max];
     [self setRate:1.0];
+    [self setSamplingRate:[self calcSamplingRate]];
     
     [super awakeFromNib];
     
@@ -459,6 +461,17 @@
 
 }
 
+- (int)calcSamplingRate {
+    double viewLength = [[self beda] gtViewRight] - [[self beda] gtViewLeft];
+    int newRate = 1;
+    if (viewLength < 120) {
+        newRate = 1;
+    } else  {
+        newRate = round(viewLength / 120.0);
+    }
+    return newRate;
+}
+
 - (void) onViewUpdated:(NSNotification *) notification {
     double l = [[self beda] gtViewLeft];
     double r = [[self beda] gtViewRight];
@@ -469,9 +482,22 @@
         l = r;
         r = temp;
     }
+    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(l) length:CPTDecimalFromFloat(r - l)];
+    int newRate = [self calcSamplingRate];
 
+    NSLog(@"%s: samplingRate %d -> %d", __PRETTY_FUNCTION__, [self samplingRate], newRate);
+
+    if (newRate != [self samplingRate]) {
+        NSLog(@"%s: reload data plot", __PRETTY_FUNCTION__);
+        [dataSourceLinePlot reloadData];
+    }
+    [self setSamplingRate:newRate];
+
+    
+    
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -885,8 +911,9 @@
         if ([self channelIndex] < 0) {
             return 0; // This is annotation channel, so ignore all the data (We should ignore them)
         } else {
-            return [[[self sourceTimeData] timedata] count];
-
+            NSUInteger numData = [[[self sourceTimeData] timedata] count];
+            NSLog(@"Sampling Rate for Data = %d", [self samplingRate]);
+          return numData / [self samplingRate];
         }
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]){
         return [[self channelSelector] numberOfRecords];
@@ -906,12 +933,13 @@
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_DATA_PLOT]){
         int key = [self channelIndex];
         // Otherwise, plot it data plot
+        NSUInteger index2 = index * [self samplingRate];
         NSMutableArray* data = [[self sourceTimeData] timedata];
         switch (fieldEnum) {
             case CPTScatterPlotFieldX:
-                return [[data objectAtIndex:index] objectForKey:[NSNumber numberWithInt:0]];
+                return [[data objectAtIndex:index2] objectForKey:[NSNumber numberWithInt:0]];
             case CPTScatterPlotFieldY:
-                return [[data objectAtIndex:index] objectForKey:[NSNumber numberWithInt:key]];
+                return [[data objectAtIndex:index2] objectForKey:[NSNumber numberWithInt:key]];
         }
         return nil;
 

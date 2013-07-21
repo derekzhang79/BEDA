@@ -53,6 +53,7 @@
 @property (retain) ChannelSelector* channelSelector;
 @property (retain) ChannelAnnotationManager* channelAnnotationManager;
 @property (retain) NSWindowController* channelAnnotWindowController;
+@property (assign) int samplingRate;
 
 - (SourceTimeData*) sourceTimeData;
 - (CPTXYGraph*) getGraph;
