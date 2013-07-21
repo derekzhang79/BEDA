@@ -15,6 +15,8 @@
 
 @implementation ChannelTimeData
 
+@synthesize lineColor;
+@synthesize areaColor;
 @synthesize channelIndex;
 @synthesize isHeaderSelected;
 @synthesize headerTime;
@@ -59,6 +61,8 @@
     [self setMaxValue:max];
     [self setRate:1.0];
     [self setSamplingRate:[self calcSamplingRate]];
+    [self setLineColor:lc];
+    [self setAreaColor:ac];
     
     [super awakeFromNib];
     
@@ -744,7 +748,7 @@
         CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol rectanglePlotSymbol];
         headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
 
-        headerPlotSymbol.size = CGSizeMake(2.0f, 13.0f);
+        headerPlotSymbol.size = CGSizeMake(6.0f, 13.0f);
         plotAnnotation.plotSymbol = headerPlotSymbol;
         
         CPTMutableLineStyle *annotationLineStyle = [CPTMutableLineStyle lineStyle];
@@ -852,6 +856,28 @@
         [[self channelSelector] select:index];
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_CHANNEL_ANNOT_PLOT]) {
         [[self channelSelector] select:index];
+    } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_DATA_PLOT]) {
+
+    } else {
+        BehaviorManager* am = [[self source] annots];
+        Behavior* beh = [am behaviorByName:(NSString *)plot.identifier];
+        
+        NSUInteger flags = [[NSApp currentEvent] modifierFlags];
+        if ( (flags & NSCommandKeyMask) ) {
+            NSLog(@"%s: Behavior is selected for REMOVAL", __PRETTY_FUNCTION__);
+            [[beh times] removeObjectAtIndex:index];
+            [self updateAnnotation];
+        } else {
+            NSLog(@"%s: Behavior is selected for relocating the header", __PRETTY_FUNCTION__);
+            NSNumber* num = [[beh times] objectAtIndex:index];
+            double x = [num doubleValue];
+            [self setHeaderTime:x];
+            [plotHeader reloadData];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
+             object:self];
+        }
+
     }
 
     

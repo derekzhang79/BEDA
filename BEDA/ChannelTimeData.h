@@ -34,12 +34,12 @@
     
     int graphScaleX;
     int graphScaleY;
-    NSColor* lineColor;
-    NSColor* areaColor;
+
 
 }
 
-
+@property (retain) NSColor* lineColor;
+@property (retain) NSColor* areaColor;
 @property (assign) int channelIndex;
 @property (assign) BOOL isHeaderSelected;
 @property (assign) double headerTime;
