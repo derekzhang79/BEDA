@@ -229,6 +229,8 @@ static BedaController* g_instance = nil;
             [cht makeRelativeMode];
         }
     }
+    [self updateRelativeTimeInfo];
+
 }
 
 - (void)updateAbsoluteTimeInfo {
@@ -268,6 +270,19 @@ static BedaController* g_instance = nil;
     [[self timePopUp] setTitle:strAppTime];
 }
 
+- (void) updateRelativeTimeInfo {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    if ([self duration] > 3600) {
+        [dateFormatter setDateFormat: @"h:mm:ss"];
+    } else {
+        [dateFormatter setDateFormat: @"mm:ss"];
+    }        NSDate* base = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
+    NSDate* now = [NSDate dateWithTimeInterval:_gtAppTime sinceDate:base];
+    NSString* strAppTime = [dateFormatter stringFromDate:now];
+    [[self timePopUp] setTitle:strAppTime];
+}
+
 + (BedaController*) getInstance {
     return g_instance;
 }
@@ -277,15 +292,7 @@ static BedaController* g_instance = nil;
     if ([self isAbsoulteTimeMode]) {
         [self updateAbsoluteTimeInfo];
     } else {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        if ([self duration] > 3600) {
-            [dateFormatter setDateFormat: @"h:mm:ss"];
-        } else {
-            [dateFormatter setDateFormat: @"mm:ss"];
-        }        NSDate* base = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
-        NSDate* now = [NSDate dateWithTimeInterval:gtAppTime sinceDate:base];
-        NSString* strAppTime = [dateFormatter stringFromDate:now];
-        [[self timePopUp] setTitle:strAppTime];
+        [self updateRelativeTimeInfo];
     }
 }
 

@@ -86,7 +86,7 @@
         }
     }
 
-    if ([[self beda] isPlaying] && [self prevIsFastMode] != [self isFastMode]) {
+    if ([[self beda] isPlaying] && [[self beda] isIntervalPlayerVisible] && [self prevIsFastMode] != [self isFastMode]) {
         NSLog(@"%s : stop (prev = %d, now = %d)", __PRETTY_FUNCTION__, [self prevIsFastMode], [self isFastMode]);
         [[self beda] stop:self];
 
