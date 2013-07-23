@@ -14,6 +14,8 @@
 @synthesize view = _view;
 @synthesize offsetOverlay = _offsetOverlay;
 @synthesize name;
+@synthesize btnOrderUp;
+@synthesize btnOrderDn;
 
 -(id) init {
     self = [super init];
@@ -22,6 +24,9 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         [self setSource:nil];
+        
+        [self setBtnOrderUp:Nil];
+        [self setBtnOrderDn:Nil];
         
         ///////////////////////////
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -147,13 +152,67 @@
     
 }
 
+- (void) createButtons {
+    NSSize sz = [self view].frame.size;
+    if ([self btnOrderUp] == Nil) {
+        NSButton* btn = [[NSButton alloc] init];
+        btn.frame = CGRectMake(sz.width - 60, 50, 30, 30);
+        btn.alphaValue = 0.9;
+        [btn setTitle:@"UP"];
+        [[self view] addSubview:btn positioned:NSWindowAbove relativeTo:nil];
+        [self setBtnOrderUp:btn];
+        
+        [btn setTarget:self];
+        [btn setAction:@selector(onBtnUp:)];
+    }
+    
+    if ([self btnOrderDn] == Nil) {
+        NSButton* btn = [[NSButton alloc] init];
+        btn.frame = CGRectMake(sz.width - 60, 10, 30, 30);
+        btn.alphaValue = 0.9;
+        [btn setTitle:@"DN"];
+        [[self view] addSubview:btn positioned:NSWindowAbove relativeTo:nil];
+        [self setBtnOrderDn:btn];
+        
+        [btn setTarget:self];
+        [btn setAction:@selector(onBtnDn:)];
+    }
+}
+
+- (IBAction)onBtnUp:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+}
+
+- (IBAction)onBtnDn:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+}
+
 - (void) showOffsetOverlay {
     if ([self offsetOverlay] == Nil) {
         [self createOffsetOverlay];
     }
     [self offsetOverlay].alphaValue = 1.0f;
     [self updateOffsetOverlay];
+ 
     
+    [self createButtons];
+    [self btnOrderUp].alphaValue = 1.0f;
+//    [self btnOrderUp].frame = CGRectMake(sz.width - my.width - 60, sz.height - my.height - 10, my.width, my.height);
+}
+
+- (void) hideOffsetOverlay {
+    if ([self offsetOverlay] == Nil) {
+        [self createOffsetOverlay];
+    }
+    [self offsetOverlay].alphaValue = 0.0f;
+    [self updateOffsetOverlay];
+    
+    
+    [self createButtons];
+    [self btnOrderUp].alphaValue = 0.0f;
+
 }
 
 - (void) onPlay:(NSNotification *) notification {
@@ -185,13 +244,6 @@
     [self stop];
 }
 
-- (void) hideOffsetOverlay {
-    if ([self offsetOverlay] == Nil) {
-        [self createOffsetOverlay];
-    }
-    [self offsetOverlay].alphaValue = 0.0f;
-    [self updateOffsetOverlay];
-}
 
 - (void) updateOffsetOverlay {
     if ([self offsetOverlay] == Nil) {
@@ -209,6 +261,8 @@
     NSSize my = overlay.frame.size;
     overlay.frame = CGRectMake(sz.width - my.width - 10, sz.height - my.height - 10, my.width, my.height);
 
+
+    
 //    NSLog(@"%@: overlay.frame.size = %@", [[self source] projname ], NSStringFromSize(overlay.frame.size) );
     if ([[[self source] beda]isMultiProjectMode] ){
         NSString* theProjName = [[[self source] projname] lastPathComponent];

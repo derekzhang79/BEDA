@@ -17,7 +17,10 @@
 
 @property (assign) Source* source;
 @property (assign) NSView* view;
-@property (assign) NSTextField* offsetOverlay;
+@property (retain) NSTextField* offsetOverlay;
+@property (retain) NSButton* btnOrderUp;
+@property (retain) NSButton* btnOrderDn;
+
 @property (copy) NSString* name;
 
 - (BedaController*) beda;
@@ -46,6 +49,5 @@
 - (void) showOffsetOverlay;
 - (void) hideOffsetOverlay;
 - (void) updateOffsetOverlay;
-
 
 @end
