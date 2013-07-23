@@ -38,6 +38,7 @@
         _arrayPlotAnnots = [[NSMutableArray alloc] init];
         _annotViewController = Nil;
         _channelSelector = Nil;
+        [[[self beda] channelsTimeData] addObject:self];
     }
     return self;
     
@@ -49,6 +50,34 @@
 
 - (CPTXYGraph*) getGraph {
     return graph;
+}
+
+- (IBAction)onBtnUp:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSMutableArray* channels = [[self beda] channelsTimeData];
+    NSUInteger index = [channels indexOfObject:self];
+    if (index == 0) {
+        NSLog(@"%s failed: already at the top", __PRETTY_FUNCTION__);
+        return;
+    }
+    ChannelTimeData* temp = [channels objectAtIndex:index - 1];
+    [channels replaceObjectAtIndex:index - 1 withObject:self];
+    [channels replaceObjectAtIndex:index withObject:temp];
+    [[self beda] createViewsForAllChannels];
+}
+
+- (IBAction)onBtnDn:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSMutableArray* channels = [[self beda] channelsTimeData];
+    NSUInteger index = [channels indexOfObject:self];
+    if (index == [channels count] - 1) {
+        NSLog(@"%s failed: already at the bottom", __PRETTY_FUNCTION__);
+        return;
+    }
+    ChannelTimeData* temp = [channels objectAtIndex:index + 1];
+    [channels replaceObjectAtIndex:index + 1 withObject:self];
+    [channels replaceObjectAtIndex:index withObject:temp];
+    [[self beda] createViewsForAllChannels];
 }
 
 - (void)initGraph:(NSString*)name atIndex:(int)index range:(double)min to:(double)max withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea {

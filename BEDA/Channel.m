@@ -55,6 +55,13 @@
     return [BedaController getInstance];
 }
 
+- (void)clearControls {
+    [self setOffsetOverlay:Nil];
+    [self setBtnOrderUp:Nil];
+    [self setBtnOrderDn:Nil];
+}
+
+
 - (void)play {
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);
     
@@ -136,6 +143,8 @@
 }
 
 - (void) createOffsetOverlay {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
     if ([self offsetOverlay] != Nil) {
         return;
     }
@@ -144,7 +153,11 @@
     overlay.frame = CGRectMake(10, 10, 80, 20);
     
     overlay.backgroundColor = [NSColor yellowColor];
-    overlay.alphaValue = 0.5f;
+    if ([[self beda] isNavMode]) {
+        overlay.alphaValue = 0.0f;
+    } else {
+        overlay.alphaValue = 1.0f;
+    }
     [overlay setStringValue:@"default"];
     [[self view] addSubview:overlay positioned:NSWindowAbove relativeTo:nil];
     
@@ -198,7 +211,13 @@
  
     
     [self createButtons];
-    [self btnOrderUp].alphaValue = 1.0f;
+    if ([self btnOrderUp]) {
+        [self btnOrderUp].alphaValue = 1.0f;
+    }
+    if ([self btnOrderDn]) {
+        [self btnOrderDn].alphaValue = 1.0f;
+    }
+    
 //    [self btnOrderUp].frame = CGRectMake(sz.width - my.width - 60, sz.height - my.height - 10, my.width, my.height);
 }
 
@@ -211,7 +230,12 @@
     
     
     [self createButtons];
-    [self btnOrderUp].alphaValue = 0.0f;
+    if ([self btnOrderUp]) {
+        [self btnOrderUp].alphaValue = 0.0f;
+    }
+    if ([self btnOrderDn]) {
+        [self btnOrderDn].alphaValue = 0.0f;
+    }
 
 }
 
@@ -260,7 +284,7 @@
     NSSize sz = [self view].frame.size;
     NSSize my = overlay.frame.size;
     overlay.frame = CGRectMake(sz.width - my.width - 10, sz.height - my.height - 10, my.width, my.height);
-
+//    NSLog(@"sz = %@ my = %@ frame = %@", NSStringFromSize(sz), NSStringFromSize(my), NSStringFromRect(overlay.frame));
 
     
 //    NSLog(@"%@: overlay.frame.size = %@", [[self source] projname ], NSStringFromSize(overlay.frame.size) );

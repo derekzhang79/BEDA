@@ -48,6 +48,9 @@
     
 }
 
+- (void) createButtons {
+}
+
 - (void)createMovieViewFor:(BedaController*)beda {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     

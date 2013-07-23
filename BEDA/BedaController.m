@@ -21,6 +21,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @implementation BedaController
 
 @synthesize sources = _sources;
+@synthesize channelsTimeData = _channelsTimeData;
 @synthesize movSplitView;
 @synthesize isNavMode;
 @synthesize numProjects;
@@ -49,6 +50,8 @@ static BedaController* g_instance = nil;
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     _sources = [[NSMutableArray alloc] init];
+    _channelsTimeData = [[NSMutableArray alloc] init];
+
 //    _movSplitView = Nil;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -905,22 +908,18 @@ static BedaController* g_instance = nil;
 //            }
 //        }
 //    }
-    for (Source* s in [self sources]) {
-        for (Channel* ch in [s channels]) {
-            if ([ch isKindOfClass:[ChannelMovie class]]) {
-                continue;
-            }
-            factor[cnt] = [ch windowHeightFactor];
-            sumFactor += factor[cnt];
-            cnt++;
-        }
+    for (ChannelTimeData* ch in [self channelsTimeData]) {
+        factor[cnt] = [ch windowHeightFactor];
+        sumFactor += factor[cnt];
+        cnt++;
     }
     for (int i = 0; i < cnt; i++) NSLog(@"factor %d: %f", i, factor[i]);
     NSLog(@"sum factor = %f", sumFactor);
     
     int MIN_SCROLL_NUM_GRAPHS = 3;
     if (cnt > MIN_SCROLL_NUM_GRAPHS) {
-        double fixedHeight = [[splitview superview] frame].size.height;
+//        double fixedHeight = [[splitview superview] frame].size.height;
+        double fixedHeight = 600;
         NSRect frame;
         frame.origin.x = 0;
         frame.origin.y = 0;
@@ -994,16 +993,43 @@ static BedaController* g_instance = nil;
                 [chm createMovieViewFor:self];
 
             } else if ([ch isKindOfClass:[ChannelTimeData class]]) {
-                ChannelTimeData* chtd = (ChannelTimeData*)ch;
-                [chtd createGraphViewFor:self];
-                
+//                ChannelTimeData* chtd = (ChannelTimeData*)ch;
+//                [chtd createGraphViewFor:self];                
             } else {
                 NSLog(@"%s: unknown channel", __PRETTY_FUNCTION__);
             }
         }
     }
     
+    for (ChannelTimeData* chtd in [self channelsTimeData]) {
+        [chtd createGraphViewFor:self];
+    }
+    
     [self spaceProportionaly:splitview];
+    
+    if ([self isSyncMode]) {
+        NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                         target:self
+                                       selector:@selector(onCreateOffsetTimer:)
+                                       userInfo:nil
+                                        repeats:NO];
+    }
+
+
+}
+
+- (void)onCreateOffsetTimer : (id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    for (Source* s in [self sources]) {
+        for (Channel* ch in [s channels]) {
+            [ch clearControls];
+            if ([self isSyncMode]) {
+                [ch showOffsetOverlay];
+            }
+        }
+    }
+    
 }
 
 @end
