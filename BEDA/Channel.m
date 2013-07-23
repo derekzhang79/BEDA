@@ -150,8 +150,10 @@
     }
     // Overlay window
     NSTextField* overlay = [[NSTextField alloc] init];
-    overlay.frame = CGRectMake(10, 10, 80, 20);
-    
+    overlay.frame = CGRectMake(10, 10, 100, 30);
+    [overlay setAllowsEditingTextAttributes:NO];
+    [overlay setEditable:NO];
+    [overlay setBordered:NO];
     overlay.backgroundColor = [NSColor yellowColor];
     if ([[self beda] isNavMode]) {
         overlay.alphaValue = 0.0f;
@@ -300,7 +302,10 @@
     
 //    NSLog(@"%@: overlay.frame.size = %@", [[self source] projname ], NSStringFromSize(overlay.frame.size) );
     if ([[[self source] beda]isMultiProjectMode] ){
+
         NSString* theProjName = [[[self source] projname] lastPathComponent];
+        overlay.backgroundColor = [[self source] projcolor];
+        
         [[self offsetOverlay] setStringValue:theProjName];
     } else {
         [[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%lf", [self offset]]];

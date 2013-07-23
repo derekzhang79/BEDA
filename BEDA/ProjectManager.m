@@ -190,6 +190,15 @@
     return color;
 }
 
+-(NSColor *)getRandomColor{
+    NSColor *color;
+    float randomRed = rand()%3;//3:you can write any number as you wish...
+    float randomGreen =rand()%2;//2:you can write any number as you wish...
+    float randomBlue =rand()%4;//4:you can write any number as you wish...
+    color= [NSColor colorWithCalibratedRed:randomRed green:randomGreen blue:randomBlue alpha:0.7];
+    return color;
+}
+
 - (void)loadFile:(NSURL*)url {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
@@ -214,6 +223,7 @@
     NSLog(@"Load OK on file %@", url);
     NSString* projname = [url absoluteString];
     NSLog(@"projname = %@", projname);
+    NSColor* projColor = [self getRandomColor];
     
     NSXMLElement *root = [xmlDoc rootElement];
     // Read app time
@@ -236,6 +246,7 @@
         Source* source = [[[self beda] sources] lastObject];
         [source setOffset:offset];
         [source setProjname:projname];
+        [source setProjcolor:projColor];
         // Clear old behaviors
         [[[source annots] behaviors] removeAllObjects];
         

@@ -897,17 +897,6 @@ static BedaController* g_instance = nil;
     float factor[20];
     float sumFactor = 0.0;
 
-//    if ([self movSplitView] != Nil) {
-//        for (Source* s in [self sources]) {
-//            for (Channel* ch in [s channels]) {
-//                if ([ch isKindOfClass:[ChannelMovie class]] && cnt == 0) {
-//                    factor[cnt] = [ch windowHeightFactor];
-//                    sumFactor += factor[cnt];
-//                    cnt++;
-//                }
-//            }
-//        }
-//    }
     for (ChannelTimeData* ch in [self channelsTimeData]) {
         factor[cnt] = [ch windowHeightFactor];
         sumFactor += factor[cnt];
@@ -919,7 +908,7 @@ static BedaController* g_instance = nil;
     int MIN_SCROLL_NUM_GRAPHS = 3;
     if (cnt > MIN_SCROLL_NUM_GRAPHS) {
 //        double fixedHeight = [[splitview superview] frame].size.height;
-        double fixedHeight = 600;
+        double fixedHeight = 400;
         NSRect frame;
         frame.origin.x = 0;
         frame.origin.y = 0;

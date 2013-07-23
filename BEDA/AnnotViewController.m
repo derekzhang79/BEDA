@@ -49,9 +49,22 @@
             [behaviorName setSelectable:NO];
         }
         return behaviorName;
-    }else
-        // # of Behavior Intervals
-        if ([tableColumn.identifier isEqualToString:@"Behavior Intervals"]) {
+        
+    } else if ([tableColumn.identifier isEqualToString:@"Behavior Color"]) {  // # of Behavior Intervals
+        NSTextField *behaviorColor = [tableView makeViewWithIdentifier:@"behaviorColorTextField" owner:self];
+        if (behaviorColor == nil) {
+            behaviorColor = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 10, 10)] autorelease];
+            
+            behaviorColor.identifier = @"behaviorColorTextField";
+            [behaviorColor setBackgroundColor:[beh color]];
+            [behaviorColor setBezeled:NO];
+            [behaviorColor setEditable:NO];
+            [behaviorColor setSelectable:NO];
+        }
+        
+        return behaviorColor;
+        
+    } else if ([tableColumn.identifier isEqualToString:@"Behavior Intervals"]) {  // # of Behavior Intervals
             NSTextField *behaviorIntervals = [tableView makeViewWithIdentifier:@"behaviorIntervalsTextField" owner:self];
             if (behaviorIntervals == nil) {
                 behaviorIntervals = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 50, 10)] autorelease];
@@ -65,9 +78,8 @@
             int numOfbehaviorIntervals = [beh numBehaviorIntervals];
             [behaviorIntervals setIntValue:numOfbehaviorIntervals];
             return behaviorIntervals;
-        } else
-            // # of total Intervals
-            if ([tableColumn.identifier isEqualToString:@"Total Intervals"]) {
+        
+        } else if ([tableColumn.identifier isEqualToString:@"Total Intervals"]) { // # of total Intervals
                 NSTextField *totalIntervals = [tableView makeViewWithIdentifier:@"totalIntervalsTextField" owner:self];
                 if (totalIntervals == nil) {
                     totalIntervals = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 50, 10)] autorelease];
@@ -81,9 +93,7 @@
                 int totalNumOfIntervals = [Behavior numTotalIntervals];
                 [totalIntervals setIntValue:totalNumOfIntervals];
                 return totalIntervals;
-            } else
-                // percetnage of behaviors
-                if ([tableColumn.identifier isEqualToString:@"Percentage Behavior"]) {
+            } else if ([tableColumn.identifier isEqualToString:@"Percentage Behavior"]) { // percetnage of behaviors
                     NSTextField *percentageBehavior = [tableView makeViewWithIdentifier:@"percentageBehaviorTextField" owner:self];
                     if (percentageBehavior == nil) {
                         percentageBehavior = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 50, 10)] autorelease];
