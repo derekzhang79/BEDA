@@ -169,9 +169,14 @@
     NSSize sz = [self view].frame.size;
     if ([self btnOrderUp] == Nil) {
         NSButton* btn = [[NSButton alloc] init];
-        btn.frame = CGRectMake(sz.width - 60, 50, 30, 30);
+        btn.frame = CGRectMake(sz.width - 20, 50, 20, 20);
         btn.alphaValue = 0.9;
         [btn setTitle:@"UP"];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"up" ofType:@"png"];
+        NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+        [btn setImage:img];
+        
         [[self view] addSubview:btn positioned:NSWindowAbove relativeTo:nil];
         [self setBtnOrderUp:btn];
         
@@ -181,9 +186,13 @@
     
     if ([self btnOrderDn] == Nil) {
         NSButton* btn = [[NSButton alloc] init];
-        btn.frame = CGRectMake(sz.width - 60, 10, 30, 30);
+        btn.frame = CGRectMake(sz.width - 20, 30, 20, 20);
         btn.alphaValue = 0.9;
         [btn setTitle:@"DN"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"down" ofType:@"png"];
+        NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+        [btn setImage:img];
+        
         [[self view] addSubview:btn positioned:NSWindowAbove relativeTo:nil];
         [self setBtnOrderDn:btn];
         
