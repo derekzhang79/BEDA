@@ -175,6 +175,7 @@
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"up" ofType:@"png"];
         NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+        [img setSize:btn.frame.size];
         [btn setImage:img];
         
         [[self view] addSubview:btn positioned:NSWindowAbove relativeTo:nil];
@@ -191,6 +192,7 @@
         [btn setTitle:@"DN"];
         NSString *path = [[NSBundle mainBundle] pathForResource:@"down" ofType:@"png"];
         NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+        [img setSize:btn.frame.size];
         [btn setImage:img];
         
         [[self view] addSubview:btn positioned:NSWindowAbove relativeTo:nil];
