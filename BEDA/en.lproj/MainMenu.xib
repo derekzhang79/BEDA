@@ -1927,6 +1927,10 @@
 									<reference key="NSControlView" ref="861295502"/>
 									<int key="NSButtonFlags">-2045231104</int>
 									<int key="NSButtonFlags2">134</int>
+									<object class="NSCustomResource" key="NSNormalImage" id="1028095440">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">intervalplay</string>
+									</object>
 									<string key="NSAlternateContents"/>
 									<string key="NSKeyEquivalent"/>
 									<int key="NSPeriodicDelay">400</int>
@@ -1939,10 +1943,7 @@
 										<int key="NSKeyEquivModMask">1048576</int>
 										<int key="NSMnemonicLoc">2147483647</int>
 										<int key="NSState">1</int>
-										<object class="NSCustomResource" key="NSImage" id="501365358">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">intervalplay</string>
-										</object>
+										<reference key="NSImage" ref="1028095440"/>
 										<reference key="NSOnImage" ref="35465992"/>
 										<reference key="NSMixedImage" ref="502551668"/>
 										<string key="NSAction">_popUpItemAction:</string>
@@ -1974,7 +1975,7 @@
 								</object>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
-							<reference key="NSToolbarItemImage" ref="501365358"/>
+							<reference key="NSToolbarItemImage" ref="1028095440"/>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{36, 36}</string>
@@ -2126,7 +2127,7 @@
 						<object class="NSCustomView" id="1069826734">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{20, 103}, {859, 59}}</string>
+							<string key="NSFrame">{{20, 103}, {859, 68}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="419037810"/>
@@ -2228,6 +2229,7 @@
 													<string key="NSFrame">{{89, 7}, {39, 22}}</string>
 													<reference key="NSSuperview" ref="242634968"/>
 													<reference key="NSWindow"/>
+													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSTextFieldCell" key="NSCell" id="784020255">
@@ -4651,7 +4653,7 @@
 								<int key="secondAttribute">4</int>
 								<float key="multiplier">1</float>
 								<object class="IBLayoutConstant" key="constant">
-									<double key="value">14</double>
+									<double key="value">5</double>
 								</object>
 								<float key="priority">1000</float>
 								<reference key="containingView" ref="439893737"/>
@@ -7583,7 +7585,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">2110</int>
+			<int key="maxID">2127</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -7613,6 +7615,7 @@
 						<string key="addAnnotation:">id</string>
 						<string key="changeModeFromSegmentedControl:">id</string>
 						<string key="exportSelection:">id</string>
+						<string key="hideInfoPopover:">id</string>
 						<string key="makeAbsoluteTimeMode:">id</string>
 						<string key="makeRelativeTimeMode:">id</string>
 						<string key="navigate:">id</string>
@@ -7642,6 +7645,10 @@
 						</object>
 						<object class="IBActionInfo" key="exportSelection:">
 							<string key="name">exportSelection:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="hideInfoPopover:">
+							<string key="name">hideInfoPopover:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="makeAbsoluteTimeMode:">
