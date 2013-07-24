@@ -110,6 +110,7 @@
     for (Source* s in [[self beda] sources]) {
         [s deleteChannel:ch];
     }
+    [[[self beda] channelsTimeData] removeObject:ch];
     [graphControlTabview removeTabViewItem:item];
 }
 

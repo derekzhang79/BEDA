@@ -61,6 +61,25 @@
     [self setBtnOrderDn:Nil];
 }
 
+- (void)adjustControlPositions {
+    NSSize sz = [self view].frame.size;
+    
+    if ([self offsetOverlay] != Nil) {
+        NSTextField* overlay = [self offsetOverlay];
+        NSSize my = overlay.frame.size;
+        overlay.frame = CGRectMake(sz.width - my.width - 10, sz.height - my.height - 10, my.width, my.height);
+
+    }
+    if ([self btnOrderUp] != Nil) {
+        NSButton* btn = [self btnOrderUp];
+        btn.frame = CGRectMake(sz.width - 20, 50, 20, 20);
+    }
+    
+    if ([self btnOrderDn] != Nil) {
+        NSButton* btn = [self btnOrderDn];
+        btn.frame = CGRectMake(sz.width - 20, 30, 20, 20);
+    }
+}
 
 - (void)play {
     NSLog(@"%s: Do NOTHING", __PRETTY_FUNCTION__);

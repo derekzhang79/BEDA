@@ -29,6 +29,9 @@
     [self setGraphTitle:name];
     [self setSelectedColumnTitle:name];
     
+    [graphColor setColor:[[self channel] lineColor]];
+    [areaColor setColor:[[self channel] areaColor]];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onApplySettingPressed:)
                                                  name:BEDA_NOTI_APPLY_SETTING_PRESSED object:Nil];
     
@@ -77,8 +80,8 @@
 
 - (void) onApplySettingPressed:(NSNotification*) noti {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    [[self channel] setLineColor:[self getGraphColor]];
-    [[self channel] setAreaColor:[self getAreaColor]];
+    [[self channel] applyLineColor:[self getGraphColor]];
+    [[self channel] applyAreaColor:[self getAreaColor]];
     [[self channel] setGraphName:[self getGraphName]];
     if(isAutomatic == NO){
         [[self channel] setRangeFrom:[[self txtMinValue] doubleValue] to:[[self txtMaxValue] doubleValue]];

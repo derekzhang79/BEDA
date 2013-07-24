@@ -26,6 +26,7 @@
 - (BedaController*) beda;
 
 - (void)clearControls;
+- (void)adjustControlPositions;
 
 - (void)play;
 - (void)fastplay;

@@ -53,6 +53,8 @@ static BedaController* g_instance = nil;
     _channelsTimeData = [[NSMutableArray alloc] init];
 
 //    _movSplitView = Nil;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGraphSplitViewResize:) name:NSSplitViewDidResizeSubviewsNotification object:splitview];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onAnnotationChanged:)
@@ -1004,6 +1006,14 @@ static BedaController* g_instance = nil;
 
 
 }
+ 
+ - (void) onGraphSplitViewResize:(NSNotification*) noti {
+     for (Source* s in [self sources]) {
+         for (Channel* ch in [s channels]) {
+             [ch adjustControlPositions];
+         }
+     }
+ }
 
 - (void)onCreateOffsetTimer : (id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);

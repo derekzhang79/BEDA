@@ -38,8 +38,8 @@
 
 }
 
-@property (retain) NSColor* lineColor;
-@property (retain) NSColor* areaColor;
+@property (nonatomic, retain) NSColor* lineColor;
+@property (nonatomic, retain) NSColor* areaColor;
 @property (assign) int channelIndex;
 @property (assign) BOOL isHeaderSelected;
 @property (assign) double headerTime;
@@ -88,10 +88,10 @@
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index;
 
 // Change style
-- (void)setLineColor:(NSColor*)lc;
-- (void)setAreaColor:(NSColor*)ac;
-- (NSColor*)getLineColor;
-- (NSColor*)getAreaColor;
+- (void)applyLineColor:(NSColor*)lc;
+- (void)applyAreaColor:(NSColor*)ac;
+//- (NSColor*)getLineColor;
+//- (NSColor*)getAreaColor;
 - (void)setGraphName:(NSString*)gName;
 - (void)setRangeFrom:(double)min to:(double)max;
 - (void)makeRelativeMode;
