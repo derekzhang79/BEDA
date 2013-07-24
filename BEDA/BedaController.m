@@ -996,13 +996,11 @@ static BedaController* g_instance = nil;
     
     [self spaceProportionaly:splitview];
     
-    if ([self isSyncMode]) {
-        NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
-                                         target:self
-                                       selector:@selector(onCreateOffsetTimer:)
-                                       userInfo:nil
-                                        repeats:NO];
-    }
+    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                     target:self
+                                   selector:@selector(onCreateOffsetTimer:)
+                                   userInfo:nil
+                                    repeats:NO];
 
 
 }
@@ -1015,6 +1013,8 @@ static BedaController* g_instance = nil;
             [ch clearControls];
             if ([self isSyncMode]) {
                 [ch showOffsetOverlay];
+            } else {
+                [ch hideOffsetOverlay];
             }
         }
     }
