@@ -961,9 +961,9 @@ static BedaController* g_instance = nil;
 - (void)clearAllViews {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    while([[[self movSplitView] subviews] count] > 0) {
-        [[[[self movSplitView] subviews] objectAtIndex:0] removeFromSuperview];
-    }
+//    while([[[self movSplitView] subviews] count] > 0) {
+//        [[[[self movSplitView] subviews] objectAtIndex:0] removeFromSuperview];
+//    }
     
     while([[splitview subviews] count] > 0) {
         [[[splitview subviews] objectAtIndex:0] removeFromSuperview];
@@ -980,8 +980,8 @@ static BedaController* g_instance = nil;
         for (Channel* ch in [s channels]) {
             if ([ch isKindOfClass:[ChannelMovie class]]) {
 //                [self createMovSplitViewIfNotExist];
-                ChannelMovie* chm = (ChannelMovie*)ch;
-                [chm createMovieViewFor:self];
+//                ChannelMovie* chm = (ChannelMovie*)ch;
+//                [chm createMovieViewFor:self];
 
             } else if ([ch isKindOfClass:[ChannelTimeData class]]) {
 //                ChannelTimeData* chtd = (ChannelTimeData*)ch;
