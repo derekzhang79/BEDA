@@ -121,8 +121,8 @@
                 
                 [chattrs setObject:[self NSStringFromDouble:[ch minValue]]  forKey:@"minValue"];
                 [chattrs setObject:[self NSStringFromDouble:[ch maxValue]]  forKey:@"maxValue"];
-                [chattrs setObject:[ch getLineColor]  forKey:@"lineColor"];
-                [chattrs setObject:[ch getAreaColor]  forKey:@"areaColor"];
+                [chattrs setObject:[ch lineColor]  forKey:@"lineColor"];
+                [chattrs setObject:[ch areaColor]  forKey:@"areaColor"];
                 [nodeChannel setAttributesWithDictionary:chattrs];
                 [nodeSource addChild:nodeChannel];
                 
