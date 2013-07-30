@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CorePlot/CorePlot.h>
-#import "ChannelAnnotationController.h"
+#import "ChannelAnnotation.h"
 
 @class ChannelTimeData;
 //@interface ChannelAnnotion : NSObject {
@@ -36,8 +36,8 @@
 
 - (id) initWithChannel:(ChannelTimeData*) ch;
 
-- (void) addSingleAt:(double)t as:(NSString*)text;
-- (void) addDoubleAt:(double)t during:(double)dur as:(NSString*)text;
+- (ChannelAnnotation*) addSingleAt:(double)t as:(NSString*)text;
+- (ChannelAnnotation*) addDoubleAt:(double)t during:(double)dur as:(NSString*)text;
 
 
 

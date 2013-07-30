@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
-#import "ChannelAnnotationController.h"
+#import "ChannelAnnotation.h"
 
-@implementation ChannelAnnotationController
+@implementation ChannelAnnotation
 
 @synthesize t;
 @synthesize duration;
@@ -36,7 +36,8 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         [self setT:_t];
         [self setDuration:_duration];
-        [self setText:[[self annotationtext] stringValue]];
+        [self setText:_text];
+//        [self setText:[[self annotationtext] stringValue]];
     }
     return self;
 }

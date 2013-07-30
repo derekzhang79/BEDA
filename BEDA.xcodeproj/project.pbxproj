@@ -29,7 +29,7 @@
 		038A62D416FD4CCB00E91A65 /* annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D216FD4CCB00E91A65 /* annotation.png */; };
 		038A62D516FD4CCB00E91A65 /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D316FD4CCB00E91A65 /* sync.png */; };
 		038E9BC51794E5FC00606594 /* ChannelAnnotationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */; };
-		038E9BC81794ED1200606594 /* ChannelAnnotationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9BC71794ED1200606594 /* ChannelAnnotationController.m */; };
+		038E9BC81794ED1200606594 /* ChannelAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9BC71794ED1200606594 /* ChannelAnnotation.m */; };
 		038E9BCB179E64F800606594 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 038E9BC9179E64F800606594 /* down.png */; };
 		038E9BCC179E64F800606594 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 038E9BCA179E64F800606594 /* up.png */; };
 		038E9D1C177932E400ACE963 /* ColorCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 038E9D1B177932E400ACE963 /* ColorCellView.m */; };
@@ -71,6 +71,7 @@
 		B28CD6D6178E62D100BC7719 /* ViewRangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28CD6D5178E62D100BC7719 /* ViewRangeController.m */; };
 		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; };
 		B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */; };
+		B28D647817A761B90085D8AC /* ChannelAnnotationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D647717A761B90085D8AC /* ChannelAnnotationWindowController.m */; };
 		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
 		B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B7E9CB176AA4A900190941 /* GraphWindowController.m */; };
 		B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */; };
@@ -112,8 +113,8 @@
 		038A62D216FD4CCB00E91A65 /* annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotation.png; sourceTree = "<group>"; };
 		038A62D316FD4CCB00E91A65 /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
 		038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelAnnotationWindow.xib; sourceTree = "<group>"; };
-		038E9BC61794ED1100606594 /* ChannelAnnotationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelAnnotationController.h; sourceTree = "<group>"; };
-		038E9BC71794ED1200606594 /* ChannelAnnotationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelAnnotationController.m; sourceTree = "<group>"; };
+		038E9BC61794ED1100606594 /* ChannelAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelAnnotation.h; sourceTree = "<group>"; };
+		038E9BC71794ED1200606594 /* ChannelAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelAnnotation.m; sourceTree = "<group>"; };
 		038E9BC9179E64F800606594 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		038E9BCA179E64F800606594 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		038E9D1A177932E400ACE963 /* ColorCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCellView.h; sourceTree = "<group>"; };
@@ -179,6 +180,8 @@
 		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
 		B28D32D916D20DB500D58ADA /* EDAGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAGraphViewController.h; sourceTree = "<group>"; };
 		B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAGraphViewController.m; sourceTree = "<group>"; };
+		B28D647617A761B90085D8AC /* ChannelAnnotationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelAnnotationWindowController.h; sourceTree = "<group>"; };
+		B28D647717A761B90085D8AC /* ChannelAnnotationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelAnnotationWindowController.m; sourceTree = "<group>"; };
 		B299F6BA176AE8E6004BCD35 /* ProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectManager.h; sourceTree = "<group>"; };
 		B299F6BB176AE8E6004BCD35 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 		B2B7E9CA176AA4A900190941 /* GraphWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphWindowController.h; sourceTree = "<group>"; };
@@ -209,11 +212,13 @@
 				0314637A1762F675007B075B /* ChannelTimeData.m */,
 				B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */,
 				B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */,
-				038E9BC61794ED1100606594 /* ChannelAnnotationController.h */,
-				038E9BC71794ED1200606594 /* ChannelAnnotationController.m */,
+				038E9BC61794ED1100606594 /* ChannelAnnotation.h */,
+				038E9BC71794ED1200606594 /* ChannelAnnotation.m */,
 				B225ED9A1793ACA0002FF5A7 /* ChannelAnnotationManager.h */,
 				B225ED9B1793ACA0002FF5A7 /* ChannelAnnotationManager.m */,
 				038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */,
+				B28D647617A761B90085D8AC /* ChannelAnnotationWindowController.h */,
+				B28D647717A761B90085D8AC /* ChannelAnnotationWindowController.m */,
 				03E90874177418180078BA59 /* AnnotView.xib */,
 				03E90876177418240078BA59 /* AnnotViewController.h */,
 				03E90877177418240078BA59 /* AnnotViewController.m */,
@@ -561,7 +566,8 @@
 				B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */,
 				B28CD6D6178E62D100BC7719 /* ViewRangeController.m in Sources */,
 				B225ED9C1793ACA0002FF5A7 /* ChannelAnnotationManager.m in Sources */,
-				038E9BC81794ED1200606594 /* ChannelAnnotationController.m in Sources */,
+				038E9BC81794ED1200606594 /* ChannelAnnotation.m in Sources */,
+				B28D647817A761B90085D8AC /* ChannelAnnotationWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

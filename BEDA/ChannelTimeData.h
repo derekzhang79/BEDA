@@ -21,7 +21,8 @@
 @class AnnotViewController;
 @class ChannelSelector;
 @class ChannelAnnotationManager;
-@class ChannelAnnotationController;
+@class ChannelAnnotation;
+@class ChannelAnnotationWindowController;
 
 @interface ChannelTimeData : Channel<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate>  {
     CPTXYGraph *graph;
@@ -30,7 +31,7 @@
     CPTScatterPlot *plotHeader;
     
     
-    ChannelAnnotationController* cac;
+    ChannelAnnotation* cac;
     
     int graphScaleX;
     int graphScaleY;
@@ -52,7 +53,7 @@
 @property (retain) AnnotViewController* annotViewController;
 @property (retain) ChannelSelector* channelSelector;
 @property (retain) ChannelAnnotationManager* channelAnnotationManager;
-@property (retain) NSWindowController* channelAnnotWindowController;
+@property (retain) ChannelAnnotationWindowController* channelAnnotWindowController;
 @property (assign) int samplingRate;
 
 - (SourceTimeData*) sourceTimeData;
@@ -86,7 +87,7 @@
 - (void)deselectHeaderPlot;
 -(NSUInteger)numberOfRecordsForHeaderPlot;
 -(NSNumber *)numberForHeaderPlotField:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index;
-
+-(CPTScatterPlot*) getPlotHeader;
 // Change style
 - (void)applyLineColor:(NSColor*)lc;
 - (void)applyAreaColor:(NSColor*)ac;

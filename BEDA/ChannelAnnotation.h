@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class ChannelTimeData;
 
-@interface ChannelAnnotationController : NSWindowController {
+@interface ChannelAnnotation : NSWindowController {
 }
 
 - (id) initAtTime:(double) _t withText:(NSString*) _text;
@@ -18,7 +18,7 @@
 @property double t;
 @property double duration;
 @property (copy) NSString* text;
-@property (assign) IBOutlet NSTextField* annotationtext;
+//@property (assign) IBOutlet NSTextField* annotationtext;
 
 - (BOOL) isSingle;
 

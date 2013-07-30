@@ -12,6 +12,7 @@
 #import "AnnotViewController.h"
 #import "ChannelSelector.h"
 #import "ChannelAnnotationManager.h"
+#import "ChannelAnnotationWindowController.h"
 
 @implementation ChannelTimeData
 
@@ -725,6 +726,10 @@
     [self setIsHeaderSelected:NO];
 }
 
+-(CPTScatterPlot*) getPlotHeader {
+    return plotHeader;
+}
+
 
 -(NSUInteger)numberOfRecordsForHeaderPlot {
     return 2;
@@ -856,11 +861,13 @@
             NSLog(@"%s : we already has DataWindowController", __PRETTY_FUNCTION__);
         }
         
-        NSWindowController *cw = [[NSWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
-        [cw showWindow:self];
+        ChannelAnnotationWindowController *cw = [[ChannelAnnotationWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
         [self setChannelAnnotWindowController:cw];
 
         [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
+        
+        [cw showWindow:self];
+
     }
     
     for (ChannelTimeData* ch in [[self source] channels]) {
@@ -887,6 +894,7 @@
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]) {
         [[self channelSelector] select:index];
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_CHANNEL_ANNOT_PLOT]) {
+
         [[self channelSelector] select:index];
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_DATA_PLOT]) {
 

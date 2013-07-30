@@ -107,27 +107,48 @@
     [[[self channel] getGraph] addPlot:p];
 }
 
-- (void) addSingleAt:(double)t as:(NSString*)text {
+- (ChannelAnnotation*) addSingleAt:(double)t as:(NSString*)text {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    [[self annots] addObject:
-     [[ChannelAnnotationController alloc] initAtTime:t withText:text]
-     ];
+    ChannelAnnotation* ca = [[ChannelAnnotation alloc] initAtTime:t withText:text];
+
+    [[self annots] addObject:ca];
     [[self plot] reloadData];
+    return ca;
 }
 
-- (void) addDoubleAt:(double)t during:(double)dur as:(NSString*)text {
+- (ChannelAnnotation*) addDoubleAt:(double)t during:(double)dur as:(NSString*)text {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-
-    [[self annots] addObject:
-     [[ChannelAnnotationController alloc] initAtTime:t during:dur withText:text]
-     ];
-    [[self plot] reloadData];
-}
-
-- (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index{
     
+    ChannelAnnotation* ca = [[ChannelAnnotation alloc] initAtTime:t during:dur withText:text];
+
+    [[self annots] addObject:ca];
+    [[self plot] reloadData];
+    return ca;
 }
+
+- (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index {
+    int annotIndex = (int)(index / 3);
+
+    ChannelAnnotation* ca = [[self annots] objectAtIndex:annotIndex];
+    NSUInteger flags = [[NSApp currentEvent] modifierFlags];
+    if ( (flags & NSCommandKeyMask) ) {
+        NSLog(@"%s: Annotation is selected for REMOVAL", __PRETTY_FUNCTION__);
+        [[self annots] removeObjectAtIndex:annotIndex];
+        [[self plot] reloadData];
+
+    } else {
+        NSLog(@"%s: Annotation is selected for relocating the header", __PRETTY_FUNCTION__);
+        double x = [ca t];
+        [[self channel ] setHeaderTime:x];
+        [[[self channel] getPlotHeader] reloadData];
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
+         object:[self channel]];
+    }
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CPTPlotDataSource functions
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
@@ -139,7 +160,7 @@
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
     int annotIndex = (int)(index / 3);
-    ChannelAnnotationController* ann = [[self annots] objectAtIndex:annotIndex];
+    ChannelAnnotation* ann = [[self annots] objectAtIndex:annotIndex];
 
     // Do not display the second point of Single annotation
     if ([ann isSingle] && (index % 3) == 1) {
@@ -171,7 +192,7 @@
 -(CPTLayer *)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)index
 {
     int annotIndex = (int)(index / 3);
-    ChannelAnnotationController* ann = [[self annots] objectAtIndex:annotIndex];
+    ChannelAnnotation* ann = [[self annots] objectAtIndex:annotIndex];
 
     CPTTextLayer *textLayer = [CPTTextLayer layer];
     textLayer.text = [ann text];
