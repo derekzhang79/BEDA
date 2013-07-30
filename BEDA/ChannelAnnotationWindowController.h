@@ -8,12 +8,16 @@
 
 #import <Foundation/Foundation.h>
 @class ChannelAnnotation;
+@class ChannelAnnotationManager;
+
 
 @interface ChannelAnnotationWindowController : NSWindowController {
     
 }
 
 @property (assign) ChannelAnnotation* annot;
+@property (assign) ChannelAnnotationManager* manager;
+
 @property (nonatomic, retain) IBOutlet NSTextField* annottext;
 
 - (IBAction)onApply:(id)sender;

@@ -127,6 +127,28 @@
     return ca;
 }
 
+- (void) makeVisible:(ChannelAnnotation*)annot {
+    for (Source* s in [[BedaController getInstance] sources]) {
+        if ([s isKindOfClass:[SourceTimeData class]] == NO) {
+            continue;
+        }
+        SourceTimeData* std = (SourceTimeData*)s;
+        for (ChannelTimeData* ctd in [std channels]) {
+            ChannelAnnotationManager* cam = [ctd channelAnnotationManager];
+            for (ChannelAnnotation* a in [cam annots]) {
+                [a setIsTextVisible:NO];
+            }
+            if (cam != self) {
+                [[cam plot] reloadData];
+            }
+        }
+    }
+
+    [annot setIsTextVisible:YES];
+    [[self plot] reloadData];
+}
+
+
 - (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index {
     int annotIndex = (int)(index / 3);
 
@@ -145,6 +167,9 @@
         [[NSNotificationCenter defaultCenter]
          postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
          object:[self channel]];
+        
+        NSLog(@"%s: Also Annotation is selected for showing text", __PRETTY_FUNCTION__);
+        [self makeVisible:ca];
     }
 }
 
@@ -182,7 +207,12 @@
         }
     } else if (fieldEnum == CPTScatterPlotFieldY) {
         // Returns Y values
-        return [NSNumber numberWithDouble: 1.0 ];
+//        return [NSNumber numberWithDouble: 1.0 ];
+        double minvalue = [[self channel] minValue];
+        double maxvalue = [[self channel] maxValue];
+        double averagevalue = (minvalue + maxvalue) * 0.5;
+        return [NSNumber numberWithDouble: averagevalue ];
+
     } else {
         // Invalid fieldEnum: Should not be reached, probably
         return nil;
@@ -193,6 +223,9 @@
 {
     int annotIndex = (int)(index / 3);
     ChannelAnnotation* ann = [[self annots] objectAtIndex:annotIndex];
+    if ([ann isTextVisible] == NO) {
+        return Nil;
+    }
 
     CPTTextLayer *textLayer = [CPTTextLayer layer];
     textLayer.text = [ann text];

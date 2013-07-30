@@ -12,6 +12,8 @@
 #import "SourceTimeData.h"
 #import "Channel.h"
 #import "ChannelTimeData.h"
+#import "ChannelAnnotation.h"
+#import "ChannelAnnotationManager.h"
 
 @implementation ProjectManager
 
@@ -124,7 +126,12 @@
                 [chattrs setObject:[ch lineColor]  forKey:@"lineColor"];
                 [chattrs setObject:[ch areaColor]  forKey:@"areaColor"];
                 [nodeChannel setAttributesWithDictionary:chattrs];
+                
+                [nodeChannel addChild:[self saveChannelAnnotationManager:[ch channelAnnotationManager]]];
+                
                 [nodeSource addChild:nodeChannel];
+                
+                
                 
                 if([ch channelIndex] < 0){
                     NSXMLElement *nodeNumBeh = (NSXMLElement *)[NSXMLNode elementWithName:@"defbehaviors"];
@@ -179,6 +186,22 @@
         
     }
     
+}
+
+-(NSXMLElement *) saveChannelAnnotationManager: (ChannelAnnotationManager*) cam {
+    NSXMLElement *node = (NSXMLElement *)[NSXMLNode elementWithName:@"ChannelAnnotationManager"];
+    for (ChannelAnnotation* ca in [cam annots]) {
+        NSXMLElement *child = (NSXMLElement *)[NSXMLNode elementWithName:@"ChannelAnnotation"];
+        NSMutableDictionary* attrs = [[NSMutableDictionary alloc] init];
+        
+        [attrs setObject:[self NSStringFromDouble:[ca t]] forKey:@"t"];
+        [attrs setObject:[self NSStringFromDouble:[ca duration]] forKey:@"duration"];
+        [attrs setObject:[ca text] forKey:@"text"];
+        
+        [child setAttributesWithDictionary:attrs];
+        [node addChild:child];
+    }
+    return node;
 }
 
 - (NSColor*)colorFromString:(NSString*)string
@@ -291,6 +314,9 @@
                     areaColor: areaColor
                      isBottom:YES hasArea:YES];
                 [ch setName:name];
+                
+                [self loadChannelAnnotationManager:[ch channelAnnotationManager] from:child2];
+                
                 [[source channels] addObject:ch];
                 continue;
             }
@@ -313,6 +339,33 @@
      object:nil];
 
     
+}
+
+- (void)loadChannelAnnotationManager:(ChannelAnnotationManager*)cam from:(NSXMLElement*)node {
+    NSXMLElement* target = Nil;
+    for (NSXMLElement* child in [node children]) {
+        if ([[child name] isEqualToString:@"ChannelAnnotationManager"]) {
+            target = child;
+            break;
+        }
+    }
+    if (target == Nil) {
+        NSLog(@"%s : does not have annotation manager data\n",  __PRETTY_FUNCTION__);
+        return;
+    }
+    NSLog(@"%s : load annotation manager data", __PRETTY_FUNCTION__);
+    for (NSXMLElement* child in [target children]) {
+        if ([[child name] isEqualToString:@"ChannelAnnotation"] == NO) {
+            continue;
+        }
+        double t = [[[child attributeForName:@"t"] stringValue] doubleValue];
+        double duration = [[[child attributeForName:@"duration"] stringValue] doubleValue];
+        NSString* text = [[child attributeForName:@"text"] stringValue];
+        NSLog(@"%s : t, d, text = %lf, %lf, %@", __PRETTY_FUNCTION__, t, duration, text);
+
+        [cam addDoubleAt:t during:duration as:text];
+    }
+
 }
 
 

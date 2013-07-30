@@ -38,6 +38,7 @@
 
 - (ChannelAnnotation*) addSingleAt:(double)t as:(NSString*)text;
 - (ChannelAnnotation*) addDoubleAt:(double)t during:(double)dur as:(NSString*)text;
+- (void) makeVisible:(ChannelAnnotation*)annot;
 
 
 
