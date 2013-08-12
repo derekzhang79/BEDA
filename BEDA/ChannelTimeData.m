@@ -53,6 +53,11 @@
     return graph;
 }
 
+- (CPTXYPlotSpace*) getPlotSpace {
+    return plotSpace;
+}
+
+
 - (IBAction)onBtnUp:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSMutableArray* channels = [[self beda] channelsTimeData];

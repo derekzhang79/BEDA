@@ -58,6 +58,7 @@
 
 - (SourceTimeData*) sourceTimeData;
 - (CPTXYGraph*) getGraph;
+- (CPTXYPlotSpace*) getPlotSpace;
 - (void)initGraph:(NSString*)name atIndex:(int)index range:(double)min to:(double)max withLineColor:(NSColor*)lc areaColor:(NSColor*)ac isBottom:(BOOL)isBottom hasArea:(BOOL)hasArea;
 - (void)createGraphViewFor:(BedaController*)beda;
 

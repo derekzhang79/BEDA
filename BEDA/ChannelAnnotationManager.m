@@ -171,6 +171,16 @@
         NSLog(@"%s: Also Annotation is selected for showing text", __PRETTY_FUNCTION__);
         [self makeVisible:ca];
     }
+    double minvalue = [[self channel] minValue];
+    double maxvalue = [[self channel] maxValue];
+    double averagevalue = (minvalue + maxvalue) * 0.5;
+    double pt[2];
+    pt[0] = [ca t];
+    pt[1] = averagevalue;
+    CGPoint viewPoint = [[[self channel] getPlotSpace] plotAreaViewPointForDoublePrecisionPlotPoint:pt];
+    NSPoint nspt = NSPointFromCGPoint(viewPoint);
+    NSPoint nspt2 = [[[self channel] view] convertPoint:nspt toView:Nil];
+    NSLog(@"viewPoint = %lf, %lf: nspt2 = %lf, %lf", viewPoint.x, viewPoint.y, nspt2.x, nspt2.y);
 }
 
 
