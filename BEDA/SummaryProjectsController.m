@@ -39,14 +39,18 @@
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:product textStyle:x.labelTextStyle];
         label.tickLocation = CPTDecimalFromInt(idx);
         label.offset = 5.0f;
+        label.rotation = -M_PI / 4;
+
         [labels addObject:label];
         [label release];
         idx++;
     }
     x.axisLabels = [NSMutableSet setWithArray:labels];
-    
+
+
 
     [graph reloadData];
+//    x.labelRotation = -M_PI / 4;
 
 }
 
@@ -69,7 +73,7 @@
     graph.plotAreaFrame.paddingTop = 5.0f;
     graph.plotAreaFrame.paddingRight = 0.0f;
     graph.plotAreaFrame.paddingLeft = 70.0f;
-    graph.plotAreaFrame.paddingBottom = 20.0f;
+    graph.plotAreaFrame.paddingBottom = 120.0f;
     
     graph.paddingRight = 0.0f;
     graph.paddingLeft = 0.0f;
@@ -116,7 +120,7 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x = axisSet.xAxis;
     x.labelingPolicy = CPTAxisLabelingPolicyNone;
-    x.title = @"Project Name";
+//    x.title = @"Project Name";
     x.titleOffset = 30.0f;
     x.majorTickLineStyle = nil;
     x.minorTickLineStyle = nil;
@@ -132,11 +136,14 @@
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:product textStyle:x.labelTextStyle];
         label.tickLocation = CPTDecimalFromInt(idx);
         label.offset = 5.0f;
+        label.rotation = -M_PI / 4;
         [labels addObject:label];
         [label release];
         idx++;
     }
     x.axisLabels = [NSMutableSet setWithArray:labels];
+//    x.labelRotation = -M_PI / 4;
+
     [labels release];
     
    
@@ -151,6 +158,11 @@
 
     graph.axisSet.axes = [NSArray arrayWithObjects:x, y, nil];
     
+    
+    
+
+    
+    // set as hosted graph
     graphview.hostedGraph = graph;
 }
 
@@ -189,6 +201,20 @@
     NSMutableArray* plotdata = [[NSMutableArray alloc] init];
     [[self plotYData] setObject:plotdata forKey:name];
     
+    
+    // Setting X-Axis
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+    CPTXYAxis *x = axisSet.xAxis;
+
+    // Add legend
+    graph.legend                 = [CPTLegend legendWithPlots:[self cptplots]];
+    graph.legend.textStyle       = x.titleTextStyle;
+    graph.legend.borderLineStyle = x.axisLineStyle;
+    graph.legend.cornerRadius    = 5.0;
+    graph.legend.numberOfRows    = 1;
+    graph.legend.swatchSize      = CGSizeMake(25.0, 25.0);
+    graph.legendAnchor           = CPTRectAnchorBottom;
+    graph.legendDisplacement     = CGPointMake(0.0, 12.0);
 }
 
 -(NSMutableArray*) findYDataWithName:(NSString*)name {

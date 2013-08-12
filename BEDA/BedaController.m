@@ -357,6 +357,8 @@ static BedaController* g_instance = nil;
     NSLog(@"url = %@ [ext = %@]", url, ext);
     
     [self openFileAtURL:url];
+    
+    [self openGraphController:Nil];
 }
 
 - (void)openFileAtURL:(NSURL*)url {

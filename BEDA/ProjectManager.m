@@ -48,6 +48,8 @@
     
     [[self beda]setNumProjects:[[self beda]numProjects] + 1];
     NSLog(@"# projects = %d", [[self beda ]numProjects]);
+    
+    [[self beda] openGraphController:Nil];
 
 }
 
