@@ -30,6 +30,6 @@
 @property (retain) NSMutableArray* groups;
 - (IBAction)onNewGroup:(id)sender;
 
-- (void)addNewDataFile:(NSString*)filename;
+- (NSString*)addNewDataFile:(NSString*)filename;
 
 @end

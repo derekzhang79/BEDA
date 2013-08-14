@@ -108,9 +108,11 @@
     }
     // At the very end of the function, we add X data (just one for each project)
     [[spc plotXData] addObject:projectName];
+    NSString* group = [self.spoutline addNewDataFile:projectName];
+    [[spc plotGroup] addObject:group];
+
     [spc reloadGraph];
 
-    [self.spoutline addNewDataFile:projectName];
 }
 
 @end

@@ -13,6 +13,7 @@
 @synthesize graph;
 @synthesize plotXData;
 @synthesize plotYData = _plotYData;
+@synthesize plotGroup = _plotGroup;
 @synthesize cptplots = _cptplots;
 
 - (void) awakeFromNib {
@@ -20,6 +21,7 @@
     graphview.hostedGraph = [self graph];
     plotXData =  [[NSMutableArray alloc] init];
     _plotYData = [[NSMutableDictionary alloc] init];
+    _plotGroup = [[NSMutableArray alloc] init];
     _cptplots =  [[NSMutableArray alloc] init];
 
     [self initGraph];
@@ -234,13 +236,26 @@
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
     NSMutableArray* data = [[self plotYData] objectForKey:plot.identifier];
-    return [data count];
+    return [data count] * 2;
 }
 
--(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
+-(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index_2
 {
     NSMutableArray* data = [[self plotYData] objectForKey:plot.identifier];
 
+    NSUInteger index = index_2 / 2;
+    if (index_2 % 2 == 0) {
+        NSString* mygroup = [[self plotGroup] objectAtIndex:index];
+        NSString* prevgroup = @"";
+        if (index > 0) {
+            prevgroup = [[self plotGroup] objectAtIndex:index - 1];
+        }
+        NSLog(@"%s: %@ --> %@", __PRETTY_FUNCTION__, mygroup, prevgroup);
+        if ([mygroup isEqualToString:prevgroup] == NO) {
+            return Nil;
+        }
+    }
+    
     NSLog(@"%s", __PRETTY_FUNCTION__);
         // Otherwise, plot it data plot
         switch (fieldEnum) {

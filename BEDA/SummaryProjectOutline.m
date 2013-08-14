@@ -149,7 +149,7 @@
     [self.outlineview reloadData];
 }
 
-- (void)addNewDataFile:(NSString*)filename {
+- (NSString*)addNewDataFile:(NSString*)filename {
     id item = [self.outlineview itemAtRow:[self.outlineview selectedRow]];
     SPGroup* group = nil;
     if ([item isKindOfClass:[SPDataFile class]]) {
@@ -158,7 +158,7 @@
         group = item;
     }
     if (group == Nil) {
-        return;
+        return Nil;
     }
     NSLog(@"%s: group = %@", __PRETTY_FUNCTION__, [group name]);
     SPDataFile* df = [[SPDataFile alloc] initWithParent:group];
@@ -166,6 +166,7 @@
     [[group datafiles] addObject:df];
     
     [self.outlineview reloadData];
+    return [group name];
 }
 
 @end

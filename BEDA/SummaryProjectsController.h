@@ -19,6 +19,8 @@
 
 @property (retain) CPTXYGraph* graph;
 @property (retain) NSMutableArray *plotXData;
+@property (retain) NSMutableArray *plotGroup;
+
 // @property (retain) NSMutableArray *plotYData;
 @property (retain) NSMutableDictionary* plotYData;
 @property (retain) NSMutableArray *cptplots;
