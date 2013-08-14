@@ -59,6 +59,7 @@
 		B22980B6176E6F6D004C2115 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22980B5176E6F6D004C2115 /* TableView.xib */; };
 		B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22980B8176E6F7B004C2115 /* TableViewController.m */; };
 		B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */; };
+		B24E2DDA17BA99AC00F8CC3E /* SummaryProjectOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = B24E2DD917BA99AC00F8CC3E /* SummaryProjectOutline.m */; };
 		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
 		B26BF280176182EE009BCC7D /* BedaController.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF27F176182EE009BCC7D /* BedaController.m */; };
 		B26BF28317618336009BCC7D /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF28217618336009BCC7D /* Source.m */; };
@@ -157,6 +158,8 @@
 		B22980B8176E6F7B004C2115 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		B22FF562178BD168008CBFFE /* IntervalPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalPlayerManager.h; sourceTree = "<group>"; };
 		B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalPlayerManager.m; sourceTree = "<group>"; };
+		B24E2DD817BA99AC00F8CC3E /* SummaryProjectOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryProjectOutline.h; sourceTree = "<group>"; };
+		B24E2DD917BA99AC00F8CC3E /* SummaryProjectOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryProjectOutline.m; sourceTree = "<group>"; };
 		B25CBBE716D1DDE100626FA9 /* DataAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAddController.h; sourceTree = "<group>"; };
 		B25CBBE816D1DDE100626FA9 /* DataAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAddController.m; sourceTree = "<group>"; };
 		B26BF27E176182EE009BCC7D /* BedaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BedaController.h; sourceTree = "<group>"; };
@@ -401,6 +404,8 @@
 				038E9D39177E010900ACE963 /* SummaryProjectsController.m */,
 				038E9D3D177E34C900ACE963 /* SummaryProjectsManager.h */,
 				038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */,
+				B24E2DD817BA99AC00F8CC3E /* SummaryProjectOutline.h */,
+				B24E2DD917BA99AC00F8CC3E /* SummaryProjectOutline.m */,
 			);
 			name = Annotation;
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 				B225ED9C1793ACA0002FF5A7 /* ChannelAnnotationManager.m in Sources */,
 				038E9BC81794ED1200606594 /* ChannelAnnotation.m in Sources */,
 				B28D647817A761B90085D8AC /* ChannelAnnotationWindowController.m in Sources */,
+				B24E2DDA17BA99AC00F8CC3E /* SummaryProjectOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

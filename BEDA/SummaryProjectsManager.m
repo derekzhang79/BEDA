@@ -110,6 +110,7 @@
     [[spc plotXData] addObject:projectName];
     [spc reloadGraph];
 
+    [self.spoutline addNewDataFile:projectName];
 }
 
 @end

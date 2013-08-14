@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "SummaryProjectsController.h"
+#import "SummaryProjectOutline.h"
 
 @interface SummaryProjectsManager : NSObject {
     IBOutlet SummaryProjectsController *spc;
 }
+@property (assign) IBOutlet SummaryProjectOutline *spoutline;
 - (IBAction)loadProject:(id)sender;
 @end
