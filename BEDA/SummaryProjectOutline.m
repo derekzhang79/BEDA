@@ -7,6 +7,7 @@
 //
 
 #import "SummaryProjectOutline.h"
+#import "SummaryProjectsManager.h"
 
 @implementation SPGroup
 
@@ -92,6 +93,7 @@
 
 @synthesize groups = _groups;
 @synthesize flattenList = _flattenList;
+@synthesize savedParent;
 
 -(id) init {
     self = [super init];
@@ -101,6 +103,7 @@
         NSLog(@"%s", __PRETTY_FUNCTION__);
         _groups = [[NSMutableArray alloc] init];
         _flattenList = [[NSMutableArray alloc] init];
+        [self setSavedParent:Nil];
 
     }
     return self;
@@ -192,9 +195,62 @@
     [self.outlineview reloadData];
 }
 
+- (IBAction)onLoadFolder:(id)sender {
+    // Show the OpenPanel
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setCanChooseFiles:NO];
+    [panel setCanChooseDirectories:YES];
+    long tvarInt = [panel runModal];
+    
+    // If user cancels it, do NOT proceed
+    if (tvarInt != NSOKButton) {
+        NSLog(@"User cancel the open command");
+        return;
+    }
+    
+    // Get URL and extract the URL
+    
+    NSURL *url = [panel URL];
+    NSLog(@"selected folder = %@", url);
+    NSString* groupname = [[url absoluteString] lastPathComponent];
+    SPGroup* spgroup = [[SPGroup alloc] init];
+    [spgroup setName:groupname];
+    [[self groups] addObject:spgroup];
+    [self.outlineview reloadData];
+    
+    [self setSavedParent:spgroup];
+    [self.outlineview deselectAll:self];
+    
+    // List the content of the directory
+    NSArray *keys = [NSArray arrayWithObjects:
+                     NSURLIsDirectoryKey, NSURLIsPackageKey, NSURLLocalizedNameKey, nil];
+    
+    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager]
+                                         enumeratorAtURL:url
+                                         includingPropertiesForKeys:keys
+                                         options:(NSDirectoryEnumerationSkipsPackageDescendants |
+                                                  NSDirectoryEnumerationSkipsHiddenFiles)
+                                         errorHandler:^(NSURL *url, NSError *error) {
+                                             // Handle the error.
+                                             // Return YES if the enumeration should continue after the error.
+                                             return NO;
+                                         }];
+    
+    for (NSURL *fileurl in enumerator) {
+        NSString* ext = [[fileurl absoluteString] pathExtension];
+        if ([ext isEqualToString:@"xml"] == NO) {
+            continue;
+        }
+        NSLog(@"load enumerated file: %@", fileurl);
+        [[self spmanager] loadFile:fileurl];
+    }
+    
+    [self setSavedParent:Nil];
+}
+
 - (SPDataFile*)addNewDataFile:(NSString*)filename {
     id item = [self.outlineview itemAtRow:[self.outlineview selectedRow]];
-    SPGroup* group = nil;
+    SPGroup* group = [self savedParent];
     if ([item isKindOfClass:[SPDataFile class]]) {
         group = [(SPDataFile*)item parent];
     } else if ([item isKindOfClass:[SPGroup class]]) {

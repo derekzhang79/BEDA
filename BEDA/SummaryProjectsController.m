@@ -179,7 +179,7 @@
     y.minorTicksPerInterval = 0;
     y.minorGridLineStyle = nil;
     y.labelExclusionRanges = [NSArray arrayWithObjects:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(0)], nil];
-    y.title = @"Day View Graph";
+    y.title = @"Percentage of Behaviors";
     y.titleOffset = 45;
 
     graph.axisSet.axes = [NSArray arrayWithObjects:x, y, nil];
@@ -219,6 +219,12 @@
 
     plot.dataLineStyle = lineStyle;
     
+    CPTPlotSymbol *symbol = [CPTPlotSymbol diamondPlotSymbol];
+    symbol.fill = [CPTFill fillWithColor:[self toCPT:color]];
+    
+    symbol.size = CGSizeMake(10.0f, 10.0f);
+    plot.plotSymbol = symbol;
+    
     plot.dataSource = self;
     
     [graph addPlot:plot];
@@ -240,7 +246,7 @@
     graph.legend.numberOfRows    = 1;
     graph.legend.swatchSize      = CGSizeMake(25.0, 25.0);
     graph.legendAnchor           = CPTRectAnchorBottom;
-    graph.legendDisplacement     = CGPointMake(0.0, 12.0);
+    graph.legendDisplacement     = CGPointMake(0.0, 0.0);
 }
 
 -(NSMutableArray*) findYDataWithName:(NSString*)name {

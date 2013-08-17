@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class SummaryProjectsManager;
+
 @interface SPGroup : NSObject
 
 @property (copy) NSString* name;
@@ -34,10 +36,13 @@
 }
 
 @property (assign) IBOutlet NSOutlineView *outlineview;
+@property (assign) IBOutlet SummaryProjectsManager *spmanager;
 @property (retain) NSMutableArray* groups;
 @property (retain) NSMutableArray* flattenList;
+@property (assign) SPGroup* savedParent;
 
 - (IBAction)onNewGroup:(id)sender;
+- (IBAction)onLoadFolder:(id)sender;
 
 - (SPDataFile*)addNewDataFile:(NSString*)filename;
 - (void)updateFlattenList;

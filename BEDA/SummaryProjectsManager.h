@@ -15,4 +15,6 @@
 }
 @property (assign) IBOutlet SummaryProjectOutline *spoutline;
 - (IBAction)loadProject:(id)sender;
+- (void)loadFile:(NSURL*)url;
+
 @end
