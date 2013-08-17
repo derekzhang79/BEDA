@@ -224,6 +224,25 @@
     return color;
 }
 
+- (NSURL*)makeValidURL:(NSURL*)fileurl withProject:(NSURL*)projecturl {
+//    BOOL isDir = NO;
+//    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:[fileurl absoluteString] isDirectory:&isDir];
+    NSError* err;
+    BOOL reachable = [fileurl checkResourceIsReachableAndReturnError:&err];
+    
+    if (reachable) {
+        return fileurl;
+    } else {
+        NSString* path1 = [fileurl absoluteString];
+        NSString* file1 = [path1 lastPathComponent];
+        NSString* path2 = [projecturl absoluteString];
+        NSString* dir2 = [[path2 stringByDeletingLastPathComponent] substringFromIndex:6];
+        NSString* newpath = [NSString stringWithFormat:@"file://%@/%@", dir2, file1];
+        NSURL* newurl = [NSURL URLWithString:newpath];
+        return newurl;
+    }
+}
+
 - (void)loadFile:(NSURL*)url {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
@@ -263,6 +282,7 @@
         }
         NSString* filename = [[child attributeForName:@"filename"] stringValue];
         NSURL* fileurl = [NSURL URLWithString:filename];
+        fileurl = [self makeValidURL:fileurl withProject:url];
         NSString* offsetStr = [[child attributeForName:@"offset"] stringValue];
         double offset = [offsetStr doubleValue];
 
