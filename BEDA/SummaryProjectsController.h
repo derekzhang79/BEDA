@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CorePlot/CorePlot.h>
 
+@class SummaryProjectOutline;
+
 @interface SummaryProjectsController : NSObject<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate> {
     IBOutlet CPTGraphHostingView* graphview;
     CPTXYPlotSpace *plotSpace;
 //    CPTScatterPlot *dataSourceLinePlot;
 }
+@property (assign) IBOutlet SummaryProjectOutline *spoutline;
 
 - (void) reloadGraph;
 

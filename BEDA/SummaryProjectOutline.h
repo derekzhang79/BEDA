@@ -12,6 +12,7 @@
 
 @property (copy) NSString* name;
 @property (retain) NSMutableArray* datafiles;
+- (void)registerToFlattenList:(NSMutableArray*) flattenList;
 
 @end
 
@@ -19,6 +20,12 @@
 
 @property (copy) NSString* filename;
 @property (retain) SPGroup* parent;
+@property (retain) NSMutableDictionary* properties;
+
+- (void)setProperty:(NSString*)name as:(double)value;
+- (BOOL)hasProperty:(NSString*)name;
+- (double)getProperty:(NSString*)name;
+- (void)registerToFlattenList:(NSMutableArray*) flattenList;
 
 @end
 
@@ -28,8 +35,11 @@
 
 @property (assign) IBOutlet NSOutlineView *outlineview;
 @property (retain) NSMutableArray* groups;
+@property (retain) NSMutableArray* flattenList;
+
 - (IBAction)onNewGroup:(id)sender;
 
-- (NSString*)addNewDataFile:(NSString*)filename;
+- (SPDataFile*)addNewDataFile:(NSString*)filename;
+- (void)updateFlattenList;
 
 @end

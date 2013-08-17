@@ -7,6 +7,7 @@
 //
 
 #import "SummaryProjectsController.h"
+#import "SummaryProjectOutline.h"
 
 @implementation SummaryProjectsController
 
@@ -33,20 +34,43 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x = axisSet.xAxis;
     
-    // Use custom x-axis label so it will display product A, B, C... instead of 1, 2, 3, 4
-    NSMutableArray *labels = [[NSMutableArray alloc] initWithCapacity:[plotXData count]];
+
+    NSMutableArray* lst = [[self spoutline] flattenList];
+    NSMutableArray *labels = [[NSMutableArray alloc] initWithCapacity:[lst count]];
     int idx = 0;
-    for (NSString *product in plotXData)
-    {
-        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:product textStyle:x.labelTextStyle];
+
+    for (id object in lst) {
+        NSString* name = @"";
+        if ([object isKindOfClass:[SPGroup class]]) {
+            name = [(SPGroup*)object name];
+        } else if ([object isKindOfClass:[SPDataFile class]]) {
+            name = [(SPDataFile*)object filename];
+        }
+        
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:name textStyle:x.labelTextStyle];
         label.tickLocation = CPTDecimalFromInt(idx);
         label.offset = 5.0f;
         label.rotation = -M_PI / 4;
-
+        
         [labels addObject:label];
         [label release];
         idx++;
     }
+    
+//    // Use custom x-axis label so it will display product A, B, C... instead of 1, 2, 3, 4
+//    NSMutableArray *labels = [[NSMutableArray alloc] initWithCapacity:[plotXData count]];
+//    int idx = 0;
+//    for (NSString *product in plotXData)
+//    {
+//        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:product textStyle:x.labelTextStyle];
+//        label.tickLocation = CPTDecimalFromInt(idx);
+//        label.offset = 5.0f;
+//        label.rotation = -M_PI / 4;
+//
+//        [labels addObject:label];
+//        [label release];
+//        idx++;
+//    }
     x.axisLabels = [NSMutableSet setWithArray:labels];
 
 
@@ -235,35 +259,51 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    NSMutableArray* data = [[self plotYData] objectForKey:plot.identifier];
-    return [data count] * 2;
+//    NSMutableArray* data = [[self plotYData] objectForKey:plot.identifier];
+//    return [data count] * 2;
+    NSMutableArray* lst = [[self spoutline] flattenList];
+    return [lst count];
 }
 
--(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index_2
+-(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
-    NSMutableArray* data = [[self plotYData] objectForKey:plot.identifier];
-
-    NSUInteger index = index_2 / 2;
-    if (index_2 % 2 == 0) {
-        NSString* mygroup = [[self plotGroup] objectAtIndex:index];
-        NSString* prevgroup = @"";
-        if (index > 0) {
-            prevgroup = [[self plotGroup] objectAtIndex:index - 1];
-        }
-        NSLog(@"%s: %@ --> %@", __PRETTY_FUNCTION__, mygroup, prevgroup);
-        if ([mygroup isEqualToString:prevgroup] == NO) {
-            return Nil;
-        }
+    if (fieldEnum == CPTScatterPlotFieldX) {
+        return [NSNumber numberWithInt:(int)index];
     }
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-        // Otherwise, plot it data plot
-        switch (fieldEnum) {
-            case CPTScatterPlotFieldX:
-                return [NSNumber numberWithInt:(int)index];
-            case CPTScatterPlotFieldY:
-                return [data objectAtIndex:index];
-        }
+    id object = [[[self spoutline] flattenList] objectAtIndex:index];
+    if ([object isKindOfClass:[SPGroup class]]) {
+        return Nil;
+    }
+    
+    SPDataFile* df = (SPDataFile*)object;
+    
+    NSString* name = (NSString*)[plot identifier];
+    NSNumber* num = [[df properties] objectForKey:name];
+    return num;
+//    NSMutableArray* data = [[self plotYData] objectForKey:plot.identifier];
+//
+//    NSUInteger index = index_2 / 2;
+//    if (index_2 % 2 == 0) {
+//        NSString* mygroup = [[self plotGroup] objectAtIndex:index];
+//        NSString* prevgroup = @"";
+//        if (index > 0) {
+//            prevgroup = [[self plotGroup] objectAtIndex:index - 1];
+//        }
+//        NSLog(@"%s: %@ --> %@", __PRETTY_FUNCTION__, mygroup, prevgroup);
+//        if ([mygroup isEqualToString:prevgroup] == NO) {
+//            return Nil;
+//        }
+//    }
+//    
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//        // Otherwise, plot it data plot
+//        switch (fieldEnum) {
+//            case CPTScatterPlotFieldX:
+//                return [NSNumber numberWithInt:(int)index];
+//            case CPTScatterPlotFieldY:
+//                return [data objectAtIndex:index];
+//        }
     return nil;
 }
 

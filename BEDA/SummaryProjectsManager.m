@@ -7,6 +7,7 @@
 //
 
 #import "SummaryProjectsManager.h"
+#import "SummaryProjectOutline.h"
 
 @implementation SummaryProjectsManager
 - (void) awakeFromNib {
@@ -71,6 +72,38 @@
     
     NSXMLElement *root = [xmlDoc rootElement];
     NSString* projectName = @"*^^*"; // Some temporary random not-meaningful name
+    // In the first pass, read the project name
+    for (NSXMLElement* child in [root children]) {
+        NSString* name = [child name];
+        if ([name isEqualToString:@"source"] == NO) {
+            continue;
+        }
+        for (NSXMLElement* child2 in [child children]) {
+            NSString* name2 = [child2 name];
+            if ([name2 isEqualToString:@"annotbehavior"] == YES) {
+                for(NSXMLElement* child3 in [child2 children]) {
+                    NSString* name3 = [child3 name];
+                    if ([name3 isEqualToString:@"stat"] == YES){
+                        projectName = [[child3 attributeForName:@"projectName"] stringValue];
+                    }
+                    
+                }
+                
+            }
+        }
+        
+    }
+    NSLog(@"project name = %@", projectName);
+    // At the very end of the function, we add X data (just one for each project)
+    [[spc plotXData] addObject:projectName];
+    SPDataFile* df = [self.spoutline addNewDataFile:projectName];
+    if (df == Nil) {
+        NSLog(@"Warning:: Please select group");
+        return;
+    }
+    
+    [[spc plotGroup] addObject:[[df parent] name]];
+    
     // Read app time
     for (NSXMLElement* child in [root children]) {
         NSString* name = [child name];
@@ -88,7 +121,6 @@
                     NSString* name3 = [child3 name];
                        if ([name3 isEqualToString:@"stat"] == YES){
                            double percentBehIntervals = [[[child3 attributeForName:@"percentBehIntervals"] stringValue] doubleValue];
-                           projectName = [[child3 attributeForName:@"projectName"] stringValue];
                            NSLog(@"percentBehIntervals = %lf%%", percentBehIntervals);
                            
                            // NOTE: this function does NOT add plot if there exists the plot with the same name
@@ -98,6 +130,10 @@
                            [data addObject:[NSNumber numberWithDouble:percentBehIntervals]];
 
                            // [[spc plotYData] addObject:[NSNumber numberWithDouble:percentBehIntervals]];
+                           
+                           // Into the new data structure
+                           [df setProperty:annotBehName as:percentBehIntervals];
+                           
                        }
                                         
                 }
@@ -106,10 +142,7 @@
         }
         
     }
-    // At the very end of the function, we add X data (just one for each project)
-    [[spc plotXData] addObject:projectName];
-    NSString* group = [self.spoutline addNewDataFile:projectName];
-    [[spc plotGroup] addObject:group];
+
 
     [spc reloadGraph];
 
