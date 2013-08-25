@@ -42,6 +42,12 @@
     
     // Get URL and extract the URL
     NSURL *url = [panel URL];
+    [self openProjectAtURL:url];
+
+}
+
+- (void)openProjectAtURL:(NSURL*)url {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSString *ext = [[url path] pathExtension];
     NSLog(@"url = %@ [ext = %@]", url, ext);
     [self loadFile:url];
@@ -50,8 +56,8 @@
     NSLog(@"# projects = %d", [[self beda ]numProjects]);
     
     [[self beda] openGraphController:Nil];
-
 }
+
 
 - (IBAction)saveProject:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);

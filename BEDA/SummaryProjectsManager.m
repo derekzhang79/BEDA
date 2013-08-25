@@ -96,7 +96,7 @@
     NSLog(@"project name = %@", projectName);
     // At the very end of the function, we add X data (just one for each project)
     [[spc plotXData] addObject:projectName];
-    SPDataFile* df = [self.spoutline addNewDataFile:projectName];
+    SPDataFile* df = [self.spoutline addNewDataFile:projectName atURL:url];
     if (df == Nil) {
         NSLog(@"Warning:: Please select group");
         return;

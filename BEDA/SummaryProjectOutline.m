@@ -8,6 +8,8 @@
 
 #import "SummaryProjectOutline.h"
 #import "SummaryProjectsManager.h"
+#import "BedaController.h"
+#import "ProjectManager.h"
 
 @implementation SPGroup
 
@@ -44,6 +46,7 @@
 @implementation SPDataFile
 
 @synthesize filename;
+@synthesize fileurl;
 @synthesize parent;
 @synthesize properties = _properties;
 
@@ -248,7 +251,23 @@
     [self setSavedParent:Nil];
 }
 
-- (SPDataFile*)addNewDataFile:(NSString*)filename {
+- (IBAction)onImportProjectToMain:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    id item = [self.outlineview itemAtRow:[self.outlineview selectedRow]];
+    if ([item isKindOfClass:[SPDataFile class]] == NO) {
+        NSLog(@"selected item is not a project xml file");
+        return;
+    }
+    SPDataFile* df = (SPDataFile*)item;
+    NSLog(@"project url = %@", [df fileurl]);
+    
+    BedaController* beda = [BedaController getInstance];
+    ProjectManager* pm = [beda projectManager];
+    [pm openProjectAtURL:[df fileurl]];
+
+}
+
+- (SPDataFile*)addNewDataFile:(NSString*)filename atURL:(NSURL*)fileurl {
     id item = [self.outlineview itemAtRow:[self.outlineview selectedRow]];
     SPGroup* group = [self savedParent];
     if ([item isKindOfClass:[SPDataFile class]]) {
@@ -262,6 +281,7 @@
     NSLog(@"%s: group = %@", __PRETTY_FUNCTION__, [group name]);
     SPDataFile* df = [[SPDataFile alloc] initWithParent:group];
     [df setFilename:filename];
+    [df setFileurl:fileurl];
     [[group datafiles] addObject:df];
     [self updateFlattenList];
     [self.outlineview reloadData];

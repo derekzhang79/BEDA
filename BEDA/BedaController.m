@@ -13,6 +13,7 @@
 #import "ChannelMovie.h"
 #import "SourceTimeData.h"
 #import "ChannelTimeData.h"
+#import "ProjectManager.h"
 
 
 float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
@@ -36,6 +37,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize dataWindowController;
 @synthesize summaryProjectsController;
 @synthesize intervalPlayerManager;
+@synthesize projectManager;
 @synthesize playTimer;
 @synthesize intervalPlayerView;
 @synthesize window;

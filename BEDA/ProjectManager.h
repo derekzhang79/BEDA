@@ -18,6 +18,7 @@
 
 
 - (IBAction)openProject:(id)sender;
+- (void)openProjectAtURL:(NSURL*)url;
 - (IBAction)saveProject:(id)sender;
 
 - (void)saveFile:(NSURL*)url;

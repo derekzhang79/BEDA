@@ -13,6 +13,8 @@
 #import "SummaryProjectsController.h"
 #import "IntervalPlayerManager.h"
 
+@class ProjectManager;
+
 #define BEDA_MODE_PLAY 0
 #define BEDA_MODE_FASTPLAY 1
 #define BEDA_MODE_STOP 2
@@ -68,6 +70,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 
 @property (retain) IBOutlet IntervalPlayerManager* intervalPlayerManager;
+@property (assign) IBOutlet ProjectManager *projectManager;
 
 @property BOOL isNavMode;
 @property int numProjects;

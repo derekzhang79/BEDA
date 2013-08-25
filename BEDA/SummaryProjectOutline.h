@@ -21,6 +21,7 @@
 @interface SPDataFile : NSObject
 
 @property (copy) NSString* filename;
+@property (copy) NSURL* fileurl;
 @property (retain) SPGroup* parent;
 @property (retain) NSMutableDictionary* properties;
 
@@ -43,8 +44,9 @@
 
 - (IBAction)onNewGroup:(id)sender;
 - (IBAction)onLoadFolder:(id)sender;
+- (IBAction)onImportProjectToMain:(id)sender;
 
-- (SPDataFile*)addNewDataFile:(NSString*)filename;
+- (SPDataFile*)addNewDataFile:(NSString*)filename atURL:(NSURL*)fileurl;
 - (void)updateFlattenList;
 
 @end
