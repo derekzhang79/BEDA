@@ -18,8 +18,8 @@
 
     CPTXYGraph* graph;
     
-    CPTScatterPlot* pctpeaks;
-    CPTBarPlot* auc;
+    CPTBarPlot* plotpeaks;
+    CPTBarPlot* plotauc;
 }
 
 @property (retain) NSMutableArray* xlabels;

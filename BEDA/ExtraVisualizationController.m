@@ -147,44 +147,68 @@
     barLineStyle.lineWidth = 1.0;
     barLineStyle.lineColor = [CPTColor whiteColor];
     
-    // Create first bar plot
-    CPTBarPlot *barPlot = [[[CPTBarPlot alloc] init] autorelease];
-    barPlot.lineStyle       = barLineStyle;
-    barPlot.fill            = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:1.0f green:0.0f blue:0.5f alpha:0.5f]];
-    barPlot.barBasesVary    = YES;
-    barPlot.barWidth        = CPTDecimalFromFloat(0.5f); // bar is 50% of the available space
-    barPlot.barCornerRadius = 10.0f;
+    {
+        // Create first bar plot
+        CPTBarPlot *barPlot = [[[CPTBarPlot alloc] init] autorelease];
+        barPlot.lineStyle       = barLineStyle;
+        barPlot.fill            = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:1.0f green:0.0f blue:0.5f alpha:0.5f]];
+        barPlot.barBasesVary    = YES;
+        barPlot.barWidth        = CPTDecimalFromFloat(0.4f); // bar is 50% of the available space
+        barPlot.barCornerRadius = 10.0f;
 #if HORIZONTAL
-    barPlot.barsAreHorizontal = YES;
+        barPlot.barsAreHorizontal = YES;
 #else
-    barPlot.barsAreHorizontal = NO;
+        barPlot.barsAreHorizontal = NO;
 #endif
+        
+        //    CPTMutableTextStyle *whiteTextStyle = [CPTMutableTextStyle textStyle];
+        //    whiteTextStyle.color   = [CPTColor whiteColor];
+        //    barPlot.labelTextStyle = whiteTextStyle;
+        
+        barPlot.delegate   = self;
+        barPlot.dataSource = self;
+        barPlot.identifier = @"peaks";
+        plotpeaks = barPlot;
+        
+        [graph addPlot:barPlot toPlotSpace:plotSpace];
+    }
     
-//    CPTMutableTextStyle *whiteTextStyle = [CPTMutableTextStyle textStyle];
-//    whiteTextStyle.color   = [CPTColor whiteColor];
-//    barPlot.labelTextStyle = whiteTextStyle;
     
-    barPlot.delegate   = self;
-    barPlot.dataSource = self;
-    barPlot.identifier = @"Bar Plot 1";
+    {
+        // Create first bar plot
+        CPTBarPlot *barPlot = [[[CPTBarPlot alloc] init] autorelease];
+        barPlot.lineStyle       = barLineStyle;
+        barPlot.fill            = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0.0f green:1.0f blue:0.0f alpha:0.5f]];
+        barPlot.barBasesVary    = YES;
+        barPlot.barWidth        = CPTDecimalFromFloat(0.7f); // bar is 50% of the available space
+        barPlot.barCornerRadius = 10.0f;
+    #if HORIZONTAL
+        barPlot.barsAreHorizontal = YES;
+    #else
+        barPlot.barsAreHorizontal = NO;
+    #endif
+        
+        //    CPTMutableTextStyle *whiteTextStyle = [CPTMutableTextStyle textStyle];
+        //    whiteTextStyle.color   = [CPTColor whiteColor];
+        //    barPlot.labelTextStyle = whiteTextStyle;
+        
+        barPlot.delegate   = self;
+        barPlot.dataSource = self;
+        barPlot.identifier = @"auc";
+        plotauc = barPlot;
+
+        [graph addPlot:barPlot toPlotSpace:plotSpace];
+    }
     
-    [graph addPlot:barPlot toPlotSpace:plotSpace];
-    
-    
-    // Add Scatter Plot
-    // Create a plot that uses the data source method
-    CPTScatterPlot* linePlot = [[[CPTScatterPlot alloc] init] autorelease];
-    linePlot.identifier = @"lineplot";
-    
-    // Actual graph line & fill
-    CPTMutableLineStyle *lineStyle = [[linePlot.dataLineStyle mutableCopy] autorelease];
-    lineStyle.lineWidth              = 2.f;
-    lineStyle.lineColor              = [CPTColor greenColor];
-    
-    linePlot.dataLineStyle = lineStyle;
-    linePlot.dataSource = self;
-    
-    [graph addPlot:linePlot toPlotSpace:plotSpace];
+    // Add legend
+    graph.legend                 = [CPTLegend legendWithPlots:[NSArray arrayWithObjects:plotauc, plotpeaks, nil]];
+    graph.legend.textStyle       = x.titleTextStyle;
+    graph.legend.borderLineStyle = x.axisLineStyle;
+    graph.legend.cornerRadius    = 5.0;
+    graph.legend.numberOfRows    = 1;
+    graph.legend.swatchSize      = CGSizeMake(25.0, 25.0);
+    graph.legendAnchor           = CPTRectAnchorBottom;
+    graph.legendDisplacement     = CGPointMake(0.0, 0.0);
     
     // set as hosted graph
     graphview.hostedGraph = graph;
@@ -206,14 +230,15 @@
     if (fieldEnum == CPTBarPlotFieldBarBase) {
         num = [NSDecimalNumber numberWithInt:0];
     } else if (fieldEnum == CPTBarPlotFieldBarTip){
-        num = [[self ypeaks] objectAtIndex:index];
+        if ( [plot.identifier isEqual:@"auc"] ) {
+            num = [[self yauc] objectAtIndex:index];
+        } else {
+            num = [[self ypeaks] objectAtIndex:index];
+        }
     } else if (fieldEnum == CPTBarPlotFieldBarLocation){
         num = [NSDecimalNumber numberWithInt:(int)index];
-    } else if (fieldEnum == CPTScatterPlotFieldX) {
-        return [NSNumber numberWithInt:(int)index];
-    } else if (fieldEnum == CPTScatterPlotFieldY) {
-        num = [[self yauc] objectAtIndex:index];
     }
+    
     return num;
 }
 
