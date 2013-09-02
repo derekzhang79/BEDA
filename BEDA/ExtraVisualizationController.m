@@ -180,7 +180,7 @@
         barPlot.lineStyle       = barLineStyle;
         barPlot.fill            = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0.0f green:1.0f blue:0.0f alpha:0.5f]];
         barPlot.barBasesVary    = YES;
-        barPlot.barWidth        = CPTDecimalFromFloat(0.7f); // bar is 50% of the available space
+        barPlot.barWidth        = CPTDecimalFromFloat(0.4f); // bar is 50% of the available space
         barPlot.barCornerRadius = 10.0f;
     #if HORIZONTAL
         barPlot.barsAreHorizontal = YES;
@@ -236,8 +236,11 @@
             num = [[self ypeaks] objectAtIndex:index];
         }
     } else if (fieldEnum == CPTBarPlotFieldBarLocation){
-        num = [NSDecimalNumber numberWithInt:(int)index];
-    }
+        if ( [plot.identifier isEqual:@"auc"] ) {
+            num = [NSDecimalNumber numberWithDouble:(double)index - 0.21];
+        } else {
+            num = [NSDecimalNumber numberWithDouble:(double)index + 0.21];
+        }    }
     
     return num;
 }
