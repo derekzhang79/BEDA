@@ -77,6 +77,7 @@
 		B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B7E9CB176AA4A900190941 /* GraphWindowController.m */; };
 		B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */; };
 		B2E3F3EE17828BD900428531 /* peak.R in Resources */ = {isa = PBXBuildFile; fileRef = B2E3F3ED17828BA100428531 /* peak.R */; };
+		B2E9327D17D43DE500E122EF /* ExtraVisualizationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E9327C17D43DE500E122EF /* ExtraVisualizationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +193,8 @@
 		B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelSelector.h; sourceTree = "<group>"; };
 		B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelSelector.m; sourceTree = "<group>"; };
 		B2E3F3ED17828BA100428531 /* peak.R */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = peak.R; sourceTree = "<group>"; };
+		B2E9327B17D43DE500E122EF /* ExtraVisualizationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraVisualizationController.h; sourceTree = "<group>"; };
+		B2E9327C17D43DE500E122EF /* ExtraVisualizationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraVisualizationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,6 +409,8 @@
 				038E9D3E177E34C900ACE963 /* SummaryProjectsManager.m */,
 				B24E2DD817BA99AC00F8CC3E /* SummaryProjectOutline.h */,
 				B24E2DD917BA99AC00F8CC3E /* SummaryProjectOutline.m */,
+				B2E9327B17D43DE500E122EF /* ExtraVisualizationController.h */,
+				B2E9327C17D43DE500E122EF /* ExtraVisualizationController.m */,
 			);
 			name = Annotation;
 			sourceTree = "<group>";
@@ -574,6 +579,7 @@
 				038E9BC81794ED1200606594 /* ChannelAnnotation.m in Sources */,
 				B28D647817A761B90085D8AC /* ChannelAnnotationWindowController.m in Sources */,
 				B24E2DDA17BA99AC00F8CC3E /* SummaryProjectOutline.m in Sources */,
+				B2E9327D17D43DE500E122EF /* ExtraVisualizationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
