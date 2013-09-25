@@ -222,6 +222,8 @@
     
     NSError *err=nil;
     
+    [[NSFileManager defaultManager] removeItemAtPath:dst error:nil];
+    
     [[NSFileManager defaultManager] copyItemAtPath:src toPath:dst error:&err];
     if (err) {
         NSLog(@"Error: %@", err);
