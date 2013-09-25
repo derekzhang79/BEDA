@@ -109,6 +109,12 @@
         if ([scriptname isEqualToString:@"peak.R"]) {
             [self copyResultResultImages:chIndex];
         }
+        if ([scriptname isEqualToString:@"allpeaks.m"]) {
+            [self copyResultDetails:chIndex as:@"allpeaks"];
+        }
+        if ([scriptname isEqualToString:@"tonic_auc.m"]) {
+            [self copyResultDetails:chIndex as:@"tonic_auc"];
+        }
     }
     [[self results] setObject:currentResult forKey:scriptname];
 
@@ -154,21 +160,38 @@
 - (void)runScript:(NSString*)scriptname {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
+    NSString* stem = [scriptname substringToIndex:[scriptname length] - 2];
+    NSLog(@"script stem = ", stem);
+    
     NSMutableString* filename =  [[NSMutableString alloc] init];
     [filename appendString:[[NSBundle mainBundle] resourcePath]];
     [filename appendString:@"/"];
     [filename appendString:scriptname];
     
     NSLog(@"filename = %@", filename);
+    
+    if ([[scriptname pathExtension] isEqualToString:@"R"]) {
+        NSArray *args = [NSArray arrayWithObjects: @"CMD", @"BATCH", filename, nil];
+        
+        NSTask* task = [[NSTask alloc] init];
+        [task setLaunchPath:@"/usr/bin/R"];
+        [task setCurrentDirectoryPath:[[NSBundle mainBundle] resourcePath]];
+        [task setArguments:args];
+        [task launch];
+        [task waitUntilExit];
+    } else {
+        NSArray *args = [NSArray arrayWithObjects: @"-nodesktop", @"-nosplash", @"-r", stem, nil];
+        
+        NSTask* task = [[NSTask alloc] init];
+        [task setLaunchPath:@"/usr/bin/matlab"];
+        [task setCurrentDirectoryPath:[[NSBundle mainBundle] resourcePath]];
+        [task setArguments:args];
+        [task launch];
+        [task waitUntilExit];
+        
+    }
 
-    NSArray *args = [NSArray arrayWithObjects: @"CMD", @"BATCH", filename, nil];
 
-    NSTask* task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/usr/bin/R"];
-    [task setCurrentDirectoryPath:[[NSBundle mainBundle] resourcePath]];
-    [task setArguments:args];
-    [task launch];
-    [task waitUntilExit];
     
     NSLog(@"%s: OK", __PRETTY_FUNCTION__);
 }
@@ -183,6 +206,27 @@
 
     NSString* output = [NSString stringWithContentsOfFile:filename encoding:NSStringEncodingConversionAllowLossy error:Nil];
     return output;
+}
+
+- (void) copyResultDetails : (int)index as:(NSString*)name {
+    NSMutableString* src =  [[NSMutableString alloc] init];
+    [src appendString:[[NSBundle mainBundle] resourcePath]];
+    [src appendString:@"/output2.csv"];
+    
+    NSMutableString* dst = [[NSMutableString alloc] init];
+    [dst appendString:NSHomeDirectory()];
+    [dst appendString:[NSString stringWithFormat:@"/Documents/beda_%@_%02d.csv", name, index]];
+    
+    NSLog(@"src = %@", src);
+    NSLog(@"dst = %@", dst);
+    
+    NSError *err=nil;
+    
+    [[NSFileManager defaultManager] copyItemAtPath:src toPath:dst error:&err];
+    if (err) {
+        NSLog(@"Error: %@", err);
+        
+    }
 }
 
 - (void) copyResultResultImages : (int)index {
