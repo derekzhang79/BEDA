@@ -75,6 +75,8 @@
 		B28D647817A761B90085D8AC /* ChannelAnnotationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D647717A761B90085D8AC /* ChannelAnnotationWindowController.m */; };
 		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
 		B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B7E9CB176AA4A900190941 /* GraphWindowController.m */; };
+		B2CC42B917F3C706005F41D6 /* exp_smooth.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CC42B817F3C706005F41D6 /* exp_smooth.m */; };
+		B2CC42BA17F3C71F005F41D6 /* exp_smooth.m in Resources */ = {isa = PBXBuildFile; fileRef = B2CC42B817F3C706005F41D6 /* exp_smooth.m */; };
 		B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */; };
 		B2E3F3EE17828BD900428531 /* peak.R in Resources */ = {isa = PBXBuildFile; fileRef = B2E3F3ED17828BA100428531 /* peak.R */; };
 		B2E9327D17D43DE500E122EF /* ExtraVisualizationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E9327C17D43DE500E122EF /* ExtraVisualizationController.m */; };
@@ -196,6 +198,7 @@
 		B299F6BB176AE8E6004BCD35 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 		B2B7E9CA176AA4A900190941 /* GraphWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphWindowController.h; sourceTree = "<group>"; };
 		B2B7E9CB176AA4A900190941 /* GraphWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphWindowController.m; sourceTree = "<group>"; };
+		B2CC42B817F3C706005F41D6 /* exp_smooth.m */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = exp_smooth.m; sourceTree = "<group>"; };
 		B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelSelector.h; sourceTree = "<group>"; };
 		B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelSelector.m; sourceTree = "<group>"; };
 		B2E3F3ED17828BA100428531 /* peak.R */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = peak.R; sourceTree = "<group>"; };
@@ -316,6 +319,7 @@
 		038E9D2F177A9C4D00ACE963 /* Script */ = {
 			isa = PBXGroup;
 			children = (
+				B2CC42B817F3C706005F41D6 /* exp_smooth.m */,
 				B2ED105917F3782100AEC7F8 /* allpeaks.m */,
 				B2ED105F17F38E0F00AEC7F8 /* getFeatures1Dcont.m */,
 				B2ED105C17F38C4800AEC7F8 /* tonic_auc.m */,
@@ -514,6 +518,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2CC42BA17F3C71F005F41D6 /* exp_smooth.m in Resources */,
 				B2ED106117F38E2400AEC7F8 /* getFeatures1Dcont.m in Resources */,
 				B2ED105B17F3783F00AEC7F8 /* allpeaks.m in Resources */,
 				036723CB16D181D9004F14D6 /* InfoPlist.strings in Resources */,
@@ -598,6 +603,7 @@
 				B2ED105A17F3782100AEC7F8 /* allpeaks.m in Sources */,
 				B2ED105D17F38C6A00AEC7F8 /* tonic_auc.m in Sources */,
 				B2ED106017F38E0F00AEC7F8 /* getFeatures1Dcont.m in Sources */,
+				B2CC42B917F3C706005F41D6 /* exp_smooth.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

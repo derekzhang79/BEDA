@@ -1,5 +1,6 @@
 %% Analysis on peaks - xcode
 data = csvread('input.csv');
+data = exp_smooth(data, 0.01)
 [y1, x1] = findpeaks(data, 'MINPEAKDISTANCE', 400, 'MINPEAKHEIGHT', 0.5);
 csvwrite('output.csv', length(x1)  );
 [m,n] = size(x1);

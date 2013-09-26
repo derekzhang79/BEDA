@@ -1,5 +1,6 @@
 %% tonic_auc.m
 data = csvread('input.csv');
+data = exp_smooth(data, 0.01)
 
 rate = 32;
 window_len = 60 * rate; % a number of data per window
