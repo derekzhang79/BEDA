@@ -8,5 +8,5 @@ if m == 1
   x1 = x1';
 end
 [x1/32, x1, y1]
-csvwrite('output2.csv', [x1/32, x1, y1])
+csvwrite('output2.csv', [(x1/32)/(1440*60), x1/32, x1, y1])
 exit();

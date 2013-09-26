@@ -28,5 +28,5 @@ end
 
 output = sum_output / num_output
 csvwrite('output.csv', output);
-csvwrite('output2.csv', [x1/32, x1, y1])
+csvwrite('output2.csv', [(x1/32)/(1440*60), x1/32, x1, y1])
 exit();
