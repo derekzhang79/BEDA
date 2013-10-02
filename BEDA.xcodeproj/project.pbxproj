@@ -26,6 +26,8 @@
 		036723DF16D18265004F14D6 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723DE16D18265004F14D6 /* DataManager.m */; };
 		036723E116D18445004F14D6 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723E016D18445004F14D6 /* QTKit.framework */; };
 		0379841A176A8994000CFBEE /* GraphController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03798419176A8994000CFBEE /* GraphController.xib */; };
+		037E76F717FCA1120045223C /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037E76F417FCA0E60045223C /* CorePlot.framework */; };
+		037E76FB17FCA1F10045223C /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 037E76F417FCA0E60045223C /* CorePlot.framework */; };
 		038A62D416FD4CCB00E91A65 /* annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D216FD4CCB00E91A65 /* annotation.png */; };
 		038A62D516FD4CCB00E91A65 /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D316FD4CCB00E91A65 /* sync.png */; };
 		038E9BC51794E5FC00606594 /* ChannelAnnotationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */; };
@@ -70,7 +72,6 @@
 		B27C396B17715FB30025188F /* Behavior.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396A17715FB30025188F /* Behavior.m */; };
 		B27C396E17715FC50025188F /* BehaviorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B27C396D17715FC50025188F /* BehaviorManager.m */; };
 		B28CD6D6178E62D100BC7719 /* ViewRangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28CD6D5178E62D100BC7719 /* ViewRangeController.m */; };
-		B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D32D616D206E000D58ADA /* CorePlot.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B28D32DB16D20DB500D58ADA /* EDAGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */; };
 		B28D647817A761B90085D8AC /* ChannelAnnotationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D647717A761B90085D8AC /* ChannelAnnotationWindowController.m */; };
 		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
@@ -87,6 +88,43 @@
 		B2ED106117F38E2400AEC7F8 /* getFeatures1Dcont.m in Resources */ = {isa = PBXBuildFile; fileRef = B2ED105F17F38E0F00AEC7F8 /* getFeatures1Dcont.m */; };
 		B2ED106217F38E7700AEC7F8 /* tonic_auc.m in Resources */ = {isa = PBXBuildFile; fileRef = B2ED105C17F38C4800AEC7F8 /* tonic_auc.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		037E76F317FCA0E60045223C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 037E76ED17FCA0E60045223C /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = CorePlot;
+		};
+		037E76F517FCA0E60045223C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 037E76ED17FCA0E60045223C /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0730F600109492D800E95162;
+			remoteInfo = UnitTests;
+		};
+		037E76F817FCA11E0045223C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 037E76ED17FCA0E60045223C /* CorePlot.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = CorePlot;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		037E76FA17FCA1E80045223C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				037E76FB17FCA1F10045223C /* CorePlot.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		031463791762F675007B075B /* ChannelTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTimeData.h; sourceTree = "<group>"; };
@@ -120,6 +158,7 @@
 		036723DE16D18265004F14D6 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		036723E016D18445004F14D6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		03798419176A8994000CFBEE /* GraphController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphController.xib; sourceTree = "<group>"; };
+		037E76ED17FCA0E60045223C /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = CorePlot_1.2/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
 		038A62D216FD4CCB00E91A65 /* annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotation.png; sourceTree = "<group>"; };
 		038A62D316FD4CCB00E91A65 /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
 		038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelAnnotationWindow.xib; sourceTree = "<group>"; };
@@ -189,7 +228,6 @@
 		B27C396D17715FC50025188F /* BehaviorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BehaviorManager.m; sourceTree = "<group>"; };
 		B28CD6D4178E62D100BC7719 /* ViewRangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewRangeController.h; sourceTree = "<group>"; };
 		B28CD6D5178E62D100BC7719 /* ViewRangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewRangeController.m; sourceTree = "<group>"; };
-		B28D32D616D206E000D58ADA /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = SOURCE_ROOT; };
 		B28D32D916D20DB500D58ADA /* EDAGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAGraphViewController.h; sourceTree = "<group>"; };
 		B28D32DA16D20DB500D58ADA /* EDAGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAGraphViewController.m; sourceTree = "<group>"; };
 		B28D647617A761B90085D8AC /* ChannelAnnotationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelAnnotationWindowController.h; sourceTree = "<group>"; };
@@ -214,9 +252,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				037E76F717FCA1120045223C /* CorePlot.framework in Frameworks */,
 				036723E116D18445004F14D6 /* QTKit.framework in Frameworks */,
 				036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */,
-				B28D32D716D206E000D58ADA /* CorePlot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +287,7 @@
 		036723B416D181D8004F14D6 = {
 			isa = PBXGroup;
 			children = (
+				037E76ED17FCA0E60045223C /* CorePlot.xcodeproj */,
 				036723C616D181D9004F14D6 /* BEDA */,
 				036723BF16D181D9004F14D6 /* Frameworks */,
 				036723BE16D181D9004F14D6 /* Products */,
@@ -266,7 +305,6 @@
 		036723BF16D181D9004F14D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B28D32D616D206E000D58ADA /* CorePlot.framework */,
 				036723C016D181D9004F14D6 /* Cocoa.framework */,
 				036723E016D18445004F14D6 /* QTKit.framework */,
 				036723C216D181D9004F14D6 /* Other Frameworks */,
@@ -314,6 +352,15 @@
 				036723CF16D181D9004F14D6 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		037E76EE17FCA0E60045223C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				037E76F417FCA0E60045223C /* CorePlot.framework */,
+				037E76F617FCA0E60045223C /* UnitTests.octest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		038E9D2F177A9C4D00ACE963 /* Script */ = {
@@ -477,10 +524,12 @@
 				036723B916D181D8004F14D6 /* Sources */,
 				036723BA16D181D8004F14D6 /* Frameworks */,
 				036723BB16D181D8004F14D6 /* Resources */,
+				037E76FA17FCA1E80045223C /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				037E76F917FCA11E0045223C /* PBXTargetDependency */,
 			);
 			name = BEDA;
 			productName = BEDA;
@@ -506,12 +555,35 @@
 			mainGroup = 036723B416D181D8004F14D6;
 			productRefGroup = 036723BE16D181D9004F14D6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 037E76EE17FCA0E60045223C /* Products */;
+					ProjectRef = 037E76ED17FCA0E60045223C /* CorePlot.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				036723BC16D181D8004F14D6 /* BEDA */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		037E76F417FCA0E60045223C /* CorePlot.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CorePlot.framework;
+			remoteRef = 037E76F317FCA0E60045223C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		037E76F617FCA0E60045223C /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = 037E76F517FCA0E60045223C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		036723BB16D181D8004F14D6 /* Resources */ = {
@@ -608,6 +680,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		037E76F917FCA11E0045223C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CorePlot;
+			targetProxy = 037E76F817FCA11E0045223C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		036723C916D181D9004F14D6 /* InfoPlist.strings */ = {
