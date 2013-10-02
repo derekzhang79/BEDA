@@ -163,7 +163,8 @@
 
 - (void) createOffsetOverlay {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-
+    return;
+    
     if ([self offsetOverlay] != Nil) {
         return;
     }

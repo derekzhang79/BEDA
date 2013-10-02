@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C3103</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">3084</string>
@@ -211,13 +211,13 @@
 											</object>
 											<object class="NSTableColumn" id="138284214">
 												<string key="NSIdentifier">Behavior Kind</string>
-												<double key="NSWidth">433</double>
+												<double key="NSWidth">439</double>
 												<double key="NSMinWidth">10</double>
 												<double key="NSMaxWidth">3.4028234663852886e+38</double>
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75497536</int>
 													<int key="NSCellFlags2">2048</int>
-													<string key="NSContents">Kinds of Behaviors</string>
+													<string key="NSContents">Name </string>
 													<reference key="NSSupport" ref="26"/>
 													<object class="NSColor" key="NSBackgroundColor">
 														<int key="NSColorSpace">6</int>
@@ -403,7 +403,7 @@
 								<object class="NSTextField" id="1044075765">
 									<reference key="NSNextResponder" ref="1046432081"/>
 									<int key="NSvFlags">266</int>
-									<string key="NSFrameSize">{439, 17}</string>
+									<string key="NSFrameSize">{445, 17}</string>
 									<reference key="NSSuperview" ref="1046432081"/>
 									<reference key="NSNextKeyView" ref="689758492"/>
 									<string key="NSAntiCompressionPriority">{250, 750}</string>
@@ -425,7 +425,7 @@
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								</object>
 							</array>
-							<string key="NSFrame">{{140, 1}, {433, 17}}</string>
+							<string key="NSFrame">{{140, 1}, {439, 17}}</string>
 							<reference key="NSNextKeyView" ref="1044075765"/>
 						</object>
 						<reference key="destination" ref="1044075765"/>
@@ -832,7 +832,7 @@
 						<reference key="object" ref="1044075765"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="734423868"/>
-							<object class="IBNSLayoutConstraint" id="107499765">
+							<object class="IBNSLayoutConstraint" id="14763159">
 								<reference key="firstItem" ref="1044075765"/>
 								<int key="firstAttribute">7</int>
 								<int key="relation">0</int>
@@ -840,7 +840,7 @@
 								<int key="secondAttribute">0</int>
 								<float key="multiplier">1</float>
 								<object class="IBLayoutConstant" key="constant">
-									<double key="value">433</double>
+									<double key="value">439</double>
 								</object>
 								<float key="priority">1000</float>
 								<reference key="containingView" ref="1044075765"/>
@@ -1020,8 +1020,8 @@
 						<reference key="parent" ref="11214080"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">448</int>
-						<reference key="object" ref="107499765"/>
+						<int key="objectID">449</int>
+						<reference key="object" ref="14763159"/>
 						<reference key="parent" ref="1044075765"/>
 					</object>
 				</array>
@@ -1074,7 +1074,7 @@
 				<string key="372.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="372.userInterfaceItemIdentifier">Behavior Kind</string>
 				<array class="NSMutableArray" key="373.IBNSViewMetadataConstraints">
-					<reference ref="107499765"/>
+					<reference ref="14763159"/>
 				</array>
 				<boolean value="NO" key="373.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="373.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1104,7 +1104,7 @@
 				<string key="432.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="436.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="437.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="448.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="449.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="7.isInViewBasedMode"/>
@@ -1128,7 +1128,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">448</int>
+			<int key="maxID">449</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

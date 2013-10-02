@@ -104,7 +104,7 @@
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x = axisSet.xAxis;
 
-    x.labelingPolicy     =  CPTAxisLabelingPolicyFixedInterval;
+    x.labelingPolicy     =  CPTAxisLabelingPolicyAutomatic;
     x.preferredNumberOfMajorTicks = 12;
     x.majorGridLineStyle = majorGridLineStyle;
     x.minorGridLineStyle = minorGridLineStyle;
