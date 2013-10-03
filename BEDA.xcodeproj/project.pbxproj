@@ -28,6 +28,13 @@
 		0379841A176A8994000CFBEE /* GraphController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03798419176A8994000CFBEE /* GraphController.xib */; };
 		037E76F717FCA1120045223C /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037E76F417FCA0E60045223C /* CorePlot.framework */; };
 		037E76FB17FCA1F10045223C /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 037E76F417FCA0E60045223C /* CorePlot.framework */; };
+		037E76FE17FD291F0045223C /* analysis.png in Resources */ = {isa = PBXBuildFile; fileRef = 037E76FC17FD291F0045223C /* analysis.png */; };
+		037E76FF17FD291F0045223C /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = 037E76FD17FD291F0045223C /* video.png */; };
+		037E770217FD29A30045223C /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 037E770017FD29A30045223C /* lock.png */; };
+		037E770317FD29A30045223C /* unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 037E770117FD29A30045223C /* unlock.png */; };
+		037E770517FD2AC30045223C /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 037E770417FD2AC30045223C /* playbutton.png */; };
+		037E771F17FD36940045223C /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037E771E17FD36940045223C /* BWToolkitFramework.framework */; };
+		037E772117FD37250045223C /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 037E772017FD37250045223C /* BWToolkitFramework.framework */; };
 		038A62D416FD4CCB00E91A65 /* annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D216FD4CCB00E91A65 /* annotation.png */; };
 		038A62D516FD4CCB00E91A65 /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 038A62D316FD4CCB00E91A65 /* sync.png */; };
 		038E9BC51794E5FC00606594 /* ChannelAnnotationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */; };
@@ -120,6 +127,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				037E772117FD37250045223C /* BWToolkitFramework.framework in CopyFiles */,
 				037E76FB17FCA1F10045223C /* CorePlot.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +167,13 @@
 		036723E016D18445004F14D6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		03798419176A8994000CFBEE /* GraphController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphController.xib; sourceTree = "<group>"; };
 		037E76ED17FCA0E60045223C /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = CorePlot_1.2/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
+		037E76FC17FD291F0045223C /* analysis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analysis.png; sourceTree = "<group>"; };
+		037E76FD17FD291F0045223C /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
+		037E770017FD29A30045223C /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		037E770117FD29A30045223C /* unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlock.png; sourceTree = "<group>"; };
+		037E770417FD2AC30045223C /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
+		037E771E17FD36940045223C /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
+		037E772017FD37250045223C /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
 		038A62D216FD4CCB00E91A65 /* annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotation.png; sourceTree = "<group>"; };
 		038A62D316FD4CCB00E91A65 /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
 		038E9BC41794E5FC00606594 /* ChannelAnnotationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelAnnotationWindow.xib; sourceTree = "<group>"; };
@@ -255,6 +270,7 @@
 				037E76F717FCA1120045223C /* CorePlot.framework in Frameworks */,
 				036723E116D18445004F14D6 /* QTKit.framework in Frameworks */,
 				036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */,
+				037E771F17FD36940045223C /* BWToolkitFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +303,7 @@
 		036723B416D181D8004F14D6 = {
 			isa = PBXGroup;
 			children = (
+				037E772017FD37250045223C /* BWToolkitFramework.framework */,
 				037E76ED17FCA0E60045223C /* CorePlot.xcodeproj */,
 				036723C616D181D9004F14D6 /* BEDA */,
 				036723BF16D181D9004F14D6 /* Frameworks */,
@@ -305,6 +322,7 @@
 		036723BF16D181D9004F14D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				037E771E17FD36940045223C /* BWToolkitFramework.framework */,
 				036723C016D181D9004F14D6 /* Cocoa.framework */,
 				036723E016D18445004F14D6 /* QTKit.framework */,
 				036723C216D181D9004F14D6 /* Other Frameworks */,
@@ -441,6 +459,11 @@
 		B26BF28B176183D5009BCC7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				037E770417FD2AC30045223C /* playbutton.png */,
+				037E770017FD29A30045223C /* lock.png */,
+				037E770117FD29A30045223C /* unlock.png */,
+				037E76FC17FD291F0045223C /* analysis.png */,
+				037E76FD17FD291F0045223C /* video.png */,
 				038E9BC9179E64F800606594 /* down.png */,
 				038E9BCA179E64F800606594 /* up.png */,
 				0394D2671791129500DDD8F9 /* intervalplay.png */,
@@ -624,6 +647,11 @@
 				038E9BCB179E64F800606594 /* down.png in Resources */,
 				038E9BCC179E64F800606594 /* up.png in Resources */,
 				B2ED106217F38E7700AEC7F8 /* tonic_auc.m in Resources */,
+				037E76FE17FD291F0045223C /* analysis.png in Resources */,
+				037E76FF17FD291F0045223C /* video.png in Resources */,
+				037E770217FD29A30045223C /* lock.png in Resources */,
+				037E770317FD29A30045223C /* unlock.png in Resources */,
+				037E770517FD2AC30045223C /* playbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,10 +812,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/BWToolkit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BEDA/BEDA-Prefix.pch";
 				INFOPLIST_FILE = "BEDA/BEDA-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/BWToolkit/BWToolkitFramework.framework/Versions/A\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -801,10 +834,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/BWToolkit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BEDA/BEDA-Prefix.pch";
 				INFOPLIST_FILE = "BEDA/BEDA-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/BWToolkit/BWToolkitFramework.framework/Versions/A\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

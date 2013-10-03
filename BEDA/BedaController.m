@@ -24,6 +24,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize sources = _sources;
 @synthesize channelsTimeData = _channelsTimeData;
 @synthesize movSplitView;
+@synthesize mainSplitView;
 @synthesize isNavMode;
 @synthesize numProjects;
 @synthesize playMode;
@@ -102,8 +103,6 @@ static BedaController* g_instance = nil;
     g_instance = self;
     [self setGraphWindowController:Nil];
     [self setGtAppTime:0];
-//    [self setIsAbsoulteTimeMode:NO];
-//    [[self timePopUp] setTitle:@"00:00"];
     [self makeRelativeTimeMode:nil];
     [self updateAbsoluteTimeInfo];
 //    [self setIntervalPlayerManager: [[IntervalPlayerManager alloc] init]];
@@ -127,6 +126,43 @@ static BedaController* g_instance = nil;
         NSLog(@"frame.height = %lf", [subview frame].size.height);
     }
     [mainview adjustSubviews];
+}
+
+-(IBAction)toggleMovieView:(id)sender;
+{
+    BOOL movieViewCollapsed = [[self mainSplitView] isSubviewCollapsed:[[[self mainSplitView] subviews] objectAtIndex: 1]];
+    if (movieViewCollapsed) {
+        [self uncollapseMovieView];
+    } else {
+        [self collapseMovieView];
+    }
+}
+-(void)collapseMovieView
+{
+    NSView *movie = [[[self mainSplitView] subviews] objectAtIndex:0];
+    NSView *graph  = [[[self mainSplitView] subviews] objectAtIndex:1];
+    NSRect movieFrame = [movie frame];
+    NSRect overallFrame = [[self mainSplitView] frame]; //???
+    [movie setHidden:YES];
+    [graph setFrameSize:NSMakeSize(movieFrame.size.width,overallFrame.size.height)];
+    [[self mainSplitView] display];
+}
+
+-(void)uncollapseMovieView
+{
+    NSView *left  = [[[self mainSplitView] subviews] objectAtIndex:1];
+    NSView *right = [[[self mainSplitView] subviews] objectAtIndex:0];
+    [right setHidden:NO];
+    CGFloat dividerThickness = [[self mainSplitView] dividerThickness];
+    // get the different frames
+    NSRect leftFrame = [left frame];
+    NSRect rightFrame = [right frame];
+    // Adjust left frame size
+    leftFrame.size.width = (leftFrame.size.width-rightFrame.size.width-dividerThickness);
+    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+    [left setFrameSize:leftFrame.size];
+    [right setFrame:rightFrame];
+    [[self mainSplitView] display];
 }
 
 - (IBAction)showInfoPopover:(id)sender {
