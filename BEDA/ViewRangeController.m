@@ -40,7 +40,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [super awakeFromNib];
     
-    NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
+    NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"00:00"];
     // If you make sure your dates are calculated at noon, you shouldn't have to
     // worry about daylight savings. If you use midnight, you will have to adjust
     // for daylight savings time.
@@ -58,7 +58,7 @@
     graph.plotAreaFrame.paddingBottom = 20.0f;
     
     graph.paddingRight = 3.0f;
-    graph.paddingLeft = 0.0f;
+    graph.paddingLeft = 3.0f;
     graph.paddingTop = 0.0f;
     graph.paddingBottom = 0.0f;
     
@@ -75,9 +75,7 @@
     double len = max - min;
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(300)];
-//    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(aProject * 5000.0f)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
-//    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(len)];
     
     CPTMutableTextStyle *axisTextStyle = [CPTTextStyle textStyle];
     axisTextStyle.fontSize = 10.0;
@@ -169,7 +167,7 @@
     return [CPTColor colorWithComponentRed:r green:g blue:b alpha:a];
 }
 
-- (void)select : (int)index{
+- (void)select : (NSUInteger)index{
     NSLog(@"%s", __PRETTY_FUNCTION__);
     CPTColor *selectedPlotColor = [CPTColor redColor];
     

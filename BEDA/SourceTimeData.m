@@ -114,11 +114,12 @@
          [NSCharacterSet characterSetWithCharactersInString:@"\n, "]];
         
         float zAxis, yAxis, xAxis, battery, Celsius, EDA;
+        int event;
         NSString *time = nil;
         
         // If we can parse the sensor data
         
-        if ([scanner scanFloat:&zAxis] && [scanner scanFloat:&yAxis] && [scanner scanFloat:&xAxis] && [scanner scanFloat:&battery] && [scanner scanFloat:&Celsius] && [scanner scanFloat:&EDA] &&[scanner scanUpToString:@"" intoString:&time]) {
+        if ([scanner scanUpToString:@"," intoString:&time] && [scanner scanFloat:&zAxis] && [scanner scanFloat:&yAxis] && [scanner scanFloat:&xAxis] && [scanner scanFloat:&battery] && [scanner scanFloat:&Celsius] && [scanner scanFloat:&EDA] &&[scanner scanInt:&event]) {
             // Process the values as needed.
             NSArray* tokens = [time componentsSeparatedByString:@"."];
             NSDate* date = [NSDate dateWithNaturalLanguageString:[tokens objectAtIndex:0]];
@@ -127,7 +128,7 @@
                 [self setBasedate: [date dateByAddingTimeInterval:0]];
                 basems = ms;
             }
-            
+            //NSLog(@"SCANNER: TIME: %@", time);
             float secSinceBase = [date timeIntervalSinceDate:[self basedate]] + (ms - basems) / 1000.0f;
             float Accel = sqrt(xAxis * xAxis + yAxis * yAxis + zAxis * zAxis);
             

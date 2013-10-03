@@ -20,7 +20,7 @@
 - (void) reloadGraph;
 
 @property (retain) CPTXYGraph* graph;
-@property int selectedIndex;
+@property NSUInteger selectedIndex;
 @property double xToLeft;
 @property double xToRight;
 

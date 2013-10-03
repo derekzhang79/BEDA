@@ -145,6 +145,15 @@ static BedaController* g_instance = nil;
     [[self movSplitView] setHidden:YES];
     [[self graphScrollView] setFrameSize:NSMakeSize(movFrame.size.width, mainFrame.size.height)];
     [self spaceProportionaly:splitview];
+    
+    double fixedHeight = 400;
+    NSRect frame;
+    frame.origin.x = 0;
+    frame.origin.y = 0;
+    frame.size.width = [splitview bounds].size.width;
+    frame.size.height = fixedHeight + 150 * 3;
+    [[splitview superview] setFrame:frame];
+    
 //    [[self graphScrollView] adjustPageHeightNew:mainFrame.size.height top:<#(CGFloat)#> bottom:<#(CGFloat)#> limit:<#(CGFloat)#>
  //  [[self mainSplitView] display];
     NSLog(@"%s : collapse view called", __PRETTY_FUNCTION__);
