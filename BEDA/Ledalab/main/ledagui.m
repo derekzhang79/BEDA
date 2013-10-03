@@ -23,7 +23,8 @@ leda2.gui.menu.menu_1b10 = uimenu(leda2.gui.menu.menu_1b,'Label','Matlab File (*
 leda2.gui.menu.menu_1b11 = uimenu(leda2.gui.menu.menu_1b,'Label','Text Type 1 [Time SC (Marker)]','Callback','import_data(''text'');');
 leda2.gui.menu.menu_1b12 = uimenu(leda2.gui.menu.menu_1b,'Label','Text Type 2 [SC (Marker)]','Callback','import_data(''text2'');');
 leda2.gui.menu.menu_1b13 = uimenu(leda2.gui.menu.menu_1b,'Label','Text Type 3 (Manual definition)','Callback','import_data(''text3'');');
-leda2.gui.menu.menu_1b14 = uimenu(leda2.gui.menu.menu_1b,'Label','User-defined Data','Callback','import_data(''userdef'');','Enable','off');
+leda2.gui.menu.menu_1b14 = uimenu(leda2.gui.menu.menu_1b,'Label','Text Type 4 (Beda)','Callback','import_data(''text4'');');
+% leda2.gui.menu.menu_1b14 = uimenu(leda2.gui.menu.menu_1b,'Label','User-defined Data','Callback','import_data(''userdef'');','Enable','off');
 
 leda2.gui.menu.menu_1c = uimenu(leda2.gui.menu.menu_1,'Label','Import Events...'); %,'Accelerator','i'
 leda2.gui.menu.menu_1c1 = uimenu(leda2.gui.menu.menu_1c,'Label','Event-Data [Time (Marker)]','Callback','import_eventdata(''userdef'')');

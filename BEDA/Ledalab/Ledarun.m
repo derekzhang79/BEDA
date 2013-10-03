@@ -54,20 +54,23 @@ disp(' '); add2log(1,['Batch-Analyzing ',filename],1,0,0,1)
 
 import_data('text4', pathname, filename);
 
-% leda2.data.conductance.data
+leda2.data.conductance.data
 % leda2.data.time.data
 
-leda_downsample(2, 'mean');  %MB 11.06.2013
+%leda_downsample(4, 'mean');  %MB 11.06.2013
+adaptive_smoothing;
 
 sdeco(1);
 
-% M = [leda2.analysis.tonicData;leda2.analysis.phasicData]';
+M = [leda2.analysis.tonicData;leda2.analysis.phasicData];
 dlmwrite('output.csv', 1);
 % dlmwrite('output2.csv', M);
 
-leda2.set.export.SCRmin = 0.5;
+leda2.set.export.SCRmin = 0.01;
 leda2.set.export.savetype = 3;
 export_scrlist('saveList');
+
+% analysis_overview;
 
 exit();
 

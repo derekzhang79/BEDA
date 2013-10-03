@@ -25,6 +25,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize channelsTimeData = _channelsTimeData;
 @synthesize movSplitView;
 @synthesize mainSplitView;
+@synthesize graphScrollView;
 @synthesize isNavMode;
 @synthesize numProjects;
 @synthesize playMode;
@@ -130,29 +131,31 @@ static BedaController* g_instance = nil;
 
 -(IBAction)toggleMovieView:(id)sender;
 {
-    BOOL movieViewCollapsed = [[self mainSplitView] isSubviewCollapsed:[[[self mainSplitView] subviews] objectAtIndex: 1]];
+    BOOL movieViewCollapsed = [[self mainSplitView] isSubviewCollapsed:[[[self mainSplitView] subviews] objectAtIndex: 0]];
     if (movieViewCollapsed) {
-        [self uncollapseMovieView];
+//        [self uncollapseMovieView];
     } else {
-        [self collapseMovieView];
+//        [self collapseMovieView];
     }
 }
 -(void)collapseMovieView
 {
-    NSView *movie = [[[self mainSplitView] subviews] objectAtIndex:0];
-    NSView *graph  = [[[self mainSplitView] subviews] objectAtIndex:1];
-    NSRect movieFrame = [movie frame];
-    NSRect overallFrame = [[self mainSplitView] frame]; //???
-    [movie setHidden:YES];
-    [graph setFrameSize:NSMakeSize(movieFrame.size.width,overallFrame.size.height)];
-    [[self mainSplitView] display];
+    NSRect movFrame = [[self movSplitView]frame];
+    NSRect mainFrame = [[self mainSplitView]frame];
+    [[self movSplitView] setHidden:YES];
+    [[self graphScrollView] setFrameSize:NSMakeSize(movFrame.size.width, mainFrame.size.height)];
+    [self spaceProportionaly:splitview];
+//    [[self graphScrollView] adjustPageHeightNew:mainFrame.size.height top:<#(CGFloat)#> bottom:<#(CGFloat)#> limit:<#(CGFloat)#>
+ //  [[self mainSplitView] display];
+    NSLog(@"%s : collapse view called", __PRETTY_FUNCTION__);
 }
 
 -(void)uncollapseMovieView
 {
+    NSLog(@"%s : UNcollapse view called", __PRETTY_FUNCTION__);
     NSView *left  = [[[self mainSplitView] subviews] objectAtIndex:1];
     NSView *right = [[[self mainSplitView] subviews] objectAtIndex:0];
-    [right setHidden:NO];
+    [movSplitView setHidden:NO];
     CGFloat dividerThickness = [[self mainSplitView] dividerThickness];
     // get the different frames
     NSRect leftFrame = [left frame];
