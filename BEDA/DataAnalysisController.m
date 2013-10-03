@@ -115,6 +115,9 @@
         if ([scriptname isEqualToString:@"tonic_auc.m"]) {
             [self copyResultDetails:chIndex as:@"tonic_auc"];
         }
+        if ([scriptname isEqualToString:@"Ledarun.m"]) {
+            [self copyResultDetails:chIndex as:@"leda"];
+        }
     }
     [[self results] setObject:currentResult forKey:scriptname];
 
