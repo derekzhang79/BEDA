@@ -83,6 +83,7 @@
 		B28D647817A761B90085D8AC /* ChannelAnnotationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D647717A761B90085D8AC /* ChannelAnnotationWindowController.m */; };
 		B299F6BC176AE8E6004BCD35 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B299F6BB176AE8E6004BCD35 /* ProjectManager.m */; };
 		B2B7E9CC176AA4A900190941 /* GraphWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B7E9CB176AA4A900190941 /* GraphWindowController.m */; };
+		B2BAA42E17FD3F2700281493 /* Ledarun.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BAA42D17FD3F2700281493 /* Ledarun.m */; };
 		B2CC42B917F3C706005F41D6 /* exp_smooth.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CC42B817F3C706005F41D6 /* exp_smooth.m */; };
 		B2CC42BA17F3C71F005F41D6 /* exp_smooth.m in Resources */ = {isa = PBXBuildFile; fileRef = B2CC42B817F3C706005F41D6 /* exp_smooth.m */; };
 		B2DAB3D3177FD40A00C4BE06 /* ChannelSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */; };
@@ -251,6 +252,7 @@
 		B299F6BB176AE8E6004BCD35 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 		B2B7E9CA176AA4A900190941 /* GraphWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphWindowController.h; sourceTree = "<group>"; };
 		B2B7E9CB176AA4A900190941 /* GraphWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphWindowController.m; sourceTree = "<group>"; };
+		B2BAA42D17FD3F2700281493 /* Ledarun.m */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; name = Ledarun.m; path = Ledalab/Ledarun.m; sourceTree = "<group>"; };
 		B2CC42B817F3C706005F41D6 /* exp_smooth.m */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = exp_smooth.m; sourceTree = "<group>"; };
 		B2DAB3D1177FD40A00C4BE06 /* ChannelSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelSelector.h; sourceTree = "<group>"; };
 		B2DAB3D2177FD40A00C4BE06 /* ChannelSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelSelector.m; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 		038E9D2F177A9C4D00ACE963 /* Script */ = {
 			isa = PBXGroup;
 			children = (
+				B2BAA42D17FD3F2700281493 /* Ledarun.m */,
 				B2CC42B817F3C706005F41D6 /* exp_smooth.m */,
 				B2ED105917F3782100AEC7F8 /* allpeaks.m */,
 				B2ED105F17F38E0F00AEC7F8 /* getFeatures1Dcont.m */,
@@ -548,6 +551,7 @@
 				036723BA16D181D8004F14D6 /* Frameworks */,
 				036723BB16D181D8004F14D6 /* Resources */,
 				037E76FA17FCA1E80045223C /* CopyFiles */,
+				B2BAA42717FD3D9E00281493 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -657,6 +661,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B2BAA42717FD3D9E00281493 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo ${PROJECT_DIR}/${PRODUCT_NAME}/Ledalab\necho ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Contents/Resources\ncp -R ${PROJECT_DIR}/${PRODUCT_NAME}/Ledalab/* ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Contents/Resources";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		036723B916D181D8004F14D6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -704,6 +724,7 @@
 				B2ED105D17F38C6A00AEC7F8 /* tonic_auc.m in Sources */,
 				B2ED106017F38E0F00AEC7F8 /* getFeatures1Dcont.m in Sources */,
 				B2CC42B917F3C706005F41D6 /* exp_smooth.m in Sources */,
+				B2BAA42E17FD3F2700281493 /* Ledarun.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
