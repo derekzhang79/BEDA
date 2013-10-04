@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -129,20 +129,20 @@
 								<bool key="NSHasVerticalScroller">YES</bool>
 								<bool key="NSCompletes">YES</bool>
 								<array class="NSMutableArray" key="NSPopUpListData">
-									<string>mean.R</string>
-									<string>median.R</string>
+									<string>SCR_amplitude.m</string>
+									<string>tonic_auc.m</string>
 									<string>summary.R</string>
 									<string>std.R</string>
 									<string>peak.R</string>
 									<string>allpeaks.m</string>
-									<string>tonic_auc.m</string>
-									<string>Ledarun.m</string>
+									<string>median.R</string>
+									<string>meain.R</string>
 								</array>
 								<reference key="NSDelegate" ref="752057352"/>
 								<object class="NSComboTableView" key="NSTableView" id="1030647730">
 									<reference key="NSNextResponder"/>
 									<int key="NSvFlags">274</int>
-									<string key="NSFrameSize">{13, 147}</string>
+									<string key="NSFrameSize">{13, 168}</string>
 									<reference key="NSSuperview"/>
 									<reference key="NSWindow"/>
 									<string key="NSReuseIdentifierKey">_NS:24</string>
@@ -259,7 +259,7 @@
 											<array class="NSMutableArray" key="NSTableColumns">
 												<object class="NSTableColumn" id="416547866">
 													<string key="NSIdentifier">GraphNameColumn</string>
-													<double key="NSWidth">100</double>
+													<double key="NSWidth">146.9453125</double>
 													<double key="NSMinWidth">40</double>
 													<double key="NSMaxWidth">1000</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -302,7 +302,7 @@
 											<reference key="NSBackgroundColor" ref="445450719"/>
 											<reference key="NSGridColor" ref="946421543"/>
 											<double key="NSRowHeight">65</double>
-											<int key="NSTvFlags">-700448768</int>
+											<int key="NSTvFlags">-702545920</int>
 											<reference key="NSDelegate"/>
 											<reference key="NSDataSource"/>
 											<int key="NSColumnAutoresizingStyle">4</int>
@@ -420,7 +420,7 @@
 								<object class="NSTextField" id="67621661">
 									<reference key="NSNextResponder" ref="216048730"/>
 									<int key="NSvFlags">266</int>
-									<string key="NSFrame">{{0, 24}, {100, 17}}</string>
+									<string key="NSFrame">{{0, 24}, {147, 17}}</string>
 									<reference key="NSSuperview" ref="216048730"/>
 									<reference key="NSNextKeyView" ref="898841676"/>
 									<string key="NSAntiCompressionPriority">{250, 750}</string>
@@ -442,7 +442,7 @@
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								</object>
 							</array>
-							<string key="NSFrame">{{1, 1}, {100, 65}}</string>
+							<string key="NSFrame">{{1, 1}, {147, 65}}</string>
 							<reference key="NSNextKeyView" ref="67621661"/>
 						</object>
 						<reference key="destination" ref="67621661"/>
@@ -900,14 +900,14 @@
 				<boolean value="NO" key="26.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="26.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<array key="27.IBComboBoxObjectValuesKey.objectValues">
-					<string>mean.R</string>
-					<string>median.R</string>
+					<string>SCR_amplitude.m</string>
+					<string>tonic_auc.m</string>
 					<string>summary.R</string>
 					<string>std.R</string>
 					<string>peak.R</string>
 					<string>allpeaks.m</string>
-					<string>tonic_auc.m</string>
-					<string>Ledarun.m</string>
+					<string>median.R</string>
+					<string>meain.R</string>
 				</array>
 				<string key="27.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="31.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

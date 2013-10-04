@@ -115,8 +115,8 @@
         if ([scriptname isEqualToString:@"tonic_auc.m"]) {
             [self copyResultDetails:chIndex as:@"tonic_auc"];
         }
-        if ([scriptname isEqualToString:@"Ledarun.m"]) {
-            [self copyResultDetails:chIndex as:@"leda"];
+        if ([scriptname isEqualToString:@"SCR_amplitude"]) {
+            [self copyResultDetails:chIndex as:@"SCR_amplitude"];
         }
     }
     [[self results] setObject:currentResult forKey:scriptname];
@@ -193,9 +193,6 @@
         [task waitUntilExit];
         
     }
-
-
-    
     NSLog(@"%s: OK", __PRETTY_FUNCTION__);
 }
 

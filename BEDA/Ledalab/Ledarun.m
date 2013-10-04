@@ -48,7 +48,6 @@ pathname = './';
 tic
 
 filename = 'input.csv';
-% filename = 'leda_test.session.txt';
 
 disp(' '); add2log(1,['Batch-Analyzing ',filename],1,0,0,1)
 
@@ -72,7 +71,7 @@ export_scrlist('saveList');
 
 % analysis_overview;
 
-% exit();
+exit();
 
 end
 
