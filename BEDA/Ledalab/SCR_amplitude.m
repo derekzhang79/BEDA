@@ -61,15 +61,16 @@ adaptive_smoothing;
 
 sdeco(1);
 
-M = [leda2.analysis.tonicData;leda2.analysis.phasicData];
+M = [leda2.analysis.tonicData;leda2.analysis.phasicData]';
 dlmwrite('output.csv', 1);
-% dlmwrite('output2.csv', M);
 
 leda2.set.export.SCRmin = 0.01;
 leda2.set.export.savetype = 3;
 export_scrlist('saveList');
 
 % analysis_overview;
+
+dlmwrite('output3.csv', M);
 
 exit();
 

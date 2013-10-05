@@ -29,6 +29,7 @@
 @synthesize maxValue;
 @synthesize channelSelector = _channelSelector;
 @synthesize samplingRate;
+@synthesize extraGraphs = _extraGraphs;
 
 -(id) init {
     self = [super init];
@@ -40,6 +41,8 @@
         _annotViewController = Nil;
         _channelSelector = Nil;
         [[[self beda] channelsTimeData] addObject:self];
+        _extraGraphs = [[NSMutableArray alloc] init];
+
     }
     return self;
     

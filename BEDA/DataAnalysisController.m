@@ -10,6 +10,7 @@
 #import "BedaController.h"
 #import "Source.h"
 #import "ChannelTimeData.h"
+#import "ChannelExtraGraph.h"
 
 @implementation DataAnalysisController
 
@@ -115,8 +116,9 @@
         if ([scriptname isEqualToString:@"tonic_auc.m"]) {
             [self copyResultDetails:chIndex as:@"tonic_auc"];
         }
-        if ([scriptname isEqualToString:@"SCR_amplitude"]) {
+        if ([scriptname isEqualToString:@"SCR_amplitude.m"]) {
             [self copyResultDetails:chIndex as:@"SCR_amplitude"];
+            [self readProcessedDataFrom:@"/output3.csv" into:ch];
         }
     }
     [[self results] setObject:currentResult forKey:scriptname];
@@ -164,7 +166,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
     NSString* stem = [scriptname substringToIndex:[scriptname length] - 2];
-    NSLog(@"script stem = ", stem);
+    NSLog(@"script stem = %@", stem);
     
     NSMutableString* filename =  [[NSMutableString alloc] init];
     [filename appendString:[[NSBundle mainBundle] resourcePath]];
@@ -206,6 +208,51 @@
 
     NSString* output = [NSString stringWithContentsOfFile:filename encoding:NSStringEncodingConversionAllowLossy error:Nil];
     return output;
+}
+
+- (void)readProcessedDataFrom : (NSString*) filename into:(ChannelTimeData*)ch {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSMutableString* filepath =  [[NSMutableString alloc] init];
+    [filepath appendString:[[NSBundle mainBundle] resourcePath]];
+    [filepath appendString:filename];
+    
+    NSLog(@"filename = %@", filepath);
+    
+    NSString* filestr = [NSString stringWithContentsOfFile:filepath encoding:NSStringEncodingConversionAllowLossy error:Nil];
+    NSArray *lines = [filestr componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\r\n"]];
+    
+    NSLog(@"file has %ld lines", (unsigned long)[lines count]);
+    
+    ChannelExtraGraph* graph_tonic = [[ChannelExtraGraph alloc] initWithChannel:ch asColor:[NSColor colorWithCalibratedRed:0.8 green:0.2 blue:0.1 alpha:0.6]];
+    ChannelExtraGraph* graph_phasic = [[ChannelExtraGraph alloc] initWithChannel:ch asColor:[NSColor colorWithCalibratedRed:0.1 green:0.7 blue:0.1 alpha:0.6]];
+
+    int MAX_LOG_LINE = 10;
+    
+    for (int i = 0; i < [lines count]; i++) {
+        NSString* line = [lines objectAtIndex:i];
+        NSScanner *scanner = [NSScanner scannerWithString:line];
+        [scanner setCharactersToBeSkipped:
+         [NSCharacterSet characterSetWithCharactersInString:@"\n, "]];
+        
+        
+        float tonic = 0.0;
+        [scanner scanFloat:&tonic];
+        [[graph_tonic data] addObject:[NSNumber numberWithFloat:tonic]];
+        
+        float phasic = 0.0;
+        [scanner scanFloat:&phasic];
+        [[graph_phasic data] addObject:[NSNumber numberWithFloat:phasic]];
+        
+        if (i < MAX_LOG_LINE) {
+            NSLog(@"tonic = %f, phasic = %f", tonic, phasic);
+        }
+    }
+
+    [[ch extraGraphs] addObject:graph_tonic];
+    [graph_tonic reload];
+    
+    [[ch extraGraphs] addObject:graph_phasic];
+    [graph_phasic reload];
 }
 
 - (void) copyResultDetails : (int)index as:(NSString*)name {

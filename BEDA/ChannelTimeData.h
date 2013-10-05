@@ -15,6 +15,8 @@
 #define BEDA_INDENTIFIER_HEADER_PLOT @"BedaHeaderPlot"
 #define BEDA_INDENTIFIER_SELECT_PLOT @"BedaSelectPlot"
 #define BEDA_INDENTIFIER_CHANNEL_ANNOT_PLOT @"BedaChannelAnnotPlot"
+#define BEDA_INDENTIFIER_EXTRA_PLOT @"BedaExtraPlot"
+
 
 #define BEDA_NOTI_SOURCE_OFFSET_CHANGED @"BedaNotiSourceOffsetChanged"
 
@@ -55,6 +57,7 @@
 @property (retain) ChannelAnnotationManager* channelAnnotationManager;
 @property (retain) ChannelAnnotationWindowController* channelAnnotWindowController;
 @property (assign) int samplingRate;
+@property (retain) NSMutableArray* extraGraphs;
 
 - (SourceTimeData*) sourceTimeData;
 - (CPTXYGraph*) getGraph;
