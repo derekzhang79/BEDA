@@ -107,7 +107,7 @@
     // If you make sure your dates are calculated at noon, you shouldn't have to
     // worry about daylight savings. If you use midnight, you will have to adjust
     // for daylight savings time.
-    NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"12:00:00"];
+    NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
     NSTimeInterval oneSec = 1;
     
     // Create graph from theme
@@ -296,10 +296,6 @@
     dataSourceLinePlot.dataLineStyle = lineStyle;
 }
 
-//- (NSColor*)getLineColor {
-//    return _lineColor;
-//}
-
 - (void)applyAreaColor:(NSColor*)ac {
     _areaColor = ac;
 
@@ -308,10 +304,6 @@
     dataSourceLinePlot.areaFill      = areaFill;
     dataSourceLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
 }
-
-//- (NSColor*)getAreaColor {
-//    return _areaColor;
-//}
 
 - (void)setGraphName:(NSString*)gName {
     NSLog(@"%s", __PRETTY_FUNCTION__);

@@ -16,20 +16,20 @@
 @synthesize plot;
 @synthesize data = _data;
 
-- (id) initWithChannel:(ChannelTimeData*) ch asColor:(NSColor*)nscolor{
+- (id) initWithChannel:(ChannelTimeData*) ch asLineColor:(NSColor*)nsLinecolor asAreaColor:(NSColor*)nsAreacolor{
     self = [super init];
     
     if (self) {
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         [self setChannel:ch];
-        [self initPlotAsColor:nscolor];
+        [self initPlotAsColor:nsLinecolor asAreaColor:nsAreacolor];
         _data = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (void) initPlotAsColor:(NSColor*)nscolor{
+- (void) initPlotAsColor:(NSColor*)nsLinecolor asAreaColor:(NSColor*)nsAreacolor{
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     // Create header plot
@@ -39,13 +39,17 @@
     p.delegate = self;
     
     // Set the style
-    CPTColor *color = [[self channel] toCPT:nscolor];
+    CPTColor *linecolor = [[self channel] toCPT:nsLinecolor];
+    CPTColor *areacolor = [[self channel] toCPT:nsAreacolor];
     
     CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
-    lineStyle.lineWidth = 2.0f;
-    lineStyle.lineColor = color;
+    lineStyle.lineWidth = 1.0f;
+    lineStyle.lineColor = linecolor;
     
     p.dataLineStyle = lineStyle;
+    CPTFill *areaFill = [CPTFill fillWithColor:areacolor];
+    p.areaFill = areaFill;
+    p.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
     
     [self setPlot:p];
 

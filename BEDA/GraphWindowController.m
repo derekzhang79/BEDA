@@ -161,8 +161,8 @@
     }
     
     [ch initGraph:@"Annotation" atIndex:index range:minValue to:maxValue
-    withLineColor: [NSColor blueColor] 
-        areaColor:[NSColor magentaColor]
+    withLineColor:[NSColor colorWithCalibratedRed:0.452 green:0.825 blue:0.925 alpha:1.0]
+        areaColor:[NSColor colorWithCalibratedRed:0.544 green:0.825 blue:0.925 alpha:0.6]
          isBottom:YES hasArea:NO];
     [ch setMyTimeInGlobal:[[self beda] gtAppTime]];
     [[s channels] addObject:ch];

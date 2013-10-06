@@ -223,8 +223,8 @@
     
     NSLog(@"file has %ld lines", (unsigned long)[lines count]);
     
-    ChannelExtraGraph* graph_tonic = [[ChannelExtraGraph alloc] initWithChannel:ch asColor:[NSColor colorWithCalibratedRed:0.8 green:0.2 blue:0.1 alpha:0.6]];
-    ChannelExtraGraph* graph_phasic = [[ChannelExtraGraph alloc] initWithChannel:ch asColor:[NSColor colorWithCalibratedRed:0.1 green:0.7 blue:0.1 alpha:0.6]];
+    ChannelExtraGraph* graph_tonic = [[ChannelExtraGraph alloc] initWithChannel:ch asLineColor: [NSColor colorWithCalibratedRed:0.109 green:0.363 blue:0.526 alpha:0.6] asAreaColor:[NSColor colorWithCalibratedRed:0.109 green:0.363 blue:0.526 alpha:0.2] ];
+    ChannelExtraGraph* graph_phasic = [[ChannelExtraGraph alloc] initWithChannel:ch asLineColor:[NSColor colorWithCalibratedRed:0.055 green:0.097 blue:0.164 alpha:0.7] asAreaColor:[NSColor colorWithCalibratedRed:0.055 green:0.097 blue:0.164 alpha:0.3]];
 
     int MAX_LOG_LINE = 10;
     

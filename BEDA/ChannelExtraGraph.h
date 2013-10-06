@@ -15,7 +15,7 @@
     
 }
 
-- (id) initWithChannel:(ChannelTimeData*) ch asColor:(NSColor*)nscolor;
+- (id) initWithChannel:(ChannelTimeData*) ch asLineColor:(NSColor*)nscolor asAreaColor:(NSColor*)nscolor;
 - (void)reload;
 
 @property (assign) ChannelTimeData* channel;
