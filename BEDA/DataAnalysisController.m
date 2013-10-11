@@ -147,10 +147,6 @@
     NSMutableArray* data = [source timedata];
     int validDataCounter = 0;
     for (int i = 0; i < [[source timedata] count]; i++) {
-//        double t = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:0]] doubleValue];
-//        if ([ch isSelectedTime:t] == NO) {
-//            continue;
-//        }
         validDataCounter++;
 
         double v = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:index]] doubleValue];

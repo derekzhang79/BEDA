@@ -17,9 +17,19 @@
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    _xlabels =  [[NSMutableArray alloc] initWithObjects:@"", @"02_27.session.csv'", @"03_01.session.csv'", @"03_06.session.csv'", nil];
-    _yauc =  [[NSMutableArray alloc] initWithObjects:@"0", @"3.114292577", @"5.185298535", @"3.623843235", nil];
-    _ypeaks =  [[NSMutableArray alloc] initWithObjects:@"0", @"0.000181678", @"0.000307652", @"0.000304125", nil];
+    _xlabels =  [[NSMutableArray alloc] initWithObjects:@"", @"02_27.session", @"03_01.session", @"03_06.session", @"03_27.session",
+                 @"", @"04_09.session", @"04_10.session", @"04_11.session",
+                 @"", @"04_18.session", @"04_30.session", @"05_02.session", @"05_03.session",
+                 @"", @"05_07.session", @"05_09.session", @"05_10.session",
+                 nil];
+    _yauc =  [[NSMutableArray alloc] initWithObjects:@"0", @"3.114292577", @"5.185298535", @"3.623843235", @"4.11317037",
+                                                     @"0", @"8.15014977",  @"5.910163732", @"7.665497886",
+                                                     @"0", @"4.699031394", @"3.489960873", @"6.579609001", @"4.516224149",
+                                                     @"0", @"2.179248277", @"4.627932952", @"3.481698746", nil];
+    _ypeaks =  [[NSMutableArray alloc] initWithObjects:@"0", @"0.000181678", @"0.000307652", @"0.000304125", @"0.000238802",
+                                                    @"0", @"0.000374443",  @"0.000379543", @"0.000227857",
+                                                    @"0", @"0.000395557", @"0.000319846", @"0.000403646", @"0.00036145",
+                                                    @"0", @"0.000412252", @"0.00022929", @"0.000255715", nil];
 
     
     for (NSUInteger i = 0; i < [[self yauc] count]; i++) {
@@ -123,19 +133,18 @@
         idx++;
     }
     x.axisLabels = [NSMutableSet setWithArray:labels];
-    //    x.labelRotation = -M_PI / 4;
     
     [labels release];
     
     
     // Setting up y-axis
 	CPTXYAxis *y = axisSet.yAxis;
-    y.majorIntervalLength = CPTDecimalFromInt(10);
+    y.majorIntervalLength = CPTDecimalFromInt(1);
     y.orthogonalCoordinateDecimal = CPTDecimalFromInt(0);
     y.minorTicksPerInterval = 0;
     y.minorGridLineStyle = nil;
     y.labelExclusionRanges = [NSArray arrayWithObjects:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(0)], nil];
-    y.title = @"Percentage of Behaviors";
+    y.title = @"Normalized EDA Analysis results";
     y.titleOffset = 45;
     
     graph.axisSet.axes = [NSArray arrayWithObjects:x, y, nil];

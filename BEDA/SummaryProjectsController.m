@@ -42,7 +42,7 @@
     for (id object in lst) {
         NSString* name = @"";
         if ([object isKindOfClass:[SPGroup class]]) {
-            name = [(SPGroup*)object name];
+//            name = [(SPGroup*)object name];
         } else if ([object isKindOfClass:[SPDataFile class]]) {
             name = [(SPDataFile*)object filename];
         }

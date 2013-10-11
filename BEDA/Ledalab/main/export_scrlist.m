@@ -91,10 +91,10 @@ if ~isempty(leda2.analysis)
         end
     end
     if strcmp(leda2.analysis.method,'sdeco')
-        scrList.CDA.onset = onset(scr_idx);
+        scrList.CDA.onset = onset(scr_idx)/(24 * 60 * 60);
         scrList.CDA.amp = amp(scr_idx);
     else
-        scrList.DDA.onset = onset(scr_idx);
+        scrList.DDA.onset = onset(scr_idx)/(24 * 60 * 60);
         scrList.DDA.amp = amp(scr_idx);
     end
 end
@@ -103,7 +103,7 @@ scr_ttpidx = find(onset_ttp >= 0 & amp_ttp >= scrAmplitudeMin);
 if isempty(scr_ttpidx)   %JG17.09.2012 Warnung eingefügt, Zusammenhang siehe andere Änderungen JG17.09.2012 bei Excel-Export
     add2log(1,['SCR-List export for ',leda2.file.filename,': No SCRs detected (method TTP)!'], 1,1,1,1,0,1);
 end
-scrList.TTP.onset = onset_ttp(scr_ttpidx);
+scrList.TTP.onset = onset_ttp(scr_ttpidx)/(24 * 60 * 60);
 scrList.TTP.amp = amp_ttp(scr_ttpidx);
 
 
@@ -133,7 +133,7 @@ if leda2.set.export.savetype == 2
         if strcmp(leda2.analysis.method,'sdeco')
             fprintf(fid,'CDA.SCR-Onset\tCDA.SCR-Amplitude\r\n');
             for i = 1:length(scrList.CDA.onset)
-                fprintf(fid,'%8.4f\t%8.4f\r\n', scrList.CDA.onset(i), scrList.CDA.amp(i));
+                fprintf(fid,'%8.4f\t%8.4f\t%8.4f\r\n', scrList.CDA.onset(i)/(1440*60), scrList.CDA.onset(i), scrList.CDA.amp(i));
             end
             
         elseif strcmp(leda2.analysis.method,'nndeco')
