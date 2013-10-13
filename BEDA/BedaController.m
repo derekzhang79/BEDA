@@ -127,10 +127,25 @@ static BedaController* g_instance = nil;
         NSLog(@"frame.height = %lf", [subview frame].size.height);
     }
     [mainview adjustSubviews];
+    
+    
 }
 
 -(IBAction)toggleMovieView:(id)sender;
 {
+    NSSegmentedControl* c = (NSSegmentedControl*)sender;
+    NSUInteger index = [c selectedSegment];
+    
+    NSLog(@"%s: %ld", __PRETTY_FUNCTION__, (unsigned long)index);
+    if (index == 0) {
+        if ([[mainSplitView subviews] indexOfObject:movSplitView] == NSNotFound) {
+            [mainSplitView addSubview:movSplitView positioned:NSWindowBelow relativeTo:graphScrollView];
+        } else {
+            [movSplitView removeFromSuperview];
+        }
+    }
+
+    
     BOOL movieViewCollapsed = [[self mainSplitView] isSubviewCollapsed:[[[self mainSplitView] subviews] objectAtIndex: 0]];
     if (movieViewCollapsed) {
 //        [self uncollapseMovieView];
