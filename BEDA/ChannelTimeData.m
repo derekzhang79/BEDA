@@ -107,7 +107,7 @@
     // If you make sure your dates are calculated at noon, you shouldn't have to
     // worry about daylight savings. If you use midnight, you will have to adjust
     // for daylight savings time.
-    NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
+    NSDate *refDate       = [NSDate dateWithNaturalLanguageString:@"00:00"];
     NSTimeInterval oneSec = 1;
     
     // Create graph from theme
@@ -330,14 +330,14 @@
 }
 
 - (void)makeRelativeMode {
-    NSDate* basedate = [NSDate dateWithNaturalLanguageString:@"00:00:00"];
+    NSDate* basedate = [NSDate dateWithNaturalLanguageString:@"00:00"];
     NSLog(@"basedate = %@", basedate);
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
     
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     if ([[self beda] duration] > 3600) {
-        [dateFormatter setDateFormat: @"h:mm:ss"];
+        [dateFormatter setDateFormat: @"HH:mm:ss"];
     } else {
         [dateFormatter setDateFormat: @"mm:ss"];
     }
@@ -781,15 +781,17 @@
         // 1. SavingPlotLine style
         CPTColor *headerPlotColor = [self toCPT:[beh color]];
         
+        CPTMutableLineStyle *annotationLineStyle = [CPTMutableLineStyle lineStyle];
+        annotationLineStyle.lineWidth = 0.0f;
+        
         // 2. Symbol style
         CPTPlotSymbol *headerPlotSymbol = [CPTPlotSymbol rectanglePlotSymbol];
         headerPlotSymbol.fill = [CPTFill fillWithColor:headerPlotColor];
+        headerPlotSymbol.lineStyle = annotationLineStyle;
 
         headerPlotSymbol.size = CGSizeMake(6.0f, 13.0f);
         plotAnnotation.plotSymbol = headerPlotSymbol;
         
-        CPTMutableLineStyle *annotationLineStyle = [CPTMutableLineStyle lineStyle];
-        annotationLineStyle.lineWidth = 0.0f;
         
         plotAnnotation.dataLineStyle = annotationLineStyle;
         

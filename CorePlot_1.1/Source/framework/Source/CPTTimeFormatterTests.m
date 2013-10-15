@@ -8,7 +8,7 @@
 
 -(void)testKeyedArchivingRoundTrip
 {
-    NSDate *refDate                = [NSDate dateWithNaturalLanguageString:@"12:00 Oct 29, 2009"];
+    NSDate *refDate                = [NSDate dateWithNaturalLanguageString:@"00:00 Oct 29, 2009"];
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
 
     dateFormatter.dateStyle = kCFDateFormatterShortStyle;
