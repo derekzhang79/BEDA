@@ -11,6 +11,7 @@
 #import "Source.h"
 #import "ChannelTimeData.h"
 #import "ChannelExtraGraph.h"
+#import "BedaSetting.h"
 
 @implementation DataAnalysisController
 
@@ -19,6 +20,11 @@
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    [comboBoxScriptSelection removeAllItems];
+    for (NSString* script in [[[self beda] setting] scriptnames]) {
+        [comboBoxScriptSelection addItemWithObjectValue:script];
+    }
+    
     _channels = [[NSMutableArray alloc] init];
     _results = [[NSMutableDictionary alloc] init];
     [self populateChannels];
@@ -90,6 +96,48 @@
     }
     return Nil;
 }
+
+-(IBAction)addScript:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    // Show the OpenPanel
+    NSOpenPanel *panel = [NSOpenPanel savePanel];
+    [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"R", @"m", nil]];
+    long tvarInt = [panel runModal];
+    
+    // If user cancels it, do NOT proceed
+    if (tvarInt != NSOKButton) {
+        NSLog(@"User cancel the open command");
+        return;
+    }
+    
+    // Get URL and extract the URL
+    NSURL *url = [panel URL];
+    
+    NSString* filename = [[url absoluteString] lastPathComponent];
+    [comboBoxScriptSelection addItemWithObjectValue:filename];
+    
+    NSString* src =  [url path];
+    NSMutableString* dst = [[NSMutableString alloc] init];
+    [dst appendString:[[NSBundle mainBundle] resourcePath]];
+    [dst appendString:[NSString stringWithFormat:@"/%@", filename]];
+    
+    NSLog(@"src = %@", src);
+    NSLog(@"dst = %@", dst);
+    
+    NSError *err=nil;
+    
+    [[NSFileManager defaultManager] removeItemAtPath:dst error:nil];
+    
+    [[NSFileManager defaultManager] copyItemAtPath:src toPath:dst error:&err];
+    if (err) {
+        NSLog(@"Error: %@", err);
+        
+    }
+    
+    [[[[self beda] setting] scriptnames] addObject:filename];
+    [[[self beda] setting] saveDefaultFile];
+}
+
 
 -(IBAction)doAnalysis:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);

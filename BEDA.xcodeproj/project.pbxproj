@@ -66,6 +66,8 @@
 		B22980B6176E6F6D004C2115 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22980B5176E6F6D004C2115 /* TableView.xib */; };
 		B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22980B8176E6F7B004C2115 /* TableViewController.m */; };
 		B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */; };
+		B23E60C21814EDD300FF24DA /* BedaSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = B23E60C11814EDD300FF24DA /* BedaSetting.m */; };
+		B23E60C61814FB3C00FF24DA /* setting.xml in Resources */ = {isa = PBXBuildFile; fileRef = B23E60C51814FB3C00FF24DA /* setting.xml */; };
 		B24E2DDA17BA99AC00F8CC3E /* SummaryProjectOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = B24E2DD917BA99AC00F8CC3E /* SummaryProjectOutline.m */; };
 		B25CBBE916D1DDE100626FA9 /* DataAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = B25CBBE816D1DDE100626FA9 /* DataAddController.m */; };
 		B26BF280176182EE009BCC7D /* BedaController.m in Sources */ = {isa = PBXBuildFile; fileRef = B26BF27F176182EE009BCC7D /* BedaController.m */; };
@@ -218,6 +220,9 @@
 		B22980B8176E6F7B004C2115 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		B22FF562178BD168008CBFFE /* IntervalPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalPlayerManager.h; sourceTree = "<group>"; };
 		B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalPlayerManager.m; sourceTree = "<group>"; };
+		B23E60C01814EDD300FF24DA /* BedaSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BedaSetting.h; sourceTree = "<group>"; };
+		B23E60C11814EDD300FF24DA /* BedaSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BedaSetting.m; sourceTree = "<group>"; };
+		B23E60C51814FB3C00FF24DA /* setting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = setting.xml; sourceTree = "<group>"; };
 		B24E2DD817BA99AC00F8CC3E /* SummaryProjectOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryProjectOutline.h; sourceTree = "<group>"; };
 		B24E2DD917BA99AC00F8CC3E /* SummaryProjectOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryProjectOutline.m; sourceTree = "<group>"; };
 		B25CBBE716D1DDE100626FA9 /* DataAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAddController.h; sourceTree = "<group>"; };
@@ -420,6 +425,9 @@
 			children = (
 				B26BF27E176182EE009BCC7D /* BedaController.h */,
 				B26BF27F176182EE009BCC7D /* BedaController.m */,
+				B23E60C01814EDD300FF24DA /* BedaSetting.h */,
+				B23E60C11814EDD300FF24DA /* BedaSetting.m */,
+				B23E60C51814FB3C00FF24DA /* setting.xml */,
 				038E9D2C177A6DE800ACE963 /* DataAnalysisController.h */,
 				038E9D2D177A6DE800ACE963 /* DataAnalysisController.m */,
 				038E9D2A177A6D8E00ACE963 /* DataAnalysisWindow.xib */,
@@ -654,6 +662,7 @@
 				037E770217FD29A30045223C /* lock.png in Resources */,
 				037E770317FD29A30045223C /* unlock.png in Resources */,
 				037E770517FD2AC30045223C /* playbutton.png in Resources */,
+				B23E60C61814FB3C00FF24DA /* setting.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +733,7 @@
 				B2CC42B917F3C706005F41D6 /* exp_smooth.m in Sources */,
 				B2BAA42E17FD3F2700281493 /* SCR_amplitude.m in Sources */,
 				B2D249651800B90C001EB73A /* ChannelExtraGraph.m in Sources */,
+				B23E60C21814EDD300FF24DA /* BedaSetting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

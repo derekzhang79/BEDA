@@ -14,6 +14,7 @@
 #import "SourceTimeData.h"
 #import "ChannelTimeData.h"
 #import "ProjectManager.h"
+#import "BedaSetting.h"
 
 
 float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
@@ -21,6 +22,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 
 @implementation BedaController
 
+@synthesize setting = _setting;
 @synthesize sources = _sources;
 @synthesize channelsTimeData = _channelsTimeData;
 @synthesize movSplitView;
@@ -52,6 +54,9 @@ static BedaController* g_instance = nil;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    _setting = [[BedaSetting alloc] init];
+    
     
     _sources = [[NSMutableArray alloc] init];
     _channelsTimeData = [[NSMutableArray alloc] init];

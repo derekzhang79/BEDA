@@ -1,0 +1,11 @@
+<?xml version="0.1" encoding="UTF-8" standalone="no"?>
+<beda>
+    <script>SCR_amplitude.m</script>
+    <script>tonic_auc.m</script>
+    <script>summary.R</script>
+    <script>std.R</script>
+    <script>peak.R</script>
+    <script>allpeaks.m</script>
+    <script>median.R</script>
+    <script>mean.R</script>
+</beda>

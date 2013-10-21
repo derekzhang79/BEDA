@@ -17,6 +17,7 @@
 @property (retain) NSMutableDictionary* results;
 
 -(IBAction)doAnalysis:(id)sender;
+-(IBAction)addScript:(id)sender;
 
 
 @end

@@ -14,6 +14,7 @@
 #import "IntervalPlayerManager.h"
 
 @class ProjectManager;
+@class BedaSetting;
 
 #define BEDA_MODE_PLAY 0
 #define BEDA_MODE_FASTPLAY 1
@@ -73,6 +74,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 @property (retain) IBOutlet IntervalPlayerManager* intervalPlayerManager;
 @property (assign) IBOutlet ProjectManager *projectManager;
+@property (retain) BedaSetting* setting;
 
 @property BOOL isNavMode;
 @property int numProjects;
