@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>pic3</string>
+	<string>beda_icon</string>
 	<key>CFBundleIdentifier</key>
 	<string>University-of-Illinois-at-Urbana-Champaign.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

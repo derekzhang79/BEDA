@@ -163,7 +163,7 @@
 
 - (void) createOffsetOverlay {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    return;
+//    return;
     
     if ([self offsetOverlay] != Nil) {
         return;
@@ -328,7 +328,7 @@
         
         [[self offsetOverlay] setStringValue:theProjName];
     } else {
-        [[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%lf", [self offset]]];
+        [[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%lf sec", [self offset]]];
     }
 }
 

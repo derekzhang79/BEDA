@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03092AF51816286000F721C9 /* beda_icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 03092AF41816285F00F721C9 /* beda_icon.icns */; };
 		0314637B1762F675007B075B /* ChannelTimeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314637A1762F675007B075B /* ChannelTimeData.m */; };
 		0314637E1762F685007B075B /* SourceTimeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314637D1762F685007B075B /* SourceTimeData.m */; };
 		031463801765ADDD007B075B /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0314637F1765ADDD007B075B /* stop.png */; };
@@ -136,6 +137,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		03092AF41816285F00F721C9 /* beda_icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = beda_icon.icns; sourceTree = "<group>"; };
 		031463791762F675007B075B /* ChannelTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTimeData.h; sourceTree = "<group>"; };
 		0314637A1762F675007B075B /* ChannelTimeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTimeData.m; sourceTree = "<group>"; };
 		0314637C1762F685007B075B /* SourceTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceTimeData.h; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 		036723B416D181D8004F14D6 = {
 			isa = PBXGroup;
 			children = (
+				03092AF41816285F00F721C9 /* beda_icon.icns */,
 				0383DD0117FE374D0092FED9 /* CorePlot.xcodeproj */,
 				036723C616D181D9004F14D6 /* BEDA */,
 				036723BF16D181D9004F14D6 /* Frameworks */,
@@ -663,6 +666,7 @@
 				037E770317FD29A30045223C /* unlock.png in Resources */,
 				037E770517FD2AC30045223C /* playbutton.png in Resources */,
 				B23E60C61814FB3C00FF24DA /* setting.xml in Resources */,
+				03092AF51816286000F721C9 /* beda_icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
