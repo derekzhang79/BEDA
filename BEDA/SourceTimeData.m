@@ -118,8 +118,22 @@
         NSString *time = nil;
         
         // If we can parse the sensor data
+        BOOL parsed = NO;
         
         if ([scanner scanUpToString:@"," intoString:&time] && [scanner scanFloat:&zAxis] && [scanner scanFloat:&yAxis] && [scanner scanFloat:&xAxis] && [scanner scanFloat:&battery] && [scanner scanFloat:&Celsius] && [scanner scanFloat:&EDA] &&[scanner scanInt:&event]) {
+            parsed = YES;
+        } else {
+            // Create a scanner for the second scan
+            NSScanner *scanner = [NSScanner scannerWithString:line];
+            [scanner setCharactersToBeSkipped:
+             [NSCharacterSet characterSetWithCharactersInString:@"\n, "]];
+            if (parsed == NO && [scanner scanFloat:&zAxis] && [scanner scanFloat:&yAxis] && [scanner scanFloat:&xAxis] && [scanner scanFloat:&battery] && [scanner scanFloat:&Celsius] && [scanner scanFloat:&EDA] &&[scanner scanUpToString:@"" intoString:&time]) {
+                parsed = YES;
+            }
+        }
+
+
+        if (parsed) {
             // Process the values as needed.
             NSArray* tokens = [time componentsSeparatedByString:@"."];
             NSDate* date = [NSDate dateWithNaturalLanguageString:[tokens objectAtIndex:0]];
