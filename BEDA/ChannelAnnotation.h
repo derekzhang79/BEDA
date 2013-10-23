@@ -18,7 +18,6 @@
 @property double t;
 @property double duration;
 @property (copy) NSString* text;
-@property (copy) NSString* type;
 @property BOOL isTextVisible;
 
 - (BOOL) isSingle;

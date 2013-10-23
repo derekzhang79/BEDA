@@ -855,10 +855,10 @@
             [[[self channelAnnotWindowController] window] makeMainWindow];
             NSLog(@"%s : we already has DataWindowController", __PRETTY_FUNCTION__);
         }
-    
-        ChannelAnnotationWindowController *cw = [[ChannelAnnotationWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
         
+        ChannelAnnotationWindowController *cw = [[ChannelAnnotationWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
         ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
+        
         [cw setAnnot:ca];
         [cw setManager:[self channelAnnotationManager]];
         

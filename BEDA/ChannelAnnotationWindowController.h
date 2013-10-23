@@ -20,7 +20,6 @@
 
 @property (nonatomic, retain) IBOutlet NSTextField* annottext;
 @property (nonatomic, retain) IBOutlet NSTextField* duration;
-@property (nonatomic, retain) IBOutlet NSComboBox *annottype;
 
 - (IBAction)onApply:(id)sender;
 
