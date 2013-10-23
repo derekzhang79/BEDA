@@ -10,49 +10,6 @@
 #import "BedaController.h"
 #import "ChannelTimeData.h"
 
-//@implementation ChannelAnnotion
-//
-//@synthesize t;
-//@synthesize duration;
-//@synthesize text;
-//
-//
-//- (id) initAtTime:(double) _t withText:(NSString*) _text {
-//    self = [super init];
-//    
-//    if (self) {
-//        // Initialization code here
-//        NSLog(@"%s", __PRETTY_FUNCTION__);
-//        [self setT:_t];
-//        [self setDuration:0.0];
-//        [self setText:_text];
-//    }
-//    return self;
-//}
-//
-//- (id) initAtTime:(double) _t during:(double)_duration withText:(NSString*) _text {
-//    self = [super init];
-//    
-//    if (self) {
-//        // Initialization code here
-//        NSLog(@"%s", __PRETTY_FUNCTION__);
-//        [self setT:_t];
-//        [self setDuration:_duration];
-//        [self setText:_text];
-//    }
-//    return self;
-//}
-//
-//- (BOOL) isSingle {
-//    if ([self duration] < 0.00001) {
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-//}
-//
-//@end
-
 @implementation ChannelAnnotationManager
 
 @synthesize channel;
@@ -93,7 +50,7 @@
     CPTPlotSymbol *symbol = [CPTPlotSymbol diamondPlotSymbol];
     symbol.fill = [CPTFill fillWithColor:color];
     
-    symbol.size = CGSizeMake(15.0f, 15.0f);
+    symbol.size = CGSizeMake(10.0f, 10.0f);
     p.plotSymbol = symbol;
     
     CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
@@ -153,6 +110,7 @@
     int annotIndex = (int)(index / 3);
 
     ChannelAnnotation* ca = [[self annots] objectAtIndex:annotIndex];
+    NSLog(@"%s: Annotation is selected with Right mouse click!!!", __PRETTY_FUNCTION__);
     NSUInteger flags = [[NSApp currentEvent] modifierFlags];
     if ( (flags & NSCommandKeyMask) ) {
         NSLog(@"%s: Annotation is selected for REMOVAL", __PRETTY_FUNCTION__);

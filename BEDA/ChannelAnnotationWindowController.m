@@ -16,6 +16,7 @@
 @synthesize annot;
 @synthesize manager;
 @synthesize annottext;
+@synthesize annottype;
 
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -24,6 +25,9 @@
 
 - (IBAction)onApply:(id)sender {
     NSLog(@"%s: %@", __PRETTY_FUNCTION__, [annottext stringValue] );
+    if( [[annottype stringValue] isEqualToString: @"Momentary"]){
+        
+    }
     [[self annot] setText:[annottext stringValue]];
     [[self manager] makeVisible:[self annot]];
     [[[self manager] plot] reloadData];

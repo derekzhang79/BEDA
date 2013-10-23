@@ -13,9 +13,10 @@
 @synthesize t;
 @synthesize duration;
 @synthesize text;
+@synthesize type;
 @synthesize isTextVisible;
 
-- (id) initAtTime:(double) _t withText:(NSString*) _text {
+- (id) initAtTime:(double) _t withText:(NSString*) _text withType:(NSString*) _type {
     self = [super init];
     
     if (self) {
@@ -24,6 +25,7 @@
         [self setT:_t];
         [self setDuration:0.0];
         [self setText:_text];
+        [self setType:_type];
         [self setIsTextVisible:NO];
     }
     return self;
@@ -40,8 +42,6 @@
         [self setDuration:_duration];
         [self setText:_text];
         [self setIsTextVisible:NO];
-
-//        [self setText:[[self annotationtext] stringValue]];
     }
     return self;
 }

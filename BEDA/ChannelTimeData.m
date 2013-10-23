@@ -841,13 +841,6 @@
           atPoint:(CGPoint)point
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-//    NSUInteger flags = [[NSApp currentEvent] modifierFlags];
-//    if ( (flags & NSCommandKeyMask) ) {
-//        NSLog(@"Detect CMD+Click: create an UI for annotation");
-//        [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@"NEW AT HEAD"];
-//
-//    }
     return YES;
 }
 
@@ -862,9 +855,10 @@
             [[[self channelAnnotWindowController] window] makeMainWindow];
             NSLog(@"%s : we already has DataWindowController", __PRETTY_FUNCTION__);
         }
-        ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
-
+    
         ChannelAnnotationWindowController *cw = [[ChannelAnnotationWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
+        
+        ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
         [cw setAnnot:ca];
         [cw setManager:[self channelAnnotationManager]];
         
@@ -903,6 +897,7 @@
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_DATA_PLOT]) {
 
     } else {
+        NSLog(@"%s: Behavior is selected with right mouse click", __PRETTY_FUNCTION__);
         BehaviorManager* am = [[self source] annots];
         Behavior* beh = [am behaviorByName:(NSString *)plot.identifier];
         
