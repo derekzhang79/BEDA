@@ -18,6 +18,7 @@
 		0320251A176FC3E600BC7020 /* GraphSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03202519176FC3E500BC7020 /* GraphSettingView.xib */; };
 		0320251D176FC44000BC7020 /* GraphSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0320251C176FC43F00BC7020 /* GraphSettingController.m */; };
 		032CEB3716FFCFE200F3DFE2 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */; };
+		035E5BE01817790C008F746F /* annotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 035E5BDF1817790C008F746F /* annotate.png */; };
 		036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723C016D181D9004F14D6 /* Cocoa.framework */; };
 		036723CB16D181D9004F14D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036723C916D181D9004F14D6 /* InfoPlist.strings */; };
 		036723CD16D181D9004F14D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723CC16D181D9004F14D6 /* main.m */; };
@@ -152,6 +153,7 @@
 		0320251C176FC43F00BC7020 /* GraphSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphSettingController.m; sourceTree = "<group>"; };
 		032CEB3516FFCFE200F3DFE2 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
+		035E5BDF1817790C008F746F /* annotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotate.png; sourceTree = "<group>"; };
 		036723BD16D181D9004F14D6 /* BEDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BEDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036723C016D181D9004F14D6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		036723C316D181D9004F14D6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -470,6 +472,7 @@
 		B26BF28B176183D5009BCC7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				035E5BDF1817790C008F746F /* annotate.png */,
 				037E770417FD2AC30045223C /* playbutton.png */,
 				037E770017FD29A30045223C /* lock.png */,
 				037E770117FD29A30045223C /* unlock.png */,
@@ -667,6 +670,7 @@
 				037E770517FD2AC30045223C /* playbutton.png in Resources */,
 				B23E60C61814FB3C00FF24DA /* setting.xml in Resources */,
 				03092AF51816286000F721C9 /* beda_icon.icns in Resources */,
+				035E5BE01817790C008F746F /* annotate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

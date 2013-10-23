@@ -28,8 +28,10 @@
     NSLog(@"%s: %@", __PRETTY_FUNCTION__, [annottext stringValue] );
     [[self annot] setText:[annottext stringValue]];
     [[self annot] setDuration: [duration doubleValue]];
+    [[[self manager] annots] addObject:[self annot]];
     [[self manager] makeVisible:[self annot]];
     [[[self manager] plot] reloadData];
+    [self close];
 
 }
 

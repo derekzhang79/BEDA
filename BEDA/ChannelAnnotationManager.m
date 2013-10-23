@@ -45,16 +45,19 @@
     // Set the style
     // 1. SavingPlotLine style
     CPTColor *color = [[self channel] toCPT:[NSColor redColor]];
-    
+    CPTMutableLineStyle *annotationLineStyle = [CPTMutableLineStyle lineStyle];
+    annotationLineStyle.lineWidth = 0.0f;
+
     // 2. Symbol style
     CPTPlotSymbol *symbol = [CPTPlotSymbol diamondPlotSymbol];
     symbol.fill = [CPTFill fillWithColor:color];
+    symbol.lineStyle = annotationLineStyle;
     
     symbol.size = CGSizeMake(10.0f, 10.0f);
     p.plotSymbol = symbol;
     
     CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
-    lineStyle.lineWidth = 5.0f;
+    lineStyle.lineWidth = 3.0f;
     lineStyle.lineColor = color;
     
     p.dataLineStyle = lineStyle;
@@ -69,8 +72,8 @@
 
     ChannelAnnotation* ca = [[ChannelAnnotation alloc] initAtTime:t withText:text];
 
-    [[self annots] addObject:ca];
-    [[self plot] reloadData];
+//    [[self annots] addObject:ca];
+//    [[self plot] reloadData];
     return ca;
 }
 
@@ -79,8 +82,8 @@
     
     ChannelAnnotation* ca = [[ChannelAnnotation alloc] initAtTime:t during:dur withText:text];
 
-    [[self annots] addObject:ca];
-    [[self plot] reloadData];
+//    [[self annots] addObject:ca];
+//    [[self plot] reloadData];
     return ca;
 }
 
@@ -110,7 +113,6 @@
     int annotIndex = (int)(index / 3);
 
     ChannelAnnotation* ca = [[self annots] objectAtIndex:annotIndex];
-    NSLog(@"%s: Annotation is selected with Right mouse click!!!", __PRETTY_FUNCTION__);
     NSUInteger flags = [[NSApp currentEvent] modifierFlags];
     if ( (flags & NSCommandKeyMask) ) {
         NSLog(@"%s: Annotation is selected for REMOVAL", __PRETTY_FUNCTION__);
@@ -139,6 +141,12 @@
     NSPoint nspt = NSPointFromCGPoint(viewPoint);
     NSPoint nspt2 = [[[self channel] view] convertPoint:nspt toView:Nil];
     NSLog(@"viewPoint = %lf, %lf: nspt2 = %lf, %lf", viewPoint.x, viewPoint.y, nspt2.x, nspt2.y);
+    
+    float gap = [[self channel] getGraph].plotAreaFrame.paddingLeft;
+    BedaController* beda = [[self channel ] beda ];
+    NSView* view = [[ [beda getSplitView] subviews] objectAtIndex:0];
+    NSRect rect = NSMakeRect(viewPoint.x + gap, viewPoint.y + 20, 2, 2);
+    [[beda popover] showRelativeToRect:rect ofView:view preferredEdge:NSMaxYEdge];
 }
 
 
@@ -198,8 +206,8 @@
     CPTTextLayer *textLayer = [CPTTextLayer layer];
     textLayer.text = [ann text];
     CPTMutableTextStyle *labelTextStyle = [CPTMutableTextStyle textStyle];
-    labelTextStyle.fontSize = 16;
-    labelTextStyle.color = [CPTColor purpleColor];
+    labelTextStyle.fontSize = 13;
+    labelTextStyle.color = [CPTColor grayColor];
     textLayer.textStyle = labelTextStyle;
     textLayer.paddingBottom = 10.0;
     return textLayer;
