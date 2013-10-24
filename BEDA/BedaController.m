@@ -174,8 +174,6 @@ static BedaController* g_instance = nil;
     frame.size.height = fixedHeight + 150 * 3;
     [[splitview superview] setFrame:frame];
     
-//    [[self graphScrollView] adjustPageHeightNew:mainFrame.size.height top:<#(CGFloat)#> bottom:<#(CGFloat)#> limit:<#(CGFloat)#>
- //  [[self mainSplitView] display];
     NSLog(@"%s : collapse view called", __PRETTY_FUNCTION__);
 }
 
@@ -210,9 +208,6 @@ static BedaController* g_instance = nil;
 }
 
 - (IBAction)hideSelectionPopover:(id)sender {
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
-     object:self];
     [[self SelectionPopover] close];
 }
 
@@ -716,14 +711,6 @@ static BedaController* g_instance = nil;
     [[NSNotificationCenter defaultCenter]
      postNotificationName:BEDA_NOTI_VIEW_UPDATE
      object:self];
-    
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    for (Source* s in [self sources]) {
-//        for (Channel* ch in [s channels]) {
-//            [ch zoomIn];
-//        }
-//    }
-
 }
 
 
@@ -844,28 +831,6 @@ static BedaController* g_instance = nil;
     [self spaceEvenly:[self movSplitView]];
     
 }
-
-//- (void)createMovSplitViewIfNotExist {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    if ([self movSplitView] != Nil) {
-//        return;
-//    }
-//    NSLog(@"%s : create a movSplitView", __PRETTY_FUNCTION__);
-//    
-//    NSSplitView* sv = [[NSSplitView alloc] init];
-//    [sv setVertical:YES];
-//    
-//    NSArray* v = [splitview subviews];
-//    NSView* firstView = Nil;
-//    if ([[splitview subviews] count] > 0) {
-//        firstView = [v objectAtIndex:0];
-//    }
-//    
-//    [splitview addSubview:sv positioned:NSWindowBelow relativeTo:firstView];
-//    
-//    [self setMovSplitView:sv];
-//    
-//}
 
 - (void)spaceEvenly:(NSSplitView *)splitView
 {
@@ -1079,14 +1044,6 @@ static BedaController* g_instance = nil;
     }
     
     [self spaceProportionaly:splitview];
-    
-    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:0.05f
-                                     target:self
-                                   selector:@selector(onCreateOffsetTimer:)
-                                   userInfo:nil
-                                    repeats:NO];
-
-
 }
  
  - (void) onGraphSplitViewResize:(NSNotification*) noti {

@@ -25,6 +25,14 @@
         // Initialization code here
         NSLog(@"%s", __PRETTY_FUNCTION__);
         [self setVisible:NO];
+        
+        for (ChannelTimeData* ch_others in [[ch sourceTimeData] channels]) {
+            if ([[ch_others channelSelector] visible]) {
+                [self setVisible:YES];
+                break;
+            }
+        }
+        
         [self setLeft:10.0];
         [self setRight:20.0];
         [self setChannel:ch];

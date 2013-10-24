@@ -37,6 +37,7 @@
     
     // Create header plot
     CPTScatterPlot* p = [[[CPTScatterPlot alloc] initWithFrame:CGRectNull] autorelease];
+    p.labelOffset = -6.0f;
     [self setPlot:p];
     p.identifier = BEDA_INDENTIFIER_CHANNEL_ANNOT_PLOT;
     p.dataSource = self;
@@ -209,7 +210,7 @@
     labelTextStyle.fontSize = 13;
     labelTextStyle.color = [CPTColor grayColor];
     textLayer.textStyle = labelTextStyle;
-    textLayer.paddingTop = 80.0;
+//    textLayer.paddingTop = 80.0;
 //    textLayer.paddingBottom = 10.0;
     return textLayer;
 }

@@ -2,7 +2,7 @@
 data = csvread('input.csv');
 data = exp_smooth(data, 0.01)
 
-rate = 32;
+rate = 8;
 window_len = 60 * rate; % a number of data per window
 start_index = 1;
 N = length(data);
@@ -29,5 +29,5 @@ end
 
 output = sum_output / num_output
 csvwrite('output.csv', output);
-csvwrite('output2.csv', [(x1/32)/(1440*60), x1/32, x1, y1])
+csvwrite('output2.csv', [(x1/rate)/(1440*60), x1/rate, x1, y1])
 exit();

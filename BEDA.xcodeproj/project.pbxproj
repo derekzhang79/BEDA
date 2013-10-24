@@ -20,6 +20,9 @@
 		032CEB3716FFCFE200F3DFE2 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */; };
 		035E5BE01817790C008F746F /* annotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 035E5BDF1817790C008F746F /* annotate.png */; };
 		035E5D9B1818A326008F746F /* range.png in Resources */ = {isa = PBXBuildFile; fileRef = 035E5D9A1818A326008F746F /* range.png */; };
+		035E5D9E18190215008F746F /* bottomview.png in Resources */ = {isa = PBXBuildFile; fileRef = 035E5D9C18190215008F746F /* bottomview.png */; };
+		035E5D9F18190215008F746F /* topview.png in Resources */ = {isa = PBXBuildFile; fileRef = 035E5D9D18190215008F746F /* topview.png */; };
+		035E5DA718191C3C008F746F /* export.png in Resources */ = {isa = PBXBuildFile; fileRef = 035E5DA618191C3C008F746F /* export.png */; };
 		036723C116D181D9004F14D6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036723C016D181D9004F14D6 /* Cocoa.framework */; };
 		036723CB16D181D9004F14D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036723C916D181D9004F14D6 /* InfoPlist.strings */; };
 		036723CD16D181D9004F14D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 036723CC16D181D9004F14D6 /* main.m */; };
@@ -156,6 +159,9 @@
 		032CEB3616FFCFE200F3DFE2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		035E5BDF1817790C008F746F /* annotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotate.png; sourceTree = "<group>"; };
 		035E5D9A1818A326008F746F /* range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = range.png; sourceTree = "<group>"; };
+		035E5D9C18190215008F746F /* bottomview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottomview.png; sourceTree = "<group>"; };
+		035E5D9D18190215008F746F /* topview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topview.png; sourceTree = "<group>"; };
+		035E5DA618191C3C008F746F /* export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = export.png; sourceTree = "<group>"; };
 		036723BD16D181D9004F14D6 /* BEDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BEDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036723C016D181D9004F14D6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		036723C316D181D9004F14D6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -474,6 +480,9 @@
 		B26BF28B176183D5009BCC7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				035E5DA618191C3C008F746F /* export.png */,
+				035E5D9C18190215008F746F /* bottomview.png */,
+				035E5D9D18190215008F746F /* topview.png */,
 				035E5D9A1818A326008F746F /* range.png */,
 				035E5BDF1817790C008F746F /* annotate.png */,
 				037E770417FD2AC30045223C /* playbutton.png */,
@@ -675,6 +684,9 @@
 				03092AF51816286000F721C9 /* beda_icon.icns in Resources */,
 				035E5BE01817790C008F746F /* annotate.png in Resources */,
 				035E5D9B1818A326008F746F /* range.png in Resources */,
+				035E5D9E18190215008F746F /* bottomview.png in Resources */,
+				035E5D9F18190215008F746F /* topview.png in Resources */,
+				035E5DA718191C3C008F746F /* export.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

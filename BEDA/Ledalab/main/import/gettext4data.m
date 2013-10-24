@@ -16,7 +16,7 @@ function [time, conductance, event] = gettextdata4(fullpathname)
 M = dlmread(fullpathname);
 
 conductance = M(:,1);
-time = (1:length(conductance)) / 32.0;
+time = (1:length(conductance)) / 8.0;
 event = [];
 
 end
