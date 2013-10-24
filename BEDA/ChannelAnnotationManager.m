@@ -209,7 +209,8 @@
     labelTextStyle.fontSize = 13;
     labelTextStyle.color = [CPTColor grayColor];
     textLayer.textStyle = labelTextStyle;
-    textLayer.paddingBottom = 10.0;
+    textLayer.paddingTop = 80.0;
+//    textLayer.paddingBottom = 10.0;
     return textLayer;
 }
 

@@ -1038,6 +1038,35 @@
 
         return textLayer;
     }
+    
+    if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]){
+        double t;
+        if(index > 2){
+            t = [self channelSelector].right;
+            t = round(t);
+        } else {
+            t = [self channelSelector].left;
+            t = round(t);
+        }
+                
+        CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+        CPTXYAxis *x          = axisSet.xAxis;
+        CPTTimeFormatter *timeFormatter = (CPTTimeFormatter *)x.labelFormatter;
+        NSString * headerString = [timeFormatter stringFromNumber:[NSNumber numberWithDouble:t]];
+        
+        
+        CPTTextLayer *textLayer = [CPTTextLayer layer];
+        textLayer.text = headerString;
+        CPTMutableTextStyle *labelTextStyle = [CPTMutableTextStyle textStyle];
+        labelTextStyle.fontSize = 13;
+        labelTextStyle.color = [CPTColor blackColor];
+        textLayer.textStyle = labelTextStyle;
+        textLayer.paddingBottom = 10.0;
+        textLayer.paddingLeft = 50.0;
+        
+        return textLayer;
+    }
+    
     return nil;
 }
 

@@ -202,7 +202,19 @@ static BedaController* g_instance = nil;
     [[self popover] close];
 }
 
+- (IBAction)showSelectionPopover:(id)sender {
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
+     object:self];
+     [[self SelectionPopover] showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+}
 
+- (IBAction)hideSelectionPopover:(id)sender {
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
+     object:self];
+    [[self SelectionPopover] close];
+}
 
 -(IBAction)openDataAnalysisWindow:(id)sender{
     NSLog(@"%s", __PRETTY_FUNCTION__);
