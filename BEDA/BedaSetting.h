@@ -2,7 +2,7 @@
 //  BedaSetting.h
 //  BEDA
 //
-//  Created by Sehoon Ha on 10/21/13.
+//  Created by Jennifer Kim on 10/21/13.
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 
