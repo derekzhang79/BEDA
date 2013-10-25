@@ -2,7 +2,7 @@
 //  SummaryProjectOutline.m
 //  BEDA
 //
-//  Created by Sehoon Ha on 8/14/13.
+//  Created by Jennifer Kim on 8/14/13.
 //  Copyright (c) 2013 Jennifer Soft. All rights reserved.
 //
 

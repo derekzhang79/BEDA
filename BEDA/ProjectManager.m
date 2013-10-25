@@ -223,6 +223,17 @@
 
 -(NSColor *)getRandomColor{
     NSColor *color;
+//    if([[self beda] numProjects] == 1){
+//        color= [NSColor colorWithCalibratedRed:0 green:0 blue:1 alpha:0.7];
+//    }
+//    
+//    if ([[self beda] numProjects] == 2){
+//        color= [NSColor colorWithCalibratedRed:0 green:1 blue:0 alpha:0.7];
+//    }
+//    
+//    if ([[self beda] numProjects] == 3){
+//        color= [NSColor colorWithCalibratedRed:1 green:1 blue:0 alpha:0.7];
+//    }
     float randomRed = (rand() % 256) / 256.0;//3:you can write any number as you wish...
     float randomGreen =(rand() % 256) / 256.0;//2:you can write any number as you wish...
     float randomBlue =(rand() % 256) / 256.0;//4:you can write any number as you wish...
