@@ -223,7 +223,9 @@
         NSArray *args = [NSArray arrayWithObjects: @"CMD", @"BATCH", filename, nil];
         
         NSTask* task = [[NSTask alloc] init];
-        [task setLaunchPath:@"/usr/bin/R"];
+//        [task setLaunchPath:@"/usr/bin/R"];
+        [task setLaunchPath:[[[self beda] setting] execR]];
+
         [task setCurrentDirectoryPath:[[NSBundle mainBundle] resourcePath]];
         [task setArguments:args];
         [task launch];
@@ -232,7 +234,9 @@
         NSArray *args = [NSArray arrayWithObjects: @"-nodesktop", @"-nosplash", @"-r", stem, nil];
         
         NSTask* task = [[NSTask alloc] init];
-        [task setLaunchPath:@"/usr/bin/matlab"];
+//        [task setLaunchPath:@"/usr/bin/matlab"];
+        [task setLaunchPath:[[[self beda] setting] execMatlab]];
+
         [task setCurrentDirectoryPath:[[NSBundle mainBundle] resourcePath]];
         [task setArguments:args];
         [task launch];

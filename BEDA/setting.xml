@@ -1,5 +1,7 @@
 <?xml version="0.1" encoding="UTF-8" standalone="no"?>
 <beda>
+    <matlab>/usr/bin/matlab</matlab>
+    <r>/usr/bin/R</r>
     <script>SCR_amplitude.m</script>
     <script>tonic_auc.m</script>
     <script>summary.R</script>

@@ -13,6 +13,9 @@
 }
 
 @property (retain) NSMutableArray* scriptnames;
+@property (copy) NSString* execMatlab;
+@property (copy) NSString* execR;
+
 
 - (void)loadDefaultFile;
 - (void)loadFile:(NSURL*)url;

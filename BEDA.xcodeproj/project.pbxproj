@@ -71,6 +71,8 @@
 		B225ED9C1793ACA0002FF5A7 /* ChannelAnnotationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B225ED9B1793ACA0002FF5A7 /* ChannelAnnotationManager.m */; };
 		B22980B6176E6F6D004C2115 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22980B5176E6F6D004C2115 /* TableView.xib */; };
 		B22980B9176E6F7B004C2115 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22980B8176E6F7B004C2115 /* TableViewController.m */; };
+		B22C657E1819EBE5000D0913 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22C657D1819EBE5000D0913 /* PreferenceController.m */; };
+		B22C65801819EC31000D0913 /* PreferenceWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22C657F1819EC31000D0913 /* PreferenceWindow.xib */; };
 		B22FF564178BD169008CBFFE /* IntervalPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */; };
 		B23E60C21814EDD300FF24DA /* BedaSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = B23E60C11814EDD300FF24DA /* BedaSetting.m */; };
 		B23E60C61814FB3C00FF24DA /* setting.xml in Resources */ = {isa = PBXBuildFile; fileRef = B23E60C51814FB3C00FF24DA /* setting.xml */; };
@@ -230,6 +232,9 @@
 		B22980B5176E6F6D004C2115 /* TableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		B22980B7176E6F7B004C2115 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		B22980B8176E6F7B004C2115 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		B22C657C1819EBE5000D0913 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
+		B22C657D1819EBE5000D0913 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
+		B22C657F1819EC31000D0913 /* PreferenceWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferenceWindow.xib; sourceTree = "<group>"; };
 		B22FF562178BD168008CBFFE /* IntervalPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalPlayerManager.h; sourceTree = "<group>"; };
 		B22FF563178BD168008CBFFE /* IntervalPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalPlayerManager.m; sourceTree = "<group>"; };
 		B23E60C01814EDD300FF24DA /* BedaSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BedaSetting.h; sourceTree = "<group>"; };
@@ -361,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				B26BF27D176182B6009BCC7D /* AppController */,
+				B22C657B1819EAF0000D0913 /* Preference */,
 				B27C396817715F340025188F /* Annotation */,
 				B26BF28A176183C1009BCC7D /* Movie */,
 				031463781762F62F007B075B /* TimeData */,
@@ -415,6 +421,18 @@
 			name = Script;
 			sourceTree = "<group>";
 		};
+		B22C657B1819EAF0000D0913 /* Preference */ = {
+			isa = PBXGroup;
+			children = (
+				B23E60C01814EDD300FF24DA /* BedaSetting.h */,
+				B23E60C11814EDD300FF24DA /* BedaSetting.m */,
+				B22C657C1819EBE5000D0913 /* PreferenceController.h */,
+				B22C657D1819EBE5000D0913 /* PreferenceController.m */,
+				B22C657F1819EC31000D0913 /* PreferenceWindow.xib */,
+			);
+			name = Preference;
+			sourceTree = "<group>";
+		};
 		B25CBBE516D1DDB300626FA9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,8 +456,6 @@
 			children = (
 				B26BF27E176182EE009BCC7D /* BedaController.h */,
 				B26BF27F176182EE009BCC7D /* BedaController.m */,
-				B23E60C01814EDD300FF24DA /* BedaSetting.h */,
-				B23E60C11814EDD300FF24DA /* BedaSetting.m */,
 				B23E60C51814FB3C00FF24DA /* setting.xml */,
 				038E9D2C177A6DE800ACE963 /* DataAnalysisController.h */,
 				038E9D2D177A6DE800ACE963 /* DataAnalysisController.m */,
@@ -687,6 +703,7 @@
 				035E5D9E18190215008F746F /* bottomview.png in Resources */,
 				035E5D9F18190215008F746F /* topview.png in Resources */,
 				035E5DA718191C3C008F746F /* export.png in Resources */,
+				B22C65801819EC31000D0913 /* PreferenceWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,6 +775,7 @@
 				B2BAA42E17FD3F2700281493 /* SCR_amplitude.m in Sources */,
 				B2D249651800B90C001EB73A /* ChannelExtraGraph.m in Sources */,
 				B23E60C21814EDD300FF24DA /* BedaSetting.m in Sources */,
+				B22C657E1819EBE5000D0913 /* PreferenceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,8 @@
 @implementation BedaSetting
 
 @synthesize scriptnames = _scriptnames;
+@synthesize execMatlab = _execMatlab;
+@synthesize execR = _execR;
 
 -(id) init {
     self = [super init];
@@ -69,7 +71,14 @@
             NSString* scriptname = [child stringValue];
             NSLog(@"script = %@", scriptname);
             [[self scriptnames] addObject:scriptname];
+        } else if ([name isEqualToString:@"matlab"] == YES) {
+            [self setExecMatlab:[child stringValue]];
+            NSLog(@"matlab = %@", [self execMatlab]);
+        } else if ([name isEqualToString:@"r"] == YES) {
+            [self setExecR:[child stringValue]];
+            NSLog(@"matlab = %@", [self execR]);
         }
+
     }
     
 }
@@ -97,6 +106,16 @@
         NSXMLElement *nodeSN = (NSXMLElement *)[NSXMLNode elementWithName:@"script"];
         [nodeSN setStringValue:sn];
         [root addChild:nodeSN];
+    }
+    {
+        NSXMLElement *nodeMatlab = (NSXMLElement *)[NSXMLNode elementWithName:@"matlab"];
+        [nodeMatlab setStringValue:[self execMatlab]];
+        [root addChild:nodeMatlab];
+    }
+    {
+        NSXMLElement *nodeR = (NSXMLElement *)[NSXMLNode elementWithName:@"r"];
+        [nodeR setStringValue:[self execR]];
+        [root addChild:nodeR];
     }
     
     NSLog(@"\n\n%@\n\n",     [xmlDoc XMLStringWithOptions:NSXMLNodePrettyPrint]);

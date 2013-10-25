@@ -15,6 +15,7 @@
 #import "ChannelTimeData.h"
 #import "ProjectManager.h"
 #import "BedaSetting.h"
+#import "PreferenceController.h"
 
 
 float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
@@ -198,6 +199,13 @@ static BedaController* g_instance = nil;
 
 - (IBAction)hideInfoPopover:(id)sender {
     [[self popover] close];
+}
+
+- (IBAction)openPreferenceWindow:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    PreferenceController* con = [[PreferenceController alloc] initWithWindowNibName:@"PreferenceWindow"];
+    [con showWindow:self];
+
 }
 
 - (IBAction)showSelectionPopover:(id)sender {
