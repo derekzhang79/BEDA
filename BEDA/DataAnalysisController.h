@@ -18,6 +18,7 @@
 
 -(IBAction)doAnalysis:(id)sender;
 -(IBAction)addScript:(id)sender;
+- (IBAction)editScript:(id)sender;
 
 
 @end

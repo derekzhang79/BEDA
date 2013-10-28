@@ -138,12 +138,50 @@
     [[[self beda] setting] saveDefaultFile];
 }
 
+- (IBAction)editScript:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSString* scriptname = [comboBoxScriptSelection stringValue];
+    bool isR = [scriptname hasSuffix:@".R"];
+    bool isM = [scriptname hasSuffix:@".m"];
+    if (isR == NO && isM == NO) {
+        NSLog(@"This is not a valid scriptname");
+        return;
+    }
+//    NSLog(@"script = %@", scriptname);
+
+    NSMutableString* filename =  [[NSMutableString alloc] init];
+    [filename appendString:[[NSBundle mainBundle] resourcePath]];
+    [filename appendString:@"/"];
+    [filename appendString:scriptname];
+    NSLog(@"filename = %@", filename);
+
+    // Use "open -t filename" command to open it with the default text editor
+    NSArray *args = [NSArray arrayWithObjects: @"-t", filename, nil];
+    
+    NSTask* task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/usr/bin/open"];
+    
+    [task setCurrentDirectoryPath:[[NSBundle mainBundle] resourcePath]];
+    [task setArguments:args];
+    [task launch];
+    [task waitUntilExit];
+    
+}
+
 
 -(IBAction)doAnalysis:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
 //    NSString* scriptname = @"mean.R";
     NSString* scriptname = [comboBoxScriptSelection stringValue];
+    bool isR = [scriptname hasSuffix:@".R"];
+    bool isM = [scriptname hasSuffix:@".m"];
+    if (isR == NO && isM == NO) {
+        NSLog(@"This is not a valid scriptname");
+        return;
+    }
+    
+    
     NSMutableArray* currentResult = [[NSMutableArray alloc] init];
     
     int chIndex = 0;
