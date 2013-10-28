@@ -17,19 +17,19 @@
 - (void) awakeFromNib {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 
-    _xlabels =  [[NSMutableArray alloc] initWithObjects:@"", @"02_27.session", @"03_01.session", @"03_06.session", @"03_27.session",
-                 @"", @"04_09.session", @"04_10.session", @"04_11.session",
-                 @"", @"04_18.session", @"04_30.session", @"05_02.session", @"05_03.session",
-                 @"", @"05_07.session", @"05_09.session", @"05_10.session",
-                 nil];
-    _yauc =  [[NSMutableArray alloc] initWithObjects:@"0", @"3.114292577", @"5.185298535", @"3.623843235", @"4.11317037",
-                                                     @"0", @"8.15014977",  @"5.910163732", @"7.665497886",
-                                                     @"0", @"4.699031394", @"3.489960873", @"6.579609001", @"4.516224149",
-                                                     @"0", @"2.179248277", @"4.627932952", @"3.481698746", nil];
-    _ypeaks =  [[NSMutableArray alloc] initWithObjects:@"0", @"0.000181678", @"0.000307652", @"0.000304125", @"0.000238802",
-                                                    @"0", @"0.000374443",  @"0.000379543", @"0.000227857",
-                                                    @"0", @"0.000395557", @"0.000319846", @"0.000403646", @"0.00036145",
-                                                    @"0", @"0.000412252", @"0.00022929", @"0.000255715", nil];
+//    _xlabels =  [[NSMutableArray alloc] initWithObjects:@"", @"02_27.session", @"03_01.session", @"03_06.session", @"03_27.session",
+//                 @"", @"04_09.session", @"04_10.session", @"04_11.session",
+//                 @"", @"04_18.session", @"04_30.session", @"05_02.session", @"05_03.session",
+//                 @"", @"05_07.session", @"05_09.session", @"05_10.session",
+//                 nil];
+//    _yauc =  [[NSMutableArray alloc] initWithObjects:@"0", @"3.114292577", @"5.185298535", @"3.623843235", @"4.11317037",
+//                                                     @"0", @"8.15014977",  @"5.910163732", @"7.665497886",
+//                                                     @"0", @"4.699031394", @"3.489960873", @"6.579609001", @"4.516224149",
+//                                                     @"0", @"2.179248277", @"4.627932952", @"3.481698746", nil];
+//    _ypeaks =  [[NSMutableArray alloc] initWithObjects:@"0", @"0.000181678", @"0.000307652", @"0.000304125", @"0.000238802",
+//                                                    @"0", @"0.000374443",  @"0.000379543", @"0.000227857",
+//                                                    @"0", @"0.000395557", @"0.000319846", @"0.000403646", @"0.00036145",
+//                                                    @"0", @"0.000412252", @"0.00022929", @"0.000255715", nil];
 
     
     for (NSUInteger i = 0; i < [[self yauc] count]; i++) {
@@ -210,14 +210,14 @@
     }
     
     // Add legend
-    graph.legend                 = [CPTLegend legendWithPlots:[NSArray arrayWithObjects:plotauc, plotpeaks, nil]];
-    graph.legend.textStyle       = x.titleTextStyle;
-    graph.legend.borderLineStyle = x.axisLineStyle;
-    graph.legend.cornerRadius    = 5.0;
-    graph.legend.numberOfRows    = 1;
-    graph.legend.swatchSize      = CGSizeMake(25.0, 25.0);
-    graph.legendAnchor           = CPTRectAnchorBottom;
-    graph.legendDisplacement     = CGPointMake(0.0, 0.0);
+//    graph.legend                 = [CPTLegend legendWithPlots:[NSArray arrayWithObjects:plotauc, plotpeaks, nil]];
+//    graph.legend.textStyle       = x.titleTextStyle;
+//    graph.legend.borderLineStyle = x.axisLineStyle;
+//    graph.legend.cornerRadius    = 5.0;
+//    graph.legend.numberOfRows    = 1;
+//    graph.legend.swatchSize      = CGSizeMake(25.0, 25.0);
+//    graph.legendAnchor           = CPTRectAnchorBottom;
+//    graph.legendDisplacement     = CGPointMake(0.0, 0.0);
     
     // set as hosted graph
     graphview.hostedGraph = graph;
