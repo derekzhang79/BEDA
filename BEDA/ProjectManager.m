@@ -388,11 +388,12 @@
             break;
         }
     }
+    
+    NSLog(@"%s : load annotation manager data", __PRETTY_FUNCTION__);
     if (target == Nil) {
         NSLog(@"%s : does not have annotation manager data\n",  __PRETTY_FUNCTION__);
         return;
     }
-    NSLog(@"%s : load annotation manager data", __PRETTY_FUNCTION__);
     for (NSXMLElement* child in [target children]) {
         if ([[child name] isEqualToString:@"ChannelAnnotation"] == NO) {
             continue;
@@ -400,7 +401,7 @@
         double t = [[[child attributeForName:@"t"] stringValue] doubleValue];
         double duration = [[[child attributeForName:@"duration"] stringValue] doubleValue];
         NSString* text = [[child attributeForName:@"text"] stringValue];
-        NSLog(@"%s : t, d, text = %lf, %lf, %@", __PRETTY_FUNCTION__, t, duration, text);
+        NSLog(@"%s : t = %lf, d = %lf, text = %@", __PRETTY_FUNCTION__, t, duration, text);
 
         [cam addDoubleAt:t during:duration as:text];
     }
