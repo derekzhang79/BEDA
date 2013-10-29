@@ -853,14 +853,6 @@
     if ( [event clickCount] == 2 ) {
         NSLog(@"%@", @"double clicked");
         
-//        ChannelAnnotationWindowController *cw = [[ChannelAnnotationWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
-//        ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
-//        
-//        [cw setAnnot:ca];
-//        [cw setManager:[self channelAnnotationManager]];
-//        [cw showWindow:self];
-//        [self setChannelAnnotWindowController:cw];
-        
         ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
         AnnotationPopoverController* apc = [[self beda] annotationPopoverController];
         [apc setAnnot:ca andManager:[self channelAnnotationManager]];
@@ -933,6 +925,7 @@
              postNotificationName:BEDA_NOTI_CHANNEL_HEAD_MOVED
              object:self];
         }
+        
 
     }
 
@@ -1062,13 +1055,21 @@
     
     if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]){
         double t;
-        if(index > 2){
+        if(index > 1){
             t = [self channelSelector].right;
             t = round(t);
+            if(index % 2 == 0){
+                return nil;
+            }
         } else {
             t = [self channelSelector].left;
             t = round(t);
+            if(index % 2 == 1){
+                return nil;
+            }
         }
+        
+        
                 
         CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
         CPTXYAxis *x          = axisSet.xAxis;

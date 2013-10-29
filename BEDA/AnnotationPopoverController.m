@@ -39,6 +39,12 @@
     [[self popover] close];
 }
 
+- (IBAction)onButtonClose:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [[self popover] close];
+}
+
 -(void) setAnnot:(ChannelAnnotation*)ca andManager:(ChannelAnnotationManager*)ma {
     [self setAnnot:ca];
     [self setManager:ma];

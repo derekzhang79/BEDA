@@ -23,6 +23,7 @@
 
 - (IBAction)onButtonRemove:(id)sender;
 - (IBAction)onButtonApply:(id)sender;
+- (IBAction)onButtonClose:(id)sender;
 
 -(void) setAnnot:(ChannelAnnotation*)ca andManager:(ChannelAnnotationManager*)ma;
 
