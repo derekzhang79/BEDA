@@ -851,10 +851,6 @@
 
     if ( [event clickCount] == 2 ) {
         NSLog(@"%@", @"double clicked");
-//        if ([self channelAnnotWindowController] != Nil) {
-//            [[[self channelAnnotWindowController] window] makeMainWindow];
-//            NSLog(@"%s : we already has DataWindowController", __PRETTY_FUNCTION__);
-//        }
         
         ChannelAnnotationWindowController *cw = [[ChannelAnnotationWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
         ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
@@ -863,7 +859,6 @@
         [cw setManager:[self channelAnnotationManager]];
         [cw showWindow:self];
         [self setChannelAnnotWindowController:cw];
-
 
     }
     
@@ -1020,13 +1015,16 @@
     if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_HEADER_PLOT]){
         double t = [self headerTime];
         t = round(t);
+        
+        if(index % 2 == 0){
+            return nil;
+        }
 
         CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
         CPTXYAxis *x          = axisSet.xAxis;
         CPTTimeFormatter *timeFormatter = (CPTTimeFormatter *)x.labelFormatter;
         NSString * headerString = [timeFormatter stringFromNumber:[NSNumber numberWithDouble:t]];
 
-        
         CPTTextLayer *textLayer = [CPTTextLayer layer];
         textLayer.text = headerString;
         CPTMutableTextStyle *labelTextStyle = [CPTMutableTextStyle textStyle];
