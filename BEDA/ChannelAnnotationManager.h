@@ -11,20 +11,6 @@
 #import "ChannelAnnotation.h"
 
 @class ChannelTimeData;
-//@interface ChannelAnnotion : NSObject {
-//}
-//
-//- (id) initAtTime:(double) _t withText:(NSString*) _text;
-//- (id) initAtTime:(double) _t during:(double)_duration withText:(NSString*) _text;
-//
-//@property double t;
-//@property double duration;
-//@property (copy) NSString* text;
-//@property (assign) IBOutlet NSTextField* annotationtext;
-//
-//- (BOOL) isSingle;
-//
-//@end
 
 @interface ChannelAnnotationManager : NSObject<CPTPlotDataSource, CPTPlotSpaceDelegate, CPTScatterPlotDelegate> {
     
@@ -33,6 +19,9 @@
 @property (assign) ChannelTimeData* channel;
 @property (assign) CPTScatterPlot* plot;
 @property (retain) NSMutableArray* annots;
+
+@property (nonatomic, retain) IBOutlet NSTextField* annottext;
+@property (nonatomic, retain) IBOutlet NSTextField* duration;
 
 - (id) initWithChannel:(ChannelTimeData*) ch;
 

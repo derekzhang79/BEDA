@@ -403,7 +403,10 @@
         NSString* text = [[child attributeForName:@"text"] stringValue];
         NSLog(@"%s : t = %lf, d = %lf, text = %@", __PRETTY_FUNCTION__, t, duration, text);
 
-        [cam addDoubleAt:t during:duration as:text];
+//        [cam addDoubleAt:t during:duration as:text];
+        ChannelAnnotation* ca = [cam addDoubleAt:t during:duration as:text];
+        [ca setIsTextVisible:YES];
+        [[cam annots] addObject:ca];
     }
 
 }

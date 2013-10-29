@@ -127,6 +127,9 @@
         
         NSLog(@"%s: Also Annotation is selected for showing text", __PRETTY_FUNCTION__);
         [self makeVisible:ca];
+        ////////////////////////////////////////////////
+        [[self annottext] setStringValue:[ca text]];
+        [[self duration] setDoubleValue:[ca duration]];
     }
     double minvalue = [[self channel] minValue];
     double maxvalue = [[self channel] maxValue];

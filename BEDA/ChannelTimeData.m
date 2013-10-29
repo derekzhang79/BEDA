@@ -888,6 +888,7 @@
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_CHANNEL_ANNOT_PLOT]) {
 
         [[self channelSelector] select:index];
+        
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_DATA_PLOT]) {
 
     } else {
