@@ -24,7 +24,7 @@
         [self setT:_t];
         [self setDuration:0.0];
         [self setText:_text];
-        [self setIsTextVisible:NO];
+        [self setIsTextVisible:YES];
     }
     return self;
 }
@@ -39,7 +39,7 @@
         [self setT:_t];
         [self setDuration:_duration];
         [self setText:_text];
-        [self setIsTextVisible:NO];
+        [self setIsTextVisible:YES];
     }
     return self;
 }

@@ -73,8 +73,6 @@
 
     ChannelAnnotation* ca = [[ChannelAnnotation alloc] initAtTime:t withText:text];
 
-//    [[self annots] addObject:ca];
-//    [[self plot] reloadData];
     return ca;
 }
 
@@ -83,8 +81,6 @@
     
     ChannelAnnotation* ca = [[ChannelAnnotation alloc] initAtTime:t during:dur withText:text];
 
-//    [[self annots] addObject:ca];
-//    [[self plot] reloadData];
     return ca;
 }
 
@@ -97,7 +93,7 @@
         for (ChannelTimeData* ctd in [std channels]) {
             ChannelAnnotationManager* cam = [ctd channelAnnotationManager];
             for (ChannelAnnotation* a in [cam annots]) {
-                [a setIsTextVisible:NO];
+                [a setIsTextVisible:YES];
             }
             if (cam != self) {
                 [[cam plot] reloadData];
@@ -184,7 +180,6 @@
         }
     } else if (fieldEnum == CPTScatterPlotFieldY) {
         // Returns Y values
-//        return [NSNumber numberWithDouble: 1.0 ];
         double minvalue = [[self channel] minValue];
         double maxvalue = [[self channel] maxValue];
         double averagevalue = (minvalue + maxvalue) * 0.5;
@@ -203,6 +198,10 @@
     if ([ann isTextVisible] == NO) {
         return Nil;
     }
+    
+    if (index % 3 == 1){
+        return Nil;
+    }
 
     CPTTextLayer *textLayer = [CPTTextLayer layer];
     textLayer.text = [ann text];
@@ -210,8 +209,6 @@
     labelTextStyle.fontSize = 13;
     labelTextStyle.color = [CPTColor grayColor];
     textLayer.textStyle = labelTextStyle;
-//    textLayer.paddingTop = 80.0;
-//    textLayer.paddingBottom = 10.0;
     return textLayer;
 }
 
