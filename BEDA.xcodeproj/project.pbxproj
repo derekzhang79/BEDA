@@ -66,6 +66,7 @@
 		03E908711771781B0078BA59 /* BehaviorSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E908701771781B0078BA59 /* BehaviorSettingController.m */; };
 		03E90875177418180078BA59 /* AnnotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E90874177418180078BA59 /* AnnotView.xib */; };
 		03E90878177418240078BA59 /* AnnotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E90877177418240078BA59 /* AnnotViewController.m */; };
+		B2109B2D181F5D670094DB44 /* AnnotationPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2109B2C181F5D670094DB44 /* AnnotationPopoverController.m */; };
 		B225C4E816FBC2BA00D3C036 /* TempGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */; };
 		B225C4EB16FBC4E400D3C036 /* AccelGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225C4EA16FBC4E400D3C036 /* AccelGraphViewController.m */; };
 		B225ED9C1793ACA0002FF5A7 /* ChannelAnnotationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B225ED9B1793ACA0002FF5A7 /* ChannelAnnotationManager.m */; };
@@ -223,6 +224,8 @@
 		03E90874177418180078BA59 /* AnnotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnotView.xib; sourceTree = "<group>"; };
 		03E90876177418240078BA59 /* AnnotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotViewController.h; sourceTree = "<group>"; };
 		03E90877177418240078BA59 /* AnnotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotViewController.m; sourceTree = "<group>"; };
+		B2109B2B181F5D670094DB44 /* AnnotationPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationPopoverController.h; sourceTree = "<group>"; };
+		B2109B2C181F5D670094DB44 /* AnnotationPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationPopoverController.m; sourceTree = "<group>"; };
 		B225C4E616FBC2BA00D3C036 /* TempGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempGraphViewController.h; sourceTree = "<group>"; };
 		B225C4E716FBC2BA00D3C036 /* TempGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempGraphViewController.m; sourceTree = "<group>"; };
 		B225C4E916FBC4E400D3C036 /* AccelGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelGraphViewController.h; sourceTree = "<group>"; };
@@ -301,6 +304,8 @@
 		031463781762F62F007B075B /* TimeData */ = {
 			isa = PBXGroup;
 			children = (
+				B2109B2B181F5D670094DB44 /* AnnotationPopoverController.h */,
+				B2109B2C181F5D670094DB44 /* AnnotationPopoverController.m */,
 				031463791762F675007B075B /* ChannelTimeData.h */,
 				0314637A1762F675007B075B /* ChannelTimeData.m */,
 				B2D249631800B90C001EB73A /* ChannelExtraGraph.h */,
@@ -776,6 +781,7 @@
 				B2D249651800B90C001EB73A /* ChannelExtraGraph.m in Sources */,
 				B23E60C21814EDD300FF24DA /* BedaSetting.m in Sources */,
 				B22C657E1819EBE5000D0913 /* PreferenceController.m in Sources */,
+				B2109B2D181F5D670094DB44 /* AnnotationPopoverController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

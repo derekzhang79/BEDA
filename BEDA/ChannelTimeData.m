@@ -13,6 +13,7 @@
 #import "ChannelSelector.h"
 #import "ChannelAnnotationManager.h"
 #import "ChannelAnnotationWindowController.h"
+#import "AnnotationPopoverController.h"
 
 @implementation ChannelTimeData
 
@@ -852,13 +853,34 @@
     if ( [event clickCount] == 2 ) {
         NSLog(@"%@", @"double clicked");
         
-        ChannelAnnotationWindowController *cw = [[ChannelAnnotationWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
-        ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
+//        ChannelAnnotationWindowController *cw = [[ChannelAnnotationWindowController alloc] initWithWindowNibName:@"ChannelAnnotationWindow"];
+//        ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
+//        
+//        [cw setAnnot:ca];
+//        [cw setManager:[self channelAnnotationManager]];
+//        [cw showWindow:self];
+//        [self setChannelAnnotWindowController:cw];
         
-        [cw setAnnot:ca];
-        [cw setManager:[self channelAnnotationManager]];
-        [cw showWindow:self];
-        [self setChannelAnnotWindowController:cw];
+        ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
+        AnnotationPopoverController* apc = [[self beda] annotationPopoverController];
+        [apc setAnnot:ca andManager:[self channelAnnotationManager]];
+        
+        // Show the popover
+        double minvalue = [self minValue];
+        double maxvalue = [self maxValue];
+        double averagevalue = (minvalue + maxvalue) * 0.5;
+        double pt[2];
+        pt[0] = [ca t];
+        pt[1] = averagevalue;
+        CGPoint viewPoint = [[self getPlotSpace] plotAreaViewPointForDoublePrecisionPlotPoint:pt];
+        NSPoint nspt = NSPointFromCGPoint(viewPoint);
+        NSPoint nspt2 = [[self view] convertPoint:nspt toView:Nil];
+        NSLog(@"viewPoint = %lf, %lf: nspt2 = %lf, %lf", viewPoint.x, viewPoint.y, nspt2.x, nspt2.y);
+        
+        float gap = graph.plotAreaFrame.paddingLeft;
+        NSView* view = [[ [[self beda] getSplitView] subviews] objectAtIndex:0];
+        NSRect rect = NSMakeRect(viewPoint.x + gap, viewPoint.y + 20, 2, 2);
+        [[[self beda] popover] showRelativeToRect:rect ofView:view preferredEdge:NSMaxYEdge];
 
     }
     

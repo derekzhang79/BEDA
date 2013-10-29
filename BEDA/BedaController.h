@@ -15,6 +15,7 @@
 
 @class ProjectManager;
 @class BedaSetting;
+@class AnnotationPopoverController;
 
 #define BEDA_MODE_PLAY 0
 #define BEDA_MODE_FASTPLAY 1
@@ -89,6 +90,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (assign) double duration;
 @property (assign) double interval;
 @property (retain) IBOutlet NSPopover* popover;
+@property (assign) IBOutlet AnnotationPopoverController *annotationPopoverController;
 @property (retain) IBOutlet NSPopover* SelectionPopover;
 - (IBAction)openPreferenceWindow:(id)sender;
 

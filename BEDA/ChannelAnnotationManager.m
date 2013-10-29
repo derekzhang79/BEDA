@@ -9,6 +9,7 @@
 #import "ChannelAnnotationManager.h"
 #import "BedaController.h"
 #import "ChannelTimeData.h"
+#import "AnnotationPopoverController.h"
 
 @implementation ChannelAnnotationManager
 
@@ -146,6 +147,8 @@
     BedaController* beda = [[self channel ] beda ];
     NSView* view = [[ [beda getSplitView] subviews] objectAtIndex:0];
     NSRect rect = NSMakeRect(viewPoint.x + gap, viewPoint.y + 20, 2, 2);
+    AnnotationPopoverController* apc = [beda annotationPopoverController];
+    [apc setAnnot:ca andManager:self];
     [[beda popover] showRelativeToRect:rect ofView:view preferredEdge:NSMaxYEdge];
 }
 
