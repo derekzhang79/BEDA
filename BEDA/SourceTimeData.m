@@ -14,6 +14,7 @@
 @synthesize timedata = _timedata;
 @synthesize basedate;
 @synthesize columns = _columns;
+@synthesize timeIndex = _timeIndex;
 
 -(id) init {
     self = [super init];
@@ -29,6 +30,7 @@
                                                  selector:@selector(onChannelHeadMoved:)
                                                      name:BEDA_NOTI_CHANNEL_HEAD_MOVED
                                                    object:nil];
+        [self setTimeIndex:0];
 
     }
     

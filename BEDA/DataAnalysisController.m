@@ -11,6 +11,7 @@
 #import "Source.h"
 #import "ChannelTimeData.h"
 #import "ChannelExtraGraph.h"
+#import "ChannelSelector.h"
 #import "BedaSetting.h"
 
 @implementation DataAnalysisController
@@ -232,9 +233,20 @@
     SourceTimeData* source = [ch sourceTimeData];
     NSMutableArray* data = [source timedata];
     int validDataCounter = 0;
+    
+    ChannelSelector* selector = [ch channelSelector];
+    double lo = [selector left];
+    double hi = [selector right];
+    BOOL isSelectionVisible = [selector visible];
+    int timeIndex = [source timeIndex];
+    
     for (int i = 0; i < [[source timedata] count]; i++) {
         validDataCounter++;
 
+        double t = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:timeIndex]] doubleValue];
+        if (isSelectionVisible && (t < lo || hi < t)) {
+            continue;
+        }
         double v = [[[data objectAtIndex:i] objectForKey:[NSNumber numberWithInt:index]] doubleValue];
         [content appendString:[NSString stringWithFormat:@"%lf\n", v]];
     }

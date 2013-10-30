@@ -16,7 +16,7 @@
 @property (retain) NSMutableArray* timedata;
 @property (retain) NSDate* basedate;
 @property (retain) NSMutableArray* columns;
-
+@property int timeIndex;
 
 - (void)loadFile:(NSURL*)url;
 //- (void)loadEDAGraph;
