@@ -637,7 +637,6 @@
 								<string key="NSFrame">{{20, 14}, {38, 24}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="103481997">
@@ -689,7 +688,6 @@
 								<string key="NSFrame">{{20, 14}, {38, 28}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="863083206">
@@ -735,21 +733,20 @@
 							<object class="NSButton" key="NSToolbarItemView" id="205679699">
 								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{15, 14}, {48, 38}}</string>
+								<string key="NSFrame">{{7, 14}, {64, 48}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="202633156">
 									<int key="NSCellFlags">67108864</int>
 									<int key="NSCellFlags2">134217728</int>
-									<string key="NSContents">Button</string>
+									<string key="NSContents"/>
 									<reference key="NSSupport" ref="806572050"/>
 									<string key="NSCellIdentifier">_NS:9</string>
 									<reference key="NSControlView" ref="205679699"/>
-									<int key="NSButtonFlags">-1228652544</int>
-									<int key="NSButtonFlags2">130</int>
+									<int key="NSButtonFlags">919355392</int>
+									<int key="NSButtonFlags2">66</int>
 									<reference key="NSNormalImage" ref="479101733"/>
 									<string key="NSAlternateContents"/>
 									<string key="NSKeyEquivalent"/>
@@ -762,7 +759,7 @@
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{44, 24}</string>
-							<string key="NSToolbarItemMaxSize">{48, 38}</string>
+							<string key="NSToolbarItemMaxSize">{64, 48}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">NO</bool>
 							<int key="NSToolbarItemTag">0</int>
@@ -804,7 +801,6 @@
 								<string key="NSFrame">{{37, 14}, {104, 28}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<string key="NSHuggingPriority">{250, 341}</string>
 								<string key="NSAntiCompressionPriority">{750, 163}</string>
@@ -868,7 +864,6 @@
 								<string key="NSFrame">{{20, 14}, {38, 28}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="235565576">
@@ -914,7 +909,6 @@
 								<string key="NSFrame">{{16, 14}, {45, 22}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="789538321">
@@ -970,7 +964,6 @@
 								<string key="NSFrame">{{17, 14}, {43, 43}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="743749389">
@@ -1033,10 +1026,9 @@
 							<object class="NSSegmentedControl" key="NSToolbarItemView" id="691338561">
 								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{0, 14}, {72, 23}}</string>
+								<string key="NSFrame">{{0, 14}, {73, 24}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="362090932">
@@ -1112,7 +1104,6 @@
 								<string key="NSFrame">{{0, 14}, {79, 24}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="561844796">
@@ -1258,7 +1249,7 @@
 							</object>
 						</object>
 					</dictionary>
-					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
+					<array key="NSToolbarIBAllowedItems">
 						<reference ref="465770848"/>
 						<reference ref="101738483"/>
 						<reference ref="87662875"/>
@@ -1276,7 +1267,7 @@
 						<reference ref="528692506"/>
 						<reference ref="80499516"/>
 					</array>
-					<array class="NSMutableArray" key="NSToolbarIBDefaultItems">
+					<array key="NSToolbarIBDefaultItems">
 						<reference ref="842440596"/>
 						<reference ref="101738483"/>
 						<reference ref="190043178"/>
@@ -1399,7 +1390,6 @@
 													<string key="NSFrame">{{89, 7}, {39, 22}}</string>
 													<reference key="NSSuperview" ref="242634968"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSTextFieldCell" key="NSCell" id="784020255">
@@ -1964,7 +1954,6 @@
 						<string key="NSFrame">{{193, 3}, {75, 32}}</string>
 						<reference key="NSSuperview" ref="562098564"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="119463125">
@@ -2161,7 +2150,7 @@
 						<string key="NSFrame">{{8, 79}, {178, 32}}</string>
 						<reference key="NSSuperview" ref="740182447"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="815831689"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="687928508">
@@ -2211,13 +2200,12 @@
 						<string key="NSFrame">{{8, 23}, {178, 32}}</string>
 						<reference key="NSSuperview" ref="740182447"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="872221797">
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">134217728</int>
-							<string key="NSContents">Close</string>
+							<string key="NSContents">Hide Selection</string>
 							<reference key="NSSupport" ref="806572050"/>
 							<string key="NSCellIdentifier">_NS:9</string>
 							<reference key="NSControlView" ref="165557328"/>
@@ -2747,6 +2735,14 @@
 						<reference key="destination" ref="597137790"/>
 					</object>
 					<int key="connectionID">2446</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">selectionToggleBtn</string>
+						<reference key="source" ref="377563220"/>
+						<reference key="destination" ref="205679699"/>
+					</object>
+					<int key="connectionID">2460</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -6414,7 +6410,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">2459</int>
+			<int key="maxID">2460</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6490,6 +6486,8 @@
 						<string key="addAnnotation:">id</string>
 						<string key="changeModeFromSegmentedControl:">id</string>
 						<string key="exportSelection:">id</string>
+						<string key="hideInfoPopover:">id</string>
+						<string key="hideSelectionPopover:">id</string>
 						<string key="makeAbsoluteTimeMode:">id</string>
 						<string key="makeRelativeTimeMode:">id</string>
 						<string key="navigate:">id</string>
@@ -6506,6 +6504,7 @@
 						<string key="stop:">id</string>
 						<string key="synchronize:">id</string>
 						<string key="toggleChannelSelector:">id</string>
+						<string key="toggleMovieView:">id</string>
 						<string key="zoomIn:">id</string>
 						<string key="zoomOut:">id</string>
 					</dictionary>
@@ -6520,6 +6519,14 @@
 						</object>
 						<object class="IBActionInfo" key="exportSelection:">
 							<string key="name">exportSelection:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="hideInfoPopover:">
+							<string key="name">hideInfoPopover:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="hideSelectionPopover:">
+							<string key="name">hideSelectionPopover:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="makeAbsoluteTimeMode:">
@@ -6586,6 +6593,10 @@
 							<string key="name">toggleChannelSelector:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="toggleMovieView:">
+							<string key="name">toggleMovieView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="zoomIn:">
 							<string key="name">zoomIn:</string>
 							<string key="candidateClassName">id</string>
@@ -6608,6 +6619,7 @@
 						<string key="playButton">NSButton</string>
 						<string key="popover">NSPopover</string>
 						<string key="projectManager">ProjectManager</string>
+						<string key="selectionToggleBtn">NSButton</string>
 						<string key="splitview">NSSplitView</string>
 						<string key="timeMenuAbsolute">NSMenuItem</string>
 						<string key="timeMenuRelative">NSMenuItem</string>
@@ -6662,6 +6674,10 @@
 						<object class="IBToOneOutletInfo" key="projectManager">
 							<string key="name">projectManager</string>
 							<string key="candidateClassName">ProjectManager</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="selectionToggleBtn">
+							<string key="name">selectionToggleBtn</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="splitview">
 							<string key="name">splitview</string>

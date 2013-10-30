@@ -61,6 +61,7 @@ static BedaController* g_instance = nil;
     
     _sources = [[NSMutableArray alloc] init];
     _channelsTimeData = [[NSMutableArray alloc] init];
+    [selectionToggleBtn setState:NSOffState];
 
 //    _movSplitView = Nil;
     
@@ -112,7 +113,6 @@ static BedaController* g_instance = nil;
     [self setGtAppTime:0];
     [self makeRelativeTimeMode:nil];
     [self updateAbsoluteTimeInfo];
-//    [self setIntervalPlayerManager: [[IntervalPlayerManager alloc] init]];
 
     NSSplitView* mainview = (NSSplitView* )[movSplitView superview];
     {
@@ -150,7 +150,6 @@ static BedaController* g_instance = nil;
             [movSplitView removeFromSuperview];
         }
     }
-
     
     BOOL movieViewCollapsed = [[self mainSplitView] isSubviewCollapsed:[[[self mainSplitView] subviews] objectAtIndex: 0]];
     if (movieViewCollapsed) {
@@ -209,14 +208,48 @@ static BedaController* g_instance = nil;
 }
 
 - (IBAction)showSelectionPopover:(id)sender {
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
-     object:self];
-     [[self SelectionPopover] showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+    
+    if([self isSelectionPopVisible] == YES){
+        [[self SelectionPopover] close];
+        [self setIsSelectionPopVisible:NO];
+        if([selectionToggleBtn state] == NSOnState){
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
+             object:self];
+            [selectionToggleBtn setState:NSOffState];
+        }
+        if([selectionToggleBtn state] == NSOffState){
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
+             object:self];
+            [selectionToggleBtn setState:NSOnState];
+        }
+        
+    } else{
+         [[self SelectionPopover] showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+         [self setIsSelectionPopVisible:YES];
+        if([selectionToggleBtn state] == NSOnState){
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
+             object:self];
+            [selectionToggleBtn setState:NSOffState];
+        }
+        if([selectionToggleBtn state] == NSOffState){
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
+             object:self];
+            [selectionToggleBtn setState:NSOnState];
+        }
+
+    }
 }
 
 - (IBAction)hideSelectionPopover:(id)sender {
-    [[self SelectionPopover] close];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
+     object:self];
+     [selectionToggleBtn setState:0];
+    
 }
 
 -(IBAction)openDataAnalysisWindow:(id)sender{
@@ -550,15 +583,7 @@ static BedaController* g_instance = nil;
     [self setPlayTimer:Nil];
     
     [self setPlayMode:BEDA_MODE_STOP];
-    
-//    if ([self isIntervalPlayerVisible] && [[self intervalPlayerManager] isFastMode]) {
-//
-//    } else {
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"png"];
-//        NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
-//        [[self playButton] setImage:img];
-//    }
-    
+        
     [[self playButton] setIntValue:0];
 
 

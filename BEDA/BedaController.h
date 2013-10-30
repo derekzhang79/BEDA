@@ -41,6 +41,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
     IBOutlet NSSegmentedControl* modeSelector;
     IBOutlet NSSplitView* splitview;
     IBOutlet NSMenu* annotmenu;
+    IBOutlet NSButton* selectionToggleBtn;
     
     IntervalPlayerController* ipc;
     DataAnalysisController* dac;
@@ -49,7 +50,6 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 @property (retain) IBOutlet NSView* intervalPlayerView;
 @property (retain) IBOutlet NSWindow *window;
--(IBAction)showIntervalPlayerSheet:(id)sender;
 
 @property BOOL isIntervalPlayerVisible;
 
@@ -78,6 +78,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (retain) BedaSetting* setting;
 
 @property BOOL isNavMode;
+@property BOOL isSelectionPopVisible;
 @property int numProjects;
 
 @property int playMode;
