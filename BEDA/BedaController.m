@@ -50,6 +50,7 @@ float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT = 300;
 @synthesize timePopUp;
 @synthesize timeMenuAbsolute;
 @synthesize timeMenuRelative;
+@synthesize dataAnalysisController = _dataAnalysisController;
 
 static BedaController* g_instance = nil;
 
@@ -113,6 +114,7 @@ static BedaController* g_instance = nil;
     [self setGtAppTime:0];
     [self makeRelativeTimeMode:nil];
     [self updateAbsoluteTimeInfo];
+    [self setDataAnalysisController:nil];
 
     NSSplitView* mainview = (NSSplitView* )[movSplitView superview];
     {
@@ -224,7 +226,8 @@ static BedaController* g_instance = nil;
 
 }
 - (IBAction)showSelectionPopover:(id)sender {
-    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
     if([self isSelectionPopVisible] == YES){
         [[self SelectionPopover] close];
         [self setIsSelectionPopVisible:NO];
@@ -237,8 +240,10 @@ static BedaController* g_instance = nil;
              postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
              object:self];
             [selectionSelector setSelected:YES forSegment:0];
-            [dac updateAnalysisBtnText];
         }
+    }
+    if ([self dataAnalysisController] != Nil) {
+        [[self dataAnalysisController] updateAnalysisBtnText];
     }
 
 }
@@ -250,6 +255,12 @@ static BedaController* g_instance = nil;
     [selectionSelector setSelected:NO forSegment:0];
     [[self SelectionPopover] close];
     [self setIsSelectionPopVisible:NO];
+    [dac updateAnalysisBtnText];
+    if ([self dataAnalysisController] != Nil) {
+        [[self dataAnalysisController] updateAnalysisBtnText];
+    }
+
+
 }
 
 -(IBAction)openDataAnalysisWindow:(id)sender{
@@ -291,6 +302,7 @@ static BedaController* g_instance = nil;
 - (void) onDataWindowControllerClosed:(NSNotification*) noti {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [self setDataWindowController:Nil];
+    [self setDataAnalysisController:Nil];
     
 }
 

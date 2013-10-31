@@ -151,7 +151,7 @@
 		03092AF41816285F00F721C9 /* beda_icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = beda_icon.icns; sourceTree = "<group>"; };
 		030A7B671821E07B003B08F2 /* viewUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewUp.png; sourceTree = "<group>"; };
 		030A7B6B1821E79C003B08F2 /* viewDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewDown.png; sourceTree = "<group>"; };
-		030A7B6F1822D9E5003B08F2 /* mean_matlab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mean_matlab.m; sourceTree = "<group>"; };
+		030A7B6F1822D9E5003B08F2 /* mean_matlab.m */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = mean_matlab.m; sourceTree = "<group>"; };
 		031463791762F675007B075B /* ChannelTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTimeData.h; sourceTree = "<group>"; };
 		0314637A1762F675007B075B /* ChannelTimeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTimeData.m; sourceTree = "<group>"; };
 		0314637C1762F685007B075B /* SourceTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceTimeData.h; sourceTree = "<group>"; };

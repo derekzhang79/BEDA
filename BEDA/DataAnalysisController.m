@@ -29,6 +29,8 @@
     _channels = [[NSMutableArray alloc] init];
     _results = [[NSMutableDictionary alloc] init];
     [self populateChannels];
+    [self updateAnalysisBtnText];
+    [[self beda] setDataAnalysisController:self];
 }
 
 - (void) populateChannels {
@@ -57,8 +59,22 @@
 }
 
 - (void) updateAnalysisBtnText{
+    BOOL isSelectorVisible = NO;
+    for (ChannelTimeData* cht in [self channels]) {
+        ChannelSelector* selector = [cht channelSelector];
+        if ([selector visible]) {
+            isSelectorVisible = YES;
+            break;
+        }
+    }
+    NSLog(@"%s, isSelectorVisible = %hhd", __PRETTY_FUNCTION__, isSelectorVisible);
 
-  //  [[self doAnalysisBtn] setTitle:@"Selection Analysis"];
+    if (isSelectorVisible) {
+        [doAnalysisBtn setTitle:@"Selection Analysis"];
+    } else {
+        [doAnalysisBtn setTitle:@"Entire Range Analysis"];
+    }
+
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {

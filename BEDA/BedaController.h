@@ -65,6 +65,8 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (nonatomic, retain) IBOutlet NSSplitView* movSplitView;
 @property (retain) NSWindowController* graphWindowController;
 @property (retain) NSWindowController* dataWindowController;
+@property (retain) DataAnalysisController* dataAnalysisController;
+
 @property (retain) NSWindowController* summaryProjectsController;
 
 @property (nonatomic, retain) IBOutlet NSButton* playButton;
