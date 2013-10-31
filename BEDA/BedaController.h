@@ -134,6 +134,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 - (IBAction)makeAbsoluteTimeMode:(id)sender;
 - (IBAction)makeRelativeTimeMode:(id)sender;
 - (void)updateAbsoluteTimeInfo;
+- (void)popMatlabConnectionWindow;
 
 // Time related functions
 - (double) getGlobalTime;

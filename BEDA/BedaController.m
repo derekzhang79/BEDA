@@ -200,11 +200,15 @@ static BedaController* g_instance = nil;
     [[self popover] close];
 }
 
-- (IBAction)openPreferenceWindow:(id)sender {
+-(void) popMatlabConnectionWindow{
     NSLog(@"%s", __PRETTY_FUNCTION__);
     PreferenceController* con = [[PreferenceController alloc] initWithWindowNibName:@"PreferenceWindow"];
     [con showWindow:self];
+}
 
+- (IBAction)openPreferenceWindow:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self popMatlabConnectionWindow];
 }
 
 

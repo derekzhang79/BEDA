@@ -51,7 +51,13 @@
     
 }
 
+
+- (IBAction)popMatlabConnectionWindow:(id)sender{
+    [[self beda] popMatlabConnectionWindow];
+}
+
 - (void) updateAnalysisBtnText{
+
   //  [[self doAnalysisBtn] setTitle:@"Selection Analysis"];
 }
 
@@ -222,6 +228,8 @@
     
     [tableview reloadData];
 }
+
+
 
 - (void)writeToCSV:(ChannelTimeData*)ch {
     NSLog(@"%s", __PRETTY_FUNCTION__);

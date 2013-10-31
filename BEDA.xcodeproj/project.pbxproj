@@ -10,6 +10,7 @@
 		03092AF51816286000F721C9 /* beda_icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 03092AF41816285F00F721C9 /* beda_icon.icns */; };
 		030A7B681821E07B003B08F2 /* viewUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 030A7B671821E07B003B08F2 /* viewUp.png */; };
 		030A7B6C1821E79C003B08F2 /* viewDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 030A7B6B1821E79C003B08F2 /* viewDown.png */; };
+		030A7B701822D9E5003B08F2 /* mean_matlab.m in Sources */ = {isa = PBXBuildFile; fileRef = 030A7B6F1822D9E5003B08F2 /* mean_matlab.m */; };
 		0314637B1762F675007B075B /* ChannelTimeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314637A1762F675007B075B /* ChannelTimeData.m */; };
 		0314637E1762F685007B075B /* SourceTimeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314637D1762F685007B075B /* SourceTimeData.m */; };
 		031463801765ADDD007B075B /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0314637F1765ADDD007B075B /* stop.png */; };
@@ -150,6 +151,7 @@
 		03092AF41816285F00F721C9 /* beda_icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = beda_icon.icns; sourceTree = "<group>"; };
 		030A7B671821E07B003B08F2 /* viewUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewUp.png; sourceTree = "<group>"; };
 		030A7B6B1821E79C003B08F2 /* viewDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewDown.png; sourceTree = "<group>"; };
+		030A7B6F1822D9E5003B08F2 /* mean_matlab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mean_matlab.m; sourceTree = "<group>"; };
 		031463791762F675007B075B /* ChannelTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTimeData.h; sourceTree = "<group>"; };
 		0314637A1762F675007B075B /* ChannelTimeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTimeData.m; sourceTree = "<group>"; };
 		0314637C1762F685007B075B /* SourceTimeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceTimeData.h; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 		038E9D2F177A9C4D00ACE963 /* Script */ = {
 			isa = PBXGroup;
 			children = (
+				030A7B6F1822D9E5003B08F2 /* mean_matlab.m */,
 				B2BAA42D17FD3F2700281493 /* SCR_amplitude.m */,
 				B2CC42B817F3C706005F41D6 /* exp_smooth.m */,
 				B2ED105917F3782100AEC7F8 /* allpeaks.m */,
@@ -790,6 +793,7 @@
 				B23E60C21814EDD300FF24DA /* BedaSetting.m in Sources */,
 				B22C657E1819EBE5000D0913 /* PreferenceController.m in Sources */,
 				B2109B2D181F5D670094DB44 /* AnnotationPopoverController.m in Sources */,
+				030A7B701822D9E5003B08F2 /* mean_matlab.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

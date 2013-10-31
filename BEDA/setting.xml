@@ -4,7 +4,7 @@
     <r>/usr/bin/R</r>
     <script>SCR_amplitude.m</script>
     <script>tonic_auc.m</script>
-    <script>summary.R</script>
+    <script>mean_matlab.m</script>
     <script>std.R</script>
     <script>peak.R</script>
     <script>allpeaks.m</script>

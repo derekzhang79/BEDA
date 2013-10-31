@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ChannelSelector.h"
 @interface DataAnalysisController : NSObject<NSTableViewDelegate, NSTableViewDataSource>  {
     IBOutlet NSTableView* tableview;
     IBOutlet NSComboBox* comboBoxScriptSelection;
@@ -20,6 +20,7 @@
 -(IBAction)doAnalysis:(id)sender;
 -(IBAction)addScript:(id)sender;
 - (IBAction)editScript:(id)sender;
+- (IBAction)popMatlabConnectionWindow:(id)sender;
 - (void) updateAnalysisBtnText;
 
 @end
