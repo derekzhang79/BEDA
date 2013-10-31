@@ -845,9 +845,9 @@
     return YES;
 }
 
--(void)addAnnotation{
+-(void)addAnnotation:(double)t {
     
-    ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
+    ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:t as:@""];
     AnnotationPopoverController* apc = [[self beda] annotationPopoverController];
     [apc setAnnot:ca andManager:[self channelAnnotationManager]];
     
@@ -869,14 +869,32 @@
     [[[self beda] popover] showRelativeToRect:rect ofView:view preferredEdge:NSMaxYEdge];
 }
 
-- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceUpEvent:(id)event atPoint:(CGPoint)interactionPoint
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceUpEvent:(id)event atPoint:(CGPoint)point
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     // Restore the vertical line plot to its initial color.
 
     if ( [event clickCount] == 2 ) {
         NSLog(@"%@", @"double clicked");
-        [self addAnnotation];
+        point.x -= graph.plotAreaFrame.paddingLeft;
+        
+        // Convert the touch point to plot area frame location
+        CGPoint pointInPlotArea = [graph convertPoint:point toLayer:graph.plotAreaFrame];
+        
+        NSDecimal pt[2];
+        [space plotPoint:pt forPlotAreaViewPoint:pointInPlotArea];
+        
+        
+        double x = [[NSDecimalNumber decimalNumberWithDecimal:pt[0]] doubleValue];
+        if(x < 0 ){
+            x = 0;
+        }
+        
+        if(x > [[self beda] duration] ){
+            x = [[self beda] duration];
+        }
+        
+        [self addAnnotation:x];
 
     }
     
