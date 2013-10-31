@@ -11,6 +11,7 @@
 @interface DataAnalysisController : NSObject<NSTableViewDelegate, NSTableViewDataSource>  {
     IBOutlet NSTableView* tableview;
     IBOutlet NSComboBox* comboBoxScriptSelection;
+    IBOutlet NSButton* doAnalysisBtn;
 }
 
 @property (retain) NSMutableArray* channels;
@@ -19,7 +20,6 @@
 -(IBAction)doAnalysis:(id)sender;
 -(IBAction)addScript:(id)sender;
 - (IBAction)editScript:(id)sender;
-- (IBAction)selectRange:(id)sender;
-
+- (void) updateAnalysisBtnText;
 
 @end

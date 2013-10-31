@@ -233,6 +233,7 @@ static BedaController* g_instance = nil;
              postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
              object:self];
             [selectionSelector setSelected:YES forSegment:0];
+            [dac updateAnalysisBtnText];
         }
     }
 

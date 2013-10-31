@@ -51,6 +51,10 @@
     
 }
 
+- (void) updateAnalysisBtnText{
+  //  [[self doAnalysisBtn] setTitle:@"Selection Analysis"];
+}
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -96,13 +100,6 @@
 
     }
     return Nil;
-}
-
-
-- (IBAction)selectRange:(id)sender {
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
-     object:self];
 }
 
 -(IBAction)addScript:(id)sender {
