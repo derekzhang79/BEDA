@@ -20,6 +20,7 @@
 
 @property (assign) ChannelAnnotation* annot;
 @property (assign) ChannelAnnotationManager* manager;
+@property (assign) BOOL isVisible;
 
 - (IBAction)onButtonRemove:(id)sender;
 - (IBAction)onButtonApply:(id)sender;

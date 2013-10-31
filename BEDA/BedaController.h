@@ -41,7 +41,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
     IBOutlet NSSegmentedControl* modeSelector;
     IBOutlet NSSplitView* splitview;
     IBOutlet NSMenu* annotmenu;
-    IBOutlet NSButton* selectionToggleBtn;
+    IBOutlet NSSegmentedControl* selectionSelector;
     
     IntervalPlayerController* ipc;
     DataAnalysisController* dac;
@@ -79,6 +79,7 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 
 @property BOOL isNavMode;
 @property BOOL isSelectionPopVisible;
+@property BOOL isAnnotInfoPopVisible;
 @property int numProjects;
 
 @property int playMode;
@@ -92,10 +93,11 @@ extern float BEDA_WINDOW_INITIAL_MOVIE_HEIGHT;
 @property (assign) double interval;
 @property (retain) IBOutlet NSPopover* popover;
 @property (assign) IBOutlet AnnotationPopoverController *annotationPopoverController;
+@property (retain) IBOutlet NSPopover* annotInfoPopover;
 @property (retain) IBOutlet NSPopover* SelectionPopover;
 - (IBAction)openPreferenceWindow:(id)sender;
-
 - (IBAction)showSelectionPopover:(id)sender;
+- (IBAction)showAnnotInfoPopover:(id)sender;
 
 - (BOOL)isSyncMode;
 - (BOOL)isMultiProjectMode;

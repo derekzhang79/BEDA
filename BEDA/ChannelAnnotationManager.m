@@ -149,7 +149,14 @@
     NSRect rect = NSMakeRect(viewPoint.x + gap, viewPoint.y + 20, 2, 2);
     AnnotationPopoverController* apc = [beda annotationPopoverController];
     [apc setAnnot:ca andManager:self];
-    [[beda popover] showRelativeToRect:rect ofView:view preferredEdge:NSMaxYEdge];
+    
+    if(apc.isVisible == NO){
+        [[beda popover] showRelativeToRect:rect ofView:view preferredEdge:NSMaxYEdge];
+        apc.isVisible = YES;
+    } else {
+        [[beda popover] close];
+         apc.isVisible = NO;
+    }
 }
 
 

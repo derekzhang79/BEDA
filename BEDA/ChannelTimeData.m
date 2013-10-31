@@ -845,6 +845,30 @@
     return YES;
 }
 
+-(void)addAnnotation{
+    
+    ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
+    AnnotationPopoverController* apc = [[self beda] annotationPopoverController];
+    [apc setAnnot:ca andManager:[self channelAnnotationManager]];
+    
+    // Show the popover
+    double minvalue = [self minValue];
+    double maxvalue = [self maxValue];
+    double averagevalue = (minvalue + maxvalue) * 0.5;
+    double pt[2];
+    pt[0] = [ca t];
+    pt[1] = averagevalue;
+    CGPoint viewPoint = [[self getPlotSpace] plotAreaViewPointForDoublePrecisionPlotPoint:pt];
+    NSPoint nspt = NSPointFromCGPoint(viewPoint);
+    NSPoint nspt2 = [[self view] convertPoint:nspt toView:Nil];
+    NSLog(@"viewPoint = %lf, %lf: nspt2 = %lf, %lf", viewPoint.x, viewPoint.y, nspt2.x, nspt2.y);
+    
+    float gap = graph.plotAreaFrame.paddingLeft;
+    NSView* view = [[ [[self beda] getSplitView] subviews] objectAtIndex:0];
+    NSRect rect = NSMakeRect(viewPoint.x + gap, viewPoint.y + 20, 2, 2);
+    [[[self beda] popover] showRelativeToRect:rect ofView:view preferredEdge:NSMaxYEdge];
+}
+
 - (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceUpEvent:(id)event atPoint:(CGPoint)interactionPoint
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -852,27 +876,7 @@
 
     if ( [event clickCount] == 2 ) {
         NSLog(@"%@", @"double clicked");
-        
-        ChannelAnnotation* ca = [[self channelAnnotationManager] addSingleAt:[self headerTime] as:@""];
-        AnnotationPopoverController* apc = [[self beda] annotationPopoverController];
-        [apc setAnnot:ca andManager:[self channelAnnotationManager]];
-        
-        // Show the popover
-        double minvalue = [self minValue];
-        double maxvalue = [self maxValue];
-        double averagevalue = (minvalue + maxvalue) * 0.5;
-        double pt[2];
-        pt[0] = [ca t];
-        pt[1] = averagevalue;
-        CGPoint viewPoint = [[self getPlotSpace] plotAreaViewPointForDoublePrecisionPlotPoint:pt];
-        NSPoint nspt = NSPointFromCGPoint(viewPoint);
-        NSPoint nspt2 = [[self view] convertPoint:nspt toView:Nil];
-        NSLog(@"viewPoint = %lf, %lf: nspt2 = %lf, %lf", viewPoint.x, viewPoint.y, nspt2.x, nspt2.y);
-        
-        float gap = graph.plotAreaFrame.paddingLeft;
-        NSView* view = [[ [[self beda] getSplitView] subviews] objectAtIndex:0];
-        NSRect rect = NSMakeRect(viewPoint.x + gap, viewPoint.y + 20, 2, 2);
-        [[[self beda] popover] showRelativeToRect:rect ofView:view preferredEdge:NSMaxYEdge];
+        [self addAnnotation];
 
     }
     
@@ -880,8 +884,6 @@
         [ch deselectHeaderPlot];
     }
     [[self channelSelector] deselect];
-    
-    
     [[NSCursor arrowCursor] set];
     
     return YES;
@@ -899,6 +901,7 @@
         
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_SELECT_PLOT]) {
         [[self channelSelector] select:index];
+        
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_CHANNEL_ANNOT_PLOT]) {
 
         [[self channelSelector] select:index];
@@ -906,7 +909,7 @@
     } else if ([(NSString *)plot.identifier isEqualToString:BEDA_INDENTIFIER_DATA_PLOT]) {
 
     } else {
-        NSLog(@"%s: Behavior is selected with right mouse click", __PRETTY_FUNCTION__);
+       
         BehaviorManager* am = [[self source] annots];
         Behavior* beh = [am behaviorByName:(NSString *)plot.identifier];
         

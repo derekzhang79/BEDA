@@ -61,7 +61,7 @@ static BedaController* g_instance = nil;
     
     _sources = [[NSMutableArray alloc] init];
     _channelsTimeData = [[NSMutableArray alloc] init];
-    [selectionToggleBtn setState:NSOffState];
+    [selectionSelector setSelected:NO forSegment:0];
 
 //    _movSplitView = Nil;
     
@@ -207,49 +207,44 @@ static BedaController* g_instance = nil;
 
 }
 
+
+- (IBAction)showAnnotInfoPopover:(id)sender {
+    if([self isAnnotInfoPopVisible] == YES){
+        [[self annotInfoPopover] close];
+        [self setIsAnnotInfoPopVisible:NO];
+        
+    } else{
+        [[self annotInfoPopover] showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+        [self setIsAnnotInfoPopVisible:YES];
+    }
+
+}
 - (IBAction)showSelectionPopover:(id)sender {
     
     if([self isSelectionPopVisible] == YES){
         [[self SelectionPopover] close];
         [self setIsSelectionPopVisible:NO];
-        if([selectionToggleBtn state] == NSOnState){
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
-             object:self];
-            [selectionToggleBtn setState:NSOffState];
-        }
-        if([selectionToggleBtn state] == NSOffState){
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
-             object:self];
-            [selectionToggleBtn setState:NSOnState];
-        }
         
     } else{
          [[self SelectionPopover] showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
-         [self setIsSelectionPopVisible:YES];
-        if([selectionToggleBtn state] == NSOnState){
+        [self setIsSelectionPopVisible:YES];
+        if([selectionSelector isSelectedForSegment:0] == NO){
             [[NSNotificationCenter defaultCenter]
              postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
              object:self];
-            [selectionToggleBtn setState:NSOffState];
+            [selectionSelector setSelected:YES forSegment:0];
         }
-        if([selectionToggleBtn state] == NSOffState){
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
-             object:self];
-            [selectionToggleBtn setState:NSOnState];
-        }
-
     }
+
 }
 
 - (IBAction)hideSelectionPopover:(id)sender {
     [[NSNotificationCenter defaultCenter]
      postNotificationName:BEDA_NOTI_CHANNELSELECTOR_TOGGLE
      object:self];
-     [selectionToggleBtn setState:0];
-    
+    [selectionSelector setSelected:NO forSegment:0];
+    [[self SelectionPopover] close];
+    [self setIsSelectionPopVisible:NO];
 }
 
 -(IBAction)openDataAnalysisWindow:(id)sender{
@@ -843,9 +838,6 @@ static BedaController* g_instance = nil;
 
 - (void)addSourceMov:(NSURL*)url {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-//    // If we do not have movSplitView, create one
-//    [self createMovSplitViewIfNotExist];
     
     // Create a source
     SourceMovie* s = [[SourceMovie alloc] init];

@@ -163,8 +163,7 @@
 
 - (void) createOffsetOverlay {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-//    return;
-    
+   
     if ([self offsetOverlay] != Nil) {
         return;
     }
@@ -251,7 +250,6 @@
         [self btnOrderDn].alphaValue = 1.0f;
     }
     
-//    [self btnOrderUp].frame = CGRectMake(sz.width - my.width - 60, sz.height - my.height - 10, my.width, my.height);
 }
 
 - (void) hideOffsetOverlay {
@@ -317,18 +315,17 @@
     NSSize sz = [self view].frame.size;
     NSSize my = overlay.frame.size;
     overlay.frame = CGRectMake(sz.width - my.width - 10, sz.height - my.height - 10, my.width, my.height);
-//    NSLog(@"sz = %@ my = %@ frame = %@", NSStringFromSize(sz), NSStringFromSize(my), NSStringFromRect(overlay.frame));
-
     
-//    NSLog(@"%@: overlay.frame.size = %@", [[self source] projname ], NSStringFromSize(overlay.frame.size) );
     if ([[[self source] beda]isMultiProjectMode] ){
 
         NSString* theProjName = [[[self source] projname] lastPathComponent];
         overlay.backgroundColor = [[self source] projcolor];
-        
         [[self offsetOverlay] setStringValue:theProjName];
+        
     } else {
-        [[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%lf sec", [self offset]]];
+        
+        [[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%.3lf sec", [self offset]]];
+        //[[self offsetOverlay] setStringValue:[NSString stringWithFormat:@"%.3lf sec", [self getMyTimeInGlobal]]];
     }
 }
 
